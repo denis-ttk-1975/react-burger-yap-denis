@@ -26,13 +26,13 @@
 .navItem {
   display: flex;
   align-items: center;
-  padding: 16px 20px;
-  color: #8585ad;
+  /* padding: 16px 20px; */
+  /* color: #8585ad; */
 }
 
 .navItemActive {
   composes: navItem;
-  color: #f2f2f3;
+  /* color: #f2f2f3; */
 }
 
 /* .icon {
