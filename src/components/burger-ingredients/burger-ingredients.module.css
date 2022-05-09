@@ -1,0 +1,18 @@
+.ingredientArea {
+  max-width: 600px;
+}
+
+.priceLabel {
+  display: flex;
+}
+
+.ingredientsCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ingredientsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
