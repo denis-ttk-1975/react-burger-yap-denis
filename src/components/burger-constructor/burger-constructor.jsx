@@ -7,8 +7,8 @@ import styles from './burger-constructor.module.css';
 
 function BurgerConstructor() {
   return (
-    <div>
-      <p>Burger Конструктор</p>
+    <div className={styles.constructorArea}>
+      <p className='text text_type_main-large'>Burger Конструктор</p>
     </div>
   );
 }
