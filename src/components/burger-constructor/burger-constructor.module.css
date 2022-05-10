@@ -1,3 +1,20 @@
 .constructorArea {
   width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.elemTop,
+.elemBottom,
+.elemList {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.innerList {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
 }

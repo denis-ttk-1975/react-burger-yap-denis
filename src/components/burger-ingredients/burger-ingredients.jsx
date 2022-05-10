@@ -5,9 +5,7 @@ import { Box, CurrencyIcon, Typography, Counter, Tab } from '@ya.praktikum/react
 
 import styles from './burger-ingredients.module.css';
 
-import data from './../../utils/data';
-
-// const data1 = data[1];
+// import data from './../../utils/data';
 
 function NavIngredient() {
   const [current, setCurrent] = React.useState('buns');
@@ -29,6 +27,7 @@ function NavIngredient() {
 function IngredientsItem(props) {
   return (
     <div className={styles.ingredientsCard}>
+      {props.data.__v ? <Counter count={props.data.__v} size='default' className={styles.counter} /> : null}
       <img src={props.data.image} alt={props.data.name} className='mb-2' />
       <div className={`mb-2 ${styles.priceLabel}`}>
         <p className=''>{props.data.price}</p>
@@ -44,7 +43,7 @@ function IngredientsArea(props) {
     <div className='mb-10'>
       <h3 className='mb-6 text text_type_main-medium'>{props.group}</h3>
       <div className={styles.ingredientsGrid}>
-        {data.map((elem, index) => {
+        {props.data.map((elem, index) => {
           if (elem.type === props.type) {
             return <IngredientsItem data={elem} key={elem._id} />;
           }
@@ -54,15 +53,15 @@ function IngredientsArea(props) {
   );
 }
 
-function BurgerIngredients() {
+function BurgerIngredients(props) {
   return (
-    <div className={styles.ingredientArea}>
+    <div className={`mt-10 ${styles.ingredientArea}`}>
       <h2 className='mb-5 text text_type_main-large'>Соберите бургер</h2>
       <NavIngredient />
       <div className={styles.scrollBox}>
-        <IngredientsArea group='Булки' type='bun' />
-        <IngredientsArea group='Соусы' type='sauce' />
-        <IngredientsArea group='Начинки' type='main' />
+        <IngredientsArea group='Булки' type='bun' data={props.data} />
+        <IngredientsArea group='Соусы' type='sauce' data={props.data} />
+        <IngredientsArea group='Начинки' type='main' data={props.data} />
       </div>
     </div>
   );

@@ -9,13 +9,15 @@ import BurgerConstructor from './../burger-constructor/burger-constructor';
 
 import styles from './app.module.css';
 
+import data from './../../utils/data';
+
 function App() {
   return (
     <div className='App'>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients />
-        <BurgerConstructor />
+        <BurgerIngredients data={data} />
+        <BurgerConstructor data={data} />
       </main>
     </div>
   );
