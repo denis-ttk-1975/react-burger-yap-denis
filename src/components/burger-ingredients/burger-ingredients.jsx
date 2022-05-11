@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import ReactDOM from 'react-dom';
+
 import PropTypes from 'prop-types';
 
 import { Box, CurrencyIcon, Typography, Counter, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -11,7 +11,7 @@ import styles from './burger-ingredients.module.css';
 function NavIngredient() {
   const [current, setCurrent] = React.useState('buns');
   return (
-    <div style={{ display: 'flex' }} className='mb-10'>
+    <div className={`${styles.navIngredient} mb-10`}>
       <Tab value='buns' active={current === 'buns'} onClick={setCurrent}>
         Булки
       </Tab>

@@ -1,12 +1,12 @@
 import React from 'react'; // импорт библиотеки
-import ReactDOM from 'react-dom';
+
 import PropTypes from 'prop-types';
 
 import { Box, CurrencyIcon, DragIcon, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './burger-constructor.module.css';
 
-// import data from './../../utils/data';
+import { IngredientType } from './../../utils/prop-types';
 
 function ElemTop(props) {
   return (
@@ -95,22 +95,10 @@ BurgerConstructor.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
-ElemList.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
+ElemList.propTypes = IngredientType;
 
-ElemBottom.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
+ElemBottom.propTypes = IngredientType;
 
-ElemTop.propTypes = {
-  name: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-};
+ElemTop.propTypes = IngredientType;
 
 export default BurgerConstructor;

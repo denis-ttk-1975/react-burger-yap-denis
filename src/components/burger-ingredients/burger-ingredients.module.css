@@ -2,6 +2,10 @@
   width: 600px;
 }
 
+.navIngredient {
+  display: flex;
+}
+
 .ingredientsCard {
   display: flex;
   flex-direction: column;
