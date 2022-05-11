@@ -26,7 +26,9 @@ function ElemBottom(props) {
 function ElemList(props) {
   return (
     <div className={styles.elemList}>
-      <DragIcon type='primary' />
+      <div className='pr-2'>
+        <DragIcon type='primary' />
+      </div>
       <ConstructorElement text={props.name} price={props.price} thumbnail={props.image} />
     </div>
   );
