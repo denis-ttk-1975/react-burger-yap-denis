@@ -1,5 +1,6 @@
 import React from 'react'; // импорт библиотеки
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import { Box, CurrencyIcon, DragIcon, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -32,10 +33,6 @@ function ElemList(props) {
       <ConstructorElement text={props.name} price={props.price} thumbnail={props.image} />
     </div>
   );
-}
-
-function TotalOrder(props) {
-  return <div className={styles.totalOrder}></div>;
 }
 
 function BurgerConstructor(props) {
@@ -93,5 +90,27 @@ function BurgerConstructor(props) {
     </div>
   );
 }
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+ElemList.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+};
+
+ElemBottom.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+};
+
+ElemTop.propTypes = {
+  name: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+};
 
 export default BurgerConstructor;

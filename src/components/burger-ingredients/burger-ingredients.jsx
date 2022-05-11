@@ -1,5 +1,6 @@
 import React from 'react'; // импорт библиотеки
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import { Box, CurrencyIcon, Typography, Counter, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -66,5 +67,19 @@ function BurgerIngredients(props) {
     </div>
   );
 }
+
+BurgerIngredients.propTypes = {
+  data: PropTypes.array.isRequired,
+};
+
+IngredientsArea.propTypes = {
+  data: PropTypes.array.isRequired,
+  group: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+};
+
+IngredientsItem.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default BurgerIngredients;

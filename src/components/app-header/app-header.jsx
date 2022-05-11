@@ -1,5 +1,6 @@
 import React from 'react'; // импорт библиотеки
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
