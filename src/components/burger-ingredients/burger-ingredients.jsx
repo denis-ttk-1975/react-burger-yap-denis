@@ -30,7 +30,7 @@ function IngredientsItem(props) {
       {props.data.__v ? <Counter count={props.data.__v} size='default' className={styles.counter} /> : null}
       <img src={props.data.image} alt={props.data.name} className='mb-2' />
       <div className={`mb-2 ${styles.priceLabel}`}>
-        <p className=''>{props.data.price}</p>
+        <p className='text text_type_digits-default'>{props.data.price}</p>
         <CurrencyIcon type='primary' />
       </div>
       <p className={styles.ingredientName}>{props.data.name}</p>

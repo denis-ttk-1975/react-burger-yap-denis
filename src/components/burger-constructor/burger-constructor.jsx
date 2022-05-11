@@ -5,7 +5,7 @@ import { Box, CurrencyIcon, DragIcon, Typography, Button, ConstructorElement } f
 
 import styles from './burger-constructor.module.css';
 
-import data from './../../utils/data';
+// import data from './../../utils/data';
 
 function ElemTop(props) {
   return (
@@ -60,15 +60,36 @@ function BurgerConstructor(props) {
 
   const ingredientList = parseOrderList(ingredientsArray);
 
+  const sumTotalBill = (array, bunElem) => {
+    const result =
+      bunElem.price * 2 +
+      array.reduce(function (sum, current) {
+        return sum + current.price;
+      }, 0);
+    return result;
+  };
+
+  const amountTotalBill = sumTotalBill(ingredientList, bunElement);
+
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>
-      <ElemTop name={bunElement.name + ' (верх)'} price={bunElement.price} image={bunElement.image_mobile} className='pr-4' />
+      <ElemTop name={bunElement.name + ' (верх)'} price={bunElement.price} image={bunElement.image_mobile} />
       <div className={styles.innerList}>
         {ingredientList.map((elem, index) => {
           return <ElemList name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
         })}
       </div>
-      <ElemBottom name={bunElement.name + ' (низ)'} price={bunElement.price} image={bunElement.image_mobile} className='pr-4' />
+      <ElemBottom name={bunElement.name + ' (низ)'} price={bunElement.price} image={bunElement.image_mobile} />
+      <div className={`${styles.orderArea} mt-10 pr-4`}>
+        <div className={`${styles.sumArea} mr-10`}>
+          <p className='text text_type_digits-medium pr-2'>{amountTotalBill}</p>
+
+          <CurrencyIcon type='primary' />
+        </div>
+        <Button type='primary' size='large'>
+          Оформить заказ
+        </Button>
+      </div>
     </div>
   );
 }

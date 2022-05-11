@@ -47,3 +47,15 @@
 .innerList::-webkit-scrollbar-track {
   background-color: #2f2f37;
 }
+
+.orderArea {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.sumArea {
+  display: flex;
+
+  align-items: center;
+}
