@@ -1,0 +1,61 @@
+.constructorArea {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.elemTop,
+.elemBottom,
+.elemList {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.elemTop,
+.elemBottom {
+  padding-right: 16px;
+}
+
+.elemList {
+  padding-right: 8px;
+}
+
+/* .dragIcon {
+  padding-right: 8px;
+} */
+
+.innerList {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 16px;
+  height: calc(100vh - 536px);
+  min-height: 464px;
+  /* max-height: 756px; */
+  overflow-y: scroll;
+}
+
+.innerList::-webkit-scrollbar {
+  max-width: 8px;
+}
+
+.innerList::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.innerList::-webkit-scrollbar-track {
+  background-color: #2f2f37;
+}
+
+.orderArea {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.sumArea {
+  display: flex;
+
+  align-items: center;
+}
