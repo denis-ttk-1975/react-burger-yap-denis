@@ -12,13 +12,13 @@ function NavIngredient() {
   const [current, setCurrent] = React.useState('buns');
   return (
     <div className={`${styles.navIngredient} mb-10`}>
-      <Tab value='buns' active={current === 'buns'} onClick={setCurrent}>
+      <Tab value='buns' active={current === 'buns'} onClick={() => setCurrent('buns')}>
         Булки
       </Tab>
-      <Tab value='sauces' onClick={setCurrent}>
+      <Tab value='sauces' active={current === 'sauces'} onClick={() => setCurrent('sauces')}>
         Соусы
       </Tab>
-      <Tab value='fillings' onClick={setCurrent}>
+      <Tab value='fillings' active={current === 'fillings'} onClick={() => setCurrent('fillings')}>
         Начинки
       </Tab>
     </div>
@@ -44,10 +44,11 @@ function IngredientsArea(props) {
     <div className='mb-10'>
       <h3 className='mb-6 text text_type_main-medium'>{props.group}</h3>
       <div className={styles.ingredientsGrid}>
-        {props.data.map((elem, index) => {
+        {props.data.map((elem) => {
           if (elem.type === props.type) {
             return <IngredientsItem data={elem} key={elem._id} />;
           }
+          return null;
         })}
       </div>
     </div>

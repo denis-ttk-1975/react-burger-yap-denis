@@ -40,6 +40,7 @@ function BurgerConstructor(props) {
     if (elem.type === 'bun' && elem.__v === 1) {
       return true;
     }
+    return false;
   });
 
   const parseOrderList = (array) => {
