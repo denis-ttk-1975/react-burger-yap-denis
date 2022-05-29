@@ -6,7 +6,7 @@ import { Box, CurrencyIcon, Typography, Counter, Tab } from '@ya.praktikum/react
 
 import styles from './burger-ingredients.module.css';
 
-// import data from './../../utils/data';
+// navigation menu in header of ingredients area
 
 function NavIngredient() {
   const [current, setCurrent] = React.useState('buns');
@@ -25,6 +25,7 @@ function NavIngredient() {
   );
 }
 
+// card for ingredient item
 function IngredientsItem(props) {
   return (
     <div className={styles.ingredientsCard} onClick={() => props.onClickIngredientsItem(props.data)}>
@@ -39,6 +40,7 @@ function IngredientsItem(props) {
   );
 }
 
+// area for group of igredients - bun, sauce, main
 function IngredientsArea(props) {
   return (
     <div className='mb-10'>
@@ -55,6 +57,7 @@ function IngredientsArea(props) {
   );
 }
 
+// whole component
 function BurgerIngredients(props) {
   return (
     <div className={`mt-10 ${styles.ingredientArea}`}>

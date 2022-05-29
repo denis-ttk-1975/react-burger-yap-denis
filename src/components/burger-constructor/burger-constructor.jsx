@@ -56,14 +56,21 @@ function BurgerConstructor(props) {
 
   const ingredientsArray = props.data.filter((elem) => elem.type !== 'bun' && elem.__v > 0);
 
-  const ingredientList = parseOrderList(ingredientsArray);
+  const ingredientList = ingredientsArray.length ? parseOrderList(ingredientsArray) : null;
 
   const sumTotalBill = (array, bunElem) => {
-    const result =
-      bunElem.price * 2 +
-      array.reduce(function (sum, current) {
-        return sum + current.price;
-      }, 0);
+    let result = 0;
+    if (array) {
+      result =
+        result +
+        array.reduce(function (sum, current) {
+          return sum + current.price;
+        }, 0);
+    }
+
+    if (bunElem) {
+      result = result + bunElem.price * 2;
+    }
     return result;
   };
 
@@ -71,13 +78,15 @@ function BurgerConstructor(props) {
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>
-      <ElemTop name={bunElement.name + ' (верх)'} price={bunElement.price} image={bunElement.image_mobile} />
-      <div className={styles.innerList}>
-        {ingredientList.map((elem, index) => {
-          return <ElemList name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
-        })}
-      </div>
-      <ElemBottom name={bunElement.name + ' (низ)'} price={bunElement.price} image={bunElement.image_mobile} />
+      {bunElement && <ElemTop name={bunElement.name + ' (верх)'} price={bunElement.price} image={bunElement.image_mobile} />}
+      {ingredientList && (
+        <div className={styles.innerList}>
+          {ingredientList.map((elem, index) => {
+            return <ElemList name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
+          })}
+        </div>
+      )}
+      {bunElement && <ElemBottom name={bunElement.name + ' (низ)'} price={bunElement.price} image={bunElement.image_mobile} />}
       <div className={`${styles.orderArea} mt-10 pr-4`}>
         <div className={`${styles.sumArea} mr-10`}>
           <p className='text text_type_digits-medium pr-2'>{amountTotalBill}</p>
