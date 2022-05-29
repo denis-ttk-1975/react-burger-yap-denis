@@ -84,7 +84,7 @@ function BurgerConstructor(props) {
 
           <CurrencyIcon type='primary' />
         </div>
-        <Button type='primary' size='large'>
+        <Button type='primary' size='large' onClick={props.onClickMakeOrder}>
           Оформить заказ
         </Button>
       </div>

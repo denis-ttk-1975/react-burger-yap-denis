@@ -27,7 +27,7 @@ function NavIngredient() {
 
 function IngredientsItem(props) {
   return (
-    <div className={styles.ingredientsCard}>
+    <div className={styles.ingredientsCard} onClick={() => props.onClickIngredientsItem(props.data)}>
       {props.data.__v ? <Counter count={props.data.__v} size='default' className={styles.counter} /> : null}
       <img src={props.data.image} alt={props.data.name} className='mb-2' />
       <div className={`mb-2 ${styles.priceLabel}`}>
@@ -46,7 +46,7 @@ function IngredientsArea(props) {
       <div className={styles.ingredientsGrid}>
         {props.data.map((elem) => {
           if (elem.type === props.type) {
-            return <IngredientsItem data={elem} key={elem._id} />;
+            return <IngredientsItem data={elem} key={elem._id} onClickIngredientsItem={props.onClickIngredientsItem} />;
           }
           return null;
         })}
@@ -61,9 +61,9 @@ function BurgerIngredients(props) {
       <h2 className='mb-5 text text_type_main-large'>Соберите бургер</h2>
       <NavIngredient />
       <div className={styles.scrollBox}>
-        <IngredientsArea group='Булки' type='bun' data={props.data} />
-        <IngredientsArea group='Соусы' type='sauce' data={props.data} />
-        <IngredientsArea group='Начинки' type='main' data={props.data} />
+        <IngredientsArea group='Булки' type='bun' data={props.data} onClickIngredientsItem={props.onClickIngredientsItem} />
+        <IngredientsArea group='Соусы' type='sauce' data={props.data} onClickIngredientsItem={props.onClickIngredientsItem} />
+        <IngredientsArea group='Начинки' type='main' data={props.data} onClickIngredientsItem={props.onClickIngredientsItem} />
       </div>
     </div>
   );

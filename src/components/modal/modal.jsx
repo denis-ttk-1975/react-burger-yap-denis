@@ -20,13 +20,13 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
   }, []);
 
   return ReactDOM.createPortal(
-    <>
-      <div>
+    <div className={styles.wrapModal}>
+      <div className={styles.modal}>
         <h3>{title}</h3>
         {children}
       </div>
       <ModalOverlay onClick={onOverlayClick} />
-    </>,
+    </div>,
     modalsContainer
   );
 };

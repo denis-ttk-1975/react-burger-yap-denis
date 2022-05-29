@@ -9,7 +9,7 @@ function AppHeader() {
     <header className={`${styles.header}`}>
       <div className={`${styles.headerBox}`}>
         <div className={styles.leftIconBox}>
-          <div className={`pt-4 pb-4 pl-5 pr-5 ${styles.navItemActive}`}>
+          <div className={`pt-4 pb-4 pl-5 pr-5 ${styles.navItem}`}>
             <BurgerIcon type='primary' />
             <p className='ml-2 text text_type_main-default'>Конструктор</p>
           </div>

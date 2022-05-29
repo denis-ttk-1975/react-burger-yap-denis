@@ -32,6 +32,7 @@
 .navItem {
   display: flex;
   align-items: center;
+  cursor: pointer;
   /*transfere to library */
   /* padding: 16px 20px; */
   /* color: #8585ad; */
