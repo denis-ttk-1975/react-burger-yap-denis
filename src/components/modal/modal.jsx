@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ModalOverlay from './../modal-overlay/modal-overlay';
 
-import { Box, Icons, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, CloseIcon, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './modal.module.css';
 
@@ -22,7 +22,12 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
   return ReactDOM.createPortal(
     <div className={styles.wrapModal}>
       <div className={styles.modal}>
-        <h3>{title}</h3>
+        <div className={styles.modalHeader}>
+          <h3 className='text text_type_main-large'>{title}</h3>
+          <button className={styles.closeModalButton} onClick={onOverlayClick}>
+            <CloseIcon type='primary' />
+          </button>
+        </div>
         {children}
       </div>
       <ModalOverlay onClick={onOverlayClick} />
