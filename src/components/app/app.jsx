@@ -4,7 +4,8 @@ import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
 import BurgerConstructor from './../burger-constructor/burger-constructor';
 import Modal from './../modal/modal';
-import ModalOverlay from './../modal-overlay/modal-overlay';
+import IngredientDetails from './../ingredient-details/ingredient-details';
+import OrderDetails from './../order-details/order-details';
 
 import styles from './app.module.css';
 
@@ -84,8 +85,16 @@ function App() {
         <main className={styles.main}>
           <BurgerIngredients data={data} onClickIngredientsItem={clickIngredientItemHandler} />
           <BurgerConstructor data={data} onClickMakeOrder={clickOrderDetailsHandler} />
-          {isOrderDetailsOpened && <Modal title='Детали заказа' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}></Modal>}
-          {isIngredientDetailsOpened && <Modal title='Детали ингредиента' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}></Modal>}
+          {isOrderDetailsOpened && (
+            <Modal title='Детали заказа' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
+              <OrderDetails dataModal={orderNumber} />
+            </Modal>
+          )}
+          {isIngredientDetailsOpened && (
+            <Modal title='Детали ингредиента' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
+              <IngredientDetails dataModal={ingredientInModal} />
+            </Modal>
+          )}
         </main>
       )}
     </>
