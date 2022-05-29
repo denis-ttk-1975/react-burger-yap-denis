@@ -86,7 +86,7 @@ function App() {
           <BurgerIngredients data={data} onClickIngredientsItem={clickIngredientItemHandler} />
           <BurgerConstructor data={data} onClickMakeOrder={clickOrderDetailsHandler} />
           {isOrderDetailsOpened && (
-            <Modal title='Детали заказа' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
+            <Modal title='' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
               <OrderDetails dataModal={orderNumber} />
             </Modal>
           )}

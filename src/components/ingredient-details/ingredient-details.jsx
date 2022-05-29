@@ -1,8 +1,8 @@
-import React from 'react'; // импорт библиотеки
-import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
+import React from 'react'; // react-lib import
 
-import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
+import PropTypes from 'prop-types'; //prop-types-lib import
+
+import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './ingredient-details.module.css';
 
