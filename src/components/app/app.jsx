@@ -9,7 +9,8 @@ import OrderDetails from './../order-details/order-details';
 
 import styles from './app.module.css';
 
-import data from './../../utils/data';
+import testData from './../../utils/data';
+import fetchUrl from './../../utils/fetch-url';
 
 function App() {
   // states for fetch hendling
@@ -29,7 +30,7 @@ function App() {
   React.useEffect(() => {
     const getProductData = async () => {
       setStateLoading(true);
-      const res = await fetch(`https://norma.nomoreparties.space/api/ingredients`);
+      const res = await fetch(fetchUrl);
       const fullResponse = await res.json();
       setIngredients([...fullResponse.data]);
       setStateLoading(false);
@@ -79,7 +80,7 @@ function App() {
       {!isLoading && (
         <main className={styles.main}>
           <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
-          <BurgerConstructor data={ingredients} onClickMakeOrder={clickOrderDetailsHandler} />
+          <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} />
           {isOrderDetailsOpened && (
             <Modal title='' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
               <OrderDetails dataModal={orderNumber} />
