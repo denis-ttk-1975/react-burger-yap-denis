@@ -1,8 +1,8 @@
 import React from 'react'; // импорт библиотеки
-import ReactDOM from 'react-dom';
+
 import PropTypes from 'prop-types';
 
-import { Box, Icons, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './order-details.module.css';
 import orderAcceptedIcon from './../../images/order-accepted-icon.png';
@@ -20,5 +20,9 @@ function OrderDetails(props) {
     </div>
   );
 }
+
+OrderDetails.propTypes = {
+  dataModal: PropTypes.number.isRequired,
+};
 
 export default OrderDetails;

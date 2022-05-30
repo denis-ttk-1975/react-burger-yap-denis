@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import ReactDOM from 'react-dom';
+
 import PropTypes from 'prop-types';
 
 import { Box, Icons, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -11,4 +11,9 @@ const ModalOverlay = ({ onClick }) => {
 
   return <div className={styles.overlay} onClick={onClick} />;
 };
+
+ModalOverlay.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};
+
 export default ModalOverlay;

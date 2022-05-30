@@ -29,17 +29,10 @@ function App() {
   React.useEffect(() => {
     const getProductData = async () => {
       setStateLoading(true);
-      console.log(isLoading);
-      setIngredients([...ingredients, 1, 2, 9]);
-      console.log(ingredients);
       const res = await fetch(`https://norma.nomoreparties.space/api/ingredients`);
       const fullResponse = await res.json();
-      console.log(fullResponse);
-      console.log(fullResponse.data);
       setIngredients([...fullResponse.data]);
-      console.log(ingredients);
       setStateLoading(false);
-      console.log(isLoading);
     };
 
     getProductData();
@@ -78,13 +71,15 @@ function App() {
     e.key === 'Escape' && closeAllModals();
   };
 
+  console.log(ingredients);
+
   return (
     <>
       <AppHeader />
       {!isLoading && (
         <main className={styles.main}>
-          <BurgerIngredients data={data} onClickIngredientsItem={clickIngredientItemHandler} />
-          <BurgerConstructor data={data} onClickMakeOrder={clickOrderDetailsHandler} />
+          <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
+          <BurgerConstructor data={ingredients} onClickMakeOrder={clickOrderDetailsHandler} />
           {isOrderDetailsOpened && (
             <Modal title='' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
               <OrderDetails dataModal={orderNumber} />

@@ -35,4 +35,8 @@ function IngredientDetails(props) {
   );
 }
 
+IngredientDetails.propTypes = {
+  dataModal: PropTypes.object.isRequired,
+};
+
 export default IngredientDetails;
