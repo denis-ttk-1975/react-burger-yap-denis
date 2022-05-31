@@ -22,7 +22,7 @@ function OrderDetails(props) {
 }
 
 OrderDetails.propTypes = {
-  dataModal: PropTypes.number.isRequired,
+  dataModal: PropTypes.string.isRequired,
 };
 
 export default OrderDetails;

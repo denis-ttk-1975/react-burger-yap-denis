@@ -23,17 +23,32 @@ function App() {
   const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = React.useState(false); // boolean state for orderDetailsWindow
 
   const [ingredientInModal, setIngredientInModal] = React.useState(null); // array for all ingredients
-  const [orderNumber, setOrderNumber] = React.useState(null); // state for order number
+  const [orderNumber, setOrderNumber] = React.useState(0); // state for order number
 
   // getting data about inredients from server
 
   React.useEffect(() => {
     const getProductData = async () => {
-      setStateLoading(true);
-      const res = await fetch(fetchUrl);
-      const fullResponse = await res.json();
-      setIngredients([...fullResponse.data]);
-      setStateLoading(false);
+      //   setStateLoading(true);
+      //   const res = await fetch(fetchUrl);
+      //   const fullResponse = await res.json();
+      //   setIngredients([...fullResponse.data]);
+      //   setStateLoading(false);
+
+      try {
+        setStateLoading(true);
+        const res = await fetch(fetchUrl);
+        if (!res.ok) {
+          throw new Error('Сервер не дал ответа');
+        }
+        const fullResponse = await res.json();
+        setIngredients([...fullResponse.data]);
+        setStateLoading(false);
+      } catch (error) {
+        console.log('Возникла проблема с вашим fetch запросом: ', error.message);
+        setErrorMessage(error.message);
+        setStateLoading(false);
+      }
     };
 
     getProductData();
@@ -42,7 +57,8 @@ function App() {
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
-    setOrderNumber(('000000' + Math.floor(Math.random() * 999999)).slice(-6));
+    // setOrderNumber(('000000' + Math.floor(Math.random() * 999999)).slice(-6));
+    setOrderNumber(('000000' + (Number(orderNumber) + 1)).slice(-6));
     console.log(orderNumber);
     if (orderNumber) {
       setIsOrderDetailsOpened(true);
