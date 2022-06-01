@@ -10,12 +10,18 @@ import styles from './modal.module.css';
 // Находим DOM-элемент для отрисовки в нем модальных окон
 const modalsContainer = document.querySelector('#modals');
 
-const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
+const Modal = ({ title, closeAllModals, children }) => {
+  // handling for Esc pressing
+
+  const handleEscKeydown = (e) => {
+    e.key === 'Escape' && closeAllModals();
+  };
+
   React.useEffect(() => {
-    document.addEventListener('keydown', onEscKeydown);
+    document.addEventListener('keydown', handleEscKeydown);
 
     return () => {
-      document.removeEventListener('keydown', onEscKeydown);
+      document.removeEventListener('keydown', handleEscKeydown);
     };
   }, []);
 
@@ -24,13 +30,13 @@ const Modal = ({ title, onOverlayClick, onEscKeydown, children }) => {
       <div className={styles.modal}>
         <div className={styles.modalHeader}>
           <h3 className='text text_type_main-large'>{title}</h3>
-          <button className={styles.closeModalButton} onClick={onOverlayClick}>
+          <button className={styles.closeModalButton} onClick={closeAllModals}>
             <CloseIcon type='primary' />
           </button>
         </div>
         {children}
       </div>
-      <ModalOverlay onClick={onOverlayClick} />
+      <ModalOverlay onClick={closeAllModals} />
     </div>,
     modalsContainer
   );

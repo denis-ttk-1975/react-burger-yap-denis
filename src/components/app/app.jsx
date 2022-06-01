@@ -82,12 +82,6 @@ function App() {
     setIsIngredientDetailsOpened(false);
   };
 
-  // handling for Esc pressing
-
-  const handleEscKeydown = (e) => {
-    e.key === 'Escape' && closeAllModals();
-  };
-
   console.log(ingredients);
 
   return (
@@ -98,12 +92,12 @@ function App() {
           <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
           <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} />
           {isOrderDetailsOpened && (
-            <Modal title='' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
+            <Modal title='' closeAllModals={closeAllModals}>
               <OrderDetails dataModal={orderNumber} />
             </Modal>
           )}
           {isIngredientDetailsOpened && (
-            <Modal title='Детали ингредиента' onOverlayClick={closeAllModals} onEscKeydown={handleEscKeydown}>
+            <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
               <IngredientDetails dataModal={ingredientInModal} />
             </Modal>
           )}
