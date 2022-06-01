@@ -6,6 +6,11 @@
   display: flex;
 }
 
+.navIngredientItem {
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
 .ingredientsCard {
   display: flex;
   flex-direction: column;
