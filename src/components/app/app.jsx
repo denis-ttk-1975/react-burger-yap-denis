@@ -55,8 +55,6 @@ function App() {
     setIngredientInModal(null);
   };
 
-  console.log(ingredients);
-
   return (
     <>
       <AppHeader />

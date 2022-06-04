@@ -10,12 +10,10 @@ function NavIngredient() {
   const [current, setCurrent] = useState('bun');
 
   const onTabClick = (par) => {
-    console.log(par);
     setCurrent(par);
     const element = document.getElementById(par);
 
     if (element) {
-      console.log('element: ', element);
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };

@@ -22,18 +22,17 @@ function BurgerConstructor(props) {
   const sumTotalBill = (array, bunElem) => {
     let result = 0;
     if (array) {
-      console.log('array: ', array);
       array.forEach((item) => {
         if (item.type !== 'bun') {
           result = result + item.__v * item.price;
-          console.log('result: ', result);
+
         }
       });
     }
 
     if (bunElem) {
       result = result + bunElem.price * 2;
-      console.log('bunElem.price * 2: ', bunElem.price * 2);
+
     }
     return result;
   };
