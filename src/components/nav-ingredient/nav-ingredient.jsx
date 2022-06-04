@@ -13,22 +13,26 @@ function NavIngredient() {
     console.log(par);
     setCurrent(par);
     const element = document.getElementById(par);
-    if (element) element.scrollIntoView({ block: 'center', behavior: 'smooth' });
+
+    if (element) {
+      console.log('element: ', element);
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <nav className={`${styles.navIngredient} mb-10`}>
-      <a href='#bun' className={styles.navIngredientItem}>
+      <a href='#' className={styles.navIngredientItem} onClick={(e) => e.preventDefault()}>
         <Tab value='bun' active={current === 'bun'} onClick={onTabClick}>
           Булки
         </Tab>
       </a>
-      <a href='#sauce' className={styles.navIngredientItem}>
+      <a href='#' className={styles.navIngredientItem} onClick={(e) => e.preventDefault()}>
         <Tab value='sauce' active={current === 'sauce'} onClick={onTabClick}>
           Соусы
         </Tab>
       </a>
-      <a href='#main' className={styles.navIngredientItem}>
+      <a href='#' className={styles.navIngredientItem} onClick={(e) => e.preventDefault()}>
         <Tab value='main' active={current === 'main'} onClick={onTabClick}>
           Начинки
         </Tab>

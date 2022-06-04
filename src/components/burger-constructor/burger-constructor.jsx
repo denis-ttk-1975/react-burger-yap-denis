@@ -5,35 +5,38 @@ import PropTypes from 'prop-types';
 import { Box, CurrencyIcon, DragIcon, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './burger-constructor.module.css';
+import ElemTop from './../elem-top/elem-top';
+import ElemBottom from './../elem-bottom/elem-bottom';
+import ElemList from './../elem-list/elem-list';
 
-import { IngredientType } from './../../utils/prop-types';
+// import { IngredientType } from './../../utils/prop-types';
 
-function ElemTop(props) {
-  return (
-    <div className={styles.elemTop}>
-      <ConstructorElement type='top' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />
-    </div>
-  );
-}
+// function ElemTop(props) {
+//   return (
+//     <div className={styles.elemTop}>
+//       <ConstructorElement type='top' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />
+//     </div>
+//   );
+// }
 
-function ElemBottom(props) {
-  return (
-    <div className={styles.elemBottom}>
-      <ConstructorElement type='bottom' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />
-    </div>
-  );
-}
+// function ElemBottom(props) {
+//   return (
+//     <div className={styles.elemBottom}>
+//       <ConstructorElement type='bottom' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />
+//     </div>
+//   );
+// }
 
-function ElemList(props) {
-  return (
-    <div className={styles.elemList}>
-      <div className='pr-2'>
-        <DragIcon type='primary' />
-      </div>
-      <ConstructorElement text={props.name} price={props.price} thumbnail={props.image} />
-    </div>
-  );
-}
+// function ElemList(props) {
+//   return (
+//     <div className={styles.elemList}>
+//       <div className='pr-2'>
+//         <DragIcon type='primary' />
+//       </div>
+//       <ConstructorElement text={props.name} price={props.price} thumbnail={props.image} />
+//     </div>
+//   );
+// }
 
 function BurgerConstructor(props) {
   const bunElement = props.data.find((elem) => {
@@ -105,10 +108,10 @@ BurgerConstructor.propTypes = {
   data: PropTypes.array.isRequired,
 };
 
-ElemList.propTypes = IngredientType;
+// ElemList.propTypes = IngredientType;
 
-ElemBottom.propTypes = IngredientType;
+// ElemBottom.propTypes = IngredientType;
 
-ElemTop.propTypes = IngredientType;
+// ElemTop.propTypes = IngredientType;
 
 export default BurgerConstructor;

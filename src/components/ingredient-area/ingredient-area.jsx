@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Box, CurrencyIcon, Typography, Counter, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './ingredient-area.module.css';
-import IngredientsItem from './../ingredient-item/ingredient-item';
+import IngredientsItem from '../ingredient-item/ingredient-item';
 
 // area for group of ingredients - bun, sauce, main
 function IngredientsArea(props) {
