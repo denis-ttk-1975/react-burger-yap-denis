@@ -14,7 +14,6 @@ import getProductData from './../../utils/api';
 
 function App() {
   // states for fetch hendling
-
   const [ingredients, setIngredients] = useState([]);
   const [isLoading, setStateLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -36,7 +35,7 @@ function App() {
   const clickOrderDetailsHandler = () => {
     setOrderNumber(('000000' + Math.floor(Math.random() * 999999)).slice(-6));
     // setOrderNumber(('000000' + (Number(orderNumber) + 1)).slice(-6));
-    console.log(orderNumber);
+
     setIsOrderDetailsOpened(true);
   };
 

@@ -2,7 +2,7 @@ import React from 'react'; // импорт библиотеки
 
 import PropTypes from 'prop-types';
 
-import { Box, CurrencyIcon, Typography, Counter, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './ingredient-area.module.css';
 import IngredientsItem from '../ingredient-item/ingredient-item';

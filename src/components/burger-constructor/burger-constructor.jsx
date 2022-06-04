@@ -2,41 +2,12 @@ import React from 'react'; // импорт библиотеки
 
 import PropTypes from 'prop-types';
 
-import { Box, CurrencyIcon, DragIcon, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, CurrencyIcon, Typography, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './burger-constructor.module.css';
 import ElemTop from './../elem-top/elem-top';
 import ElemBottom from './../elem-bottom/elem-bottom';
 import ElemList from './../elem-list/elem-list';
-
-// import { IngredientType } from './../../utils/prop-types';
-
-// function ElemTop(props) {
-//   return (
-//     <div className={styles.elemTop}>
-//       <ConstructorElement type='top' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />
-//     </div>
-//   );
-// }
-
-// function ElemBottom(props) {
-//   return (
-//     <div className={styles.elemBottom}>
-//       <ConstructorElement type='bottom' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />
-//     </div>
-//   );
-// }
-
-// function ElemList(props) {
-//   return (
-//     <div className={styles.elemList}>
-//       <div className='pr-2'>
-//         <DragIcon type='primary' />
-//       </div>
-//       <ConstructorElement text={props.name} price={props.price} thumbnail={props.image} />
-//     </div>
-//   );
-// }
 
 function BurgerConstructor(props) {
   const bunElement = props.data.find((elem) => {
@@ -46,46 +17,41 @@ function BurgerConstructor(props) {
     return false;
   });
 
-  const parseOrderList = (array) => {
-    let result = [];
-    array.forEach((elem, index) => {
-      for (let i = 1; i <= elem.__v; i++) {
-        result.push({ name: elem.name, price: elem.price, image: elem.image_mobile });
-      }
-    });
-    console.log(result);
-    return result;
-  };
-
   const ingredientsArray = props.data.filter((elem) => elem.type !== 'bun' && elem.__v > 0);
-
-  const ingredientList = ingredientsArray.length ? parseOrderList(ingredientsArray) : null;
 
   const sumTotalBill = (array, bunElem) => {
     let result = 0;
     if (array) {
-      result =
-        result +
-        array.reduce(function (sum, current) {
-          return sum + current.price;
-        }, 0);
+      console.log('array: ', array);
+      array.forEach((item) => {
+        if (item.type !== 'bun') {
+          result = result + item.__v * item.price;
+          console.log('result: ', result);
+        }
+      });
     }
 
     if (bunElem) {
       result = result + bunElem.price * 2;
+      console.log('bunElem.price * 2: ', bunElem.price * 2);
     }
     return result;
   };
 
-  const amountTotalBill = sumTotalBill(ingredientList, bunElement);
+  const amountTotalBill = sumTotalBill(ingredientsArray, bunElement);
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>
       {bunElement && <ElemTop name={bunElement.name + ' (верх)'} price={bunElement.price} image={bunElement.image_mobile} />}
-      {ingredientList && (
+      {ingredientsArray && (
         <div className={styles.innerList}>
-          {ingredientList.map((elem, index) => {
-            return <ElemList name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
+          {ingredientsArray.map((elem, index) => {
+            if (elem.type !== 'bun') {
+              let i = elem.__v;
+              do {
+                return <ElemList name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
+              } while (i > 0);
+            }
           })}
         </div>
       )}
@@ -107,11 +73,5 @@ function BurgerConstructor(props) {
 BurgerConstructor.propTypes = {
   data: PropTypes.array.isRequired,
 };
-
-// ElemList.propTypes = IngredientType;
-
-// ElemBottom.propTypes = IngredientType;
-
-// ElemTop.propTypes = IngredientType;
 
 export default BurgerConstructor;

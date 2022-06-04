@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ModalOverlay from './../modal-overlay/modal-overlay';
 
-import { Box, CloseIcon, Typography, Button, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, CloseIcon, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './modal.module.css';
 
