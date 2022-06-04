@@ -2,23 +2,23 @@
   width: 600px;
 }
 
-.navIngredient {
+/* .navIngredient {
   display: flex;
 }
 
 .navIngredientItem {
   text-decoration: none;
   scroll-behavior: smooth;
-}
+} */
 
-.ingredientsCard {
+/* .ingredientsCard {
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
   width: 272px;
   cursor: pointer;
-}
+} */
 
 .scrollBox {
   height: calc(100vh - 284px);
@@ -40,14 +40,14 @@
   margin: 0 0 52px;
 }
 
-.ingredientsGrid {
+/* .ingredientsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   row-gap: 32px;
   column-gap: 24px;
   margin: auto;
-}
-
+} */
+/*
 .ingredientName {
   text-align: center;
 }
@@ -62,4 +62,4 @@
   position: absolute;
   top: 0;
   right: 0;
-}
+} */
