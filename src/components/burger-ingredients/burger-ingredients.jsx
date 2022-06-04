@@ -1,4 +1,4 @@
-import React from 'react'; // импорт библиотеки
+import React, { useState } from 'react'; // импорт библиотеки
 
 import PropTypes from 'prop-types';
 
@@ -9,7 +9,7 @@ import styles from './burger-ingredients.module.css';
 // navigation menu in header of ingredients area
 
 function NavIngredient() {
-  const [current, setCurrent] = React.useState('bun');
+  const [current, setCurrent] = useState('bun');
 
   const onTabClick = (par) => {
     console.log(par);

@@ -1,4 +1,4 @@
-import React from 'react'; // импорт библиотеки
+import React, { useState, useEffect } from 'react'; // импорт библиотеки
 
 import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
@@ -15,37 +15,19 @@ import getProductData from './../../utils/api';
 function App() {
   // states for fetch hendling
 
-  const [ingredients, setIngredients] = React.useState([]);
-  const [isLoading, setStateLoading] = React.useState(false);
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const [ingredients, setIngredients] = useState([]);
+  const [isLoading, setStateLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = React.useState(false); // boolean state for orderDetailsWindow
-  const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = React.useState(false); // boolean state for orderDetailsWindow
+  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
+  const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
-  const [ingredientInModal, setIngredientInModal] = React.useState(null); // array for all ingredients
-  const [orderNumber, setOrderNumber] = React.useState(0); // state for order number
+  const [ingredientInModal, setIngredientInModal] = useState(null); // array for all ingredients
+  const [orderNumber, setOrderNumber] = useState(0); // state for order number
 
   // getting data about inredients from server
 
-  React.useEffect(() => {
-    // const getProductData = async () => {
-
-    //   try {
-    //     setStateLoading(true);
-    //     const res = await fetch(fetchUrl);
-    //     if (!res.ok) {
-    //       throw new Error('Сервер не дал ответа');
-    //     }
-    //     const fullResponse = await res.json();
-    //     setIngredients([...fullResponse.data]);
-    //     setStateLoading(false);
-    //   } catch (error) {
-    //     console.log('Возникла проблема с вашим fetch запросом: ', error.message);
-    //     setErrorMessage(error.message);
-    //     setStateLoading(false);
-    //   }
-    // };
-
+  useEffect(() => {
     getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
   }, []);
 

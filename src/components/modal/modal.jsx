@@ -1,4 +1,4 @@
-import React from 'react'; // импорт библиотеки
+import React, { useEffect } from 'react'; // импорт библиотеки
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import ModalOverlay from './../modal-overlay/modal-overlay';
@@ -17,7 +17,7 @@ const Modal = ({ title, closeAllModals, children }) => {
     e.key === 'Escape' && closeAllModals();
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener('keydown', handleEscKeydown);
 
     return () => {
