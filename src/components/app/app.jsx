@@ -34,13 +34,10 @@ function App() {
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
-    // setOrderNumber(('000000' + Math.floor(Math.random() * 999999)).slice(-6));
-    setOrderNumber(('000000' + (Number(orderNumber) + 1)).slice(-6));
+    setOrderNumber(('000000' + Math.floor(Math.random() * 999999)).slice(-6));
+    // setOrderNumber(('000000' + (Number(orderNumber) + 1)).slice(-6));
     console.log(orderNumber);
     setIsOrderDetailsOpened(true);
-    // if (orderNumber) {
-    //   setIsOrderDetailsOpened(true);
-    // }
   };
 
   // handling for click on tab with ingredient
@@ -48,9 +45,6 @@ function App() {
   const clickIngredientItemHandler = (data) => {
     setIngredientInModal(data);
     setIsIngredientDetailsOpened(true);
-    // if (ingredientInModal) {
-    //   setIsIngredientDetailsOpened(true);
-    // }
   };
 
   // function to close all opened modals
