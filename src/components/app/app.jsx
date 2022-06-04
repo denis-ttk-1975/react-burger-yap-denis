@@ -10,7 +10,7 @@ import OrderDetails from './../order-details/order-details';
 import styles from './app.module.css';
 
 import testData from './../../utils/data';
-import fetchUrl from './../../utils/fetch-url';
+import getProductData from './../../utils/api';
 
 function App() {
   // states for fetch hendling
@@ -28,30 +28,25 @@ function App() {
   // getting data about inredients from server
 
   React.useEffect(() => {
-    const getProductData = async () => {
-      //   setStateLoading(true);
-      //   const res = await fetch(fetchUrl);
-      //   const fullResponse = await res.json();
-      //   setIngredients([...fullResponse.data]);
-      //   setStateLoading(false);
+    // const getProductData = async () => {
 
-      try {
-        setStateLoading(true);
-        const res = await fetch(fetchUrl);
-        if (!res.ok) {
-          throw new Error('Сервер не дал ответа');
-        }
-        const fullResponse = await res.json();
-        setIngredients([...fullResponse.data]);
-        setStateLoading(false);
-      } catch (error) {
-        console.log('Возникла проблема с вашим fetch запросом: ', error.message);
-        setErrorMessage(error.message);
-        setStateLoading(false);
-      }
-    };
+    //   try {
+    //     setStateLoading(true);
+    //     const res = await fetch(fetchUrl);
+    //     if (!res.ok) {
+    //       throw new Error('Сервер не дал ответа');
+    //     }
+    //     const fullResponse = await res.json();
+    //     setIngredients([...fullResponse.data]);
+    //     setStateLoading(false);
+    //   } catch (error) {
+    //     console.log('Возникла проблема с вашим fetch запросом: ', error.message);
+    //     setErrorMessage(error.message);
+    //     setStateLoading(false);
+    //   }
+    // };
 
-    getProductData();
+    getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
   }, []);
 
   // handling for Make-Order-Button
@@ -69,7 +64,7 @@ function App() {
 
   const clickIngredientItemHandler = (data) => {
     setIngredientInModal(data);
-    console.log(ingredientInModal);
+
     if (ingredientInModal) {
       setIsIngredientDetailsOpened(true);
     }
