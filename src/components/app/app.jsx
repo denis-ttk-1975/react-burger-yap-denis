@@ -37,26 +37,29 @@ function App() {
     // setOrderNumber(('000000' + Math.floor(Math.random() * 999999)).slice(-6));
     setOrderNumber(('000000' + (Number(orderNumber) + 1)).slice(-6));
     console.log(orderNumber);
-    if (orderNumber) {
-      setIsOrderDetailsOpened(true);
-    }
+    setIsOrderDetailsOpened(true);
+    // if (orderNumber) {
+    //   setIsOrderDetailsOpened(true);
+    // }
   };
 
   // handling for click on tab with ingredient
 
   const clickIngredientItemHandler = (data) => {
     setIngredientInModal(data);
-
-    if (ingredientInModal) {
-      setIsIngredientDetailsOpened(true);
-    }
+    setIsIngredientDetailsOpened(true);
+    // if (ingredientInModal) {
+    //   setIsIngredientDetailsOpened(true);
+    // }
   };
 
   // function to close all opened modals
 
   const closeAllModals = () => {
     setIsOrderDetailsOpened(false);
+    setOrderNumber(0);
     setIsIngredientDetailsOpened(false);
+    setIngredientInModal(null);
   };
 
   console.log(ingredients);
