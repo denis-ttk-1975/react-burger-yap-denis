@@ -18,9 +18,15 @@ export const getProductData = async (setIngredients, setStateLoading, setErrorMe
   }
 };
 
-export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMessage, errorMessage) => {
+export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMessage, errorMessage, ingredients) => {
   let fullResponse;
   try {
+    const bodyIngredients = ingredients.map((item) => {
+      if (item.__v > 0) {
+        return item._id;
+      }
+    });
+    console.log(' bodyIngredients: ', bodyIngredients);
     setStateLoading(true);
     const res = await fetch(postUrlForOrder, {
       method: 'POST',
@@ -28,7 +34,7 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        ingredients: ['60d3b41abdacab0026a733c6'],
+        ingredients: bodyIngredients,
       }),
     });
     if (!res.ok) {

@@ -18,6 +18,7 @@ import { getProductData, postOrderData } from './../../utils/api';
 function App() {
   // states for fetch handling
   const [ingredients, setIngredients] = useState([]);
+
   const [orderIngredients, setOrderIngredients] = useState([]);
   const [isLoading, setStateLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -43,7 +44,7 @@ function App() {
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
-    postOrderData(setOrderNumber, setStateLoading, setErrorMessage, errorMessage);
+    postOrderData(setOrderNumber, setStateLoading, setErrorMessage, errorMessage, orderIngredients);
     setIsOrderDetailsOpened(true);
     console.log('isOrderDetailsOpened: ', isOrderDetailsOpened);
     console.log('orderNumber: ', orderNumber);
@@ -64,7 +65,7 @@ function App() {
     setIsIngredientDetailsOpened(false);
     setIngredientInModal(null);
   };
-
+  console.log('ingredients: ', ingredients);
   return (
     <BurgerIngredientsContext.Provider value={{ orderIngredients, setOrderIngredients }}>
       <AppHeader />

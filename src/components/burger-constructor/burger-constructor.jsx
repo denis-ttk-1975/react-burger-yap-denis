@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'; // импорт библиотеки
+import React, { useContext, useEffect } from 'react'; // импорт библиотеки
 
 import BurgerIngredientsContext from './../../context/burger-ingredient-context';
 
@@ -52,7 +52,7 @@ function BurgerConstructor(props) {
         result = result + item.price;
       });
     }
-
+    // setOrderIngredients(burgerOrderArray);
     return result;
   };
 
