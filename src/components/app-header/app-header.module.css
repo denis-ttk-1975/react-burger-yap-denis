@@ -32,19 +32,13 @@
 .navItem {
   display: flex;
   align-items: center;
-  /*transfere to library */
-  /* padding: 16px 20px; */
-  /* color: #8585ad; */
+  cursor: pointer;
+  text-decoration: none;
 }
 
 .navItemActive {
   composes: navItem;
-  /* color: #f2f2f3; */
 }
-
-/* .icon {
-  padding-right: 8px;
-} */
 
 .headerLogo {
   display: flex;

@@ -1,0 +1,43 @@
+.mainModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.imageWrap {
+  height: 240px;
+  width: 520px;
+  padding-bottom: 16px;
+}
+
+.ingredientName {
+  color: #f2f2f3;
+  min-height: 30px;
+  width: 520px;
+  padding-bottom: 32px;
+  margin: auto;
+  text-align: center;
+}
+
+.paramArea {
+  display: grid;
+  grid-template-columns: 120px 112px 112px 112px;
+
+  justify-content: space-between;
+  min-height: 56px;
+  width: 520px;
+  padding-bottom: 60px;
+}
+.paramItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.paramName {
+  margin: auto;
+}
+
+.paramData {
+  margin: auto;
+}
