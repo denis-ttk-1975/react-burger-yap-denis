@@ -18,6 +18,7 @@ import { getProductData, postOrderData } from './../../utils/api';
 function App() {
   // states for fetch handling
   const [ingredients, setIngredients] = useState([]);
+  const [orderIngredients, setOrderIngredients] = useState([]);
   const [isLoading, setStateLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -32,6 +33,11 @@ function App() {
 
   useEffect(() => {
     getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
+  }, []);
+
+  // load data for order-ingredients
+  useEffect(() => {
+    setOrderIngredients(testData);
   }, []);
 
   // handling for Make-Order-Button
@@ -60,13 +66,13 @@ function App() {
   };
 
   return (
-    <BurgerIngredientsContext.Provider value={{ ingredients, setIngredients }}>
+    <BurgerIngredientsContext.Provider value={{ orderIngredients, setOrderIngredients }}>
       <AppHeader />
       {!isLoading && (
         <main className={styles.main}>
           <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
           {/* <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} /> */}
-          <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} />
+          <BurgerConstructor onClickMakeOrder={clickOrderDetailsHandler} />
           {isOrderDetailsOpened && (
             <Modal title='' closeAllModals={closeAllModals}>
               <OrderDetails dataModal={orderNumber} />
