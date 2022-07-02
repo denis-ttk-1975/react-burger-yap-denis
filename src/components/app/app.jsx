@@ -9,11 +9,13 @@ import OrderDetails from './../order-details/order-details';
 
 import styles from './app.module.css';
 
+import IngredientContext from './../../utils/ingredientContext';
+
 import testData from './../../utils/data';
 import getProductData from './../../utils/api';
 
 function App() {
-  // states for fetch hendling
+  // states for fetch handling
   const [ingredients, setIngredients] = useState([]);
   const [isLoading, setStateLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -24,7 +26,7 @@ function App() {
   const [ingredientInModal, setIngredientInModal] = useState(null); // array for all ingredients
   const [orderNumber, setOrderNumber] = useState(0); // state for order number
 
-  // getting data about inredients from server
+  // getting data about ingredients from server
 
   useEffect(() => {
     getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
@@ -56,11 +58,12 @@ function App() {
   };
 
   return (
-    <>
+    <IngredientContext.Provider value={ingredients}>
       <AppHeader />
       {!isLoading && (
         <main className={styles.main}>
           <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
+          {/* <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} /> */}
           <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} />
           {isOrderDetailsOpened && (
             <Modal title='' closeAllModals={closeAllModals}>
@@ -74,7 +77,7 @@ function App() {
           )}
         </main>
       )}
-    </>
+    </IngredientContext.Provider>
   );
 }
 
