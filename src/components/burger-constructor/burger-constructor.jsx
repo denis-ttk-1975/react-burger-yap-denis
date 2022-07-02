@@ -1,4 +1,6 @@
-import React from 'react'; // импорт библиотеки
+import React, { useContext } from 'react'; // импорт библиотеки
+
+import BurgerIngredientsContext from './../../context/burger-ingredient-context';
 
 import PropTypes from 'prop-types';
 
@@ -9,15 +11,22 @@ import ElemTop from './../elem-top/elem-top';
 import ElemBottom from './../elem-bottom/elem-bottom';
 import ElemList from './../elem-list/elem-list';
 
+import testData from './../../utils/data';
+
 function BurgerConstructor(props) {
-  const bunElement = props.data.find((elem) => {
+  const { ingredients, setIngredients } = useContext(BurgerIngredientsContext);
+
+  console.log(ingredients);
+  console.log(props.data);
+
+  const bunElement = ingredients.find((elem) => {
     if (elem.type === 'bun' && elem.__v === 1) {
       return true;
     }
     return false;
   });
 
-  const ingredientsArray = props.data.filter((elem) => elem.type !== 'bun' && elem.__v > 0);
+  const ingredientsArray = ingredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0);
 
   const sumTotalBill = (array, bunElem) => {
     let result = 0;
@@ -25,19 +34,21 @@ function BurgerConstructor(props) {
       array.forEach((item) => {
         if (item.type !== 'bun') {
           result = result + item.__v * item.price;
-
         }
       });
     }
 
     if (bunElem) {
       result = result + bunElem.price * 2;
-
     }
     return result;
   };
 
   const amountTotalBill = sumTotalBill(ingredientsArray, bunElement);
+
+  // console.log('bunElement: ', bunElement);
+  // console.log('ingredientsArray: ', ingredientsArray);
+  // console.log('amountTotalBill: ', amountTotalBill);
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>

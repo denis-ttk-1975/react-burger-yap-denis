@@ -9,10 +9,11 @@ import OrderDetails from './../order-details/order-details';
 
 import styles from './app.module.css';
 
-import IngredientContext from './../../utils/ingredientContext';
+// import { IngredientContext } from './../../utils/ingredientContext';
+import BurgerIngredientsContext from './../../context/burger-ingredient-context';
 
 import testData from './../../utils/data';
-import getProductData from './../../utils/api';
+import { getProductData, postOrderData } from './../../utils/api';
 
 function App() {
   // states for fetch handling
@@ -21,10 +22,11 @@ function App() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
+
   const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
   const [ingredientInModal, setIngredientInModal] = useState(null); // array for all ingredients
-  const [orderNumber, setOrderNumber] = useState(0); // state for order number
+  const [orderNumber, setOrderNumber] = useState('000000'); // state for order number
 
   // getting data about ingredients from server
 
@@ -35,10 +37,10 @@ function App() {
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
-    setOrderNumber(('000000' + Math.floor(Math.random() * 999999)).slice(-6));
-    // setOrderNumber(('000000' + (Number(orderNumber) + 1)).slice(-6));
-
+    postOrderData(setOrderNumber, setStateLoading, setErrorMessage, errorMessage);
     setIsOrderDetailsOpened(true);
+    console.log('isOrderDetailsOpened: ', isOrderDetailsOpened);
+    console.log('orderNumber: ', orderNumber);
   };
 
   // handling for click on tab with ingredient
@@ -58,7 +60,7 @@ function App() {
   };
 
   return (
-    <IngredientContext.Provider value={ingredients}>
+    <BurgerIngredientsContext.Provider value={{ ingredients, setIngredients }}>
       <AppHeader />
       {!isLoading && (
         <main className={styles.main}>
@@ -77,7 +79,7 @@ function App() {
           )}
         </main>
       )}
-    </IngredientContext.Provider>
+    </BurgerIngredientsContext.Provider>
   );
 }
 
