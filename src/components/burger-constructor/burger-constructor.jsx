@@ -17,22 +17,24 @@ import { NewLineKind } from 'typescript';
 function BurgerConstructor(props) {
   const { orderIngredients, setOrderIngredients } = useContext(BurgerConstructorContext);
 
-  const bunElement = orderIngredients.find((elem) => {
-    if (elem.type === 'bun' && elem.__v === 1) {
-      return true;
+  const amountBunCheck = (arrayIngredients) => {
+    if (arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0).length > 1) {
+      alert('Вы выбрали больше чем одну булку, выберите один вид булки');
     }
-    return false;
-  });
+    return [...arrayIngredients.filter((elem) => elem.type === 'bun')][0];
+  };
 
-  const ingredientsArray = orderIngredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0);
+  const bunElement = amountBunCheck(orderIngredients);
+
+  const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0)];
 
   const prepareBurgerArray = (bunObject, ingredientsArray) => {
     let result = [];
     if (bunObject && ingredientsArray) {
-      delete bunObject.__v;
+      const removeKey = ({ __v, ...rest }) => rest;
+      bunObject = removeKey(bunObject);
       result.push({ ...bunObject, name: `${bunObject.name} (верх)` });
       ingredientsArray.forEach((elem) => {
-        const removeKey = ({ __v, ...rest }) => rest;
         const newElem = removeKey(elem);
         for (let j = 0; j < elem.__v; j++) {
           result.push(newElem);
@@ -44,6 +46,7 @@ function BurgerConstructor(props) {
   };
 
   const burgerOrderArray = prepareBurgerArray(bunElement, ingredientsArray);
+  console.log(' burgerOrderArray: ', burgerOrderArray);
 
   const sumTotalBill = (array) => {
     let result = 0;
@@ -52,7 +55,7 @@ function BurgerConstructor(props) {
         result = result + item.price;
       });
     }
-    // setOrderIngredients(burgerOrderArray);
+
     return result;
   };
 

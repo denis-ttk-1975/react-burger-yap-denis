@@ -81,7 +81,7 @@ const data = [
     image: 'https://code.s3.yandex.net/react/code/meat-01.png',
     image_mobile: 'https://code.s3.yandex.net/react/code/meat-01-mobile.png',
     image_large: 'https://code.s3.yandex.net/react/code/meat-01-large.png',
-    __v: 0,
+    __v: 3,
   },
   {
     _id: '60d3b41abdacab0026a733cc',
@@ -151,7 +151,7 @@ const data = [
     image: 'https://code.s3.yandex.net/react/code/mineral_rings.png',
     image_mobile: 'https://code.s3.yandex.net/react/code/mineral_rings-mobile.png',
     image_large: 'https://code.s3.yandex.net/react/code/mineral_rings-large.png',
-    __v: 5,
+    __v: 0,
   },
   {
     _id: '60d3b41abdacab0026a733d1',
