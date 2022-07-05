@@ -9,8 +9,7 @@ import OrderDetails from './../order-details/order-details';
 
 import styles from './app.module.css';
 
-// import { IngredientContext } from './../../utils/ingredientContext';
-import BurgerIngredientsContext from './../../context/burger-ingredient-context';
+import { BurgerIngredientsContext, BurgerConstructorContext } from './../../context/BurgerContext';
 
 import testData from './../../utils/data';
 import { getProductData, postOrderData } from './../../utils/api';
@@ -20,6 +19,7 @@ function App() {
   const [ingredients, setIngredients] = useState([]);
 
   const [orderIngredients, setOrderIngredients] = useState([]);
+
   const [isLoading, setStateLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -34,12 +34,14 @@ function App() {
 
   useEffect(() => {
     getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
+    console.log('ingredients: ', ingredients);
   }, []);
 
   // load data for order-ingredients
   useEffect(() => {
     setOrderIngredients(testData);
-  }, []);
+    console.log('orderIngredients: ', orderIngredients);
+  });
 
   // handling for Make-Order-Button
 
@@ -65,27 +67,29 @@ function App() {
     setIsIngredientDetailsOpened(false);
     setIngredientInModal(null);
   };
-  console.log('ingredients: ', ingredients);
+
   return (
-    <BurgerIngredientsContext.Provider value={{ orderIngredients, setOrderIngredients }}>
-      <AppHeader />
-      {!isLoading && (
-        <main className={styles.main}>
-          <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
-          {/* <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} /> */}
-          <BurgerConstructor onClickMakeOrder={clickOrderDetailsHandler} />
-          {isOrderDetailsOpened && (
-            <Modal title='' closeAllModals={closeAllModals}>
-              <OrderDetails dataModal={orderNumber} />
-            </Modal>
-          )}
-          {isIngredientDetailsOpened && (
-            <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
-              <IngredientDetails dataModal={ingredientInModal} />
-            </Modal>
-          )}
-        </main>
-      )}
+    <BurgerIngredientsContext.Provider value={{ ingredients, setIngredients }}>
+      <BurgerConstructorContext.Provider value={{ orderIngredients, setOrderIngredients }}>
+        <AppHeader />
+        {!isLoading && (
+          <main className={styles.main}>
+            <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
+            {/* <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} /> */}
+            <BurgerConstructor onClickMakeOrder={clickOrderDetailsHandler} />
+            {isOrderDetailsOpened && (
+              <Modal title='' closeAllModals={closeAllModals}>
+                <OrderDetails dataModal={orderNumber} />
+              </Modal>
+            )}
+            {isIngredientDetailsOpened && (
+              <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
+                <IngredientDetails dataModal={ingredientInModal} />
+              </Modal>
+            )}
+          </main>
+        )}
+      </BurgerConstructorContext.Provider>
     </BurgerIngredientsContext.Provider>
   );
 }

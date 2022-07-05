@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'; // импорт библиотеки
 
-import BurgerIngredientsContext from './../../context/burger-ingredient-context';
+import { BurgerConstructorContext } from './../../context/BurgerContext';
 
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,7 @@ import testData from './../../utils/data';
 import { NewLineKind } from 'typescript';
 
 function BurgerConstructor(props) {
-  const { orderIngredients, setOrderIngredients } = useContext(BurgerIngredientsContext);
+  const { orderIngredients, setOrderIngredients } = useContext(BurgerConstructorContext);
 
   const bunElement = orderIngredients.find((elem) => {
     if (elem.type === 'bun' && elem.__v === 1) {

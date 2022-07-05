@@ -21,11 +21,7 @@ export const getProductData = async (setIngredients, setStateLoading, setErrorMe
 export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMessage, errorMessage, ingredients) => {
   let fullResponse;
   try {
-    const bodyIngredients = ingredients.map((item) => {
-      if (item.__v > 0) {
-        return item._id;
-      }
-    });
+    const bodyIngredients = ingredients.filter((item) => item.__v > 0);
     console.log(' bodyIngredients: ', bodyIngredients);
     setStateLoading(true);
     const res = await fetch(postUrlForOrder, {
