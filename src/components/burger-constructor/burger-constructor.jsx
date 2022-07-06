@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'; // импорт библиотеки
+import React, { useContext, useEffect } from 'react'; // импорт библиотеки
 
 import { BurgerConstructorContext } from './../../context/BurgerContext';
 
@@ -46,6 +46,7 @@ function BurgerConstructor(props) {
   };
 
   const burgerOrderArray = prepareBurgerArray(bunElement, ingredientsArray);
+  console.log(' burgerOrderArray: ', burgerOrderArray);
 
   const sumTotalBill = (array) => {
     let result = 0;
@@ -95,5 +96,9 @@ function BurgerConstructor(props) {
     </div>
   );
 }
+
+// BurgerConstructor.propTypes = {
+//   data: PropTypes.array.isRequired,
+// };
 
 export default BurgerConstructor;

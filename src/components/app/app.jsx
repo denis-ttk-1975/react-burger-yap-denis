@@ -34,11 +34,13 @@ function App() {
 
   useEffect(() => {
     getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
+    console.log('ingredients: ', ingredients);
   }, []);
 
   // load data for order-ingredients
   useEffect(() => {
     setOrderIngredients(testData);
+    console.log('orderIngredients: ', orderIngredients);
   });
 
   // handling for Make-Order-Button
@@ -46,6 +48,8 @@ function App() {
   const clickOrderDetailsHandler = () => {
     postOrderData(setOrderNumber, setStateLoading, setErrorMessage, errorMessage, orderIngredients);
     setIsOrderDetailsOpened(true);
+    console.log('isOrderDetailsOpened: ', isOrderDetailsOpened);
+    console.log('orderNumber: ', orderNumber);
   };
 
   // handling for click on tab with ingredient
@@ -70,7 +74,8 @@ function App() {
         <AppHeader />
         {!isLoading && (
           <main className={styles.main}>
-            <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
+            <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
+            {/* <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} /> */}
             <BurgerConstructor onClickMakeOrder={clickOrderDetailsHandler} />
             {isOrderDetailsOpened && (
               <Modal title='' closeAllModals={closeAllModals}>

@@ -22,7 +22,7 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
   let fullResponse;
   try {
     const bodyIngredients = ingredients.filter((item) => item.__v > 0);
-
+    console.log(' bodyIngredients: ', bodyIngredients);
     setStateLoading(true);
     const res = await fetch(postUrlForOrder, {
       method: 'POST',
@@ -37,15 +37,15 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
       throw new Error('Сервер не дал ответа о приеме заказа');
     }
     fullResponse = await res.json();
+    console.log('fullResponse1: ', fullResponse);
 
     setOrderNumber(('000000' + fullResponse.order.number).slice(-6));
-    setStateLoading(false);
   } catch (error) {
     setErrorMessage(error.message);
     console.log('Возникла проблема с вашим fetch запросом: ', errorMessage);
 
     setStateLoading(false);
   }
-
+  console.log('fullResponse2: ', fullResponse);
   return fullResponse;
 };
