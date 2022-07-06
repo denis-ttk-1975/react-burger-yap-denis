@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'; // импорт библиотеки
+import React, { useContext } from 'react'; // импорт библиотеки
 
 import { BurgerConstructorContext } from './../../context/BurgerContext';
 
@@ -97,8 +97,8 @@ function BurgerConstructor(props) {
   );
 }
 
-// BurgerConstructor.propTypes = {
-//   data: PropTypes.array.isRequired,
-// };
+BurgerConstructor.propTypes = {
+  onClickMakeOrder: PropTypes.func.isRequired,
+};
 
 export default BurgerConstructor;

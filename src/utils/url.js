@@ -1,3 +1,5 @@
-export const fetchUrlForIngredients = `https://norma.nomoreparties.space/api/ingredients`;
+const baseUrl = 'https://norma.nomoreparties.space/api/';
 
-export const postUrlForOrder = `https://norma.nomoreparties.space/api/orders`;
+export const fetchUrlForIngredients = `${baseUrl}ingredients`;
+
+export const postUrlForOrder = `${baseUrl}orders`;

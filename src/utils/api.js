@@ -40,6 +40,7 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
     console.log('fullResponse1: ', fullResponse);
 
     setOrderNumber(('000000' + fullResponse.order.number).slice(-6));
+    setStateLoading(false);
   } catch (error) {
     setErrorMessage(error.message);
     console.log('Возникла проблема с вашим fetch запросом: ', errorMessage);

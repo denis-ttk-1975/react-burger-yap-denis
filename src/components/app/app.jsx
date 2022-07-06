@@ -74,8 +74,8 @@ function App() {
         <AppHeader />
         {!isLoading && (
           <main className={styles.main}>
-            <BurgerIngredients data={ingredients} onClickIngredientsItem={clickIngredientItemHandler} />
-            {/* <BurgerConstructor data={testData} onClickMakeOrder={clickOrderDetailsHandler} /> */}
+            <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
+
             <BurgerConstructor onClickMakeOrder={clickOrderDetailsHandler} />
             {isOrderDetailsOpened && (
               <Modal title='' closeAllModals={closeAllModals}>
