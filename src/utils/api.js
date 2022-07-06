@@ -1,12 +1,19 @@
 import { fetchUrlForIngredients, postUrlForOrder } from './url';
 
+function checkResponse(data) {
+  if (!data.ok) {
+    throw new Error('Сервер не дал ответа');
+  }
+}
+
 export const getProductData = async (setIngredients, setStateLoading, setErrorMessage, errorMessage) => {
   try {
     setStateLoading(true);
     const res = await fetch(fetchUrlForIngredients);
-    if (!res.ok) {
-      throw new Error('Сервер не дал ответа');
-    }
+    checkResponse(res);
+    // if (!res.ok) {
+    //   throw new Error('Сервер не дал ответа');
+    // }
     const fullResponse = await res.json();
     setIngredients([...fullResponse.data]);
     setStateLoading(false);
@@ -33,9 +40,10 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
         ingredients: bodyIngredients,
       }),
     });
-    if (!res.ok) {
-      throw new Error('Сервер не дал ответа о приеме заказа');
-    }
+    // if (!res.ok) {
+    //   throw new Error('Сервер не дал ответа о приеме заказа');
+    // }
+    checkResponse(res);
     fullResponse = await res.json();
     console.log('fullResponse1: ', fullResponse);
 
