@@ -11,7 +11,6 @@ import ElemTop from './../elem-top/elem-top';
 import ElemBottom from './../elem-bottom/elem-bottom';
 import ElemList from './../elem-list/elem-list';
 
-import testData from './../../utils/data';
 import { NewLineKind } from 'typescript';
 
 function BurgerConstructor(props) {
@@ -46,7 +45,6 @@ function BurgerConstructor(props) {
   };
 
   const burgerOrderArray = prepareBurgerArray(bunElement, ingredientsArray);
-  console.log(' burgerOrderArray: ', burgerOrderArray);
 
   const sumTotalBill = (array) => {
     let result = 0;

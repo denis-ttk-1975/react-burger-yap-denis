@@ -11,9 +11,6 @@ export const getProductData = async (setIngredients, setStateLoading, setErrorMe
     setStateLoading(true);
     const res = await fetch(fetchUrlForIngredients);
     checkResponse(res);
-    // if (!res.ok) {
-    //   throw new Error('Сервер не дал ответа');
-    // }
     const fullResponse = await res.json();
     setIngredients([...fullResponse.data]);
     setStateLoading(false);
@@ -29,7 +26,6 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
   let fullResponse;
   try {
     const bodyIngredients = ingredients.filter((item) => item.__v > 0);
-    console.log(' bodyIngredients: ', bodyIngredients);
     setStateLoading(true);
     const res = await fetch(postUrlForOrder, {
       method: 'POST',
@@ -40,13 +36,8 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
         ingredients: bodyIngredients,
       }),
     });
-    // if (!res.ok) {
-    //   throw new Error('Сервер не дал ответа о приеме заказа');
-    // }
     checkResponse(res);
     fullResponse = await res.json();
-    console.log('fullResponse1: ', fullResponse);
-
     setOrderNumber(('000000' + fullResponse.order.number).slice(-6));
     setStateLoading(false);
   } catch (error) {
@@ -55,6 +46,6 @@ export const postOrderData = async (setOrderNumber, setStateLoading, setErrorMes
 
     setStateLoading(false);
   }
-  console.log('fullResponse2: ', fullResponse);
+
   return fullResponse;
 };
