@@ -15,12 +15,14 @@ import { BurgerIngredientsContext, BurgerConstructorContext } from './../../cont
 import { store } from './../../index';
 
 import { getIngredients } from './../../services/actions/burger-ingredients';
+import { getOrderDetails } from './../../services/actions/order-details';
 
 import testData from './../../utils/data';
 import { getProductData, postOrderData } from './../../utils/api';
 
 function App() {
-  const { ingredients, isLoading: isLoadingIngredients, errorMessage } = useSelector((state) => state.burgerIngredients);
+  const { ingredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
+  const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails } = useSelector((state) => state.orderDetails);
 
   console.log(store.getState());
 
@@ -42,7 +44,7 @@ function App() {
   const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
   const [ingredientInModal, setIngredientInModal] = useState(null); // array for all ingredients
-  const [orderNumber, setOrderNumber] = useState('000000'); // state for order number
+  // const [orderNumber, setOrderNumber] = useState('000000'); // state for order number
 
   // getting data about ingredients from server
 
@@ -62,7 +64,8 @@ function App() {
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
-    postOrderData(setOrderNumber, setStateLoadingOrder, setErrorMessageOrder, errorMessageOrder, orderIngredients);
+    // postOrderData(setOrderNumber, setStateLoadingOrder, setErrorMessageOrder, errorMessageOrder, orderIngredients);
+    dispatch(getOrderDetails(testData));
     setIsOrderDetailsOpened(true);
   };
 
@@ -77,7 +80,7 @@ function App() {
 
   const closeAllModals = () => {
     setIsOrderDetailsOpened(false);
-    setOrderNumber(0);
+    dispatch({ type: 'RESET_ORDER_NUMBER' });
     setIsIngredientDetailsOpened(false);
     setIngredientInModal(null);
   };
@@ -90,8 +93,8 @@ function App() {
           <main className={styles.main}>
             <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
-            <BurgerConstructor onClickMakeOrder={clickOrderDetailsHandler} />
-            {isOrderDetailsOpened && (
+            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(testData)} />
+            {isOrderDetailsOpened && !isLoadingOrderDetails && !errorMessageOrderDetails && (
               <Modal title='' closeAllModals={closeAllModals}>
                 <OrderDetails dataModal={orderNumber} />
               </Modal>
