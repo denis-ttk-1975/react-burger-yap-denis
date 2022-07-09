@@ -23,12 +23,11 @@ function BurgerConstructor(props) {
     if (arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0).length > 1) {
       alert('Вы выбрали больше чем одну булку, выберите один вид булки');
     }
-    console.log([...arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0)]);
+
     return [...arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0)][0];
   };
 
   const bunElement = amountBunCheck(orderIngredients);
-  console.log('bunElement: ', bunElement);
 
   const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0)];
 
@@ -50,7 +49,6 @@ function BurgerConstructor(props) {
   };
 
   const burgerOrderArray = prepareBurgerArray(bunElement, ingredientsArray);
-  console.log('burgerOrderArray: ', burgerOrderArray);
 
   const sumTotalBill = (array) => {
     let result = 0;

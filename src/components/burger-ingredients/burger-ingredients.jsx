@@ -13,7 +13,7 @@ import NavIngredient from './../nav-ingredient/nav-ingredient';
 
 // whole component
 function BurgerIngredients(props) {
-  const { ingredients, setIngredientss } = useContext(BurgerIngredientsContext);
+  const { ingredients } = useContext(BurgerIngredientsContext);
   return (
     <div className={`mt-10 ${styles.ingredientArea}`}>
       <h2 className='mb-5 text text_type_main-large'>Соберите бургер</h2>

@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'; // импорт библиотеки
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
@@ -11,17 +12,30 @@ import styles from './app.module.css';
 
 import { BurgerIngredientsContext, BurgerConstructorContext } from './../../context/BurgerContext';
 
+import { store } from './../../index';
+
+import { getIngredients } from './../../services/actions/burger-ingredients';
+
 import testData from './../../utils/data';
 import { getProductData, postOrderData } from './../../utils/api';
 
 function App() {
+  const { ingredients, isLoading: isLoadingIngredients, errorMessage } = useSelector((state) => state.burgerIngredients);
+
+  console.log(store.getState());
+
+  const dispatch = useDispatch();
+
   // states for fetch handling
-  const [ingredients, setIngredients] = useState([]);
+  // const [ingredients, setIngredients] = useState([]);
 
   const [orderIngredients, setOrderIngredients] = useState([]);
 
-  const [isLoading, setStateLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  // const [isLoadingIngredients, setStateLoadingIngredients] = useState(false);
+  // const [errorMessageIngredients, setErrorMessageIngredients] = useState('');
+
+  const [isLoadingOrder, setStateLoadingOrder] = useState(false);
+  const [errorMessageOrder, setErrorMessageOrder] = useState('');
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
@@ -32,8 +46,12 @@ function App() {
 
   // getting data about ingredients from server
 
+  // useEffect(() => {
+  //   getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
+  // }, []);
+
   useEffect(() => {
-    getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
+    dispatch(getIngredients());
   }, []);
 
   // load data for order-ingredients
@@ -44,7 +62,7 @@ function App() {
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
-    postOrderData(setOrderNumber, setStateLoading, setErrorMessage, errorMessage, orderIngredients);
+    postOrderData(setOrderNumber, setStateLoadingOrder, setErrorMessageOrder, errorMessageOrder, orderIngredients);
     setIsOrderDetailsOpened(true);
   };
 
@@ -65,10 +83,10 @@ function App() {
   };
 
   return (
-    <BurgerIngredientsContext.Provider value={{ ingredients, setIngredients }}>
+    <BurgerIngredientsContext.Provider value={{ ingredients }}>
       <BurgerConstructorContext.Provider value={{ orderIngredients, setOrderIngredients }}>
         <AppHeader />
-        {!isLoading && (
+        {!isLoadingIngredients && (
           <main className={styles.main}>
             <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
