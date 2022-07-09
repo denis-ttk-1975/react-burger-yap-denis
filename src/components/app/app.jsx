@@ -30,6 +30,8 @@ function App() {
 
   const dispatch = useDispatch();
 
+  const scrollHandler = () => {};
+
   // states for fetch handling
   // const [ingredients, setIngredients] = useState([]);
 
@@ -41,7 +43,7 @@ function App() {
   // const [isLoadingOrder, setStateLoadingOrder] = useState(false);
   // const [errorMessageOrder, setErrorMessageOrder] = useState('');
 
-  const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
+  // const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
   // const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
@@ -94,28 +96,28 @@ function App() {
   };
 
   return (
-    <BurgerIngredientsContext.Provider value={{ ingredients }}>
-      <BurgerConstructorContext.Provider value={{ orderIngredients, setOrderIngredients }}>
-        <AppHeader />
-        {!isLoadingIngredients && (
-          <main className={styles.main}>
-            <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
+    // <BurgerIngredientsContext.Provider value={{ ingredients }}>
+    <BurgerConstructorContext.Provider value={{ orderIngredients, setOrderIngredients }}>
+      <AppHeader />
+      {!isLoadingIngredients && (
+        <main className={styles.main}>
+          <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
-            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(testData)} />
-            {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
-              <Modal title='' closeAllModals={closeAllModals}>
-                <OrderDetails dataModal={orderNumber} />
-              </Modal>
-            )}
-            {isIngredientModalOpen && (
-              <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
-                <IngredientDetails dataModal={ingredientInModal} />
-              </Modal>
-            )}
-          </main>
-        )}
-      </BurgerConstructorContext.Provider>
-    </BurgerIngredientsContext.Provider>
+          <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(testData)} />
+          {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
+            <Modal title='' closeAllModals={closeAllModals}>
+              <OrderDetails dataModal={orderNumber} />
+            </Modal>
+          )}
+          {isIngredientModalOpen && (
+            <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
+              <IngredientDetails dataModal={ingredientInModal} />
+            </Modal>
+          )}
+        </main>
+      )}
+    </BurgerConstructorContext.Provider>
+    // </BurgerIngredientsContext.Provider>
   );
 }
 

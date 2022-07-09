@@ -1,4 +1,5 @@
-import React, { useState } from 'react'; // импорт библиотеки
+import React, { useState, useRef } from 'react'; // импорт библиотеки
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Box, Typography, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -7,10 +8,30 @@ import styles from './nav-ingredient.module.css';
 // navigation menu in header of ingredients area
 
 function NavIngredient() {
-  const [current, setCurrent] = useState('bun');
+  const dispatch = useDispatch();
+
+  const { activeNavElement } = useSelector((state) => state.burgerIngredients);
+  // const [current, setCurrent] = useState('bun');
 
   const onTabClick = (par) => {
-    setCurrent(par);
+    // setCurrent(par);
+    switch (par) {
+      case 'bun': {
+        dispatch({ type: 'NAV_ACTIVE_BUN' });
+        break;
+      }
+      case 'sauce': {
+        dispatch({ type: 'NAV_ACTIVE_SAUCE' });
+        break;
+      }
+      case 'main': {
+        dispatch({ type: 'NAV_ACTIVE_MAIN' });
+        break;
+      }
+      default: {
+        dispatch({ type: 'NAV_ACTIVE_BUN' });
+      }
+    }
     const element = document.getElementById(par);
 
     if (element) {
@@ -21,17 +42,17 @@ function NavIngredient() {
   return (
     <nav className={`${styles.navIngredient} mb-10`}>
       <a href='#' className={styles.navIngredientItem} onClick={(e) => e.preventDefault()}>
-        <Tab value='bun' active={current === 'bun'} onClick={onTabClick}>
+        <Tab value='bun' active={activeNavElement === 'bun'} onClick={onTabClick}>
           Булки
         </Tab>
       </a>
       <a href='#' className={styles.navIngredientItem} onClick={(e) => e.preventDefault()}>
-        <Tab value='sauce' active={current === 'sauce'} onClick={onTabClick}>
+        <Tab value='sauce' active={activeNavElement === 'sauce'} onClick={onTabClick}>
           Соусы
         </Tab>
       </a>
       <a href='#' className={styles.navIngredientItem} onClick={(e) => e.preventDefault()}>
-        <Tab value='main' active={current === 'main'} onClick={onTabClick}>
+        <Tab value='main' active={activeNavElement === 'main'} onClick={onTabClick}>
           Начинки
         </Tab>
       </a>

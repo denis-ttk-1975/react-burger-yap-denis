@@ -4,6 +4,10 @@ export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
 export const GET_INGREDIENTS_SUCCESS = 'GET_INGREDIENTS_SUCCESS';
 
+export const NAV_ACTIVE_BUN = 'NAV_ACTIVE_BUN';
+export const NAV_ACTIVE_SAUCE = 'NAV_ACTIVE_SAUCE';
+export const NAV_ACTIVE_MAIN = 'NAV_ACTIVE_MAIN';
+
 export function getIngredients() {
   return async function (dispatch) {
     try {
