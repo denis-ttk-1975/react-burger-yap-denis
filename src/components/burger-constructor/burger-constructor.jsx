@@ -11,6 +11,9 @@ import ElemTop from './../elem-top/elem-top';
 import ElemBottom from './../elem-bottom/elem-bottom';
 import ElemList from './../elem-list/elem-list';
 
+import defaultBunGrey from './../../images/default-bun-grey.png';
+import defaultIngredientGrey from './../../images/default-ingredient-grey.png';
+
 import { NewLineKind } from 'typescript';
 
 function BurgerConstructor(props) {
@@ -64,10 +67,15 @@ function BurgerConstructor(props) {
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>
-      {burgerOrderArray.length > 0 && burgerOrderArray[0]['type'] === 'bun' && burgerOrderArray[0]['name'].includes('(верх)') && (
-        <ElemTop name={burgerOrderArray[0]['name']} price={burgerOrderArray[0]['price']} image={burgerOrderArray[0]['image_mobile']} />
+      {burgerOrderArray.length === 0 ? (
+        <ElemTop name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
+      ) : (
+        burgerOrderArray[0]['type'] === 'bun' &&
+        burgerOrderArray[0]['name'].includes('(верх)') && <ElemTop name={burgerOrderArray[0]['name']} price={burgerOrderArray[0]['price']} image={burgerOrderArray[0]['image_mobile']} />
       )}
-      {burgerOrderArray.length > 0 && (
+      {ingredientsArray.length === 0 ? (
+        <ElemList name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
+      ) : (
         <div className={styles.innerList}>
           {burgerOrderArray.map((elem, index) => {
             if (elem.type !== 'bun') {
@@ -76,12 +84,17 @@ function BurgerConstructor(props) {
           })}
         </div>
       )}
-      {burgerOrderArray.length > 0 && burgerOrderArray[burgerOrderArray.length - 1]['type'] === 'bun' && burgerOrderArray[burgerOrderArray.length - 1]['name'].includes('(низ)') && (
-        <ElemBottom
-          name={burgerOrderArray[burgerOrderArray.length - 1]['name']}
-          price={burgerOrderArray[burgerOrderArray.length - 1]['price']}
-          image={burgerOrderArray[burgerOrderArray.length - 1]['image_mobile']}
-        />
+      {burgerOrderArray.length === 0 ? (
+        <ElemBottom name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
+      ) : (
+        burgerOrderArray[burgerOrderArray.length - 1]['type'] === 'bun' &&
+        burgerOrderArray[burgerOrderArray.length - 1]['name'].includes('(низ)') && (
+          <ElemBottom
+            name={burgerOrderArray[burgerOrderArray.length - 1]['name']}
+            price={burgerOrderArray[burgerOrderArray.length - 1]['price']}
+            image={burgerOrderArray[burgerOrderArray.length - 1]['image_mobile']}
+          />
+        )
       )}
 
       <div className={`${styles.orderArea} mt-10 pr-4`}>
