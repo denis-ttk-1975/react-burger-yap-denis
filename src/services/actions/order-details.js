@@ -6,6 +6,9 @@ export const GET_ORDER_SUCCESS = 'GET_ORDER_SUCCESS';
 
 export const RESET_ORDER_NUMBER = 'RESET_ORDER_NUMBER';
 
+export const OPEN_ORDER_MODAL = 'OPEN_ORDER_MODAL';
+export const CLOSE_ORDER_MODAL = 'CLOSE_ORDER_MODAL';
+
 export function getOrderDetails(arrayIngredients) {
   return async function (dispatch) {
     let fullResponse;

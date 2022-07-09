@@ -18,11 +18,13 @@ import { getIngredients } from './../../services/actions/burger-ingredients';
 import { getOrderDetails } from './../../services/actions/order-details';
 
 import testData from './../../utils/data';
-import { getProductData, postOrderData } from './../../utils/api';
+// import { getProductData, postOrderData } from './../../utils/api';
 
 function App() {
   const { ingredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
-  const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails } = useSelector((state) => state.orderDetails);
+  const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails, isOrderModalOpen } = useSelector((state) => state.orderDetails);
+  const { ingredientData: ingredientInModal, isIngredientModalOpen } = useSelector((state) => state.ingredientForModal);
+  console.log('ingredientInModal: ', ingredientInModal);
 
   console.log(store.getState());
 
@@ -36,14 +38,14 @@ function App() {
   // const [isLoadingIngredients, setStateLoadingIngredients] = useState(false);
   // const [errorMessageIngredients, setErrorMessageIngredients] = useState('');
 
-  const [isLoadingOrder, setStateLoadingOrder] = useState(false);
-  const [errorMessageOrder, setErrorMessageOrder] = useState('');
+  // const [isLoadingOrder, setStateLoadingOrder] = useState(false);
+  // const [errorMessageOrder, setErrorMessageOrder] = useState('');
 
   const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
-  const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
+  // const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
 
-  const [ingredientInModal, setIngredientInModal] = useState(null); // array for all ingredients
+  // const [ingredientInModal, setIngredientInModal] = useState(null); // array for all ingredients
   // const [orderNumber, setOrderNumber] = useState('000000'); // state for order number
 
   // getting data about ingredients from server
@@ -66,23 +68,29 @@ function App() {
   const clickOrderDetailsHandler = () => {
     // postOrderData(setOrderNumber, setStateLoadingOrder, setErrorMessageOrder, errorMessageOrder, orderIngredients);
     dispatch(getOrderDetails(testData));
-    setIsOrderDetailsOpened(true);
+    dispatch({ type: 'OPEN_ORDER_MODAL' });
+    // setIsOrderDetailsOpened(true);
   };
 
   // handling for click on tab with ingredient
 
   const clickIngredientItemHandler = (data) => {
-    setIngredientInModal(data);
-    setIsIngredientDetailsOpened(true);
+    console.log('data: ', data);
+    dispatch({ type: 'SET_INGREDIENT', ingredientData: data });
+    // setIngredientInModal(data);
+    dispatch({ type: 'OPEN_INGREDIENT_MODAL' });
+    // setIsIngredientDetailsOpened(true);
   };
 
   // function to close all opened modals
 
   const closeAllModals = () => {
-    setIsOrderDetailsOpened(false);
+    dispatch({ type: 'CLOSE_ORDER_MODAL' });
+    // setIsOrderDetailsOpened(false);
     dispatch({ type: 'RESET_ORDER_NUMBER' });
-    setIsIngredientDetailsOpened(false);
-    setIngredientInModal(null);
+    dispatch({ type: 'CLOSE_INGREDIENT_MODAL' });
+    // setIsIngredientDetailsOpened(false);
+    dispatch({ type: 'RESET_INGREDIENT' });
   };
 
   return (
@@ -94,12 +102,12 @@ function App() {
             <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
             <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(testData)} />
-            {isOrderDetailsOpened && !isLoadingOrderDetails && !errorMessageOrderDetails && (
+            {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
               <Modal title='' closeAllModals={closeAllModals}>
                 <OrderDetails dataModal={orderNumber} />
               </Modal>
             )}
-            {isIngredientDetailsOpened && (
+            {isIngredientModalOpen && (
               <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
                 <IngredientDetails dataModal={ingredientInModal} />
               </Modal>

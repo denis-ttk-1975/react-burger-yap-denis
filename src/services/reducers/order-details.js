@@ -1,9 +1,10 @@
-import { GET_ORDER, GET_ORDER_FAILED, GET_ORDER_SUCCESS, RESET_ORDER_NUMBER } from './../actions/order-details';
+import { GET_ORDER, GET_ORDER_FAILED, GET_ORDER_SUCCESS, RESET_ORDER_NUMBER, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL } from './../actions/order-details';
 
 const initialState = {
   isLoading: false,
   errorMessage: '',
   orderNumber: '000000',
+  isOrderModalOpen: false,
 };
 
 export const orderDetailsReducer = (state = initialState, action) => {
@@ -37,6 +38,20 @@ export const orderDetailsReducer = (state = initialState, action) => {
       return {
         ...state,
         orderNumber: '000000',
+      };
+    }
+    case OPEN_ORDER_MODAL: {
+      console.log('state: ', state);
+      return {
+        ...state,
+        isOrderModalOpen: true,
+      };
+    }
+    case CLOSE_ORDER_MODAL: {
+      console.log('state: ', state);
+      return {
+        ...state,
+        isOrderModalOpen: false,
       };
     }
     default: {
