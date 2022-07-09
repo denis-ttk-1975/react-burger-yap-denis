@@ -20,10 +20,12 @@ function BurgerConstructor(props) {
     if (arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0).length > 1) {
       alert('Вы выбрали больше чем одну булку, выберите один вид булки');
     }
-    return [...arrayIngredients.filter((elem) => elem.type === 'bun')][0];
+    console.log([...arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0)]);
+    return [...arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0)][0];
   };
 
   const bunElement = amountBunCheck(orderIngredients);
+  console.log('bunElement: ', bunElement);
 
   const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0)];
 
@@ -45,6 +47,7 @@ function BurgerConstructor(props) {
   };
 
   const burgerOrderArray = prepareBurgerArray(bunElement, ingredientsArray);
+  console.log('burgerOrderArray: ', burgerOrderArray);
 
   const sumTotalBill = (array) => {
     let result = 0;
@@ -61,10 +64,10 @@ function BurgerConstructor(props) {
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>
-      {burgerOrderArray.length && burgerOrderArray[0]['type'] === 'bun' && burgerOrderArray[0]['name'].includes('(верх)') && (
+      {burgerOrderArray.length > 0 && burgerOrderArray[0]['type'] === 'bun' && burgerOrderArray[0]['name'].includes('(верх)') && (
         <ElemTop name={burgerOrderArray[0]['name']} price={burgerOrderArray[0]['price']} image={burgerOrderArray[0]['image_mobile']} />
       )}
-      {burgerOrderArray.length && (
+      {burgerOrderArray.length > 0 && (
         <div className={styles.innerList}>
           {burgerOrderArray.map((elem, index) => {
             if (elem.type !== 'bun') {
@@ -73,7 +76,7 @@ function BurgerConstructor(props) {
           })}
         </div>
       )}
-      {burgerOrderArray.length && burgerOrderArray[burgerOrderArray.length - 1]['type'] === 'bun' && burgerOrderArray[burgerOrderArray.length - 1]['name'].includes('(низ)') && (
+      {burgerOrderArray.length > 0 && burgerOrderArray[burgerOrderArray.length - 1]['type'] === 'bun' && burgerOrderArray[burgerOrderArray.length - 1]['name'].includes('(низ)') && (
         <ElemBottom
           name={burgerOrderArray[burgerOrderArray.length - 1]['name']}
           price={burgerOrderArray[burgerOrderArray.length - 1]['price']}
