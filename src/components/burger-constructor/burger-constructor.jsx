@@ -1,9 +1,10 @@
-import React, { useContext } from 'react'; // импорт библиотеки
+import React, { useEffect } from 'react'; // импорт библиотеки
+import { useSelector, useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { BurgerConstructorContext } from './../../context/BurgerContext';
-
 import PropTypes from 'prop-types';
+
+import { v4 as uuidv4 } from 'uuid';
 
 import { Box, CurrencyIcon, Typography, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -18,7 +19,8 @@ import defaultIngredientGrey from './../../images/default-ingredient-grey.png';
 import { NewLineKind } from 'typescript';
 
 function BurgerConstructor(props) {
-  const { orderIngredients, setOrderIngredients } = useContext(BurgerConstructorContext);
+  const { ingredients: orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
+  const dispatch = useDispatch();
 
   const [, dropIngredientTarget] = useDrop({
     accept: ['main', 'sauce'],
@@ -42,54 +44,56 @@ function BurgerConstructor(props) {
 
   const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0)];
 
-  const prepareBurgerArray = (bunObject, ingredientsArray) => {
-    let result = [];
-    if (bunObject && ingredientsArray) {
-      const removeKey = ({ __v, ...rest }) => rest;
-      bunObject = removeKey(bunObject);
-      result.push({ ...bunObject, name: `${bunObject.name} (верх)` });
+  useEffect(() => {
+    const removeKey = ({ __v, ...rest }) => rest;
+    if (bunElement) {
+      const bun = removeKey(bunElement);
+      dispatch({ type: 'SET_BUN_INTO_ORDER', bun: bun });
+    }
+    if (ingredientsArray) {
+      let stuffingAcc = [];
       ingredientsArray.forEach((elem) => {
         const newElem = removeKey(elem);
         for (let j = 0; j < elem.__v; j++) {
-          result.push(newElem);
+          stuffingAcc.push(newElem);
+          console.log(' stuffingAcc: ', stuffingAcc);
         }
       });
-      result.push({ ...bunObject, name: `${bunObject.name} (низ)` });
+      dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: stuffingAcc });
     }
-    return result;
-  };
+  }, []);
 
-  const burgerOrderArray = prepareBurgerArray(bunElement, ingredientsArray);
-
-  const sumTotalBill = (array) => {
+  function sumTotalBill() {
     let result = 0;
-    if (array) {
-      array.forEach((item) => {
+    if (stuffing) {
+      stuffing.forEach((item) => {
         result = result + item.price;
       });
+      if (bun) {
+        result = result + bun.price * 2;
+      }
     }
 
     return result;
-  };
+  }
 
-  const amountTotalBill = sumTotalBill(burgerOrderArray);
+  const amountTotalBill = sumTotalBill();
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>
       <div ref={dropBunTopTarget}>
-        {burgerOrderArray.length === 0 ? (
+        {Object.keys(bun).length === 0 ? (
           <ElemTop name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
         ) : (
-          burgerOrderArray[0]['type'] === 'bun' &&
-          burgerOrderArray[0]['name'].includes('(верх)') && <ElemTop name={burgerOrderArray[0]['name']} price={burgerOrderArray[0]['price']} image={burgerOrderArray[0]['image_mobile']} />
+          <ElemTop name={`${bun['name']} (верх)`} price={bun['price']} image={bun['image_mobile']} />
         )}
       </div>
       <div ref={dropIngredientTarget}>
-        {ingredientsArray.length === 0 ? (
+        {stuffing.length === 0 ? (
           <ElemList name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
         ) : (
           <div className={styles.innerList}>
-            {burgerOrderArray.map((elem, index) => {
+            {stuffing.map((elem, index) => {
               if (elem.type !== 'bun') {
                 return <ElemList name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
               }
@@ -99,17 +103,10 @@ function BurgerConstructor(props) {
       </div>
       <div ref={dropBunBottomTarget}>
         {' '}
-        {burgerOrderArray.length === 0 ? (
+        {Object.keys(bun).length === 0 ? (
           <ElemBottom name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
         ) : (
-          burgerOrderArray[burgerOrderArray.length - 1]['type'] === 'bun' &&
-          burgerOrderArray[burgerOrderArray.length - 1]['name'].includes('(низ)') && (
-            <ElemBottom
-              name={burgerOrderArray[burgerOrderArray.length - 1]['name']}
-              price={burgerOrderArray[burgerOrderArray.length - 1]['price']}
-              image={burgerOrderArray[burgerOrderArray.length - 1]['image_mobile']}
-            />
-          )
+          <ElemBottom name={`${bun['name']} (низ)`} price={bun['price']} image={bun['image_mobile']} />
         )}
       </div>
 

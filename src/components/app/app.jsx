@@ -12,8 +12,6 @@ import OrderDetails from './../order-details/order-details';
 
 import styles from './app.module.css';
 
-import { BurgerIngredientsContext, BurgerConstructorContext } from './../../context/BurgerContext';
-
 import { store } from './../../index';
 
 import { getIngredients } from './../../services/actions/burger-ingredients';
@@ -34,29 +32,9 @@ function App() {
 
   const scrollHandler = () => {};
 
-  // states for fetch handling
-  // const [ingredients, setIngredients] = useState([]);
-
   const [orderIngredients, setOrderIngredients] = useState([]);
 
-  // const [isLoadingIngredients, setStateLoadingIngredients] = useState(false);
-  // const [errorMessageIngredients, setErrorMessageIngredients] = useState('');
-
-  // const [isLoadingOrder, setStateLoadingOrder] = useState(false);
-  // const [errorMessageOrder, setErrorMessageOrder] = useState('');
-
-  // const [isOrderDetailsOpened, setIsOrderDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
-
-  // const [isIngredientDetailsOpened, setIsIngredientDetailsOpened] = useState(false); // boolean state for orderDetailsWindow
-
-  // const [ingredientInModal, setIngredientInModal] = useState(null); // array for all ingredients
-  // const [orderNumber, setOrderNumber] = useState('000000'); // state for order number
-
   // getting data about ingredients from server
-
-  // useEffect(() => {
-  //   getProductData(setIngredients, setStateLoading, setErrorMessage, errorMessage);
-  // }, []);
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -64,16 +42,14 @@ function App() {
 
   // load data for order-ingredients
   useEffect(() => {
-    setOrderIngredients(testData);
-  });
+    dispatch({ type: 'SET_BURGER_INGREDIENTS', ingredients: [] });
+  }, []);
 
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
-    // postOrderData(setOrderNumber, setStateLoadingOrder, setErrorMessageOrder, errorMessageOrder, orderIngredients);
     dispatch(getOrderDetails(testData));
     dispatch({ type: 'OPEN_ORDER_MODAL' });
-    // setIsOrderDetailsOpened(true);
   };
 
   // handling for click on tab with ingredient
@@ -81,25 +57,23 @@ function App() {
   const clickIngredientItemHandler = (data) => {
     console.log('data: ', data);
     dispatch({ type: 'SET_INGREDIENT', ingredientData: data });
-    // setIngredientInModal(data);
+
     dispatch({ type: 'OPEN_INGREDIENT_MODAL' });
-    // setIsIngredientDetailsOpened(true);
   };
 
   // function to close all opened modals
 
   const closeAllModals = () => {
     dispatch({ type: 'CLOSE_ORDER_MODAL' });
-    // setIsOrderDetailsOpened(false);
+
     dispatch({ type: 'RESET_ORDER_NUMBER' });
     dispatch({ type: 'CLOSE_INGREDIENT_MODAL' });
-    // setIsIngredientDetailsOpened(false);
+
     dispatch({ type: 'RESET_INGREDIENT' });
   };
 
   return (
-    // <BurgerIngredientsContext.Provider value={{ ingredients }}>
-    <BurgerConstructorContext.Provider value={{ orderIngredients, setOrderIngredients }}>
+    <>
       <AppHeader />
       {!isLoadingIngredients && (
         <main className={styles.main}>
@@ -120,8 +94,7 @@ function App() {
           )}
         </main>
       )}
-    </BurgerConstructorContext.Provider>
-    // </BurgerIngredientsContext.Provider>
+    </>
   );
 }
 

@@ -1,7 +1,5 @@
-import React, { useContext, useEffect, useRef } from 'react'; // импорт библиотеки
+import React, { useEffect, useRef } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
-
-import { BurgerIngredientsContext } from './../../context/BurgerContext';
 
 import PropTypes from 'prop-types';
 
@@ -20,7 +18,6 @@ function BurgerIngredients(props) {
   const bunRef = useRef(null);
   const sauceRef = useRef(null);
   const mainRef = useRef(null);
-  // const { ingredients } = useContext(BurgerIngredientsContext);
 
   const scrollHandler = (e) => {
     // e.stopPropagation();
