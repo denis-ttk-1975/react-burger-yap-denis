@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
@@ -101,9 +103,11 @@ function App() {
       <AppHeader />
       {!isLoadingIngredients && (
         <main className={styles.main}>
-          <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
+          <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
-          <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(testData)} />
+            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(testData)} />
+          </DndProvider>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
             <Modal title='' closeAllModals={closeAllModals}>
               <OrderDetails dataModal={orderNumber} />

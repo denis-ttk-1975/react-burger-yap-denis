@@ -52,10 +52,10 @@ function BurgerIngredients(props) {
   // }, []);
 
   return (
-    <div onScroll={scrollHandler} className={`mt-10 ${styles.ingredientArea}`}>
+    <div className={`mt-10 ${styles.ingredientArea}`}>
       <h2 className='mb-5 text text_type_main-large'>Соберите бургер</h2>
       <NavIngredient />
-      <div className={styles.scrollBox} ref={scrollBoxRef}>
+      <div className={styles.scrollBox} ref={scrollBoxRef} onScroll={scrollHandler}>
         <IngredientsArea group='Булки' type='bun' data={ingredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={bunRef} />
         <IngredientsArea group='Соусы' type='sauce' data={ingredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={sauceRef} />
         <IngredientsArea group='Начинки' type='main' data={ingredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={mainRef} />
