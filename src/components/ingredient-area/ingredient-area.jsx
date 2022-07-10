@@ -8,9 +8,9 @@ import styles from './ingredient-area.module.css';
 import IngredientsItem from '../ingredient-item/ingredient-item';
 
 // area for group of ingredients - bun, sauce, main
-function IngredientsArea(props) {
+const IngredientsArea = React.forwardRef((props, ref) => {
   return (
-    <div className='mb-10'>
+    <div ref={ref} className='mb-10'>
       <h3 id={props.type} className='mb-6 text text_type_main-medium'>
         {props.group}
       </h3>
@@ -24,7 +24,7 @@ function IngredientsArea(props) {
       </div>
     </div>
   );
-}
+});
 
 IngredientsArea.propTypes = {
   data: PropTypes.array.isRequired,
