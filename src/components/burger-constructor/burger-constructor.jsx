@@ -24,12 +24,35 @@ function BurgerConstructor(props) {
 
   const [, dropIngredientTarget] = useDrop({
     accept: ['main', 'sauce'],
+    drop(itemData) {
+      const removeKey = ({ __v, ...rest }) => rest;
+      if (itemData) {
+        const newItem = removeKey(itemData);
+        console.log(' newItem: ', newItem);
+        const newStuffing = [...stuffing, newItem];
+        dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: newStuffing });
+      }
+    },
   });
   const [, dropBunTopTarget] = useDrop({
     accept: ['bun'],
+    drop(itemData) {
+      const removeKey = ({ __v, ...rest }) => rest;
+      if (itemData) {
+        const newBun = removeKey(itemData);
+        dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
+      }
+    },
   });
   const [, dropBunBottomTarget] = useDrop({
     accept: ['bun'],
+    drop(itemData) {
+      const removeKey = ({ __v, ...rest }) => rest;
+      if (itemData) {
+        const newBun = removeKey(itemData);
+        dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
+      }
+    },
   });
 
   const amountBunCheck = (arrayIngredients) => {
@@ -65,19 +88,23 @@ function BurgerConstructor(props) {
 
   function sumTotalBill() {
     let result = 0;
-    if (stuffing) {
+    if (stuffing.length) {
       stuffing.forEach((item) => {
+        console.log('item: ', item);
         result = result + item.price;
+        console.log('item.price: ', item.price);
+        console.log('result: ', result);
       });
-      if (bun) {
-        result = result + bun.price * 2;
-      }
     }
-
+    if (Object.keys(bun).length) {
+      result = result + bun.price * 2;
+      console.log('bun: ', bun);
+    }
+    console.log('result: ', result);
     return result;
   }
 
-  const amountTotalBill = sumTotalBill();
+  const amountTotalBill = sumTotalBill() || 0;
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`}>

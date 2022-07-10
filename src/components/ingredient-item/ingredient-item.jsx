@@ -11,7 +11,7 @@ import styles from './ingredient-item.module.css';
 function IngredientsItem(props) {
   const [, dragRef] = useDrag(() => ({
     type: props.data.type,
-    item: props.data._id,
+    item: props.data,
   }));
 
   return (
