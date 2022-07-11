@@ -116,14 +116,14 @@ function BurgerConstructor(props) {
           <ElemTop name={`${bun['name']} (верх)`} price={bun['price']} image={bun['image_mobile']} />
         )}
       </div>
-      <div ref={dropIngredientTarget}>
+      <div className={'constructor__stuffing'} ref={dropIngredientTarget}>
         {stuffing.length === 0 ? (
-          <ElemList name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
+          <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
         ) : (
           <div className={styles.innerList}>
             {stuffing.map((elem, index) => {
               if (elem.type !== 'bun') {
-                return <ElemList name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
+                return <ElemList uuid={elem.uuid} name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
               }
             })}
           </div>
