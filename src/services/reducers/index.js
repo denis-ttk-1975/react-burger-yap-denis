@@ -20,4 +20,4 @@ export const rootReducer = combineReducers({
 //   burgerIngredientsReducer: burgerIngredientsReducer(state, action);
 // };
 
-console.log('rootReducer: ', rootReducer);
+

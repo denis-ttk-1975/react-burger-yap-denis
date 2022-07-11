@@ -21,12 +21,9 @@ import testData from './../../utils/data';
 // import { getProductData, postOrderData } from './../../utils/api';
 
 function App() {
-  const { ingredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
+  const { menuIngredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
   const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails, isOrderModalOpen } = useSelector((state) => state.orderDetails);
   const { ingredientData: ingredientInModal, isIngredientModalOpen } = useSelector((state) => state.ingredientForModal);
-  console.log('ingredientInModal: ', ingredientInModal);
-
-  console.log(store.getState());
 
   const dispatch = useDispatch();
 
@@ -55,7 +52,6 @@ function App() {
   // handling for click on tab with ingredient
 
   const clickIngredientItemHandler = (data) => {
-    console.log('data: ', data);
     dispatch({ type: 'SET_INGREDIENT', ingredientData: data });
 
     dispatch({ type: 'OPEN_INGREDIENT_MODAL' });

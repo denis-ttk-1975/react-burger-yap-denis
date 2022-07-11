@@ -10,7 +10,6 @@ const initialState = {
 export const orderDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDER: {
-      console.log('state: ', state);
       return {
         ...state,
         isLoading: true,
@@ -18,7 +17,6 @@ export const orderDetailsReducer = (state = initialState, action) => {
       };
     }
     case GET_ORDER_SUCCESS: {
-      console.log('state: ', state);
       return {
         ...state,
         orderNumber: action.orderNumber,
@@ -26,7 +24,6 @@ export const orderDetailsReducer = (state = initialState, action) => {
       };
     }
     case GET_ORDER_FAILED: {
-      console.log('state: ', state);
       return {
         ...state,
         errorMessage: action.errorMessage,
@@ -34,28 +31,24 @@ export const orderDetailsReducer = (state = initialState, action) => {
       };
     }
     case RESET_ORDER_NUMBER: {
-      console.log('state: ', state);
       return {
         ...state,
         orderNumber: '000000',
       };
     }
     case OPEN_ORDER_MODAL: {
-      console.log('state: ', state);
       return {
         ...state,
         isOrderModalOpen: true,
       };
     }
     case CLOSE_ORDER_MODAL: {
-      console.log('state: ', state);
       return {
         ...state,
         isOrderModalOpen: false,
       };
     }
     default: {
-      console.log('state: ', state);
       return state;
     }
   }

@@ -8,7 +8,6 @@ const initialState = {
 export const ingredientForModalReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_INGREDIENT: {
-      console.log('state: ', state);
       return {
         ...state,
         ingredientData: action.ingredientData,
@@ -16,28 +15,24 @@ export const ingredientForModalReducer = (state = initialState, action) => {
     }
 
     case RESET_INGREDIENT: {
-      console.log('state: ', state);
       return {
         ...state,
         ingredientData: {},
       };
     }
     case OPEN_INGREDIENT_MODAL: {
-      console.log('state: ', state);
       return {
         ...state,
         isIngredientModalOpen: true,
       };
     }
     case CLOSE_INGREDIENT_MODAL: {
-      console.log('state: ', state);
       return {
         ...state,
         isIngredientModalOpen: false,
       };
     }
     default: {
-      console.log('state: ', state);
       return state;
     }
   }

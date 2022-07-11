@@ -8,6 +8,9 @@ export const NAV_ACTIVE_BUN = 'NAV_ACTIVE_BUN';
 export const NAV_ACTIVE_SAUCE = 'NAV_ACTIVE_SAUCE';
 export const NAV_ACTIVE_MAIN = 'NAV_ACTIVE_MAIN';
 
+export const SET_BUN_AMOUNT = 'SET_BUN_AMOUNT';
+export const SET_STUFFING_AMOUNT = 'SET_STUFFING_AMOUNT';
+
 export function getIngredients() {
   return async function (dispatch) {
     try {

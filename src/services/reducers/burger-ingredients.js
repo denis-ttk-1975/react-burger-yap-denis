@@ -1,16 +1,26 @@
-import { GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, NAV_ACTIVE_BUN, NAV_ACTIVE_SAUCE, NAV_ACTIVE_MAIN } from './../actions/burger-ingredients';
+import {
+  GET_INGREDIENTS,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_SUCCESS,
+  NAV_ACTIVE_BUN,
+  NAV_ACTIVE_SAUCE,
+  NAV_ACTIVE_MAIN,
+  SET_BUN_AMOUNT,
+  SET_STUFFING_AMOUNT,
+} from './../actions/burger-ingredients';
 
 const initialState = {
   isLoading: false,
   errorMessage: '',
-  ingredients: [],
+  menuIngredients: [],
   activeNavElement: 'bun',
+  bunAmountArray: [{}],
+  stuffingAmountArray: [{}],
 };
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS: {
-      console.log('state: ', state);
       return {
         ...state,
         isLoading: true,
@@ -18,15 +28,13 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
       };
     }
     case GET_INGREDIENTS_SUCCESS: {
-      console.log('state: ', state);
       return {
         ...state,
-        ingredients: action.ingredients,
+        menuIngredients: action.ingredients,
         isLoading: false,
       };
     }
     case GET_INGREDIENTS_FAILED: {
-      console.log('state: ', state);
       return {
         ...state,
         errorMessage: action.errorMessage,
@@ -34,28 +42,36 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
       };
     }
     case NAV_ACTIVE_BUN: {
-      console.log('state: ', state);
       return {
         ...state,
         activeNavElement: 'bun',
       };
     }
     case NAV_ACTIVE_SAUCE: {
-      console.log('state: ', state);
       return {
         ...state,
         activeNavElement: 'sauce',
       };
     }
     case NAV_ACTIVE_MAIN: {
-      console.log('state: ', state);
       return {
         ...state,
         activeNavElement: 'main',
       };
     }
+    case SET_BUN_AMOUNT: {
+      return {
+        ...state,
+        bunAmountArray: action.payload,
+      };
+    }
+    case SET_STUFFING_AMOUNT: {
+      return {
+        ...state,
+        stuffingAmountArray: action.payload,
+      };
+    }
     default: {
-      console.log('state: ', state);
       return state;
     }
   }

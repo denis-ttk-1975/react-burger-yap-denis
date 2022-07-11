@@ -12,7 +12,10 @@ import NavIngredient from './../nav-ingredient/nav-ingredient';
 
 // whole component
 function BurgerIngredients(props) {
-  const { ingredients } = useSelector((state) => state.burgerIngredients);
+  const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
+
+  const { menuIngredients, bunAmountArray, stuffingAmountArray } = useSelector((state) => state.burgerIngredients);
+
   const dispatch = useDispatch();
   const scrollBoxRef = useRef(null);
   const bunRef = useRef(null);
@@ -21,11 +24,6 @@ function BurgerIngredients(props) {
 
   const scrollHandler = (e) => {
     // e.stopPropagation();
-    console.log('bunRef', bunRef.current.offsetTop);
-    console.log('sauceRef', sauceRef.current.offsetTop);
-    console.log('mainRef', mainRef.current.offsetTop);
-    console.log('scrollBoxRef', scrollBoxRef.current.offsetTop);
-    console.log('scrollBoxRef', scrollBoxRef.current.scrollTop);
 
     if (scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop) {
       dispatch({ type: 'NAV_ACTIVE_BUN' });
@@ -53,9 +51,9 @@ function BurgerIngredients(props) {
       <h2 className='mb-5 text text_type_main-large'>Соберите бургер</h2>
       <NavIngredient />
       <div className={styles.scrollBox} ref={scrollBoxRef} onScroll={scrollHandler}>
-        <IngredientsArea group='Булки' type='bun' data={ingredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={bunRef} />
-        <IngredientsArea group='Соусы' type='sauce' data={ingredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={sauceRef} />
-        <IngredientsArea group='Начинки' type='main' data={ingredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={mainRef} />
+        <IngredientsArea group='Булки' type='bun' data={menuIngredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={bunRef} />
+        <IngredientsArea group='Соусы' type='sauce' data={menuIngredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={sauceRef} />
+        <IngredientsArea group='Начинки' type='main' data={menuIngredients} onClickIngredientsItem={props.onClickIngredientsItem} ref={mainRef} />
       </div>
     </div>
   );

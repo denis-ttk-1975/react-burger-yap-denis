@@ -20,28 +20,72 @@ import defaultIngredientGrey from './../../images/default-ingredient-grey.png';
 import { NewLineKind } from 'typescript';
 
 function BurgerConstructor(props) {
-  const { ingredients: orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
+  const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
+
+  const { menuIngredients, bunAmountArray, stuffingAmountArray } = useSelector((state) => state.burgerIngredients);
+
   const dispatch = useDispatch();
 
   const [, dropIngredientTarget] = useDrop({
     accept: ['main', 'sauce'],
     drop(itemData) {
       const removeKey = ({ __v, ...rest }) => rest;
+      console.log('itemData: ', itemData);
       if (itemData) {
         const newItem = { ...removeKey(itemData), uuid: nanoid() };
-        console.log(' newItem: ', newItem);
+        console.log('newItem: ', newItem);
+
         const newStuffing = [...stuffing, newItem];
+        console.log(' newStuffing: ', newStuffing);
         dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: newStuffing });
+
+        let stuffingArr = stuffing.map((item, index, arr) => {
+          console.log('{ id: item._id, amount: arr.filter((el) => el._id === item._id).length }: ', { id: item._id, amount: arr.filter((el) => el._id === item._id).length });
+          return { id: item._id, amount: arr.filter((el) => el._id === item._id).length };
+        });
+        console.log('stuffingArr: ', stuffingArr);
+        dispatch({ type: 'SET_STUFFING_AMOUNT', payload: stuffingArr });
+
+        let result = menuIngredients.map((item) => {
+          for (let i = 0; i < stuffingAmountArray.length; i++) {
+            if ('id' in stuffingAmountArray[i] && 'amount' in stuffingAmountArray[i] && stuffingAmountArray[i].id === item._id) {
+              return {
+                ...item,
+                __v: stuffingAmountArray[i].amount,
+              };
+            } else {
+              return { ...item };
+            }
+          }
+        });
+        console.log('result: ', result);
+        dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
       }
     },
   });
+
   const [, dropBunTopTarget] = useDrop({
     accept: ['bun'],
     drop(itemData) {
       const removeKey = ({ __v, ...rest }) => rest;
       if (itemData) {
         const newBun = { ...removeKey(itemData), uuid: nanoid() };
+        let result = menuIngredients.map((item) => {
+          if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id === item._id) {
+            return { ...item, __v: 1 };
+          } else {
+            if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id !== item._id) {
+              return { ...item, __v: 0 };
+            } else {
+              return { ...item };
+            }
+          }
+        });
         dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
+
+        dispatch({ type: 'SET_BUN_AMOUNT', payload: [{ id: newBun._id, amount: 1 }] });
+
+        dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
       }
     },
   });
@@ -51,7 +95,22 @@ function BurgerConstructor(props) {
       const removeKey = ({ __v, ...rest }) => rest;
       if (itemData) {
         const newBun = { ...removeKey(itemData), uuid: nanoid() };
+        let result = menuIngredients.map((item) => {
+          if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id === item._id) {
+            return { ...item, __v: 1 };
+          } else {
+            if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id !== item._id) {
+              return { ...item, __v: 0 };
+            } else {
+              return { ...item };
+            }
+          }
+        });
         dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
+
+        dispatch({ type: 'SET_BUN_AMOUNT', payload: [{ id: newBun._id, amount: 1 }] });
+
+        dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
       }
     },
   });
@@ -72,7 +131,20 @@ function BurgerConstructor(props) {
     const removeKey = ({ __v, ...rest }) => rest;
     if (bunElement) {
       const bun = { ...removeKey(bunElement), uuid: nanoid() };
+      let result = menuIngredients.map((item) => {
+        if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id === item._id) {
+          return { ...item, __v: 1 };
+        } else {
+          if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id !== item._id) {
+            return { ...item, __v: 0 };
+          } else {
+            return { ...item };
+          }
+        }
+      });
       dispatch({ type: 'SET_BUN_INTO_ORDER', bun: bun });
+      dispatch({ type: 'SET_BUN_AMOUNT', payload: [{ id: bun._id, amount: 1 }] });
+      dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
     }
     if (ingredientsArray) {
       let stuffingAcc = [];
@@ -80,7 +152,6 @@ function BurgerConstructor(props) {
         const newElem = { ...removeKey(elem), uuid: nanoid() };
         for (let j = 0; j < elem.__v; j++) {
           stuffingAcc.push(newElem);
-          console.log(' stuffingAcc: ', stuffingAcc);
         }
       });
       dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: stuffingAcc });
@@ -91,17 +162,13 @@ function BurgerConstructor(props) {
     let result = 0;
     if (stuffing.length) {
       stuffing.forEach((item) => {
-        console.log('item: ', item);
         result = result + item.price;
-        console.log('item.price: ', item.price);
-        console.log('result: ', result);
       });
     }
     if (Object.keys(bun).length) {
       result = result + bun.price * 2;
-      console.log('bun: ', bun);
     }
-    console.log('result: ', result);
+
     return result;
   }
 
