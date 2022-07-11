@@ -5,6 +5,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import PropTypes from 'prop-types';
 
 import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 
 import { Box, CurrencyIcon, Typography, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -27,7 +28,7 @@ function BurgerConstructor(props) {
     drop(itemData) {
       const removeKey = ({ __v, ...rest }) => rest;
       if (itemData) {
-        const newItem = removeKey(itemData);
+        const newItem = { ...removeKey(itemData), uuid: nanoid() };
         console.log(' newItem: ', newItem);
         const newStuffing = [...stuffing, newItem];
         dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: newStuffing });
@@ -39,7 +40,7 @@ function BurgerConstructor(props) {
     drop(itemData) {
       const removeKey = ({ __v, ...rest }) => rest;
       if (itemData) {
-        const newBun = removeKey(itemData);
+        const newBun = { ...removeKey(itemData), uuid: nanoid() };
         dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
       }
     },
@@ -49,7 +50,7 @@ function BurgerConstructor(props) {
     drop(itemData) {
       const removeKey = ({ __v, ...rest }) => rest;
       if (itemData) {
-        const newBun = removeKey(itemData);
+        const newBun = { ...removeKey(itemData), uuid: nanoid() };
         dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
       }
     },
@@ -70,13 +71,13 @@ function BurgerConstructor(props) {
   useEffect(() => {
     const removeKey = ({ __v, ...rest }) => rest;
     if (bunElement) {
-      const bun = removeKey(bunElement);
+      const bun = { ...removeKey(bunElement), uuid: nanoid() };
       dispatch({ type: 'SET_BUN_INTO_ORDER', bun: bun });
     }
     if (ingredientsArray) {
       let stuffingAcc = [];
       ingredientsArray.forEach((elem) => {
-        const newElem = removeKey(elem);
+        const newElem = { ...removeKey(elem), uuid: nanoid() };
         for (let j = 0; j < elem.__v; j++) {
           stuffingAcc.push(newElem);
           console.log(' stuffingAcc: ', stuffingAcc);
