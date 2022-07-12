@@ -39,26 +39,34 @@ function BurgerConstructor(props) {
         console.log(' newStuffing: ', newStuffing);
         dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: newStuffing });
 
-        let stuffingArr = stuffing.map((item, index, arr) => {
-          console.log('{ id: item._id, amount: arr.filter((el) => el._id === item._id).length }: ', { id: item._id, amount: arr.filter((el) => el._id === item._id).length });
-          return { id: item._id, amount: arr.filter((el) => el._id === item._id).length };
-        });
+        let stuffingArr = stuffing.length
+          ? stuffing.map((item, index, arr) => {
+              console.log('{ id: item._id, amount: arr.filter((el) => el._id === item._id).length }: ', { id: item._id, amount: arr.filter((el) => el._id === item._id).length });
+              return { id: item._id, amount: arr.filter((el) => el._id === item._id).length };
+            })
+          : [];
         console.log('stuffingArr: ', stuffingArr);
         dispatch({ type: 'SET_STUFFING_AMOUNT', payload: stuffingArr });
 
-        let result = menuIngredients.map((item) => {
-          for (let i = 0; i < stuffingAmountArray.length; i++) {
-            if ('id' in stuffingAmountArray[i] && 'amount' in stuffingAmountArray[i] && stuffingAmountArray[i].id === item._id) {
-              return {
-                ...item,
-                __v: stuffingAmountArray[i].amount,
-              };
-            } else {
-              return { ...item };
-            }
-          }
-        });
-        console.log('result: ', result);
+        let result = stuffingAmountArray.length
+          ? menuIngredients.map((item) => {
+              let innerAcc = { ...item };
+              for (let i = 0; i < stuffingAmountArray.length; i++) {
+                if (stuffingAmountArray[i].id === item._id) {
+                  innerAcc = {
+                    ...item,
+                    __v: stuffingAmountArray[i].amount,
+                  };
+                }
+                // else {
+                //   console.log(3, item, stuffingAmountArray[i]);
+                //   innerAcc = { ...item };
+                // }
+              }
+              return innerAcc;
+            })
+          : [...menuIngredients];
+
         dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
       }
     },

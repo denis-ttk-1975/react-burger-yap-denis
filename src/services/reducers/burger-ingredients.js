@@ -15,7 +15,7 @@ const initialState = {
   menuIngredients: [],
   activeNavElement: 'bun',
   bunAmountArray: [{}],
-  stuffingAmountArray: [{}],
+  stuffingAmountArray: [],
 };
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
