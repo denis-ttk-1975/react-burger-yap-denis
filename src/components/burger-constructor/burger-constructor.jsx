@@ -66,7 +66,6 @@ function BurgerConstructor(props) {
               return innerAcc;
             })
           : [...menuIngredients];
-
         dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
       }
     },
