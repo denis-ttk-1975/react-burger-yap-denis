@@ -1,6 +1,17 @@
 import React, { useState, useRef } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
+import {
+  GET_INGREDIENTS,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_SUCCESS,
+  NAV_ACTIVE_BUN,
+  NAV_ACTIVE_SAUCE,
+  NAV_ACTIVE_MAIN,
+  SET_BUN_AMOUNT,
+  SET_STUFFING_AMOUNT,
+} from './../../services/actions/burger-ingredients';
+
 import { Box, Typography, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './nav-ingredient.module.css';
@@ -17,19 +28,19 @@ function NavIngredient() {
     // setCurrent(par);
     switch (par) {
       case 'bun': {
-        dispatch({ type: 'NAV_ACTIVE_BUN' });
+        dispatch({ type: NAV_ACTIVE_BUN });
         break;
       }
       case 'sauce': {
-        dispatch({ type: 'NAV_ACTIVE_SAUCE' });
+        dispatch({ type: NAV_ACTIVE_SAUCE });
         break;
       }
       case 'main': {
-        dispatch({ type: 'NAV_ACTIVE_MAIN' });
+        dispatch({ type: NAV_ACTIVE_MAIN });
         break;
       }
       default: {
-        dispatch({ type: 'NAV_ACTIVE_BUN' });
+        dispatch({ type: NAV_ACTIVE_BUN });
       }
     }
     const element = document.getElementById(par);

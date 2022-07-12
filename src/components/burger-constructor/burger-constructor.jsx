@@ -2,6 +2,18 @@ import React, { useEffect } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
+import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
+import {
+  GET_INGREDIENTS,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_SUCCESS,
+  NAV_ACTIVE_BUN,
+  NAV_ACTIVE_SAUCE,
+  NAV_ACTIVE_MAIN,
+  SET_BUN_AMOUNT,
+  SET_STUFFING_AMOUNT,
+} from './../../services/actions/burger-ingredients';
+
 import PropTypes from 'prop-types';
 
 import { v4 as uuidv4 } from 'uuid';
@@ -37,7 +49,7 @@ function BurgerConstructor(props) {
 
         const newStuffing = [...stuffing, newItem];
         console.log(' newStuffing: ', newStuffing);
-        dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: newStuffing });
+        dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: newStuffing });
 
         let stuffingArr = stuffing.length
           ? stuffing.map((item, index, arr) => {
@@ -46,7 +58,7 @@ function BurgerConstructor(props) {
             })
           : [];
         console.log('stuffingArr: ', stuffingArr);
-        dispatch({ type: 'SET_STUFFING_AMOUNT', payload: stuffingArr });
+        dispatch({ type: SET_STUFFING_AMOUNT, payload: stuffingArr });
 
         let result = stuffingAmountArray.length
           ? menuIngredients.map((item) => {
@@ -66,7 +78,7 @@ function BurgerConstructor(props) {
               return innerAcc;
             })
           : [...menuIngredients];
-        dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
+        dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
       }
     },
   });
@@ -88,11 +100,11 @@ function BurgerConstructor(props) {
             }
           }
         });
-        dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
+        dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
 
-        dispatch({ type: 'SET_BUN_AMOUNT', payload: [{ id: newBun._id, amount: 1 }] });
+        dispatch({ type: SET_BUN_AMOUNT, payload: [{ id: newBun._id, amount: 1 }] });
 
-        dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
+        dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
       }
     },
   });
@@ -113,11 +125,11 @@ function BurgerConstructor(props) {
             }
           }
         });
-        dispatch({ type: 'SET_BUN_INTO_ORDER', bun: newBun });
+        dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
 
-        dispatch({ type: 'SET_BUN_AMOUNT', payload: [{ id: newBun._id, amount: 1 }] });
+        dispatch({ type: SET_BUN_AMOUNT, payload: [{ id: newBun._id, amount: 1 }] });
 
-        dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
+        dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
       }
     },
   });
@@ -149,9 +161,9 @@ function BurgerConstructor(props) {
           }
         }
       });
-      dispatch({ type: 'SET_BUN_INTO_ORDER', bun: bun });
-      dispatch({ type: 'SET_BUN_AMOUNT', payload: [{ id: bun._id, amount: 1 }] });
-      dispatch({ type: 'GET_INGREDIENTS_SUCCESS', ingredients: result });
+      dispatch({ type: SET_BUN_INTO_ORDER, bun: bun });
+      dispatch({ type: SET_BUN_AMOUNT, payload: [{ id: bun._id, amount: 1 }] });
+      dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
     }
     if (ingredientsArray) {
       let stuffingAcc = [];
@@ -161,7 +173,7 @@ function BurgerConstructor(props) {
           stuffingAcc.push(newElem);
         }
       });
-      dispatch({ type: 'SET_STUFFING_INTO_ORDER', stuffing: stuffingAcc });
+      dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: stuffingAcc });
     }
   }, []);
 

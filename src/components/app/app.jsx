@@ -3,6 +3,21 @@ import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
+import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
+import {
+  GET_INGREDIENTS,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_SUCCESS,
+  NAV_ACTIVE_BUN,
+  NAV_ACTIVE_SAUCE,
+  NAV_ACTIVE_MAIN,
+  SET_BUN_AMOUNT,
+  SET_STUFFING_AMOUNT,
+} from './../../services/actions/burger-ingredients';
+
+import { SET_INGREDIENT, RESET_INGREDIENT, OPEN_INGREDIENT_MODAL, CLOSE_INGREDIENT_MODAL } from './../../services/actions/ingredient-details';
+import { GET_ORDER, GET_ORDER_FAILED, GET_ORDER_SUCCESS, RESET_ORDER_NUMBER, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL } from './../../services/actions/order-details';
+
 import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
 import BurgerConstructor from './../burger-constructor/burger-constructor';
@@ -39,33 +54,33 @@ function App() {
 
   // load data for order-ingredients
   useEffect(() => {
-    dispatch({ type: 'SET_BURGER_INGREDIENTS', ingredients: [] });
+    dispatch({ type: SET_BURGER_INGREDIENTS, ingredients: [] });
   }, []);
 
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = () => {
     dispatch(getOrderDetails(testData));
-    dispatch({ type: 'OPEN_ORDER_MODAL' });
+    dispatch({ type: OPEN_ORDER_MODAL });
   };
 
   // handling for click on tab with ingredient
 
   const clickIngredientItemHandler = (data) => {
-    dispatch({ type: 'SET_INGREDIENT', ingredientData: data });
+    dispatch({ type: SET_INGREDIENT, ingredientData: data });
 
-    dispatch({ type: 'OPEN_INGREDIENT_MODAL' });
+    dispatch({ type: OPEN_INGREDIENT_MODAL });
   };
 
   // function to close all opened modals
 
   const closeAllModals = () => {
-    dispatch({ type: 'CLOSE_ORDER_MODAL' });
+    dispatch({ type: CLOSE_ORDER_MODAL });
 
-    dispatch({ type: 'RESET_ORDER_NUMBER' });
-    dispatch({ type: 'CLOSE_INGREDIENT_MODAL' });
+    dispatch({ type: RESET_ORDER_NUMBER });
+    dispatch({ type: CLOSE_INGREDIENT_MODAL });
 
-    dispatch({ type: 'RESET_INGREDIENT' });
+    dispatch({ type: RESET_INGREDIENT });
   };
 
   return (

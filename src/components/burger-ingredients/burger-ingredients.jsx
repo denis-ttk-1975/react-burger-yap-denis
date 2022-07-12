@@ -1,6 +1,18 @@
 import React, { useEffect, useRef } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
+import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
+import {
+  GET_INGREDIENTS,
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_SUCCESS,
+  NAV_ACTIVE_BUN,
+  NAV_ACTIVE_SAUCE,
+  NAV_ACTIVE_MAIN,
+  SET_BUN_AMOUNT,
+  SET_STUFFING_AMOUNT,
+} from './../../services/actions/burger-ingredients';
+
 import PropTypes from 'prop-types';
 
 import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -26,13 +38,13 @@ function BurgerIngredients(props) {
     // e.stopPropagation();
 
     if (scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop) {
-      dispatch({ type: 'NAV_ACTIVE_BUN' });
+      dispatch({ type: NAV_ACTIVE_BUN });
     }
     if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop && scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop + sauceRef.current.offsetTop) {
-      dispatch({ type: 'NAV_ACTIVE_SAUCE' });
+      dispatch({ type: NAV_ACTIVE_SAUCE });
     }
     if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop + sauceRef.current.offsetTop) {
-      dispatch({ type: 'NAV_ACTIVE_MAIN' });
+      dispatch({ type: NAV_ACTIVE_MAIN });
     }
   };
 

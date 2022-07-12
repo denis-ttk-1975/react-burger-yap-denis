@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
+import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
+
 import PropTypes from 'prop-types';
 
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -24,7 +26,7 @@ function ElemList(props) {
         thumbnail={props.image}
         handleClose={() => {
           dispatch({
-            type: 'SET_STUFFING_INTO_ORDER',
+            type: SET_STUFFING_INTO_ORDER,
             stuffing: stuffing.filter((elem) => elem.uuid !== props.uuid),
           });
         }}
