@@ -16,7 +16,7 @@ function IngredientsItem(props) {
 
   return (
     <div className={styles.ingredientsCard} onClick={() => props.onClickIngredientsItem(props.data)} ref={dragRef}>
-      {props.data.__v ? <Counter count={props.data.__v} size='default' className={styles.counter} /> : null}
+      {props.amount ? <Counter count={props.amount} size='default' className={styles.counter} /> : null}
       <img src={props.data.image} alt={props.data.name} className='mb-2' />
       <div className={`mb-2 ${styles.priceLabel}`}>
         <p className='text text_type_digits-default'>{props.data.price}</p>

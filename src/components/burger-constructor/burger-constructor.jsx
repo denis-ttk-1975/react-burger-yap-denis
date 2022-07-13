@@ -42,43 +42,15 @@ function BurgerConstructor(props) {
     accept: ['main', 'sauce'],
     drop(itemData) {
       const removeKey = ({ __v, ...rest }) => rest;
-      console.log('itemData: ', itemData);
+
       if (itemData) {
         const newItem = { ...removeKey(itemData), uuid: nanoid() };
-        console.log('newItem: ', newItem);
 
         const newStuffing = [...stuffing, newItem];
-        console.log(' newStuffing: ', newStuffing);
+
         dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: newStuffing });
 
-        let stuffingArr = stuffing.length
-          ? stuffing.map((item, index, arr) => {
-              console.log('{ id: item._id, amount: arr.filter((el) => el._id === item._id).length }: ', { id: item._id, amount: arr.filter((el) => el._id === item._id).length });
-              return { id: item._id, amount: arr.filter((el) => el._id === item._id).length };
-            })
-          : [];
-        console.log('stuffingArr: ', stuffingArr);
-        dispatch({ type: SET_STUFFING_AMOUNT, payload: stuffingArr });
-
-        let result = stuffingAmountArray.length
-          ? menuIngredients.map((item) => {
-              let innerAcc = { ...item };
-              for (let i = 0; i < stuffingAmountArray.length; i++) {
-                if (stuffingAmountArray[i].id === item._id) {
-                  innerAcc = {
-                    ...item,
-                    __v: stuffingAmountArray[i].amount,
-                  };
-                }
-                // else {
-                //   console.log(3, item, stuffingAmountArray[i]);
-                //   innerAcc = { ...item };
-                // }
-              }
-              return innerAcc;
-            })
-          : [...menuIngredients];
-        dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
+        //   ? stuffing.map((item, index, arr) => {
       }
     },
   });
@@ -89,22 +61,8 @@ function BurgerConstructor(props) {
       const removeKey = ({ __v, ...rest }) => rest;
       if (itemData) {
         const newBun = { ...removeKey(itemData), uuid: nanoid() };
-        let result = menuIngredients.map((item) => {
-          if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id === item._id) {
-            return { ...item, __v: 1 };
-          } else {
-            if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id !== item._id) {
-              return { ...item, __v: 0 };
-            } else {
-              return { ...item };
-            }
-          }
-        });
+
         dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
-
-        dispatch({ type: SET_BUN_AMOUNT, payload: [{ id: newBun._id, amount: 1 }] });
-
-        dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
       }
     },
   });
@@ -114,22 +72,8 @@ function BurgerConstructor(props) {
       const removeKey = ({ __v, ...rest }) => rest;
       if (itemData) {
         const newBun = { ...removeKey(itemData), uuid: nanoid() };
-        let result = menuIngredients.map((item) => {
-          if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id === item._id) {
-            return { ...item, __v: 1 };
-          } else {
-            if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id !== item._id) {
-              return { ...item, __v: 0 };
-            } else {
-              return { ...item };
-            }
-          }
-        });
+
         dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
-
-        dispatch({ type: SET_BUN_AMOUNT, payload: [{ id: newBun._id, amount: 1 }] });
-
-        dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
       }
     },
   });
@@ -150,20 +94,8 @@ function BurgerConstructor(props) {
     const removeKey = ({ __v, ...rest }) => rest;
     if (bunElement) {
       const bun = { ...removeKey(bunElement), uuid: nanoid() };
-      let result = menuIngredients.map((item) => {
-        if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id === item._id) {
-          return { ...item, __v: 1 };
-        } else {
-          if (item.type === 'bun' && 'id' in bunAmountArray[0] && bunAmountArray[0].id !== item._id) {
-            return { ...item, __v: 0 };
-          } else {
-            return { ...item };
-          }
-        }
-      });
+
       dispatch({ type: SET_BUN_INTO_ORDER, bun: bun });
-      dispatch({ type: SET_BUN_AMOUNT, payload: [{ id: bun._id, amount: 1 }] });
-      dispatch({ type: GET_INGREDIENTS_SUCCESS, ingredients: result });
     }
     if (ingredientsArray) {
       let stuffingAcc = [];

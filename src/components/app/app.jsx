@@ -27,8 +27,6 @@ import OrderDetails from './../order-details/order-details';
 
 import styles from './app.module.css';
 
-import { store } from './../../index';
-
 import { getIngredients } from './../../services/actions/burger-ingredients';
 import { getOrderDetails } from './../../services/actions/order-details';
 
@@ -41,10 +39,6 @@ function App() {
   const { ingredientData: ingredientInModal, isIngredientModalOpen } = useSelector((state) => state.ingredientForModal);
 
   const dispatch = useDispatch();
-
-  const scrollHandler = () => {};
-
-  const [orderIngredients, setOrderIngredients] = useState([]);
 
   // getting data about ingredients from server
 
