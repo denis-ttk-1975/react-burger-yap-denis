@@ -1,21 +1,10 @@
-import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_SUCCESS,
-  NAV_ACTIVE_BUN,
-  NAV_ACTIVE_SAUCE,
-  NAV_ACTIVE_MAIN,
-  SET_BUN_AMOUNT,
-  SET_STUFFING_AMOUNT,
-} from './../actions/burger-ingredients';
+import { GET_INGREDIENTS, GET_INGREDIENTS_FAILED, GET_INGREDIENTS_SUCCESS, NAV_ACTIVE_BUN, NAV_ACTIVE_SAUCE, NAV_ACTIVE_MAIN } from './../actions/burger-ingredients';
 
 const initialState = {
   isLoading: false,
   errorMessage: '',
   menuIngredients: [],
   activeNavElement: 'bun',
-  bunAmountArray: [{}],
-  stuffingAmountArray: [],
 };
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
@@ -59,18 +48,7 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         activeNavElement: 'main',
       };
     }
-    case SET_BUN_AMOUNT: {
-      return {
-        ...state,
-        bunAmountArray: action.payload,
-      };
-    }
-    case SET_STUFFING_AMOUNT: {
-      return {
-        ...state,
-        stuffingAmountArray: action.payload,
-      };
-    }
+
     default: {
       return state;
     }

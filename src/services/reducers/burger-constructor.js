@@ -1,4 +1,4 @@
-import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../actions/burger-constructor';
+import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER } from './../actions/burger-constructor';
 
 const initialState = {
   orderIngredients: [],
@@ -26,12 +26,7 @@ export const burgerConstructorReducer = (state = initialState, action) => {
         stuffing: action.stuffing,
       };
     }
-    case DELETE_STUFFING_FROM_ORDER: {
-      return {
-        ...state,
-        stuffing: action.stuffing,
-      };
-    }
+
 
     default: {
       return state;
