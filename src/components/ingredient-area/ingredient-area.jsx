@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ import IngredientsItem from '../ingredient-item/ingredient-item';
 
 // area for group of ingredients - bun, sauce, main
 const IngredientsArea = React.forwardRef((props, ref) => {
-  const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
+  const { bun, stuffing } = useSelector((state) => state.burgerConstructor);
 
   function countIngredients() {
     const acc = {};

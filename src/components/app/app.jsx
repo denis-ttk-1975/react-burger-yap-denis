@@ -1,22 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
-import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_SUCCESS,
-  NAV_ACTIVE_BUN,
-  NAV_ACTIVE_SAUCE,
-  NAV_ACTIVE_MAIN,
-  SET_BUN_AMOUNT,
-  SET_STUFFING_AMOUNT,
-} from './../../services/actions/burger-ingredients';
+import { SET_BURGER_INGREDIENTS } from './../../services/actions/burger-constructor';
 
 import { SET_INGREDIENT, RESET_INGREDIENT, OPEN_INGREDIENT_MODAL, CLOSE_INGREDIENT_MODAL } from './../../services/actions/ingredient-details';
-import { GET_ORDER, GET_ORDER_FAILED, GET_ORDER_SUCCESS, RESET_ORDER_NUMBER, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL } from './../../services/actions/order-details';
+import { RESET_ORDER_NUMBER, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL } from './../../services/actions/order-details';
 
 import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
@@ -29,9 +19,6 @@ import styles from './app.module.css';
 
 import { getIngredients } from './../../services/actions/burger-ingredients';
 import { getOrderDetails } from './../../services/actions/order-details';
-
-import testData from './../../utils/data';
-// import { getProductData, postOrderData } from './../../utils/api';
 
 function App() {
   const { menuIngredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
@@ -55,8 +42,6 @@ function App() {
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = (bunElement, stuffingArray) => {
-    console.log('Object.keys(bunElement).length: ', Object.keys(bunElement).length);
-    console.log('stuffingArray.length: ', stuffingArray.length);
     if (Object.keys(bunElement).length === 0) {
       alert('Добавьте булку');
     } else if (!stuffingArray.length) {

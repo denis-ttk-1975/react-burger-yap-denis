@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react'; // импорт библиотеки
+import React, { useRef } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
+import { SET_STUFFING_INTO_ORDER } from './../../services/actions/burger-constructor';
 
 import PropTypes from 'prop-types';
 
@@ -14,7 +14,7 @@ import { IngredientType } from '../../utils/prop-types';
 
 function ElemList({ index, uuid, name, price, image }) {
   const dispatch = useDispatch();
-  const { ingredients: orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
+  const { stuffing } = useSelector((state) => state.burgerConstructor);
 
   const ref = useRef(null);
   const [, drop] = useDrop({
@@ -25,9 +25,9 @@ function ElemList({ index, uuid, name, price, image }) {
         return;
       }
       const dragIndex = item.index;
-      // console.log('dragIndex: ', dragIndex);
+
       const hoverIndex = index;
-      // console.log('hoverIndex: ', hoverIndex);
+
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
         return;
@@ -53,15 +53,11 @@ function ElemList({ index, uuid, name, price, image }) {
       }
       // Time to actually perform the action
 
-      // console.log(dragIndex, hoverIndex);
       const stuffingAcc = [...stuffing];
       stuffingAcc.splice(hoverIndex, 0, stuffingAcc.splice(dragIndex, 1)[0]);
-      // console.log('stuffing: ', stuffing);
-      // console.log('stuffingAcc: ', stuffingAcc);
 
       dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: stuffingAcc });
       item.index = hoverIndex;
-      console.log(dragIndex, hoverIndex);
     },
   });
   const [, drag] = useDrag({

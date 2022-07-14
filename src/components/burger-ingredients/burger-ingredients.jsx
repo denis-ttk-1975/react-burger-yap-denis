@@ -1,17 +1,7 @@
-import React, { useEffect, useRef } from 'react'; // импорт библиотеки
+import React, { useRef } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
-import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_SUCCESS,
-  NAV_ACTIVE_BUN,
-  NAV_ACTIVE_SAUCE,
-  NAV_ACTIVE_MAIN,
-  SET_BUN_AMOUNT,
-  SET_STUFFING_AMOUNT,
-} from './../../services/actions/burger-ingredients';
+import { NAV_ACTIVE_BUN, NAV_ACTIVE_SAUCE, NAV_ACTIVE_MAIN } from './../../services/actions/burger-ingredients';
 
 import PropTypes from 'prop-types';
 
@@ -24,9 +14,7 @@ import NavIngredient from './../nav-ingredient/nav-ingredient';
 
 // whole component
 function BurgerIngredients(props) {
-  const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
-
-  const { menuIngredients, bunAmountArray, stuffingAmountArray } = useSelector((state) => state.burgerIngredients);
+  const { menuIngredients } = useSelector((state) => state.burgerIngredients);
 
   const dispatch = useDispatch();
   const scrollBoxRef = useRef(null);
@@ -35,8 +23,6 @@ function BurgerIngredients(props) {
   const mainRef = useRef(null);
 
   const scrollHandler = (e) => {
-    // e.stopPropagation();
-
     if (scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop) {
       dispatch({ type: NAV_ACTIVE_BUN });
     }
@@ -47,16 +33,6 @@ function BurgerIngredients(props) {
       dispatch({ type: NAV_ACTIVE_MAIN });
     }
   };
-
-  // useEffect(() => {
-  //   // Устанавливаем слушатель события при монтировании
-  //   document.addEventListener('scroll', scrollHandler);
-
-  //   // Сбрасываем слушатель события при удалении компонента из DOM
-  //   return () => {
-  //     document.removeEventListener('scroll', scrollHandler);
-  //   };
-  // }, []);
 
   return (
     <div className={`mt-10 ${styles.ingredientArea}`}>

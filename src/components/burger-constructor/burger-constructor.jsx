@@ -1,22 +1,11 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
-import { useDrag, useDrop } from 'react-dnd';
+import { useDrop } from 'react-dnd';
 
-import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER, DELETE_STUFFING_FROM_ORDER } from './../../services/actions/burger-constructor';
-import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_SUCCESS,
-  NAV_ACTIVE_BUN,
-  NAV_ACTIVE_SAUCE,
-  NAV_ACTIVE_MAIN,
-  SET_BUN_AMOUNT,
-  SET_STUFFING_AMOUNT,
-} from './../../services/actions/burger-ingredients';
+import { SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER } from './../../services/actions/burger-constructor';
 
 import PropTypes from 'prop-types';
 
-import { v4 as uuidv4 } from 'uuid';
 import { nanoid } from 'nanoid';
 
 import { Box, CurrencyIcon, Typography, Button } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -33,8 +22,6 @@ import { NewLineKind } from 'typescript';
 
 function BurgerConstructor(props) {
   const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
-
-  const { menuIngredients, bunAmountArray, stuffingAmountArray } = useSelector((state) => state.burgerIngredients);
 
   const dispatch = useDispatch();
 
@@ -58,8 +45,6 @@ function BurgerConstructor(props) {
       }
     },
   });
-
-
 
   const amountBunCheck = (arrayIngredients) => {
     if (arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0).length > 1) {
@@ -110,14 +95,14 @@ function BurgerConstructor(props) {
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`} ref={dropIngredientTarget}>
-      <div >
+      <div>
         {Object.keys(bun).length === 0 ? (
           <ElemTop name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
         ) : (
           <ElemTop name={`${bun['name']} (верх)`} price={bun['price']} image={bun['image_mobile']} />
         )}
       </div>
-      <div className={'constructor__stuffing'} >
+      <div className={'constructor__stuffing'}>
         {stuffing.length === 0 ? (
           <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
         ) : (
@@ -130,8 +115,7 @@ function BurgerConstructor(props) {
           </div>
         )}
       </div>
-      <div >
-
+      <div>
         {Object.keys(bun).length === 0 ? (
           <ElemBottom name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
         ) : (

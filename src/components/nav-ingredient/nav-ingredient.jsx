@@ -1,16 +1,7 @@
-import React, { useState, useRef } from 'react'; // импорт библиотеки
+import React from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
-import {
-  GET_INGREDIENTS,
-  GET_INGREDIENTS_FAILED,
-  GET_INGREDIENTS_SUCCESS,
-  NAV_ACTIVE_BUN,
-  NAV_ACTIVE_SAUCE,
-  NAV_ACTIVE_MAIN,
-  SET_BUN_AMOUNT,
-  SET_STUFFING_AMOUNT,
-} from './../../services/actions/burger-ingredients';
+import { NAV_ACTIVE_BUN, NAV_ACTIVE_SAUCE, NAV_ACTIVE_MAIN } from './../../services/actions/burger-ingredients';
 
 import { Box, Typography, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -22,10 +13,8 @@ function NavIngredient() {
   const dispatch = useDispatch();
 
   const { activeNavElement } = useSelector((state) => state.burgerIngredients);
-  // const [current, setCurrent] = useState('bun');
 
   const onTabClick = (par) => {
-    // setCurrent(par);
     switch (par) {
       case 'bun': {
         dispatch({ type: NAV_ACTIVE_BUN });
