@@ -39,44 +39,27 @@ function BurgerConstructor(props) {
   const dispatch = useDispatch();
 
   const [, dropIngredientTarget] = useDrop({
-    accept: ['main', 'sauce'],
+    accept: ['main', 'sauce', 'bun'],
     drop(itemData) {
       const removeKey = ({ __v, ...rest }) => rest;
 
       if (itemData) {
-        const newItem = { ...removeKey(itemData), uuid: nanoid() };
-
-        const newStuffing = [...stuffing, newItem];
-
-        dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: newStuffing });
+        if (itemData.type === 'bun') {
+          const newBun = { ...removeKey(itemData), uuid: nanoid() };
+          dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
+        }
+        if (itemData.type === 'main' || itemData.type === 'sauce') {
+          const newItem = { ...removeKey(itemData), uuid: nanoid() };
+          const newStuffing = [...stuffing, newItem];
+          dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: newStuffing });
+        }
 
         //   ? stuffing.map((item, index, arr) => {
       }
     },
   });
 
-  const [, dropBunTopTarget] = useDrop({
-    accept: ['bun'],
-    drop(itemData) {
-      const removeKey = ({ __v, ...rest }) => rest;
-      if (itemData) {
-        const newBun = { ...removeKey(itemData), uuid: nanoid() };
 
-        dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
-      }
-    },
-  });
-  const [, dropBunBottomTarget] = useDrop({
-    accept: ['bun'],
-    drop(itemData) {
-      const removeKey = ({ __v, ...rest }) => rest;
-      if (itemData) {
-        const newBun = { ...removeKey(itemData), uuid: nanoid() };
-
-        dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
-      }
-    },
-  });
 
   const amountBunCheck = (arrayIngredients) => {
     if (arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0).length > 1) {
@@ -126,15 +109,15 @@ function BurgerConstructor(props) {
   const amountTotalBill = sumTotalBill() || 0;
 
   return (
-    <div className={`mt-25 ${styles.constructorArea}`}>
-      <div ref={dropBunTopTarget}>
+    <div className={`mt-25 ${styles.constructorArea}`} ref={dropIngredientTarget}>
+      <div >
         {Object.keys(bun).length === 0 ? (
           <ElemTop name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
         ) : (
           <ElemTop name={`${bun['name']} (верх)`} price={bun['price']} image={bun['image_mobile']} />
         )}
       </div>
-      <div className={'constructor__stuffing'} ref={dropIngredientTarget}>
+      <div className={'constructor__stuffing'} >
         {stuffing.length === 0 ? (
           <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
         ) : (
@@ -147,8 +130,8 @@ function BurgerConstructor(props) {
           </div>
         )}
       </div>
-      <div ref={dropBunBottomTarget}>
-        {' '}
+      <div >
+
         {Object.keys(bun).length === 0 ? (
           <ElemBottom name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
         ) : (

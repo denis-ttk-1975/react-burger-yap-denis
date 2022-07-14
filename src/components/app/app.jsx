@@ -37,6 +37,7 @@ function App() {
   const { menuIngredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
   const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails, isOrderModalOpen } = useSelector((state) => state.orderDetails);
   const { ingredientData: ingredientInModal, isIngredientModalOpen } = useSelector((state) => state.ingredientForModal);
+  const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
 
   const dispatch = useDispatch();
 
@@ -53,8 +54,8 @@ function App() {
 
   // handling for Make-Order-Button
 
-  const clickOrderDetailsHandler = () => {
-    dispatch(getOrderDetails(testData));
+  const clickOrderDetailsHandler = (array) => {
+    dispatch(getOrderDetails(array));
     dispatch({ type: OPEN_ORDER_MODAL });
   };
 
@@ -85,7 +86,7 @@ function App() {
           <DndProvider backend={HTML5Backend}>
             <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
-            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(testData)} />
+            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler([bun, ...stuffing])} />
           </DndProvider>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
             <Modal title='' closeAllModals={closeAllModals}>

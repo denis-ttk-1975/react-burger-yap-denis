@@ -13,7 +13,8 @@ export function getOrderDetails(arrayIngredients) {
   return async function (dispatch) {
     let fullResponse;
     try {
-      const bodyIngredients = arrayIngredients.filter((item) => item.__v > 0);
+      // const bodyIngredients = arrayIngredients.filter((item) => item.__v > 0);
+      const bodyIngredients = arrayIngredients;
       dispatch({
         type: GET_ORDER,
       });

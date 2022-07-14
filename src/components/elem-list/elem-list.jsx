@@ -25,9 +25,9 @@ function ElemList({ index, uuid, name, price, image }) {
         return;
       }
       const dragIndex = item.index;
-      console.log('dragIndex: ', dragIndex);
+      // console.log('dragIndex: ', dragIndex);
       const hoverIndex = index;
-      console.log('hoverIndex: ', hoverIndex);
+      // console.log('hoverIndex: ', hoverIndex);
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
         return;
@@ -60,6 +60,8 @@ function ElemList({ index, uuid, name, price, image }) {
       // console.log('stuffingAcc: ', stuffingAcc);
 
       dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: stuffingAcc });
+      item.index = hoverIndex;
+      console.log(dragIndex, hoverIndex);
     },
   });
   const [, drag] = useDrag({
