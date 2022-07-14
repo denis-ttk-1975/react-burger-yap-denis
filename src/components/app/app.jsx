@@ -54,9 +54,17 @@ function App() {
 
   // handling for Make-Order-Button
 
-  const clickOrderDetailsHandler = (array) => {
-    dispatch(getOrderDetails(array));
-    dispatch({ type: OPEN_ORDER_MODAL });
+  const clickOrderDetailsHandler = (bunElement, stuffingArray) => {
+    console.log('Object.keys(bunElement).length: ', Object.keys(bunElement).length);
+    console.log('stuffingArray.length: ', stuffingArray.length);
+    if (Object.keys(bunElement).length === 0) {
+      alert('Добавьте булку');
+    } else if (!stuffingArray.length) {
+      alert('Добавьте хотя бы один ингредиент');
+    } else {
+      dispatch(getOrderDetails([bunElement, ...stuffingArray]));
+      dispatch({ type: OPEN_ORDER_MODAL });
+    }
   };
 
   // handling for click on tab with ingredient
@@ -86,7 +94,7 @@ function App() {
           <DndProvider backend={HTML5Backend}>
             <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
-            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler([bun, ...stuffing])} />
+            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(bun, stuffing)} />
           </DndProvider>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
             <Modal title='' closeAllModals={closeAllModals}>
