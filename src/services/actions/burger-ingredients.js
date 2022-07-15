@@ -1,4 +1,5 @@
 import { fetchUrlForIngredients } from './../../utils/url';
+import { checkResponse } from './../../utils/checkResponse';
 
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_FAILED = 'GET_INGREDIENTS_FAILED';
@@ -16,9 +17,10 @@ export function getIngredients() {
       });
 
       const res = await fetch(fetchUrlForIngredients);
-      if (!res.ok) {
-        throw new Error('Сервер не дал ответа');
-      }
+      // if (!res.ok) {
+      //   throw new Error('Сервер не дал ответа');
+      // }
+      checkResponse(res);
       const fullResponse = await res.json();
 
       dispatch({

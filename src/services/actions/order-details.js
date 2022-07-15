@@ -1,4 +1,5 @@
 import { postUrlForOrder } from './../../utils/url';
+import { checkResponse } from './../../utils/checkResponse';
 
 export const GET_ORDER = 'GET_ORDER';
 export const GET_ORDER_FAILED = 'GET_ORDER_FAILED';
@@ -27,9 +28,10 @@ export function getOrderDetails(arrayIngredients) {
           ingredients: bodyIngredients,
         }),
       });
-      if (!res.ok) {
-        throw new Error('Сервер не дал ответа');
-      }
+      // if (!res.ok) {
+      //   throw new Error('Сервер не дал ответа');
+      // }
+      checkResponse(res);
       fullResponse = await res.json();
 
       dispatch({
