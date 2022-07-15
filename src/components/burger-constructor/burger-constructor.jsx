@@ -109,7 +109,7 @@ function BurgerConstructor(props) {
           <div className={styles.innerList}>
             {stuffing.map((elem, index) => {
               if (elem.type !== 'bun') {
-                return <ElemList index={index} uuid={elem.uuid} name={elem.name} price={elem.price} image={elem.image} key={index} className='pr-4' />;
+                return <ElemList index={index} uuid={elem.uuid} name={elem.name} price={elem.price} image={elem.image} key={elem.uuid} className='pr-4' />;
               }
             })}
           </div>
