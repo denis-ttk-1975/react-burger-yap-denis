@@ -2,7 +2,7 @@ import React, { useRef } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { SET_STUFFING_INTO_ORDER } from './../../services/actions/burger-constructor';
+import { setStuffingIntoOrder } from './../../services/actions/burger-constructor';
 
 import PropTypes from 'prop-types';
 
@@ -56,7 +56,7 @@ function ElemList({ index, uuid, name, price, image }) {
       const stuffingAcc = [...stuffing];
       stuffingAcc.splice(hoverIndex, 0, stuffingAcc.splice(dragIndex, 1)[0]);
 
-      dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: stuffingAcc });
+      dispatch(setStuffingIntoOrder(stuffingAcc));
       item.index = hoverIndex;
     },
   });
@@ -82,10 +82,7 @@ function ElemList({ index, uuid, name, price, image }) {
         price={price}
         thumbnail={image}
         handleClose={() => {
-          dispatch({
-            type: SET_STUFFING_INTO_ORDER,
-            stuffing: stuffing.filter((elem) => elem.uuid !== uuid),
-          });
+          dispatch(setStuffingIntoOrder(stuffing.filter((elem) => elem.uuid !== uuid)));
         }}
       />
     </div>

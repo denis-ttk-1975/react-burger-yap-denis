@@ -1,7 +1,7 @@
 import React from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
-import { NAV_ACTIVE_BUN, NAV_ACTIVE_SAUCE, NAV_ACTIVE_MAIN } from './../../services/actions/burger-ingredients';
+import { setBunActiveForMenu, setSauceActiveForMenu, setMainActiveForMenu } from './../../services/actions/burger-ingredients';
 
 import { Box, Typography, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -17,19 +17,19 @@ function NavIngredient() {
   const onTabClick = (par) => {
     switch (par) {
       case 'bun': {
-        dispatch({ type: NAV_ACTIVE_BUN });
+        dispatch(setBunActiveForMenu());
         break;
       }
       case 'sauce': {
-        dispatch({ type: NAV_ACTIVE_SAUCE });
+        dispatch(setSauceActiveForMenu());
         break;
       }
       case 'main': {
-        dispatch({ type: NAV_ACTIVE_MAIN });
+        dispatch(setMainActiveForMenu());
         break;
       }
       default: {
-        dispatch({ type: NAV_ACTIVE_BUN });
+        dispatch(setBunActiveForMenu());
       }
     }
     const element = document.getElementById(par);

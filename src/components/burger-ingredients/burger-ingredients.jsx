@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
-import { NAV_ACTIVE_BUN, NAV_ACTIVE_SAUCE, NAV_ACTIVE_MAIN } from './../../services/actions/burger-ingredients';
+import { setBunActiveForMenu, setSauceActiveForMenu, setMainActiveForMenu } from './../../services/actions/burger-ingredients';
 
 import PropTypes from 'prop-types';
 
@@ -24,13 +24,13 @@ function BurgerIngredients(props) {
 
   const scrollHandler = (e) => {
     if (scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop) {
-      dispatch({ type: NAV_ACTIVE_BUN });
+      dispatch(setBunActiveForMenu());
     }
     if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop && scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop + sauceRef.current.offsetTop) {
-      dispatch({ type: NAV_ACTIVE_SAUCE });
+      dispatch(setSauceActiveForMenu());
     }
     if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop + sauceRef.current.offsetTop) {
-      dispatch({ type: NAV_ACTIVE_MAIN });
+      dispatch(setMainActiveForMenu());
     }
   };
 

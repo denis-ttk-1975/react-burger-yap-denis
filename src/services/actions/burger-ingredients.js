@@ -9,12 +9,34 @@ export const NAV_ACTIVE_BUN = 'NAV_ACTIVE_BUN';
 export const NAV_ACTIVE_SAUCE = 'NAV_ACTIVE_SAUCE';
 export const NAV_ACTIVE_MAIN = 'NAV_ACTIVE_MAIN';
 
+export function setStartForIngredientRequest() {
+  return { type: GET_INGREDIENTS };
+}
+
+export function setFailedForIngredientRequest(errorMessage) {
+  return { type: GET_INGREDIENTS_FAILED, errorMessage };
+}
+
+export function setSuccessForIngredientRequest(ingredients) {
+  return { type: GET_INGREDIENTS_SUCCESS, ingredients };
+}
+
+export function setBunActiveForMenu(activeNavElement) {
+  return { type: NAV_ACTIVE_BUN };
+}
+
+export function setSauceActiveForMenu(activeNavElement) {
+  return { type: NAV_ACTIVE_SAUCE };
+}
+
+export function setMainActiveForMenu(activeNavElement) {
+  return { type: NAV_ACTIVE_MAIN };
+}
+
 export function getIngredients() {
   return async function (dispatch) {
     try {
-      dispatch({
-        type: GET_INGREDIENTS,
-      });
+      dispatch(setStartForIngredientRequest());
 
       const res = await fetch(fetchUrlForIngredients);
       // if (!res.ok) {
@@ -23,15 +45,9 @@ export function getIngredients() {
       checkResponse(res);
       const fullResponse = await res.json();
 
-      dispatch({
-        type: GET_INGREDIENTS_SUCCESS,
-        ingredients: [...fullResponse.data],
-      });
+      dispatch(setSuccessForIngredientRequest([...fullResponse.data]));
     } catch (error) {
-      dispatch({
-        type: GET_INGREDIENTS_FAILED,
-        errorMessage: error.message,
-      });
+      dispatch(setFailedForIngredientRequest(error.message));
     }
   };
 }

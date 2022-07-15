@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrop } from 'react-dnd';
 
-import { SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER } from './../../services/actions/burger-constructor';
+import { setBunIntoOrder, setStuffingIntoOrder } from './../../services/actions/burger-constructor';
 
 import PropTypes from 'prop-types';
 
@@ -33,12 +33,12 @@ function BurgerConstructor(props) {
       if (itemData) {
         if (itemData.type === 'bun') {
           const newBun = { ...removeKey(itemData), uuid: nanoid() };
-          dispatch({ type: SET_BUN_INTO_ORDER, bun: newBun });
+          dispatch(setBunIntoOrder(newBun));
         }
         if (itemData.type === 'main' || itemData.type === 'sauce') {
           const newItem = { ...removeKey(itemData), uuid: nanoid() };
           const newStuffing = [...stuffing, newItem];
-          dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: newStuffing });
+          dispatch(setStuffingIntoOrder(newStuffing));
         }
 
         //   ? stuffing.map((item, index, arr) => {
@@ -63,7 +63,7 @@ function BurgerConstructor(props) {
     if (bunElement) {
       const bun = { ...removeKey(bunElement), uuid: nanoid() };
 
-      dispatch({ type: SET_BUN_INTO_ORDER, bun: bun });
+      dispatch(setBunIntoOrder(bun));
     }
     if (ingredientsArray) {
       let stuffingAcc = [];
@@ -73,7 +73,7 @@ function BurgerConstructor(props) {
           stuffingAcc.push(newElem);
         }
       });
-      dispatch({ type: SET_STUFFING_INTO_ORDER, stuffing: stuffingAcc });
+      dispatch(setStuffingIntoOrder(stuffingAcc));
     }
   }, []);
 

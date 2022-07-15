@@ -5,8 +5,17 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { SET_BURGER_INGREDIENTS } from './../../services/actions/burger-constructor';
 
-import { SET_INGREDIENT, RESET_INGREDIENT, OPEN_INGREDIENT_MODAL, CLOSE_INGREDIENT_MODAL } from './../../services/actions/ingredient-details';
-import { RESET_ORDER_NUMBER, OPEN_ORDER_MODAL, CLOSE_ORDER_MODAL } from './../../services/actions/order-details';
+import {
+  SET_INGREDIENT,
+  RESET_INGREDIENT,
+  OPEN_INGREDIENT_MODAL,
+  CLOSE_INGREDIENT_MODAL,
+  setIngredientItemForModal,
+  resetIngredientItemForModal,
+  setOpenForIngredientModal,
+  setCloseForIngredientModal,
+} from './../../services/actions/ingredient-details';
+import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
 
 import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
@@ -48,27 +57,27 @@ function App() {
       alert('Добавьте хотя бы один ингредиент');
     } else {
       dispatch(getOrderDetails([bunElement, ...stuffingArray]));
-      dispatch({ type: OPEN_ORDER_MODAL });
+      dispatch(setOpenForOrderModal());
     }
   };
 
   // handling for click on tab with ingredient
 
   const clickIngredientItemHandler = (data) => {
-    dispatch({ type: SET_INGREDIENT, ingredientData: data });
+    dispatch(setIngredientItemForModal(data));
 
-    dispatch({ type: OPEN_INGREDIENT_MODAL });
+    dispatch(setOpenForIngredientModal());
   };
 
   // function to close all opened modals
 
   const closeAllModals = () => {
-    dispatch({ type: CLOSE_ORDER_MODAL });
+    dispatch(setCloseForOrderModal());
 
-    dispatch({ type: RESET_ORDER_NUMBER });
-    dispatch({ type: CLOSE_INGREDIENT_MODAL });
+    dispatch(resetOrderNumberForModal());
+    dispatch(setCloseForIngredientModal());
 
-    dispatch({ type: RESET_INGREDIENT });
+    dispatch(resetIngredientItemForModal());
   };
 
   return (
