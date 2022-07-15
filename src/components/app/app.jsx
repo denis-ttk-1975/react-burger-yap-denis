@@ -3,18 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-import { SET_BURGER_INGREDIENTS } from './../../services/actions/burger-constructor';
+import { setBurgerIngredients } from './../../services/actions/burger-constructor';
 
-import {
-  SET_INGREDIENT,
-  RESET_INGREDIENT,
-  OPEN_INGREDIENT_MODAL,
-  CLOSE_INGREDIENT_MODAL,
-  setIngredientItemForModal,
-  resetIngredientItemForModal,
-  setOpenForIngredientModal,
-  setCloseForIngredientModal,
-} from './../../services/actions/ingredient-details';
+import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from './../../services/actions/ingredient-details';
 import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
 
 import AppHeader from './../app-header/app-header';
@@ -45,7 +36,7 @@ function App() {
 
   // load data for order-ingredients
   useEffect(() => {
-    dispatch({ type: SET_BURGER_INGREDIENTS, ingredients: [] });
+    dispatch(setBurgerIngredients([]));
   }, []);
 
   // handling for Make-Order-Button
