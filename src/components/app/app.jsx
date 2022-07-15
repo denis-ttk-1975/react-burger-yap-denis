@@ -8,6 +8,7 @@ import { setBurgerIngredients } from './../../services/actions/burger-constructo
 import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from './../../services/actions/ingredient-details';
 import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
 
+import Preloader from './../preloader/preloader';
 import AppHeader from './../app-header/app-header';
 import BurgerIngredients from './../burger-ingredients/burger-ingredients';
 import BurgerConstructor from './../burger-constructor/burger-constructor';
@@ -73,6 +74,7 @@ function App() {
 
   return (
     <>
+      {(isLoadingIngredients || isLoadingOrderDetails) && <Preloader />}
       <AppHeader />
       {!isLoadingIngredients && (
         <main className={styles.main}>
