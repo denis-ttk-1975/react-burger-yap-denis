@@ -17,6 +17,9 @@ import IngredientDetails from './../ingredient-details/ingredient-details';
 import OrderDetails from './../order-details/order-details';
 
 import Login from './../../pages/login/login';
+import Register from './../../pages/register/register';
+import ForgotPassword from './../../pages/forgot-password/forgot-password';
+import ResetPassword from './../../pages/reset-password/reset-password';
 
 import styles from './app.module.css';
 
@@ -98,6 +101,9 @@ function App() {
         </main>
       )}
       <Login />
+      <Register />
+      <ForgotPassword />
+      <ResetPassword />
     </>
   );
 }

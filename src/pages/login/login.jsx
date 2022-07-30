@@ -1,6 +1,6 @@
 import React from 'react'; // импорт библиотеки
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './login.module.css';
 
@@ -19,7 +19,7 @@ function Login() {
           placeholder={'E-mail'}
           onChange={(e) => setValueEmail(e.target.value)}
           value={valueEmail}
-          name={'Email'}
+          name={'email'}
           error={false}
           ref={inputEmailRef}
           errorText={'Ошибка'}
@@ -31,7 +31,7 @@ function Login() {
           placeholder={'Пароль'}
           onChange={(e) => setValuePassword(e.target.value)}
           value={valuePassword}
-          name={'Password'}
+          name={'password'}
           error={false}
           ref={inputPasswordRef}
           errorText={'Ошибка'}

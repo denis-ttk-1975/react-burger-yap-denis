@@ -1,4 +1,4 @@
-.loginBox {
+.registerBox {
   width: 480px;
   margin: auto;
   margin-top: 180px;
@@ -7,11 +7,11 @@
   align-items: center;
 }
 
-.login_input {
+.register_input {
   width: 480px;
 }
 
-.login_form {
+.register_form {
   margin: 24px auto 80px;
   display: flex;
   flex-direction: column;
@@ -19,12 +19,12 @@
   gap: 24px;
 }
 
-.login_footer {
+.register_footer {
   color: #8585ad;
   margin-bottom: 16px;
 }
 
-.login_link {
+.register_link {
   text-decoration: none;
   color: #4c4cff;
 }
