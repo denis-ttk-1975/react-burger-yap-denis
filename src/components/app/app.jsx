@@ -16,6 +16,8 @@ import Modal from './../modal/modal';
 import IngredientDetails from './../ingredient-details/ingredient-details';
 import OrderDetails from './../order-details/order-details';
 
+import Login from './../../pages/login/login';
+
 import styles from './app.module.css';
 
 import { getIngredients } from './../../services/actions/burger-ingredients';
@@ -95,6 +97,7 @@ function App() {
           )}
         </main>
       )}
+      <Login />
     </>
   );
 }
