@@ -32,11 +32,11 @@ function BurgerConstructor(props) {
 
       if (itemData) {
         if (itemData.type === 'bun') {
-          const newBun = { ...removeKey(itemData), uuid: nanoid() };
+          const newBun = { ...itemData, uuid: nanoid() };
           dispatch(setBunIntoOrder(newBun));
         }
         if (itemData.type === 'main' || itemData.type === 'sauce') {
-          const newItem = { ...removeKey(itemData), uuid: nanoid() };
+          const newItem = { ...itemData, uuid: nanoid() };
           const newStuffing = [...stuffing, newItem];
           dispatch(setStuffingIntoOrder(newStuffing));
         }
@@ -61,14 +61,14 @@ function BurgerConstructor(props) {
   useEffect(() => {
     const removeKey = ({ __v, ...rest }) => rest;
     if (bunElement) {
-      const bun = { ...removeKey(bunElement), uuid: nanoid() };
+      const bun = { ...bunElement, uuid: nanoid() };
 
       dispatch(setBunIntoOrder(bun));
     }
     if (ingredientsArray) {
       let stuffingAcc = [];
       ingredientsArray.forEach((elem) => {
-        const newElem = { ...removeKey(elem), uuid: nanoid() };
+        const newElem = { ...elem, uuid: nanoid() };
         for (let j = 0; j < elem.__v; j++) {
           stuffingAcc.push(newElem);
         }
