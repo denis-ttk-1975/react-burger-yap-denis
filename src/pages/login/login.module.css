@@ -1,0 +1,29 @@
+.loginBox {
+  width: 480px;
+  margin: auto;
+  margin-top: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login_input {
+  width: 480px;
+}
+
+.login_form {
+  margin: 24px auto 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.login_footer {
+  color: #8585ad;
+  margin-bottom: 16px;
+}
+
+.login_link {
+  text-decoration: none;
+}
