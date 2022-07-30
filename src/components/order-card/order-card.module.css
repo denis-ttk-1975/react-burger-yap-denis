@@ -1,0 +1,17 @@
+.orderCard {
+  display: flex;
+  flex-direction: column;
+  width: 844px;
+}
+.orderCard_header {
+  display: flex;
+}
+.orderCard_footer {
+  display: flex;
+}
+.orderCard_price {
+  display: flex;
+}
+.orderCard_ingredients {
+  border-radius: 50%;
+}
