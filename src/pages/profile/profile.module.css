@@ -1,0 +1,13 @@
+.profileBox {
+  display: flex;
+}
+.profile_form {
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.profile_input {
+  width: 480px;
+}
