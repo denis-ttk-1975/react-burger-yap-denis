@@ -26,9 +26,6 @@ const OrderCard = ({ number, date, title, status, data, price, onClick }) => {
               </div>
             );
           })}
-          {/* <div className={`${styles.orderCard_ingredientImageWrap}`}>
-            <img src={data.image_mobile} alt='round' className={`${styles.orderCard_ingredientImage}`} />
-          </div> */}
         </div>
         <div className={`${styles.orderCard_price}`}>
           <p className='text text_type_digits-medium'>{price}</p>

@@ -22,6 +22,7 @@ import ForgotPassword from './../../pages/forgot-password/forgot-password';
 import ResetPassword from './../../pages/reset-password/reset-password';
 import Profile from '../../pages/profile/profile';
 import OrderHistory from '../../pages/order-history/order-history';
+import Feed from '../../pages/feed/feed';
 
 import styles from './app.module.css';
 
@@ -108,6 +109,7 @@ function App() {
       <ResetPassword />
       <Profile />
       <OrderHistory />
+      <Feed />
     </>
   );
 }

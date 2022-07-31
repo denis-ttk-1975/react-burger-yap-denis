@@ -1,0 +1,8 @@
+.feedBox {
+  display: flex;
+  gap: 60px;
+
+  justify-content: center;
+  margin: auto;
+  max-width: 1280px;
+}
