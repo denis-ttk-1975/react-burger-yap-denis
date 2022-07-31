@@ -1,11 +1,14 @@
 .scrollBox {
-  height: calc(100vh - 284px);
-  min-height: 716px;
+  max-height: calc(100vh - 384px);
+  /* min-height: 464px; */
   /* max-height: 756px; */
-  overflow-y: scroll;
+  overflow-y: auto;
+  /* max-height: 756px; */
+  /* overflow-y: scroll; */
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-top: 40px;
 }
 
 .scrollBox::-webkit-scrollbar {

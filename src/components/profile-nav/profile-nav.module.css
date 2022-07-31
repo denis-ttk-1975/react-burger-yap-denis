@@ -12,11 +12,5 @@
 }
 
 .profile_nav_elem {
-  color: #8585ad;
-  text-decoration: none;
-}
-
-.profile_nav_elem_active {
-  color: #f2f2f3;
   text-decoration: none;
 }

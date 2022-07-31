@@ -7,11 +7,8 @@
   align-items: center;
 }
 
-.login_input {
-  width: 480px;
-}
-
 .login_form {
+  width: 480px;
   margin: 24px auto 80px;
   display: flex;
   flex-direction: column;
@@ -20,7 +17,6 @@
 }
 
 .login_footer {
-  color: #8585ad;
   margin-bottom: 16px;
 }
 
