@@ -1,4 +1,5 @@
-import React from 'react'; // импорт библиотеки
+import React from 'react';
+import { useHistory, Link } from 'react-router-dom'; // импорт библиотеки
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -48,10 +49,10 @@ function ResetPassword() {
         </Button>
       </form>
       <p className={`${styles.reset_password_footer} text text_type_main-default text_color_inactive`}>
-        Вспомнили пароль?{' '}
-        <a className={`${styles.reset_password_link}`} href='#'>
+        Вспомнили пароль?
+        <Link to={{ pathname: `/login` }} className={`${styles.reset_password_link}`}>
           Войти
-        </a>
+        </Link>
       </p>
     </div>
   );

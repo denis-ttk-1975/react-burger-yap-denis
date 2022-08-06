@@ -62,10 +62,10 @@ function Login() {
         </Link>
       </p>
       <p className={`${styles.login_footer} text text_type_main-default text_color_inactive`}>
-        Забыли пароль?{' '}
-        <a className={`${styles.login_link}`} href='#'>
+        Забыли пароль?
+        <Link to={{ pathname: `/forgot-password` }} className={`${styles.login_link}`}>
           Восстановить пароль
-        </a>
+        </Link>
       </p>
     </div>
   );

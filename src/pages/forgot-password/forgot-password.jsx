@@ -1,4 +1,5 @@
 import React from 'react'; // импорт библиотеки
+import { useHistory, Link } from 'react-router-dom';
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -31,10 +32,10 @@ function ForgotPassword() {
         </Button>
       </form>
       <p className={`${styles.forgot_password_footer} text text_type_main-default text_color_inactive`}>
-        Вспомнили пароль?{' '}
-        <a className={`${styles.forgot_password_link}`} href='#'>
+        Вспомнили пароль?
+        <Link to={{ pathname: `/login` }} className={`${styles.forgot_password_link}`}>
           Войти
-        </a>
+        </Link>
       </p>
     </div>
   );
