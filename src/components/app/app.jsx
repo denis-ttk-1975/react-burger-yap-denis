@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import { setBurgerIngredients } from './../../services/actions/burger-constructor';
 
@@ -81,16 +82,35 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       {(isLoadingIngredients || isLoadingOrderDetails) && <Preloader />}
       <AppHeader />
       {!isLoadingIngredients && (
         <main className={styles.main}>
-          <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
+          <Switch>
+            <Route path='/' exact={true}>
+              <DndProvider backend={HTML5Backend}>
+                <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
 
-            <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(bun, stuffing)} />
-          </DndProvider>
+                <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(bun, stuffing)} />
+              </DndProvider>
+            </Route>
+            <Route path='/login' exact={true}>
+              <Login />
+            </Route>
+            <Route path='/register' exact={true}>
+              <Register />
+            </Route>
+            <Route path='/forgot-password' exact={true}>
+              <ForgotPassword />
+            </Route>
+            <Route path='/reset-password' exact={true}>
+              <ResetPassword />
+            </Route>
+            <Route path='/profile' exact={true}>
+              <Profile />
+            </Route>
+          </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
             <Modal title='' closeAllModals={closeAllModals}>
               <OrderDetails dataModal={orderNumber} />
@@ -103,14 +123,10 @@ function App() {
           )}
         </main>
       )}
-      <Login />
-      <Register />
-      <ForgotPassword />
-      <ResetPassword />
-      <Profile />
+
       <OrderHistory />
       <Feed />
-    </>
+    </Router>
   );
 }
 
