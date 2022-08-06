@@ -52,9 +52,7 @@ export function getOrderDetails(arrayIngredients) {
           ingredients: bodyIngredients,
         }),
       });
-      // if (!res.ok) {
-      //   throw new Error('Сервер не дал ответа');
-      // }
+
       checkResponse(res);
       fullResponse = await res.json();
 
