@@ -1,4 +1,5 @@
-import React from 'react'; // импорт библиотеки
+import React, { useCallback } from 'react'; // импорт библиотеки
+import { useHistory, Link } from 'react-router-dom';
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -12,6 +13,13 @@ function Login() {
   const [valuePassword, setValuePassword] = React.useState('');
   const inputEmailRef = React.useRef(null);
   const inputPasswordRef = React.useRef(null);
+
+  const history = useHistory();
+
+  const login = useCallback(() => {
+    history.replace({ pathname: '/login' });
+  }, [history]);
+
   return (
     <div className={`${styles.loginBox}`}>
       <p className={`${styles.login_title} text text_type_main-medium`}>Вход</p>
@@ -48,10 +56,10 @@ function Login() {
         </Button>
       </form>
       <p className={`${styles.login_footer} text text_type_main-default text_color_inactive`}>
-        Вы — новый пользователь?{' '}
-        <a className={`${styles.login_link}`} href='#'>
+        Вы — новый пользователь?
+        <Link to={{ pathname: `/register` }} className={`${styles.login_link}`}>
           Зарегистрироваться
-        </a>
+        </Link>
       </p>
       <p className={`${styles.login_footer} text text_type_main-default text_color_inactive`}>
         Забыли пароль?{' '}
