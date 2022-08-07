@@ -4,9 +4,6 @@ import { useHistory, Link } from 'react-router-dom';
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './login.module.css';
-import './../pages.css';
-// import './index.css';
-// import './login.css';
 
 function Login() {
   const [valueEmail, setValueEmail] = React.useState('');

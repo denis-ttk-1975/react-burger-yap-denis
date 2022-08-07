@@ -4,7 +4,6 @@ import { useHistory, Link } from 'react-router-dom'; // импорт библи�
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './reset-password.module.css';
-import './../pages.css';
 
 function ResetPassword() {
   const [valuePassword, setValuePassword] = React.useState('');

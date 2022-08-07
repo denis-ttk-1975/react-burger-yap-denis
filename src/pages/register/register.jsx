@@ -4,7 +4,6 @@ import { useHistory, Link } from 'react-router-dom';
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './register.module.css';
-import './../pages.css';
 
 function Register() {
   const [valueName, setValueName] = React.useState('');
