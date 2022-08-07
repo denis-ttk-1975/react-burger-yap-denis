@@ -61,7 +61,14 @@ function Register() {
             errorText={'Ошибка'}
           />
         </div>
-        <Button type='primary' size='medium' onClick={() => dispatch(registerNewUser())}>
+        <Button
+          type='primary'
+          size='medium'
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(registerNewUser());
+          }}
+        >
           Зарегистрироваться
         </Button>
       </form>

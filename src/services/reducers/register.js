@@ -4,6 +4,8 @@ const initialState = {
   isLoading: false,
   errorMessage: '',
   userInfo: {},
+  accessToken: null,
+  refreshToken: null,
 };
 
 export const userRegistrationReducer = (state = initialState, action) => {
@@ -18,7 +20,9 @@ export const userRegistrationReducer = (state = initialState, action) => {
     case GET_REGISTRATION_SUCCESS: {
       return {
         ...state,
-        userInfo: action.user,
+        userInfo: action.payload.user,
+        accessToken: action.payload.accessToken,
+        refreshToken: action.payload.refreshToken,
         isLoading: false,
       };
     }

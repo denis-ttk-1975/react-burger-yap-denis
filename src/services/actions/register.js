@@ -13,8 +13,8 @@ export function setFailedForRegistrationRequest(errorMessage) {
   return { type: GET_REGISTRATION_FAILED, errorMessage };
 }
 
-export function setSuccessForRegistrationRequest(userData) {
-  return { type: GET_REGISTRATION_SUCCESS, user: userData };
+export function setSuccessForRegistrationRequest(userData, accessToken, refreshToken) {
+  return { type: GET_REGISTRATION_SUCCESS, payload: { user: userData, accessToken: accessToken, refreshToken: refreshToken } };
 }
 
 export function registerNewUser() {
@@ -28,15 +28,15 @@ export function registerNewUser() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: 'ddduuu1975@yandex.ru',
-          password: 'password',
-          name: 'DenisU',
+          email: 'denisu@mozej1234567890012.com',
+          password: 'password13',
+          name: 'DenisUMazai123456789',
         }),
       });
       checkResponse(res);
       const fullResponse = await res.json();
 
-      dispatch(setSuccessForRegistrationRequest([...fullResponse.data]));
+      dispatch(setSuccessForRegistrationRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
     } catch (error) {
       dispatch(setFailedForRegistrationRequest(error.message));
     }
