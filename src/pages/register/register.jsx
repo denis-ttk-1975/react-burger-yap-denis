@@ -1,9 +1,12 @@
 import React from 'react'; // импорт библиотеки
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './register.module.css';
+
+import { registerNewUser } from './../../services/actions/register';
 
 function Register() {
   const [valueName, setValueName] = React.useState('');
@@ -12,6 +15,9 @@ function Register() {
   const inputNameRef = React.useRef(null);
   const inputEmailRef = React.useRef(null);
   const inputPasswordRef = React.useRef(null);
+
+  const dispatch = useDispatch();
+
   return (
     <div className={`${styles.registerBox}`}>
       <p className={`${styles.register_title} text text_type_main-medium`}>Регистрация</p>
@@ -55,7 +61,7 @@ function Register() {
             errorText={'Ошибка'}
           />
         </div>
-        <Button type='primary' size='medium'>
+        <Button type='primary' size='medium' onClick={() => dispatch(registerNewUser())}>
           Зарегистрироваться
         </Button>
       </form>
