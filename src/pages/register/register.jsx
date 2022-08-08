@@ -2,7 +2,7 @@ import React from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './register.module.css';
 
@@ -31,12 +31,13 @@ function Register() {
             value={valueName}
             name={'name'}
             error={false}
-            ref={inputNameRef}
+            // ref={inputNameRef}
             errorText={'Ошибка'}
           />
         </div>
         <div className={'input_wrapper'}>
-          <Input
+          <EmailInput className={`${styles.register_input}`} onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
+          {/* <Input
             className={`${styles.register_input}`}
             type={'text'}
             placeholder={'E-mail'}
@@ -46,7 +47,7 @@ function Register() {
             error={false}
             ref={inputEmailRef}
             errorText={'Ошибка'}
-          />
+          /> */}
         </div>
         <div className={'input_wrapper'}>
           <PasswordInput
@@ -57,7 +58,7 @@ function Register() {
             value={valuePassword}
             name={'password'}
             error={false}
-            ref={inputPasswordRef}
+            // ref={inputPasswordRef}
             errorText={'Ошибка'}
           />
         </div>

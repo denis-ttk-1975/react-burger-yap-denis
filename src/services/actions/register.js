@@ -21,16 +21,41 @@ export function registerNewUser(name, email, password) {
   return async function (dispatch) {
     try {
       dispatch(setStartForRegistrationRequest());
-
+      // console.log(
+      //   JSON.stringify({
+      //     email: `${email}`,
+      //     password: `${password}`,
+      //     name: `${name}`,
+      //   })
+      // );
+      // console.log(
+      //   JSON.stringify({
+      //     email: email,
+      //     password: password,
+      //     name: name,
+      //   })
+      // );
+      // console.log(
+      //   JSON.stringify({
+      //     email: `${email}`,
+      //     password: `${password}`,
+      //     name: `${name}`,
+      //   }) ===
+      //     JSON.stringify({
+      //       email: email,
+      //       password: password,
+      //       name: name,
+      //     })
+      // );
       const res = await fetch(postUrlUserRegister, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: { email },
-          password: { password },
-          name: { name },
+          email: `${email}`,
+          password: `${password}`,
+          name: `${name}`,
         }),
       });
       checkResponse(res);
