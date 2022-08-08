@@ -6,7 +6,7 @@ export const fetchUrlForIngredients = `${baseUrl}ingredients`;
 
 export const postUrlForOrder = `${baseUrl}orders`;
 
-export const postUrlForgetPassword = `${baseUrl}password-reset`;
+export const postUrlForgotPassword = `${baseUrl}password-reset`;
 
 export const postUrlResetPassword = `${baseUrl}password-reset/reset`;
 

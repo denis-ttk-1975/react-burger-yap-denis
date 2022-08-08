@@ -72,11 +72,11 @@ function Register() {
             // const email = inputEmailRef.current.value;
             // const password = inputPasswordRef.current.value;
 
-            const name = valueName;
-            const email = valueEmail;
-            const password = valuePassword;
+            // const name = valueName;
+            // const email = valueEmail;
+            // const password = valuePassword;
 
-            dispatch(registerNewUser(name, email, password));
+            dispatch(registerNewUser(valueName, valueEmail, valuePassword));
           }}
         >
           Зарегистрироваться
