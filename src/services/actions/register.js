@@ -17,7 +17,7 @@ export function setSuccessForRegistrationRequest(userData, accessToken, refreshT
   return { type: GET_REGISTRATION_SUCCESS, payload: { user: userData, accessToken: accessToken, refreshToken: refreshToken } };
 }
 
-export function registerNewUser() {
+export function registerNewUser(name, email, password) {
   return async function (dispatch) {
     try {
       dispatch(setStartForRegistrationRequest());
@@ -28,9 +28,9 @@ export function registerNewUser() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          email: 'denisu@mozej1234567890012.com',
-          password: 'password13',
-          name: 'DenisUMazai123456789',
+          email: { email },
+          password: { password },
+          name: { name },
         }),
       });
       checkResponse(res);
