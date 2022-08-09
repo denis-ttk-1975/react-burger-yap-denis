@@ -49,7 +49,7 @@ function ForgotPassword() {
             // const password = valuePassword;
 
             dispatch(sendForgotPasswordRequest(valueEmail));
-            history.replace({ pathname: '/reset-password' });
+            history.push({ pathname: '/reset-password' });
           }}
         >
           Восстановить

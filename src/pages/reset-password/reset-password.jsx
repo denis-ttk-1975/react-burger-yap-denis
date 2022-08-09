@@ -1,9 +1,12 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom'; // импорт библиотеки
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './reset-password.module.css';
+
+import { resetUserPassword } from './../../services/actions/reset-password';
 
 function ResetPassword() {
   const [valuePassword, setValuePassword] = React.useState('');
@@ -11,6 +14,10 @@ function ResetPassword() {
 
   const inputPasswordRef = React.useRef(null);
   const inputCodeRef = React.useRef(null);
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
 
   return (
     <div className={`${styles.reset_passwordBox}`}>
@@ -43,7 +50,15 @@ function ResetPassword() {
             errorText={'Ошибка'}
           />
         </div>
-        <Button type='primary' size='medium'>
+        <Button
+          type='primary'
+          size='medium'
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch(resetUserPassword(valuePassword, valueCode));
+            history.push({ pathname: '/' });
+          }}
+        >
           Сохранить
         </Button>
       </form>

@@ -6,6 +6,7 @@ import { ingredientForModalReducer } from './ingredient-details';
 import { burgerConstructorReducer } from './burger-constructor';
 import { userRegistrationReducer } from './register';
 import { forgotPasswordReducer } from './forgot-password';
+import { resetPasswordReducer } from './reset-password';
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -14,6 +15,7 @@ export const rootReducer = combineReducers({
   burgerConstructor: burgerConstructorReducer,
   userRegistration: userRegistrationReducer,
   forgotPassword: forgotPasswordReducer,
+  resetPassword: resetPasswordReducer,
 });
 
 // export const rootReducer = (state, action) => {
