@@ -15,6 +15,8 @@ function ForgotPassword() {
 
   const dispatch = useDispatch();
 
+  const history = useHistory();
+
   return (
     <div className={`${styles.forgot_passwordBox}`}>
       <p className={`${styles.forgot_password_title} text text_type_main-medium`}>Восстановление пароля</p>
@@ -47,6 +49,7 @@ function ForgotPassword() {
             // const password = valuePassword;
 
             dispatch(sendForgotPasswordRequest(valueEmail));
+            history.replace({ pathname: '/reset-password' });
           }}
         >
           Восстановить

@@ -33,7 +33,6 @@ export function sendForgotPasswordRequest(email) {
       });
       checkResponse(res);
       const fullResponse = await res.json();
-      alert(fullResponse.message);
 
       dispatch(setSuccessForForgotPasswordRequest(fullResponse.message));
     } catch (error) {
