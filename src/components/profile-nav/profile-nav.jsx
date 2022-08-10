@@ -11,6 +11,7 @@ function ProfileNav() {
       <div className={`${styles.profile_nav_elem_wrap}`}>
         <NavLink
           to={{ pathname: `/profile` }}
+          exact
           activeClassName={`${styles.profile_nav_elem} text text_type_main-medium`}
           className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`}
         >
@@ -21,6 +22,7 @@ function ProfileNav() {
       <div className={`${styles.profile_nav_elem_wrap}`}>
         <NavLink
           to={{ pathname: `/profile/orders` }}
+          exact
           activeClassName={`${styles.profile_nav_elem} text text_type_main-medium`}
           className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`}
         >
@@ -31,6 +33,7 @@ function ProfileNav() {
       <div className={`${styles.profile_nav_elem_wrap}`}>
         <NavLink
           to={{ pathname: `/` }}
+          exact
           activeClassName={`${styles.profile_nav_elem} text text_type_main-medium`}
           className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`}
         >
