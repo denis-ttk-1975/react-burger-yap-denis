@@ -32,7 +32,7 @@ function ResetPassword() {
             value={valuePassword}
             name={'password'}
             error={false}
-            ref={inputPasswordRef}
+            // ref={inputPasswordRef}
             errorText={'Ошибка'}
           />
         </div>
@@ -46,7 +46,7 @@ function ResetPassword() {
             value={valueCode}
             name={'email'}
             error={false}
-            ref={inputCodeRef}
+            // ref={inputCodeRef}
             errorText={'Ошибка'}
           />
         </div>
