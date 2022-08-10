@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Link, NavLink, Route, Switch } from 'react-router-dom';
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 

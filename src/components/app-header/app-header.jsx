@@ -21,7 +21,7 @@ function AppHeader() {
             <p className={location.pathname === '/' ? classNameActive : classNameInactive}>Конструктор</p>
           </Link>
 
-          <Link to={{ pathname: `/feed` }} href='#' className={`pt-4 pb-4 pl-5 pr-5 ${styles.navItem}`}>
+          <Link to={{ pathname: `/feed` }} className={`pt-4 pb-4 pl-5 pr-5 ${styles.navItem}`}>
             <ListIcon type={location.pathname === '/feed' ? typePrimary : typeSecondary} />
             <p className={location.pathname === '/feed' ? classNameActive : classNameInactive}>Лента заказов</p>
           </Link>
@@ -31,7 +31,7 @@ function AppHeader() {
         </div>
 
         <div className={`pt-4 pb-4 pl-5 pr-5 ${styles.rightIconBox}`}>
-          <Link to={{ pathname: `/profile` }} href='#' className={styles.navItem}>
+          <Link to={{ pathname: `/profile` }} className={styles.navItem}>
             <ProfileIcon type={location.pathname === '/profile' ? typePrimary : typeSecondary} />
             <p className={location.pathname === '/profile' ? classNameActive : classNameInactive}>Личный кабинет</p>
           </Link>
