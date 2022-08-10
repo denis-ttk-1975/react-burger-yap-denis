@@ -110,6 +110,9 @@ function App() {
             <Route path='/profile' exact={true}>
               <Profile />
             </Route>
+            <Route path='/feed' exact={true}>
+              <Feed />
+            </Route>
           </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
             <Modal title='' closeAllModals={closeAllModals}>
@@ -124,8 +127,8 @@ function App() {
         </main>
       )}
 
-      <OrderHistory />
-      <Feed />
+      {/* <OrderHistory /> */}
+      {/* <Feed /> */}
     </Router>
   );
 }
