@@ -32,8 +32,8 @@ function AppHeader() {
 
         <div className={`pt-4 pb-4 pl-5 pr-5 ${styles.rightIconBox}`}>
           <Link to={{ pathname: `/profile` }} className={styles.navItem}>
-            <ProfileIcon type={location.pathname === '/profile' ? typePrimary : typeSecondary} />
-            <p className={location.pathname === '/profile' ? classNameActive : classNameInactive}>Личный кабинет</p>
+            <ProfileIcon type={location.pathname.substr(0, 8) === '/profile' ? typePrimary : typeSecondary} />
+            <p className={location.pathname.substr(0, 8) === '/profile' ? classNameActive : classNameInactive}>Личный кабинет</p>
           </Link>
         </div>
       </div>

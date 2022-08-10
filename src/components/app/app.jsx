@@ -107,7 +107,7 @@ function App() {
             <Route path='/reset-password' exact={true}>
               <ResetPassword />
             </Route>
-            <Route path='/profile' exact={true}>
+            <Route path={['/profile', '/profile/orders']} exact={true}>
               <Profile />
             </Route>
             <Route path='/feed' exact={true}>
