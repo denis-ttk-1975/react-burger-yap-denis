@@ -9,12 +9,7 @@ function ProfileNav() {
   return (
     <nav className={`${styles.profile_navBox}`}>
       <div className={`${styles.profile_nav_elem_wrap}`}>
-        <NavLink
-          to={{ pathname: `/profile` }}
-          exact
-          activeClassName={`${styles.profile_nav_elem} text text_type_main-medium`}
-          className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`}
-        >
+        <NavLink to={{ pathname: `/profile` }} exact className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`} activeClassName={`${styles.profile_nav_elem_active} `}>
           Профиль
         </NavLink>
       </div>
@@ -23,7 +18,7 @@ function ProfileNav() {
         <NavLink
           to={{ pathname: `/profile/orders` }}
           exact
-          activeClassName={`${styles.profile_nav_elem} text text_type_main-medium`}
+          activeClassName={`${styles.profile_nav_elem_active} `}
           className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`}
         >
           История заказов
@@ -31,12 +26,7 @@ function ProfileNav() {
       </div>
 
       <div className={`${styles.profile_nav_elem_wrap}`}>
-        <NavLink
-          to={{ pathname: `/` }}
-          exact
-          activeClassName={`${styles.profile_nav_elem} text text_type_main-medium`}
-          className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`}
-        >
+        <NavLink to={{ pathname: `/` }} exact className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`} activeClassName={`${styles.profile_nav_elem_active} `}>
           Выход
         </NavLink>
       </div>
