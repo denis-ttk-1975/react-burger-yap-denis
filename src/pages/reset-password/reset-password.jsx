@@ -31,9 +31,6 @@ function ResetPassword() {
             onChange={(e) => setValuePassword(e.target.value)}
             value={valuePassword}
             name={'password'}
-            error={false}
-            // ref={inputPasswordRef}
-            errorText={'Ошибка'}
           />
         </div>
 

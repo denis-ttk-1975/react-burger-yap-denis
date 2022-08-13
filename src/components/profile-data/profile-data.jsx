@@ -1,13 +1,14 @@
 import React from 'react'; // импорт библиотеки
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, PasswordInput, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, EmailInput, PasswordInput, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile-data.module.css';
 
 function ProfileData() {
-  const [valueName, setValueName] = React.useState('Denis');
-  const [valueEmail, setValueEmail] = React.useState('MyE-Mail');
-  const [valuePassword, setValuePassword] = React.useState('MyPass');
+  const [valueName, setValueName] = React.useState(localStorage.getItem('user_name'));
+  const [valueEmail, setValueEmail] = React.useState(localStorage.getItem('user_email'));
+  const [valuePassword, setValuePassword] = React.useState(localStorage.getItem('user_password'));
+  const [activateButtons, setActivateButtons] = React.useState(false);
   const inputNameRef = React.useRef(null);
   const inputEmailRef = React.useRef(null);
   const inputPasswordRef = React.useRef(null);
@@ -18,7 +19,10 @@ function ProfileData() {
           className={`${styles.profile_data_input}`}
           type={'text'}
           placeholder={'Имя'}
-          onChange={(e) => setValueName(e.target.value)}
+          onChange={(e) => {
+            setValueName(e.target.value);
+            setActivateButtons(true);
+          }}
           value={valueName}
           name={'name'}
           error={false}
@@ -28,31 +32,25 @@ function ProfileData() {
         />
       </div>
       <div className={'input_wrapper'}>
-        <Input
+        <EmailInput
           className={`${styles.profile_data_input}`}
-          type={'text'}
-          placeholder={'E-mail'}
-          onChange={(e) => setValueEmail(e.target.value)}
+          onChange={(e) => {
+            setValueEmail(e.target.value);
+            setActivateButtons(true);
+          }}
           value={valueEmail}
           name={'email'}
-          error={false}
-          ref={inputEmailRef}
-          errorText={'Ошибка'}
-          icon={'EditIcon'}
         />
       </div>
       <div className={'input_wrapper'}>
-        <Input
+        <PasswordInput
           className={`${styles.profile_data_input}`}
-          type={'password'}
-          placeholder={'Пароль'}
-          onChange={(e) => setValuePassword(e.target.value)}
+          onChange={(e) => {
+            setValuePassword(e.target.value);
+            setActivateButtons(true);
+          }}
           value={valuePassword}
           name={'password'}
-          error={false}
-          ref={inputPasswordRef}
-          errorText={'Ошибка'}
-          icon={'EditIcon'}
         />
       </div>
     </form>

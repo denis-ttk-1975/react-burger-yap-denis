@@ -2,9 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
-import { setBurgerIngredients } from './../../services/actions/burger-constructor';
+import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from './../../services/actions/ingredient-details';
 import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
@@ -21,12 +19,16 @@ import Login from './../../pages/login/login';
 import Register from './../../pages/register/register';
 import ForgotPassword from './../../pages/forgot-password/forgot-password';
 import ResetPassword from './../../pages/reset-password/reset-password';
-import Profile from '../../pages/profile/profile';
-import OrderHistory from '../../pages/order-history/order-history';
-import Feed from '../../pages/feed/feed';
+import Profile from './../../pages/profile/profile';
+import OrderHistory from './../../pages/order-history/order-history';
+import Feed from './../../pages/feed/feed';
+import { ProtectedRoute } from './../protected-route/protected-route';
+
+import { getCookie } from './../../utils/getCookie';
 
 import styles from './app.module.css';
 
+import { setBurgerIngredients } from './../../services/actions/burger-constructor';
 import { getIngredients } from './../../services/actions/burger-ingredients';
 import { getOrderDetails } from './../../services/actions/order-details';
 
@@ -37,6 +39,7 @@ function App() {
   const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // getting data about ingredients from server
 
@@ -80,6 +83,7 @@ function App() {
 
     dispatch(resetIngredientItemForModal());
   };
+  console.log('history', history);
 
   return (
     <Router>
@@ -95,21 +99,33 @@ function App() {
                 <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(bun, stuffing)} />
               </DndProvider>
             </Route>
-            <Route path='/login' exact={true}>
+            <ProtectedRoute path='/login' exact={true} condition={!getCookie('refreshToken')} redirection={'/profile'}>
+              {/* <Route path='/login' exact={true}> */}
               <Login />
-            </Route>
-            <Route path='/register' exact={true}>
+              {/* </Route> */}
+            </ProtectedRoute>
+            <ProtectedRoute path='/register' exact={true} condition={!getCookie('refreshToken')} redirection={'/profile'}>
+              {/* <Route path='/register' exact={true}> */}
               <Register />
-            </Route>
-            <Route path='/forgot-password' exact={true}>
+              {/* </Route> */}
+            </ProtectedRoute>
+            <ProtectedRoute path='/forgot-password' exact={true} condition={!getCookie('refreshToken')} redirection={'/profile'}>
+              {/* <Route path='/forgot-password' exact={true}> */}
               <ForgotPassword />
-            </Route>
-            <Route path='/reset-password' exact={true}>
+              {/* </Route> */}
+            </ProtectedRoute>
+
+            <ProtectedRoute path='/reset-password' exact={true} condition={!getCookie('refreshToken') && history} redirection={'/profile'}>
+              {/* <Route path='/reset-password' exact={true}> */}
               <ResetPassword />
-            </Route>
-            <Route path={['/profile', '/profile/orders']} exact={true}>
+              {/* </Route> */}
+            </ProtectedRoute>
+
+            {/* <Route path={['/profile', '/profile/orders']} exact={true}> */}
+            <ProtectedRoute path={['/profile', '/profile/orders']} exact={true} condition={getCookie('refreshToken')} redirection={'/login'}>
               <Profile />
-            </Route>
+            </ProtectedRoute>
+            {/* </Route> */}
             <Route path='/feed' exact={true}>
               <Feed />
             </Route>

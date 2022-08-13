@@ -17,6 +17,11 @@ function ForgotPassword() {
 
   const history = useHistory();
 
+  const location = {
+    pathname: '/reset-password',
+    state: { fromForgotPassword: true },
+  };
+
   return (
     <div className={`${styles.forgot_passwordBox}`}>
       <p className={`${styles.forgot_password_title} text text_type_main-medium`}>Восстановление пароля</p>
@@ -49,7 +54,7 @@ function ForgotPassword() {
             // const password = valuePassword;
 
             dispatch(sendForgotPasswordRequest(valueEmail));
-            history.push({ pathname: '/reset-password' });
+            history.push(location);
           }}
         >
           Восстановить
