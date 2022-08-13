@@ -16,7 +16,7 @@ export const postUrlUserRegister = `${baseUrl}auth/register`;
 
 export const postUrlUserLogout = `${baseUrl}auth/logout`;
 
-export const postUrlUserTokenRefresh = `${baseUrl}auth/token`;
+export const postUrlUserTokenUpdate = `${baseUrl}auth/token`;
 
 export const urlUserInfo = `${baseUrl}auth/user`;
 

@@ -8,6 +8,8 @@ import { userRegistrationReducer } from './register';
 import { forgotPasswordReducer } from './forgot-password';
 import { resetPasswordReducer } from './reset-password';
 import { userLoginReducer } from './login';
+import { updateTokenReducer } from './update-token';
+import { userLogoutReducer } from './logout';
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -18,6 +20,8 @@ export const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   userLogin: userLoginReducer,
+  updateToken: updateTokenReducer,
+  userLogout: userLogoutReducer,
 });
 
 // export const rootReducer = (state, action) => {

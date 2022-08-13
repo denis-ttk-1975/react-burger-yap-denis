@@ -1,6 +1,9 @@
 import { postUrlUserLogin } from './../../utils/url';
 import { checkResponse } from './../../utils/checkResponse';
 
+import { setUserData } from './../../utils/setUserData';
+import { setCookie } from './../../utils/setCookie';
+
 export const SEND_LOGIN = 'SEND_LOGIN';
 export const GET_LOGIN_FAILED = 'GET_LOGIN_FAILED';
 export const GET_LOGIN_SUCCESS = 'GET_LOGIN_SUCCESS';
@@ -35,7 +38,10 @@ export function loginUser(email, password) {
       checkResponse(res);
       const fullResponse = await res.json();
 
-      dispatch(setSuccessForLoginRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
+      await dispatch(setSuccessForLoginRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
+      setUserData(fullResponse.user.name, fullResponse.user.email, password);
+      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
+      setCookie('refreshToken', fullResponse.refreshToken);
     } catch (error) {
       dispatch(setFailedForLoginRequest(error.message));
     }

@@ -1,6 +1,9 @@
 import { postUrlUserRegister } from './../../utils/url';
 import { checkResponse } from './../../utils/checkResponse';
 
+import { setUserData } from './../../utils/setUserData';
+import { setCookie } from './../../utils/setCookie';
+
 export const SEND_REGISTRATION = 'SEND_REGISTRATION';
 export const GET_REGISTRATION_FAILED = 'GET_REGISTRATION_FAILED';
 export const GET_REGISTRATION_SUCCESS = 'GET_REGISTRATION_SUCCESS';
@@ -21,32 +24,7 @@ export function registerNewUser(name, email, password) {
   return async function (dispatch) {
     try {
       dispatch(setStartForRegistrationRequest());
-      // console.log(
-      //   JSON.stringify({
-      //     email: `${email}`,
-      //     password: `${password}`,
-      //     name: `${name}`,
-      //   })
-      // );
-      // console.log(
-      //   JSON.stringify({
-      //     email: email,
-      //     password: password,
-      //     name: name,
-      //   })
-      // );
-      // console.log(
-      //   JSON.stringify({
-      //     email: `${email}`,
-      //     password: `${password}`,
-      //     name: `${name}`,
-      //   }) ===
-      //     JSON.stringify({
-      //       email: email,
-      //       password: password,
-      //       name: name,
-      //     })
-      // );
+
       const res = await fetch(postUrlUserRegister, {
         method: 'POST',
         headers: {
@@ -61,7 +39,10 @@ export function registerNewUser(name, email, password) {
       checkResponse(res);
       const fullResponse = await res.json();
 
-      dispatch(setSuccessForRegistrationRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
+      await dispatch(setSuccessForRegistrationRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
+      setUserData(fullResponse.user.name, fullResponse.user.email, password);
+      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
+      setCookie('refreshToken', fullResponse.refreshToken);
     } catch (error) {
       dispatch(setFailedForRegistrationRequest(error.message));
     }

@@ -17,6 +17,7 @@ function Register() {
   const inputPasswordRef = React.useRef(null);
 
   const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.userRegistration);
 
   return (
     <div className={`${styles.registerBox}`}>

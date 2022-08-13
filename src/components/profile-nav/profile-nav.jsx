@@ -1,11 +1,18 @@
 import React from 'react'; // импорт библиотеки
-import { BrowserRouter as Router, Link, NavLink, Route, Switch } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Link, NavLink, Route, Switch, useHistory } from 'react-router-dom';
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile-nav.module.css';
 
+import { logoutUser } from './../../services/actions/logout';
+import { getCookie } from './../../utils/getCookie';
+
 function ProfileNav() {
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   return (
     <nav className={`${styles.profile_navBox}`}>
       <div className={`${styles.profile_nav_elem_wrap}`}>
@@ -26,7 +33,19 @@ function ProfileNav() {
       </div>
 
       <div className={`${styles.profile_nav_elem_wrap}`}>
-        <NavLink to={{ pathname: `/` }} exact className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`} activeClassName={`${styles.profile_nav_elem_active} `}>
+        <NavLink
+          onClick={(e) => {
+            e.preventDefault();
+
+            dispatch(logoutUser(getCookie('refreshToken')));
+
+            history.push({ pathname: '/' });
+          }}
+          to={{ pathname: `/` }}
+          exact
+          className={`${styles.profile_nav_elem} text text_type_main-medium text_color_inactive`}
+          activeClassName={`${styles.profile_nav_elem_active} `}
+        >
           Выход
         </NavLink>
       </div>
