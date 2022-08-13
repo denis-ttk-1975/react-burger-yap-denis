@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation } from 'react-router-dom';
 
 import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from './../../services/actions/ingredient-details';
 import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
@@ -40,6 +40,7 @@ function App() {
 
   const dispatch = useDispatch();
   const history = useHistory();
+  // const location = useLocation();
 
   // getting data about ingredients from server
 
@@ -59,9 +60,13 @@ function App() {
       alert('Добавьте булку');
     } else if (!stuffingArray.length) {
       alert('Добавьте хотя бы один ингредиент');
+    } else if (!getCookie('refreshToken')) {
+      dispatch(setBurgerIngredients([bunElement, ...stuffingArray]));
+      history.push({ pathname: '/login' });
     } else {
       dispatch(getOrderDetails([bunElement, ...stuffingArray]));
       dispatch(setOpenForOrderModal());
+      dispatch(setBurgerIngredients([]));
     }
   };
 
@@ -86,7 +91,8 @@ function App() {
   console.log('history', history);
 
   return (
-    <Router>
+    // <Router>
+    <>
       {(isLoadingIngredients || isLoadingOrderDetails) && <Preloader />}
       <AppHeader />
       {!isLoadingIngredients && (
@@ -145,7 +151,8 @@ function App() {
 
       {/* <OrderHistory /> */}
       {/* <Feed /> */}
-    </Router>
+      {/* </Router> */}
+    </>
   );
 }
 
