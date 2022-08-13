@@ -1,16 +1,17 @@
 import React, { useCallback } from 'react'; // импорт библиотеки
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
-import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Typography, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './login.module.css';
+
+import { loginUser } from './../../services/actions/login';
 
 function Login() {
   const [valueEmail, setValueEmail] = React.useState('');
   const [valuePassword, setValuePassword] = React.useState('');
-  const inputEmailRef = React.useRef(null);
-  const inputPasswordRef = React.useRef(null);
-
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const login = useCallback(() => {
@@ -22,33 +23,21 @@ function Login() {
       <p className={`${styles.login_title} text text_type_main-medium`}>Вход</p>
       <form className={`${styles.login_form}`} style={{ width: 480 }}>
         <div className={'input_wrapper'}>
-          <Input
-            className={`${styles.login_input}`}
-            type={'text'}
-            placeholder={'E-mail'}
-            onChange={(e) => setValueEmail(e.target.value)}
-            value={valueEmail}
-            name={'email'}
-            error={false}
-            ref={inputEmailRef}
-            errorText={'Ошибка'}
-          />
+          <EmailInput className={`${styles.login_input}`} onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput
-            className={`${styles.login_input}`}
-            type={'text'}
-            placeholder={'Пароль'}
-            onChange={(e) => setValuePassword(e.target.value)}
-            value={valuePassword}
-            name={'password'}
-            error={false}
-            ref={inputPasswordRef}
-            errorText={'Ошибка'}
-          />
+          <PasswordInput className={`${styles.login_input}`} onChange={(e) => setValuePassword(e.target.value)} value={valuePassword} name={'password'} />
         </div>
 
-        <Button type='primary' size='medium'>
+        <Button
+          type='primary'
+          size='medium'
+          onClick={(e) => {
+            e.preventDefault();
+
+            dispatch(loginUser(valueEmail, valuePassword));
+          }}
+        >
           Войти
         </Button>
       </form>

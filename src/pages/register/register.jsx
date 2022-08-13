@@ -37,44 +37,15 @@ function Register() {
         </div>
         <div className={'input_wrapper'}>
           <EmailInput className={`${styles.register_input}`} onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
-          {/* <Input
-            className={`${styles.register_input}`}
-            type={'text'}
-            placeholder={'E-mail'}
-            onChange={(e) => setValueEmail(e.target.value)}
-            value={valueEmail}
-            name={'email'}
-            error={false}
-            ref={inputEmailRef}
-            errorText={'Ошибка'}
-          /> */}
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput
-            className={`${styles.register_input}`}
-            type={'text'}
-            placeholder={'Пароль'}
-            onChange={(e) => setValuePassword(e.target.value)}
-            value={valuePassword}
-            name={'password'}
-            error={false}
-            // ref={inputPasswordRef}
-            errorText={'Ошибка'}
-          />
+          <PasswordInput className={`${styles.register_input}`} onChange={(e) => setValuePassword(e.target.value)} value={valuePassword} name={'password'} />
         </div>
         <Button
           type='primary'
           size='medium'
           onClick={(e) => {
             e.preventDefault();
-
-            // const name = inputNameRef.current.value;
-            // const email = inputEmailRef.current.value;
-            // const password = inputPasswordRef.current.value;
-
-            // const name = valueName;
-            // const email = valueEmail;
-            // const password = valuePassword;
 
             dispatch(registerNewUser(valueName, valueEmail, valuePassword));
           }}
