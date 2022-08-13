@@ -16,3 +16,7 @@
 .profile_nav_elem {
   text-decoration: none;
 }
+
+.profile_nav_elem_active {
+  color: #f2f2f3;
+}
