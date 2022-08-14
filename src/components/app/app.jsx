@@ -74,7 +74,6 @@ function App() {
 
   const clickIngredientItemHandler = (data) => {
     dispatch(setIngredientItemForModal(data));
-
     dispatch(setOpenForIngredientModal());
   };
 
@@ -82,16 +81,13 @@ function App() {
 
   const closeAllModals = () => {
     dispatch(setCloseForOrderModal());
-
     dispatch(resetOrderNumberForModal());
     dispatch(setCloseForIngredientModal());
-
     dispatch(resetIngredientItemForModal());
   };
   console.log('history', history);
 
   return (
-    // <Router>
     <>
       {(isLoadingIngredients || isLoadingOrderDetails) && <Preloader />}
       <AppHeader />
@@ -106,32 +102,23 @@ function App() {
               </DndProvider>
             </Route>
             <ProtectedRoute path='/login' exact={true} condition={!getCookie('refreshToken')} redirection={'/profile'}>
-              {/* <Route path='/login' exact={true}> */}
               <Login />
-              {/* </Route> */}
             </ProtectedRoute>
             <ProtectedRoute path='/register' exact={true} condition={!getCookie('refreshToken')} redirection={'/profile'}>
-              {/* <Route path='/register' exact={true}> */}
               <Register />
-              {/* </Route> */}
             </ProtectedRoute>
             <ProtectedRoute path='/forgot-password' exact={true} condition={!getCookie('refreshToken')} redirection={'/profile'}>
-              {/* <Route path='/forgot-password' exact={true}> */}
               <ForgotPassword />
-              {/* </Route> */}
             </ProtectedRoute>
 
-            <ProtectedRoute path='/reset-password' exact={true} condition={!getCookie('refreshToken') && history.location.state?.fromForgotPassword} redirection={'/profile'}>
-              {/* <Route path='/reset-password' exact={true}> */}
+            <ProtectedRoute path='/reset-password' exact={true} condition={!getCookie('refreshToken')} redirection={'/profile'}>
               <ResetPassword />
-              {/* </Route> */}
             </ProtectedRoute>
 
-            {/* <Route path={['/profile', '/profile/orders']} exact={true}> */}
             <ProtectedRoute path={['/profile', '/profile/orders']} exact={true} condition={getCookie('refreshToken')} redirection={'/login'}>
               <Profile />
             </ProtectedRoute>
-            {/* </Route> */}
+
             <Route path='/feed' exact={true}>
               <Feed />
             </Route>
@@ -148,10 +135,7 @@ function App() {
           )}
         </main>
       )}
-
-      {/* <OrderHistory /> */}
-      {/* <Feed /> */}
-      {/* </Router> */}
+      {/* && history.location.state?.fromForgotPassword */}
     </>
   );
 }

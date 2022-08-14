@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom'; // импорт библиотеки
+import { useHistory, Link, Redirect } from 'react-router-dom'; // импорт библиотеки
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -18,6 +18,10 @@ function ResetPassword() {
   const dispatch = useDispatch();
 
   const history = useHistory();
+
+  if (!history.location?.state?.fromForgotPassword) {
+    return <Redirect to={'/forgot-password'} />;
+  }
 
   return (
     <div className={`${styles.reset_passwordBox}`}>

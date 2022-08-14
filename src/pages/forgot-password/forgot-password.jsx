@@ -11,11 +11,10 @@ import { sendForgotPasswordRequest } from './../../services/actions/forgot-passw
 function ForgotPassword() {
   const [valueEmail, setValueEmail] = React.useState('');
 
-  const inputEmailRef = React.useRef(null);
-
   const dispatch = useDispatch();
 
   const history = useHistory();
+  // history.push({ state: { fromForgotPassword: true } });
 
   const location = {
     pathname: '/reset-password',
@@ -28,33 +27,14 @@ function ForgotPassword() {
       <form className={`${styles.forgot_password_form}`} style={{ width: 480 }}>
         <div className={'input_wrapper'}>
           <EmailInput onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
-          {/* <Input
-            type={'text'}
-            placeholder={'Укажите e-mail'}
-            onChange={(e) => setValueEmail(e.target.value)}
-            value={valueEmail}
-            name={'email'}
-            error={false}
-            ref={inputEmailRef}
-            errorText={'Ошибка'}
-          /> */}
         </div>
         <Button
           type='primary'
           size='medium'
           onClick={(e) => {
             e.preventDefault();
-
-            // const name = inputNameRef.current.value;
-            // const email = inputEmailRef.current.value;
-            // const password = inputPasswordRef.current.value;
-
-            // const name = valueName;
-            // const email = valueEmail;
-            // const password = valuePassword;
-
-            dispatch(sendForgotPasswordRequest(valueEmail));
             history.push(location);
+            dispatch(sendForgotPasswordRequest(valueEmail));
           }}
         >
           Восстановить

@@ -51,15 +51,15 @@ function BurgerConstructor(props) {
       alert('Вы выбрали больше чем одну булку, выберите один вид булки');
     }
 
-    return [...arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0)][0];
+    return [...arrayIngredients.filter((elem) => elem.type === 'bun')][0];
   };
 
   const bunElement = amountBunCheck(orderIngredients);
 
-  const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0)];
+  const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun')];
 
   useEffect(() => {
-    const removeKey = ({ __v, ...rest }) => rest;
+    // const removeKey = ({ __v, ...rest }) => rest;
     if (bunElement) {
       const bun = { ...bunElement, uuid: nanoid() };
 
@@ -69,9 +69,8 @@ function BurgerConstructor(props) {
       let stuffingAcc = [];
       ingredientsArray.forEach((elem) => {
         const newElem = { ...elem, uuid: nanoid() };
-        for (let j = 0; j < elem.__v; j++) {
-          stuffingAcc.push(newElem);
-        }
+
+        stuffingAcc.push(newElem);
       });
       dispatch(setStuffingIntoOrder(stuffingAcc));
     }
