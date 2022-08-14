@@ -1,5 +1,8 @@
 import { postUrlForOrder } from './../../utils/url';
 import { checkResponse } from './../../utils/checkResponse';
+import { fetchWithCheckJwt } from './../../utils/fetchWithCheckJwt';
+
+import { getCookie } from './../../utils/getCookie';
 
 import { setBunIntoOrder, setStuffingIntoOrder } from './burger-constructor';
 
@@ -37,28 +40,30 @@ export function setCloseForOrderModal() {
 }
 
 export function getOrderDetails(arrayIngredients) {
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('accessToken')}`,
+    },
+    body: JSON.stringify({
+      ingredients: arrayIngredients,
+    }),
+  };
+
   return async function (dispatch) {
-    let fullResponse;
     try {
-      const bodyIngredients = arrayIngredients;
       dispatch(setStartForOrderRequest());
 
-      const res = await fetch(postUrlForOrder, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          ingredients: bodyIngredients,
-        }),
-      });
+      // const res = await fetch(postUrlForOrder, options);
+      const res = await fetchWithCheckJwt(postUrlForOrder, options, checkResponse, getCookie('refreshToken'));
 
-      checkResponse(res);
-      fullResponse = await res.json();
+      // checkResponse(res);
+      const fullResponse = await res.json();
 
-      dispatch(setSuccessForOrderRequest(('000000' + fullResponse.order.number).slice(-6)));
-      dispatch(setBunIntoOrder({}));
-      dispatch(setStuffingIntoOrder([]));
+      await dispatch(setSuccessForOrderRequest(('000000' + fullResponse.order.number).slice(-6)));
+      await dispatch(setBunIntoOrder({}));
+      await dispatch(setStuffingIntoOrder([]));
     } catch (error) {
       dispatch(setFailedForOrderRequest(error.message));
     }
