@@ -10,6 +10,7 @@ import { resetPasswordReducer } from './reset-password';
 import { userLoginReducer } from './login';
 import { updateTokenReducer } from './update-token';
 import { userLogoutReducer } from './logout';
+import { userUpdateInfoReducer } from './patch-user-info';
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -22,6 +23,7 @@ export const rootReducer = combineReducers({
   userLogin: userLoginReducer,
   updateToken: updateTokenReducer,
   userLogout: userLogoutReducer,
+  userUpdateInfo: userUpdateInfoReducer,
 });
 
 // export const rootReducer = (state, action) => {

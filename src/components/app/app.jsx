@@ -121,7 +121,7 @@ function App() {
               {/* </Route> */}
             </ProtectedRoute>
 
-            <ProtectedRoute path='/reset-password' exact={true} condition={!getCookie('refreshToken') && history} redirection={'/profile'}>
+            <ProtectedRoute path='/reset-password' exact={true} condition={!getCookie('refreshToken') && history.location.state?.fromForgotPassword} redirection={'/profile'}>
               {/* <Route path='/reset-password' exact={true}> */}
               <ResetPassword />
               {/* </Route> */}

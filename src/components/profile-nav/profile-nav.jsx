@@ -13,6 +13,7 @@ function ProfileNav() {
   const dispatch = useDispatch();
   const history = useHistory();
   const match = useRouteMatch('/profile/orders');
+  console.log(match);
   const descriptionText = match ? 'В этом разделе вы можете просмотреть свою историю заказов' : 'В этом разделе вы можете изменить свои персональные данные';
 
   return (

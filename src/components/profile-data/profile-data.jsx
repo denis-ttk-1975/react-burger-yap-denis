@@ -1,10 +1,14 @@
 import React from 'react'; // импорт библиотеки
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserInfo } from './../../services/actions/patch-user-info';
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, EmailInput, PasswordInput, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile-data.module.css';
 
 function ProfileData() {
+  const dispatch = useDispatch();
+
   const [valueName, setValueName] = React.useState(localStorage.getItem('user_name'));
   const [valueEmail, setValueEmail] = React.useState(localStorage.getItem('user_email'));
   const [valuePassword, setValuePassword] = React.useState(localStorage.getItem('user_password'));
@@ -55,10 +59,26 @@ function ProfileData() {
       </div>
       {activateButtons && (
         <div className={`${styles.profile_data_buttons_area}`}>
-          <Button type='secondary' size='medium'>
+          <Button
+            type='secondary'
+            size='medium'
+            onClick={(e) => {
+              e.preventDefault();
+              setValueName(localStorage.getItem('user_name'));
+              setValueEmail(localStorage.getItem('user_email'));
+              setValuePassword(localStorage.getItem('user_password'));
+            }}
+          >
             Отмена
           </Button>
-          <Button type='primary' size='medium'>
+          <Button
+            type='primary'
+            size='medium'
+            onClick={(e) => {
+              e.preventDefault();
+              dispatch(updateUserInfo(valueName, valueEmail, valuePassword));
+            }}
+          >
             Сохранить
           </Button>
         </div>
