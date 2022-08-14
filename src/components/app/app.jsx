@@ -46,12 +46,12 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngredients());
-  }, []);
+  }, [dispatch]);
 
   // load data for order-ingredients
   useEffect(() => {
     dispatch(setBurgerIngredients([]));
-  }, []);
+  }, [dispatch]);
 
   // handling for Make-Order-Button
 
