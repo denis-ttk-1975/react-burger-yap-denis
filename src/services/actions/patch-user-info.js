@@ -3,6 +3,7 @@ import { checkResponse } from './../../utils/checkResponse';
 
 import { setUserData } from './../../utils/setUserData';
 import { setCookie } from './../../utils/setCookie';
+import { getCookie } from './../../utils/getCookie';
 
 export const SEND_UPDATE_USER_INFO = 'SEND_UPDATE_USER_INFO';
 export const GET_UPDATE_USER_INFO_FAILED = 'GET_UPDATE_USER_INFO_FAILED';
@@ -29,6 +30,7 @@ export function updateUserInfo(name, email, password) {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${getCookie('accessToken')}`,
         },
         body: JSON.stringify({
           email: `${email}`,
