@@ -1,9 +1,12 @@
 import { urlUserInfo } from './../../utils/url';
 import { checkResponse } from './../../utils/checkResponse';
+import { fetchWithCheckJwt } from './../../utils/fetchWithCheckJwt';
 
 import { setUserData } from './../../utils/setUserData';
 import { setCookie } from './../../utils/setCookie';
 import { getCookie } from './../../utils/getCookie';
+
+import { updateTokenRequest } from './update-token';
 
 export const SEND_UPDATE_USER_INFO = 'SEND_UPDATE_USER_INFO';
 export const GET_UPDATE_USER_INFO_FAILED = 'GET_UPDATE_USER_INFO_FAILED';
@@ -22,29 +25,29 @@ export function setSuccessForUpdateUserInfoRequest(userData, accessToken, refres
 }
 
 export function updateUserInfo(name, email, password) {
+  const options = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${getCookie('accessToken')}`,
+    },
+    body: JSON.stringify({
+      email: `${email}`,
+      password: `${password}`,
+      name: `${name}`,
+    }),
+  };
+
   return async function (dispatch) {
     try {
       dispatch(setStartForUpdateUserInfoRequest());
 
-      const res = await fetch(urlUserInfo, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getCookie('accessToken')}`,
-        },
-        body: JSON.stringify({
-          email: `${email}`,
-          password: `${password}`,
-          name: `${name}`,
-        }),
-      });
-      checkResponse(res);
+      const res = await fetchWithCheckJwt(urlUserInfo, options, checkResponse, getCookie('refreshToken'));
+
       const fullResponse = await res.json();
 
-      await dispatch(setSuccessForUpdateUserInfoRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
+      await dispatch(setSuccessForUpdateUserInfoRequest(fullResponse.user));
       setUserData(fullResponse.user.name, fullResponse.user.email, password);
-      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
-      setCookie('refreshToken', fullResponse.refreshToken);
     } catch (error) {
       dispatch(setFailedForUpdateUserInfoRequest(error.message));
     }

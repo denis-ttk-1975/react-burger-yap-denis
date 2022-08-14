@@ -36,6 +36,8 @@ function Login() {
             e.preventDefault();
 
             dispatch(loginUser(valueEmail, valuePassword));
+
+            history.push({ pathname: '/' });
           }}
         >
           Войти

@@ -4,8 +4,6 @@ const initialState = {
   isLoading: false,
   errorMessage: '',
   userInfo: {},
-  accessToken: null,
-  refreshToken: null,
 };
 
 export const userUpdateInfoReducer = (state = initialState, action) => {
@@ -21,8 +19,7 @@ export const userUpdateInfoReducer = (state = initialState, action) => {
       return {
         ...state,
         userInfo: action.payload.user,
-        accessToken: action.payload.accessToken,
-        refreshToken: action.payload.refreshToken,
+
         isLoading: false,
       };
     }

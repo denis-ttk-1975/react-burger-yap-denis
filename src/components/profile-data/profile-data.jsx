@@ -1,6 +1,7 @@
 import React from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserInfo } from './../../services/actions/patch-user-info';
+import { requestForUserInfo } from './../../services/actions/get-user-info';
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, EmailInput, PasswordInput, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -8,6 +9,8 @@ import styles from './profile-data.module.css';
 
 function ProfileData() {
   const dispatch = useDispatch();
+
+  dispatch(requestForUserInfo());
 
   const [valueName, setValueName] = React.useState(localStorage.getItem('user_name'));
   const [valueEmail, setValueEmail] = React.useState(localStorage.getItem('user_email'));

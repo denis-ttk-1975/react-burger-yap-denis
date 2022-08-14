@@ -17,6 +17,7 @@ function Register() {
   const inputPasswordRef = React.useRef(null);
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const { userInfo } = useSelector((state) => state.userRegistration);
 
   return (
@@ -49,6 +50,8 @@ function Register() {
             e.preventDefault();
 
             dispatch(registerNewUser(valueName, valueEmail, valuePassword));
+
+            history.push({ pathname: '/' });
           }}
         >
           Зарегистрироваться
