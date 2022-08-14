@@ -1,6 +1,6 @@
 import React from 'react'; // импорт библиотеки
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, EmailInput, PasswordInput, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, EmailInput, PasswordInput, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './profile-data.module.css';
 
@@ -53,6 +53,16 @@ function ProfileData() {
           name={'password'}
         />
       </div>
+      {activateButtons && (
+        <div className={`${styles.profile_data_buttons_area}`}>
+          <Button type='secondary' size='medium'>
+            Отмена
+          </Button>
+          <Button type='primary' size='medium'>
+            Сохранить
+          </Button>
+        </div>
+      )}
     </form>
   );
 }

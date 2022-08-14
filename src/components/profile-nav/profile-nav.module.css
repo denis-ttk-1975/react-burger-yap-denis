@@ -20,3 +20,7 @@
 .profile_nav_elem_active {
   color: #f2f2f3;
 }
+
+.profile_nav_description {
+  margin-top: 80px;
+}

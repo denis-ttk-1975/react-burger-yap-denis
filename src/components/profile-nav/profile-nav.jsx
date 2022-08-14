@@ -1,6 +1,6 @@
 import React from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
-import { BrowserRouter as Router, Link, NavLink, Route, Switch, useHistory } from 'react-router-dom';
+import { BrowserRouter as Router, Link, NavLink, Route, Switch, useHistory, useRouteMatch } from 'react-router-dom';
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -12,6 +12,8 @@ import { getCookie } from './../../utils/getCookie';
 function ProfileNav() {
   const dispatch = useDispatch();
   const history = useHistory();
+  const match = useRouteMatch('/profile/orders');
+  const descriptionText = match ? 'В этом разделе вы можете просмотреть свою историю заказов' : 'В этом разделе вы можете изменить свои персональные данные';
 
   return (
     <nav className={`${styles.profile_navBox}`}>
@@ -49,6 +51,7 @@ function ProfileNav() {
           Выход
         </NavLink>
       </div>
+      <p className={`${styles.profile_nav_description} text text_type_main-default text_color_inactive`}>{descriptionText}</p>
     </nav>
   );
 }
