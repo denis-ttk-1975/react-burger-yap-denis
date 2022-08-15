@@ -47,7 +47,6 @@ function ResetPassword() {
             value={valueCode}
             name={'email'}
             error={false}
-            // ref={inputCodeRef}
             errorText={'Ошибка'}
           />
         </div>

@@ -87,7 +87,7 @@ function App() {
     dispatch(setCloseForIngredientModal());
     dispatch(resetIngredientItemForModal());
   };
-  console.log('history', history);
+
 
   return (
     <>

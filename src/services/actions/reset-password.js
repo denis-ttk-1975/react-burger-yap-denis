@@ -21,32 +21,7 @@ export function resetUserPassword(password, token) {
   return async function (dispatch) {
     try {
       dispatch(setStartForResetPasswordRequest());
-      // console.log(
-      //   JSON.stringify({
-      //     email: `${email}`,
-      //     password: `${password}`,
-      //     name: `${name}`,
-      //   })
-      // );
-      // console.log(
-      //   JSON.stringify({
-      //     email: email,
-      //     password: password,
-      //     name: name,
-      //   })
-      // );
-      // console.log(
-      //   JSON.stringify({
-      //     email: `${email}`,
-      //     password: `${password}`,
-      //     name: `${name}`,
-      //   }) ===
-      //     JSON.stringify({
-      //       email: email,
-      //       password: password,
-      //       name: name,
-      //     })
-      // );
+
       const res = await fetch(postUrlResetPassword, {
         method: 'POST',
         headers: {
@@ -63,7 +38,6 @@ export function resetUserPassword(password, token) {
       dispatch(setSuccessForResetPasswordRequest(fullResponse.message));
       alert(fullResponse.message);
     } catch (error) {
-      console.log(error, error.message);
       dispatch(setFailedForResetPasswordRequest(error.message));
     }
   };

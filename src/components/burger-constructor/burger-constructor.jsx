@@ -40,8 +40,6 @@ function BurgerConstructor(props) {
           const newStuffing = [...stuffing, newItem];
           dispatch(setStuffingIntoOrder(newStuffing));
         }
-
-        //   ? stuffing.map((item, index, arr) => {
       }
     },
   });
@@ -59,7 +57,6 @@ function BurgerConstructor(props) {
   const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun')];
 
   useEffect(() => {
-    // const removeKey = ({ __v, ...rest }) => rest;
     if (bunElement) {
       const bun = { ...bunElement, uuid: nanoid() };
 

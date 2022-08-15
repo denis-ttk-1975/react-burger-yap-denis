@@ -14,7 +14,6 @@ function ForgotPassword() {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  // history.push({ state: { fromForgotPassword: true } });
 
   const location = {
     pathname: '/reset-password',

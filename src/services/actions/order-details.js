@@ -55,10 +55,8 @@ export function getOrderDetails(arrayIngredients) {
     try {
       dispatch(setStartForOrderRequest());
 
-      // const res = await fetch(postUrlForOrder, options);
       const res = await fetchWithCheckJwt(postUrlForOrder, options, checkResponse, getCookie('refreshToken'));
 
-      // checkResponse(res);
       const fullResponse = await res.json();
 
       await dispatch(setSuccessForOrderRequest(('000000' + fullResponse.order.number).slice(-6)));

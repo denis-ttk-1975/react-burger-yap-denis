@@ -33,7 +33,6 @@ function Register() {
             value={valueName}
             name={'name'}
             error={false}
-            // ref={inputNameRef}
             errorText={'Ошибка'}
           />
         </div>

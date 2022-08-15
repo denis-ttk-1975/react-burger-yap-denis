@@ -20,13 +20,10 @@ export function setSuccessForUpdateTokenRequest(userData, accessToken, refreshTo
 }
 
 export function updateTokenRequest(refreshToken) {
-  console.log('updateTokenRequest start');
   return async function (dispatch) {
-    console.log('updateTokenRequest start 2');
     try {
-      console.log('updateTokenRequest start 3');
       dispatch(setStartForUpdateTokenRequest());
-      console.log('updateTokenRequest start 4');
+
       const res = await fetch(postUrlUserTokenUpdate, {
         method: 'POST',
         headers: {
@@ -38,13 +35,11 @@ export function updateTokenRequest(refreshToken) {
       });
       await checkResponse(res);
       const fullResponse = await res.json();
-      console.log('Обновление токена : ', fullResponse);
 
       await dispatch(setSuccessForUpdateTokenRequest(fullResponse.accessToken, fullResponse.refreshToken));
       setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
       setCookie('refreshToken', fullResponse.refreshToken);
     } catch (error) {
-      console.log('updateTokenRequest error');
       dispatch(setFailedForUpdateTokenRequest(error.message));
       Promise.reject(error.message);
     }
