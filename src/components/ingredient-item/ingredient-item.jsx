@@ -1,5 +1,6 @@
 import React from 'react'; // импорт библиотеки
 import { useDrag } from 'react-dnd';
+import { BrowserRouter as Router, Link, Route, Switch, useHistory, useRouteMatch, useParams, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
@@ -13,17 +14,20 @@ function IngredientsItem(props) {
     type: props.data.type,
     item: props.data,
   }));
-
+  const location = useLocation();
+  const id = props.data._id;
   return (
-    <div className={styles.ingredientsCard} onClick={() => props.onClickIngredientsItem(props.data)} ref={dragRef}>
-      {props.amount ? <Counter count={props.amount} size='default' className={styles.counter} /> : null}
-      <img src={props.data.image} alt={props.data.name} className='mb-2' />
-      <div className={`mb-2 ${styles.priceLabel}`}>
-        <p className='text text_type_digits-default'>{props.data.price}</p>
-        <CurrencyIcon type='primary' />
+    <Link to={{ pathname: `/ingredients/${id}`, state: { background: location } }}>
+      <div className={styles.ingredientsCard} onClick={() => props.onClickIngredientsItem(props.data)} ref={dragRef}>
+        {props.amount ? <Counter count={props.amount} size='default' className={styles.counter} /> : null}
+        <img src={props.data.image} alt={props.data.name} className='mb-2' />
+        <div className={`mb-2 ${styles.priceLabel}`}>
+          <p className='text text_type_digits-default'>{props.data.price}</p>
+          <CurrencyIcon type='primary' />
+        </div>
+        <p className={styles.ingredientName}>{props.data.name}</p>
       </div>
-      <p className={styles.ingredientName}>{props.data.name}</p>
-    </div>
+    </Link>
   );
 }
 

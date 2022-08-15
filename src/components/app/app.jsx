@@ -40,7 +40,9 @@ function App() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  // const location = useLocation();
+  const location = useLocation();
+
+  const background = location.state?.background;
 
   // getting data about ingredients from server
 
@@ -93,7 +95,7 @@ function App() {
       <AppHeader />
       {!isLoadingIngredients && (
         <main className={styles.main}>
-          <Switch>
+          <Switch location={background || location}>
             <Route path='/' exact={true}>
               <DndProvider backend={HTML5Backend}>
                 <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
@@ -118,9 +120,11 @@ function App() {
             <ProtectedRoute path={['/profile', '/profile/orders']} exact={true} condition={getCookie('refreshToken')} redirection={'/login'}>
               <Profile />
             </ProtectedRoute>
-
             <Route path='/feed' exact={true}>
               <Feed />
+            </Route>
+            <Route path='/ingredients/:id' exact={true}>
+              {!!menuIngredients.length && <IngredientDetails />}
             </Route>
           </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
@@ -128,14 +132,20 @@ function App() {
               <OrderDetails dataModal={orderNumber} />
             </Modal>
           )}
-          {isIngredientModalOpen && (
+          {background && (
+            <Route path='/ingredients/:id' exact={true}>
+              <Modal title='Детали ингредиента' closeAllModals={() => history.goBack()}>
+                <IngredientDetails />
+              </Modal>
+            </Route>
+          )}
+          {/* {isIngredientModalOpen && (
             <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
               <IngredientDetails dataModal={ingredientInModal} />
             </Modal>
-          )}
+          )} */}
         </main>
       )}
-      {/* && history.location.state?.fromForgotPassword */}
     </>
   );
 }
