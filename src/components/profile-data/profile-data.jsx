@@ -24,7 +24,13 @@ function ProfileData() {
   const inputEmailRef = React.useRef(null);
   const inputPasswordRef = React.useRef(null);
   return (
-    <form className={`${styles.profile_data_form}`}>
+    <form
+      className={`${styles.profile_data_form}`}
+      onSubmit={(e) => {
+        e.preventDefault();
+        dispatch(updateUserInfo(valueName, valueEmail, valuePassword));
+      }}
+    >
       <div className={'input_wrapper'}>
         <Input
           className={`${styles.profile_data_input}`}
@@ -81,10 +87,10 @@ function ProfileData() {
           <Button
             type='primary'
             size='medium'
-            onClick={(e) => {
-              e.preventDefault();
-              dispatch(updateUserInfo(valueName, valueEmail, valuePassword));
-            }}
+            // onClick={(e) => {
+            //   e.preventDefault();
+            //   dispatch(updateUserInfo(valueName, valueEmail, valuePassword));
+            // }}
           >
             Сохранить
           </Button>

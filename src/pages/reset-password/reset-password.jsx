@@ -26,7 +26,14 @@ function ResetPassword() {
   return (
     <div className={`${styles.reset_passwordBox}`}>
       <p className={`${styles.reset_password_title} text text_type_main-medium`}>Восстановление пароля</p>
-      <form className={`${styles.reset_password_form}`}>
+      <form
+        className={`${styles.reset_password_form}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(resetUserPassword(valuePassword, valueCode));
+          history.push({ pathname: '/' });
+        }}
+      >
         <div className={'input_wrapper'}>
           <PasswordInput
             className={`${styles.reset_password_input}`}
@@ -53,11 +60,11 @@ function ResetPassword() {
         <Button
           type='primary'
           size='medium'
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(resetUserPassword(valuePassword, valueCode));
-            history.push({ pathname: '/' });
-          }}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   dispatch(resetUserPassword(valuePassword, valueCode));
+          //   history.push({ pathname: '/' });
+          // }}
         >
           Сохранить
         </Button>

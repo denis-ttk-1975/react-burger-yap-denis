@@ -23,7 +23,16 @@ function Register() {
   return (
     <div className={`${styles.registerBox}`}>
       <p className={`${styles.register_title} text text_type_main-medium`}>Регистрация</p>
-      <form className={`${styles.register_form}`}>
+      <form
+        className={`${styles.register_form}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          dispatch(registerNewUser(valueName, valueEmail, valuePassword));
+
+          history.push({ pathname: '/' });
+        }}
+      >
         <div className={'input_wrapper'}>
           <Input
             className={`${styles.register_input}`}
@@ -45,13 +54,13 @@ function Register() {
         <Button
           type='primary'
           size='medium'
-          onClick={(e) => {
-            e.preventDefault();
+          // onClick={(e) => {
+          //   e.preventDefault();
 
-            dispatch(registerNewUser(valueName, valueEmail, valuePassword));
+          //   dispatch(registerNewUser(valueName, valueEmail, valuePassword));
 
-            history.push({ pathname: '/' });
-          }}
+          //   history.push({ pathname: '/' });
+          // }}
         >
           Зарегистрироваться
         </Button>

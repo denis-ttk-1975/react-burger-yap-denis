@@ -21,7 +21,16 @@ function Login() {
   return (
     <div className={`${styles.loginBox}`}>
       <p className={`${styles.login_title} text text_type_main-medium`}>Вход</p>
-      <form className={`${styles.login_form}`}>
+      <form
+        className={`${styles.login_form}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          dispatch(loginUser(valueEmail, valuePassword));
+
+          history.push({ pathname: '/' });
+        }}
+      >
         <div className={'input_wrapper'}>
           <EmailInput className={`${styles.login_input}`} onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
         </div>
@@ -32,13 +41,13 @@ function Login() {
         <Button
           type='primary'
           size='medium'
-          onClick={(e) => {
-            e.preventDefault();
+          // onClick={(e) => {
+          //   e.preventDefault();
 
-            dispatch(loginUser(valueEmail, valuePassword));
+          //   dispatch(loginUser(valueEmail, valuePassword));
 
-            history.push({ pathname: '/' });
-          }}
+          //   history.push({ pathname: '/' });
+          // }}
         >
           Войти
         </Button>

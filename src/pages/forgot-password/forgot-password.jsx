@@ -23,18 +23,25 @@ function ForgotPassword() {
   return (
     <div className={`${styles.forgot_passwordBox}`}>
       <p className={`${styles.forgot_password_title} text text_type_main-medium`}>Восстановление пароля</p>
-      <form className={`${styles.forgot_password_form}`}>
+      <form
+        className={`${styles.forgot_password_form}`}
+        onSubmit={(e) => {
+          e.preventDefault();
+          history.push(location);
+          dispatch(sendForgotPasswordRequest(valueEmail));
+        }}
+      >
         <div className={'input_wrapper'}>
           <EmailInput onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
         </div>
         <Button
           type='primary'
           size='medium'
-          onClick={(e) => {
-            e.preventDefault();
-            history.push(location);
-            dispatch(sendForgotPasswordRequest(valueEmail));
-          }}
+          // onClick={(e) => {
+          //   e.preventDefault();
+          //   history.push(location);
+          //   dispatch(sendForgotPasswordRequest(valueEmail));
+          // }}
         >
           Восстановить
         </Button>
