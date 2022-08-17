@@ -23,7 +23,7 @@ function ForgotPassword() {
   return (
     <div className={`${styles.forgot_passwordBox}`}>
       <p className={`${styles.forgot_password_title} text text_type_main-medium`}>Восстановление пароля</p>
-      <form className={`${styles.forgot_password_form}`} style={{ width: 480 }}>
+      <form className={`${styles.forgot_password_form}`}>
         <div className={'input_wrapper'}>
           <EmailInput onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
         </div>

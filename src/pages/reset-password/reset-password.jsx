@@ -26,7 +26,7 @@ function ResetPassword() {
   return (
     <div className={`${styles.reset_passwordBox}`}>
       <p className={`${styles.reset_password_title} text text_type_main-medium`}>Восстановление пароля</p>
-      <form className={`${styles.reset_password_form}`} style={{ width: 480 }}>
+      <form className={`${styles.reset_password_form}`}>
         <div className={'input_wrapper'}>
           <PasswordInput
             className={`${styles.reset_password_input}`}

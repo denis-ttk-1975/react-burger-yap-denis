@@ -21,7 +21,7 @@ function Login() {
   return (
     <div className={`${styles.loginBox}`}>
       <p className={`${styles.login_title} text text_type_main-medium`}>Вход</p>
-      <form className={`${styles.login_form}`} style={{ width: 480 }}>
+      <form className={`${styles.login_form}`}>
         <div className={'input_wrapper'}>
           <EmailInput className={`${styles.login_input}`} onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
         </div>

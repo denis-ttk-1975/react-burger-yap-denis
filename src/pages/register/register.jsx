@@ -23,7 +23,7 @@ function Register() {
   return (
     <div className={`${styles.registerBox}`}>
       <p className={`${styles.register_title} text text_type_main-medium`}>Регистрация</p>
-      <form className={`${styles.register_form}`} style={{ width: 480 }}>
+      <form className={`${styles.register_form}`}>
         <div className={'input_wrapper'}>
           <Input
             className={`${styles.register_input}`}

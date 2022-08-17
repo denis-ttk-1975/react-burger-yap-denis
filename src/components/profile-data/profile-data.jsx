@@ -24,7 +24,7 @@ function ProfileData() {
   const inputEmailRef = React.useRef(null);
   const inputPasswordRef = React.useRef(null);
   return (
-    <form className={`${styles.profile_data_form}`} style={{ width: 480 }}>
+    <form className={`${styles.profile_data_form}`}>
       <div className={'input_wrapper'}>
         <Input
           className={`${styles.profile_data_input}`}
