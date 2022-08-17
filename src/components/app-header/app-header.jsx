@@ -27,7 +27,9 @@ function AppHeader() {
           </Link>
         </div>
         <div className={styles.headerLogo}>
-          <Logo />
+          <Link to={{ pathname: `/` }}>
+            <Logo />
+          </Link>
         </div>
 
         <div className={`pt-4 pb-4 pl-5 pr-5 ${styles.rightIconBox}`}>
