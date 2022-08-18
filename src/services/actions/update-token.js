@@ -33,8 +33,8 @@ export function updateTokenRequest(refreshToken) {
           token: `${refreshToken}`,
         }),
       });
-      await checkResponse(res);
-      const fullResponse = await res.json();
+
+      const fullResponse = await checkResponse(res);
 
       await dispatch(setSuccessForUpdateTokenRequest(fullResponse.accessToken, fullResponse.refreshToken));
       setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);

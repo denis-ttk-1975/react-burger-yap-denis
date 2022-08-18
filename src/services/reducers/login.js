@@ -1,4 +1,4 @@
-import { SEND_LOGIN, GET_LOGIN_FAILED, GET_LOGIN_SUCCESS } from './../actions/login';
+import { SEND_LOGIN, GET_LOGIN_FAILED, GET_LOGIN_SUCCESS } from '../actions/login';
 
 const initialState = {
   isLoading: false,

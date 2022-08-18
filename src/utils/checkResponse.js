@@ -1,6 +1,7 @@
 export async function checkResponse(res) {
+  const serverResponseBody = await res.json();
+  console.log('я в чек респонс - serverResponseBody: ', serverResponseBody);
   if (res.status !== 200) {
-    const serverResponseBody = await res.json();
     if (serverResponseBody.message.length) {
       console.log(`${serverResponseBody.message}`);
       throw new Error(`${serverResponseBody.message}`);
@@ -13,4 +14,5 @@ export async function checkResponse(res) {
     console.log('Сервер не дал ответа: ', 'Сервер не дал ответа');
     throw new Error('Сервер не дал ответа');
   }
+  return serverResponseBody;
 }

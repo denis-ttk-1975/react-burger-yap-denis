@@ -32,8 +32,8 @@ export function resetUserPassword(password, token) {
           token: `${token}`,
         }),
       });
-      await checkResponse(res);
-      const fullResponse = await res.json();
+
+      const fullResponse = await checkResponse(res);
 
       dispatch(setSuccessForResetPasswordRequest(fullResponse.message));
       alert(fullResponse.message);

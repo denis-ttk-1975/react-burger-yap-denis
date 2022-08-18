@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation, Redirect } from 'react-router-dom';
 
 import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from './../../services/actions/ingredient-details';
 import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
@@ -42,7 +42,7 @@ function App() {
   const history = useHistory();
   const location = useLocation();
 
-  const background = location.state?.background;
+  const background = location?.state?.background;
 
   // getting data about ingredients from server
 
@@ -64,7 +64,8 @@ function App() {
       alert('Добавьте хотя бы один ингредиент');
     } else if (!getCookie('refreshToken')) {
       dispatch(setBurgerIngredients([bunElement, ...stuffingArray]));
-      history.push({ pathname: '/login' });
+      // <Redirect to={{ pathname: '/login', state: { from: location } }} />;
+      history.push({ pathname: '/login', state: { from: location } });
     } else {
       dispatch(getOrderDetails([bunElement, ...stuffingArray]));
       dispatch(setOpenForOrderModal());
@@ -87,7 +88,6 @@ function App() {
     dispatch(setCloseForIngredientModal());
     dispatch(resetIngredientItemForModal());
   };
-
 
   return (
     <>
@@ -132,18 +132,13 @@ function App() {
               <OrderDetails dataModal={orderNumber} />
             </Modal>
           )}
-          {background && (
+          {background && !!menuIngredients.length && (
             <Route path='/ingredients/:id' exact={true}>
               <Modal title='Детали ингредиента' closeAllModals={() => history.goBack()}>
                 <IngredientDetails />
               </Modal>
             </Route>
           )}
-          {/* {isIngredientModalOpen && (
-            <Modal title='Детали ингредиента' closeAllModals={closeAllModals}>
-              <IngredientDetails dataModal={ingredientInModal} />
-            </Modal>
-          )} */}
         </main>
       )}
     </>

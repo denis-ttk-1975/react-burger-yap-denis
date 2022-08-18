@@ -36,11 +36,11 @@ export function registerNewUser(name, email, password) {
           name: `${name}`,
         }),
       });
-      checkResponse(res);
-      const fullResponse = await res.json();
+     
+      const fullResponse = await  checkResponse(res);
 
       await dispatch(setSuccessForRegistrationRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
-      setUserData(fullResponse.user.name, fullResponse.user.email, password);
+      setUserData(fullResponse.user.name, fullResponse.user.email);
       setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
       setCookie('refreshToken', fullResponse.refreshToken);
     } catch (error) {

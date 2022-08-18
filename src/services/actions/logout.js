@@ -34,8 +34,8 @@ export function logoutUser(refreshToken) {
           token: `${refreshToken}`,
         }),
       });
-      checkResponse(res);
-      const fullResponse = await res.json();
+
+      const fullResponse = await checkResponse(res);
       await dispatch(setSuccessForLogoutRequest());
       alert(fullResponse.message);
 

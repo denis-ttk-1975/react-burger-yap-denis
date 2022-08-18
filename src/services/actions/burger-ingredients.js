@@ -39,8 +39,8 @@ export function getIngredients() {
       dispatch(setStartForIngredientRequest());
 
       const res = await fetch(fetchUrlForIngredients);
-      checkResponse(res);
-      const fullResponse = await res.json();
+     
+      const fullResponse = await  checkResponse(res);
 
       dispatch(setSuccessForIngredientRequest([...fullResponse.data]));
     } catch (error) {

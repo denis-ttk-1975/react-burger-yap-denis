@@ -6,9 +6,9 @@ import { postUrlUserTokenUpdate } from './url';
 export const fetchWithCheckJwt = async (url, options, checkResponsePromise, refreshToken) => {
   try {
     const res = await fetch(url, options);
-    await checkResponsePromise(res);
+    const result = await checkResponsePromise(res);
 
-    return res;
+    return result;
   } catch (err) {
     if (err.message === 'jwt expired') {
       try {
@@ -21,8 +21,8 @@ export const fetchWithCheckJwt = async (url, options, checkResponsePromise, refr
             token: `${refreshToken}`,
           }),
         });
-        await checkResponsePromise(res);
-        const fullResponse = await res.json();
+
+        const fullResponse = await checkResponsePromise(res);
 
         setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
         setCookie('refreshToken', fullResponse.refreshToken);
@@ -38,8 +38,9 @@ export const fetchWithCheckJwt = async (url, options, checkResponsePromise, refr
         },
       });
 
-      await checkResponsePromise(res);
-      return res;
+      const result = await checkResponsePromise(res);
+
+      return result;
     } else {
       return Promise.reject(err);
     }

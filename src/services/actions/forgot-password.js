@@ -31,8 +31,8 @@ export function sendForgotPasswordRequest(email) {
           email: `${email}`,
         }),
       });
-      checkResponse(res);
-      const fullResponse = await res.json();
+
+      const fullResponse = await checkResponse(res);
 
       dispatch(setSuccessForForgotPasswordRequest(fullResponse.message));
       alert(fullResponse.message);

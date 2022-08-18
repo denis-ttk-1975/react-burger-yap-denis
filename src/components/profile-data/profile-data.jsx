@@ -18,7 +18,7 @@ function ProfileData() {
 
   const [valueName, setValueName] = React.useState(localStorage.getItem('user_name'));
   const [valueEmail, setValueEmail] = React.useState(localStorage.getItem('user_email'));
-  const [valuePassword, setValuePassword] = React.useState(localStorage.getItem('user_password'));
+  const [valuePassword, setValuePassword] = React.useState('');
   const [activateButtons, setActivateButtons] = React.useState(false);
   const inputNameRef = React.useRef(null);
   const inputEmailRef = React.useRef(null);
@@ -79,7 +79,7 @@ function ProfileData() {
               e.preventDefault();
               setValueName(localStorage.getItem('user_name'));
               setValueEmail(localStorage.getItem('user_email'));
-              setValuePassword(localStorage.getItem('user_password'));
+              setValuePassword('');
             }}
           >
             Отмена

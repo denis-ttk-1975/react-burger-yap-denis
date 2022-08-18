@@ -42,12 +42,10 @@ export function updateUserInfo(name, email, password) {
     try {
       dispatch(setStartForUpdateUserInfoRequest());
 
-      const res = await fetchWithCheckJwt(urlUserInfo, options, checkResponse, getCookie('refreshToken'));
-
-      const fullResponse = await res.json();
+      const fullResponse = await fetchWithCheckJwt(urlUserInfo, options, checkResponse, getCookie('refreshToken'));
 
       await dispatch(setSuccessForUpdateUserInfoRequest(fullResponse.user));
-      setUserData(fullResponse.user.name, fullResponse.user.email, password);
+      setUserData(fullResponse.user.name, fullResponse.user.email);
     } catch (error) {
       dispatch(setFailedForUpdateUserInfoRequest(error.message));
     }

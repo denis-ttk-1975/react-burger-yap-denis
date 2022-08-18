@@ -1,8 +1,11 @@
-import { postUrlUserLogin } from './../../utils/url';
-import { checkResponse } from './../../utils/checkResponse';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation, Redirect } from 'react-router-dom';
 
-import { setUserData } from './../../utils/setUserData';
-import { setCookie } from './../../utils/setCookie';
+import { postUrlUserLogin } from '../../utils/url';
+import { checkResponse } from '../../utils/checkResponse';
+
+import { setUserData } from '../../utils/setUserData';
+import { setCookie } from '../../utils/setCookie';
 
 export const SEND_LOGIN = 'SEND_LOGIN';
 export const GET_LOGIN_FAILED = 'GET_LOGIN_FAILED';
@@ -35,15 +38,19 @@ export function loginUser(email, password) {
           password: `${password}`,
         }),
       });
-      checkResponse(res);
-      const fullResponse = await res.json();
 
+      const fullResponse = await checkResponse(res);
+      console.log('после ЧекРеспонс', fullResponse);
       await dispatch(setSuccessForLoginRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
-      setUserData(fullResponse.user.name, fullResponse.user.email, password);
+      setUserData(fullResponse.user.name, fullResponse.user.email);
       setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
       setCookie('refreshToken', fullResponse.refreshToken);
     } catch (error) {
-      dispatch(setFailedForLoginRequest(error.message));
+      const alarm = error.message;
+      console.log('я в кетч');
+      dispatch(setFailedForLoginRequest(alarm));
+      alert(alarm);
+      // document.history.back();
     }
   };
 }

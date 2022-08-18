@@ -35,12 +35,10 @@ export function requestForUserInfo() {
     try {
       dispatch(setStartForUserInfoRequest());
 
-      const res = await fetchWithCheckJwt(urlUserInfo, options, checkResponse, getCookie('refreshToken'));
-
-      const fullResponse = await res.json();
+      const fullResponse = await fetchWithCheckJwt(urlUserInfo, options, checkResponse, getCookie('refreshToken'));
 
       await dispatch(setSuccessForUserInfoRequest(fullResponse.user));
-      setUserData(fullResponse.user.name, fullResponse.user.email, localStorage.getItem('user_password'));
+      setUserData(fullResponse.user.name, fullResponse.user.email);
     } catch (error) {
       dispatch(setFailedForUserInfoRequest(error.message));
     }

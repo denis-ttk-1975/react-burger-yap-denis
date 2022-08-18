@@ -1,18 +1,19 @@
 import React, { useCallback } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory, Link, useLocation } from 'react-router-dom';
 
 import { Typography, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './login.module.css';
 
-import { loginUser } from './../../services/actions/login';
+import { loginUser } from '../../services/actions/login';
 
 function Login() {
   const [valueEmail, setValueEmail] = React.useState('');
   const [valuePassword, setValuePassword] = React.useState('');
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
 
   const login = useCallback(() => {
     history.replace({ pathname: '/login' });
@@ -28,7 +29,7 @@ function Login() {
 
           dispatch(loginUser(valueEmail, valuePassword));
 
-          history.push({ pathname: '/' });
+          history.push({ pathname: location?.state?.from?.pathname || '/' });
         }}
       >
         <div className={'input_wrapper'}>
@@ -38,17 +39,7 @@ function Login() {
           <PasswordInput className={`${styles.login_input}`} onChange={(e) => setValuePassword(e.target.value)} value={valuePassword} name={'password'} />
         </div>
 
-        <Button
-          type='primary'
-          size='medium'
-          // onClick={(e) => {
-          //   e.preventDefault();
-
-          //   dispatch(loginUser(valueEmail, valuePassword));
-
-          //   history.push({ pathname: '/' });
-          // }}
-        >
+        <Button type='primary' size='medium'>
           Войти
         </Button>
       </form>
