@@ -4,17 +4,18 @@ import { useHistory, Link } from 'react-router-dom';
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { useForm } from './../../hooks/useForm';
+
 import styles from './register.module.css';
 
 import { registerNewUser } from './../../services/actions/register';
 
 function Register() {
-  const [valueName, setValueName] = React.useState('');
-  const [valueEmail, setValueEmail] = React.useState('');
-  const [valuePassword, setValuePassword] = React.useState('');
-  const inputNameRef = React.useRef(null);
-  const inputEmailRef = React.useRef(null);
-  const inputPasswordRef = React.useRef(null);
+  // const [valueName, setValueName] = React.useState('');
+  // const [valueEmail, setValueEmail] = React.useState('');
+  // const [valuePassword, setValuePassword] = React.useState('');
+
+  const { values, setValues, handleChange } = useForm({});
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -28,40 +29,21 @@ function Register() {
         onSubmit={(e) => {
           e.preventDefault();
 
-          dispatch(registerNewUser(valueName, valueEmail, valuePassword));
+          dispatch(registerNewUser(values?.name, values?.email, values?.password));
 
           history.push({ pathname: '/' });
         }}
       >
         <div className={'input_wrapper'}>
-          <Input
-            className={`${styles.register_input}`}
-            type={'text'}
-            placeholder={'Имя'}
-            onChange={(e) => setValueName(e.target.value)}
-            value={valueName}
-            name={'name'}
-            error={false}
-            errorText={'Ошибка'}
-          />
+          <Input className={`${styles.register_input}`} type={'text'} placeholder={'Имя'} onChange={(e) => handleChange(e)} value={values?.name} name={'name'} error={false} errorText={'Ошибка'} />
         </div>
         <div className={'input_wrapper'}>
-          <EmailInput className={`${styles.register_input}`} onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
+          <EmailInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.email} name={'email'} />
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput className={`${styles.register_input}`} onChange={(e) => setValuePassword(e.target.value)} value={valuePassword} name={'password'} />
+          <PasswordInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.password} name={'password'} />
         </div>
-        <Button
-          type='primary'
-          size='medium'
-          // onClick={(e) => {
-          //   e.preventDefault();
-
-          //   dispatch(registerNewUser(valueName, valueEmail, valuePassword));
-
-          //   history.push({ pathname: '/' });
-          // }}
-        >
+        <Button type='primary' size='medium'>
           Зарегистрироваться
         </Button>
       </form>

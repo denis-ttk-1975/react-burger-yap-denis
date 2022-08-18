@@ -4,13 +4,18 @@ import { useHistory, Link, useLocation } from 'react-router-dom';
 
 import { Typography, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { useForm } from './../../hooks/useForm';
+
 import styles from './login.module.css';
 
 import { loginUser } from '../../services/actions/login';
 
 function Login() {
-  const [valueEmail, setValueEmail] = React.useState('');
-  const [valuePassword, setValuePassword] = React.useState('');
+  // const [valueEmail, setValueEmail] = React.useState('');
+  // const [valuePassword, setValuePassword] = React.useState('');
+
+  const { values, setValues, handleChange } = useForm({});
+
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
@@ -27,16 +32,16 @@ function Login() {
         onSubmit={(e) => {
           e.preventDefault();
 
-          dispatch(loginUser(valueEmail, valuePassword));
+          dispatch(loginUser(values?.email, values?.password));
 
           history.push({ pathname: location?.state?.from?.pathname || '/' });
         }}
       >
         <div className={'input_wrapper'}>
-          <EmailInput className={`${styles.login_input}`} onChange={(e) => setValueEmail(e.target.value)} value={valueEmail} name={'email'} />
+          <EmailInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.email} name={'email'} />
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput className={`${styles.login_input}`} onChange={(e) => setValuePassword(e.target.value)} value={valuePassword} name={'password'} />
+          <PasswordInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.password} name={'password'} />
         </div>
 
         <Button type='primary' size='medium'>

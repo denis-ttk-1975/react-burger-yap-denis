@@ -5,30 +5,32 @@ import { requestForUserInfo } from './../../services/actions/get-user-info';
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, EmailInput, PasswordInput, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { useForm } from './../../hooks/useForm';
+
 import styles from './profile-data.module.css';
 
 function ProfileData() {
   const dispatch = useDispatch();
 
-  // dispatch(requestForUserInfo());
-
   useEffect(() => {
     dispatch(requestForUserInfo());
   }, [dispatch]);
 
-  const [valueName, setValueName] = React.useState(localStorage.getItem('user_name'));
-  const [valueEmail, setValueEmail] = React.useState(localStorage.getItem('user_email'));
-  const [valuePassword, setValuePassword] = React.useState('');
+  // const [valueName, setValueName] = React.useState(localStorage.getItem('user_name'));
+  // const [valueEmail, setValueEmail] = React.useState(localStorage.getItem('user_email'));
+  // const [valuePassword, setValuePassword] = React.useState('');
+
+  const { values, setValues, handleChange } = useForm({ name: localStorage.getItem('user_name'), email: localStorage.getItem('user_email'), password: '' });
+
   const [activateButtons, setActivateButtons] = React.useState(false);
   const inputNameRef = React.useRef(null);
-  const inputEmailRef = React.useRef(null);
-  const inputPasswordRef = React.useRef(null);
+
   return (
     <form
       className={`${styles.profile_data_form}`}
       onSubmit={(e) => {
         e.preventDefault();
-        dispatch(updateUserInfo(valueName, valueEmail, valuePassword));
+        dispatch(updateUserInfo(values?.name, values?.email, values?.password));
       }}
     >
       <div className={'input_wrapper'}>
@@ -37,10 +39,10 @@ function ProfileData() {
           type={'text'}
           placeholder={'Имя'}
           onChange={(e) => {
-            setValueName(e.target.value);
+            handleChange(e);
             setActivateButtons(true);
           }}
-          value={valueName}
+          value={values?.name}
           name={'name'}
           error={false}
           ref={inputNameRef}
@@ -52,10 +54,10 @@ function ProfileData() {
         <EmailInput
           className={`${styles.profile_data_input}`}
           onChange={(e) => {
-            setValueEmail(e.target.value);
+            handleChange(e);
             setActivateButtons(true);
           }}
-          value={valueEmail}
+          value={values?.email}
           name={'email'}
         />
       </div>
@@ -63,10 +65,10 @@ function ProfileData() {
         <PasswordInput
           className={`${styles.profile_data_input}`}
           onChange={(e) => {
-            setValuePassword(e.target.value);
+            handleChange(e);
             setActivateButtons(true);
           }}
-          value={valuePassword}
+          value={values?.password}
           name={'password'}
         />
       </div>
@@ -77,21 +79,15 @@ function ProfileData() {
             size='medium'
             onClick={(e) => {
               e.preventDefault();
-              setValueName(localStorage.getItem('user_name'));
-              setValueEmail(localStorage.getItem('user_email'));
-              setValuePassword('');
+              setValues({ name: localStorage.getItem('user_name'), email: localStorage.getItem('user_email'), password: '' });
+              // setValueName(localStorage.getItem('user_name'));
+              // setValueEmail(localStorage.getItem('user_email'));
+              // setValuePassword('');
             }}
           >
             Отмена
           </Button>
-          <Button
-            type='primary'
-            size='medium'
-            // onClick={(e) => {
-            //   e.preventDefault();
-            //   dispatch(updateUserInfo(valueName, valueEmail, valuePassword));
-            // }}
-          >
+          <Button type='primary' size='medium'>
             Сохранить
           </Button>
         </div>

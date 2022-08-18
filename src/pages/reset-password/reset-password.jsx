@@ -4,16 +4,17 @@ import { useHistory, Link, Redirect } from 'react-router-dom'; // импорт �
 
 import { Typography, Logo, Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
+import { useForm } from './../../hooks/useForm';
+
 import styles from './reset-password.module.css';
 
 import { resetUserPassword } from './../../services/actions/reset-password';
 
 function ResetPassword() {
-  const [valuePassword, setValuePassword] = React.useState('');
-  const [valueCode, setValueCode] = React.useState('');
+  // const [valuePassword, setValuePassword] = React.useState('');
+  // const [valueCode, setValueCode] = React.useState('');
 
-  const inputPasswordRef = React.useRef(null);
-  const inputCodeRef = React.useRef(null);
+  const { values, setValues, handleChange } = useForm({});
 
   const dispatch = useDispatch();
 
@@ -30,19 +31,12 @@ function ResetPassword() {
         className={`${styles.reset_password_form}`}
         onSubmit={(e) => {
           e.preventDefault();
-          dispatch(resetUserPassword(valuePassword, valueCode));
+          dispatch(resetUserPassword(values?.password, values?.code));
           history.push({ pathname: '/' });
         }}
       >
         <div className={'input_wrapper'}>
-          <PasswordInput
-            className={`${styles.reset_password_input}`}
-            type={'text'}
-            placeholder={'Введите новый пароль'}
-            onChange={(e) => setValuePassword(e.target.value)}
-            value={valuePassword}
-            name={'password'}
-          />
+          <PasswordInput className={`${styles.reset_password_input}`} type={'text'} placeholder={'Введите новый пароль'} onChange={(e) => handleChange(e)} value={values?.password} name={'password'} />
         </div>
 
         <div className={'input_wrapper'}>
@@ -50,22 +44,14 @@ function ResetPassword() {
             className={`${styles.reset_password_input}`}
             type={'text'}
             placeholder={'Введите код из письма'}
-            onChange={(e) => setValueCode(e.target.value)}
-            value={valueCode}
-            name={'email'}
+            onChange={(e) => handleChange(e)}
+            value={values?.code}
+            name={'code'}
             error={false}
             errorText={'Ошибка'}
           />
         </div>
-        <Button
-          type='primary'
-          size='medium'
-          // onClick={(e) => {
-          //   e.preventDefault();
-          //   dispatch(resetUserPassword(valuePassword, valueCode));
-          //   history.push({ pathname: '/' });
-          // }}
-        >
+        <Button type='primary' size='medium'>
           Сохранить
         </Button>
       </form>
