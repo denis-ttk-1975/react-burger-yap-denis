@@ -30,6 +30,15 @@ function ProfileData() {
       className={`${styles.profile_data_form}`}
       onSubmit={(e) => {
         e.preventDefault();
+        if (values?.name || values?.email || values?.password) {
+          alert(
+            `введены не все значения \n Отсутствуют значения: \n${!values?.name ? '  Имени \n' : ''}${!values?.email ? '  Электронной почты \n' : ''}${
+              !values?.password ? '  Пароля' : ''
+            }\n повторите ввод`
+          );
+          setValues({ name: localStorage.getItem('user_name'), email: localStorage.getItem('user_email'), password: '' });
+          return;
+        }
         dispatch(updateUserInfo(values?.name, values?.email, values?.password));
       }}
     >
@@ -42,7 +51,7 @@ function ProfileData() {
             handleChange(e);
             setActivateButtons(true);
           }}
-          value={values?.name}
+          value={values?.name || ''}
           name={'name'}
           error={false}
           ref={inputNameRef}
@@ -57,7 +66,7 @@ function ProfileData() {
             handleChange(e);
             setActivateButtons(true);
           }}
-          value={values?.email}
+          value={values?.email || ''}
           name={'email'}
         />
       </div>
@@ -68,7 +77,7 @@ function ProfileData() {
             handleChange(e);
             setActivateButtons(true);
           }}
-          value={values?.password}
+          value={values?.password || ''}
           name={'password'}
         />
       </div>

@@ -15,7 +15,7 @@ function Register() {
   // const [valueEmail, setValueEmail] = React.useState('');
   // const [valuePassword, setValuePassword] = React.useState('');
 
-  const { values, setValues, handleChange } = useForm({});
+  const { values, setValues, handleChange } = useForm({ name: '', email: '', password: '' });
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -29,19 +29,38 @@ function Register() {
         onSubmit={(e) => {
           e.preventDefault();
 
+          if (values?.name || values?.email || values?.password) {
+            alert(
+              `введены не все значения \n Отсутствуют значения: \n${!values?.name ? '  Имени \n' : ''}${!values?.email ? '  Электронной почты \n' : ''}${
+                !values?.password ? '  Пароля' : ''
+              }\n повторите ввод`
+            );
+            setValues({ name: '', email: '', password: '' });
+            return;
+          }
+
           dispatch(registerNewUser(values?.name, values?.email, values?.password));
 
           history.push({ pathname: '/' });
         }}
       >
         <div className={'input_wrapper'}>
-          <Input className={`${styles.register_input}`} type={'text'} placeholder={'Имя'} onChange={(e) => handleChange(e)} value={values?.name} name={'name'} error={false} errorText={'Ошибка'} />
+          <Input
+            className={`${styles.register_input}`}
+            type={'text'}
+            placeholder={'Имя'}
+            onChange={(e) => handleChange(e)}
+            value={values?.name || ''}
+            name={'name'}
+            error={false}
+            errorText={'Ошибка'}
+          />
         </div>
         <div className={'input_wrapper'}>
-          <EmailInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.email} name={'email'} />
+          <EmailInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.password} name={'password'} />
+          <PasswordInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.password || ''} name={'password'} />
         </div>
         <Button type='primary' size='medium'>
           Зарегистрироваться

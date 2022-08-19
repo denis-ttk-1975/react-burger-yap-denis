@@ -14,7 +14,7 @@ function ResetPassword() {
   // const [valuePassword, setValuePassword] = React.useState('');
   // const [valueCode, setValueCode] = React.useState('');
 
-  const { values, setValues, handleChange } = useForm({});
+  const { values, setValues, handleChange } = useForm({ email: '', code: '' });
 
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ function ResetPassword() {
         }}
       >
         <div className={'input_wrapper'}>
-          <PasswordInput className={`${styles.reset_password_input}`} type={'text'} placeholder={'Введите новый пароль'} onChange={(e) => handleChange(e)} value={values?.password} name={'password'} />
+          <PasswordInput className={`${styles.reset_password_input}`} type={'text'} placeholder={'Введите новый пароль'} onChange={(e) => handleChange(e)} value={values?.password||''} name={'password'} />
         </div>
 
         <div className={'input_wrapper'}>
@@ -45,7 +45,7 @@ function ResetPassword() {
             type={'text'}
             placeholder={'Введите код из письма'}
             onChange={(e) => handleChange(e)}
-            value={values?.code}
+            value={values?.code||''}
             name={'code'}
             error={false}
             errorText={'Ошибка'}

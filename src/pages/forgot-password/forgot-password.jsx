@@ -13,7 +13,7 @@ import { sendForgotPasswordRequest } from './../../services/actions/forgot-passw
 function ForgotPassword() {
   // const [valueEmail, setValueEmail] = React.useState('');
 
-  const { values, setValues, handleChange } = useForm({});
+  const { values, setValues, handleChange } = useForm({ email: '' });
 
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ function ForgotPassword() {
         }}
       >
         <div className={'input_wrapper'}>
-          <EmailInput onChange={(e) => handleChange(e)} value={values?.email} name={'email'} />
+          <EmailInput onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
         </div>
         <Button
           type='primary'

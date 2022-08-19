@@ -14,7 +14,7 @@ function Login() {
   // const [valueEmail, setValueEmail] = React.useState('');
   // const [valuePassword, setValuePassword] = React.useState('');
 
-  const { values, setValues, handleChange } = useForm({});
+  const { values, setValues, handleChange } = useForm({ email: '', password: '' });
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,10 +38,10 @@ function Login() {
         }}
       >
         <div className={'input_wrapper'}>
-          <EmailInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.email} name={'email'} />
+          <EmailInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.password} name={'password'} />
+          <PasswordInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.password || ''} name={'password'} />
         </div>
 
         <Button type='primary' size='medium'>
