@@ -1,0 +1,24 @@
+.ordersSummary {
+  margin-top: 100px;
+}
+.ordersSummaryLists {
+  display: flex;
+  gap: 36px;
+  margin-bottom: 60px;
+}
+.ordersList {
+  width: 272px;
+}
+.ordersListTitle {
+  margin-bottom: 24px;
+}
+.preparingOrderItem {
+  list-style-type: none;
+}
+.readyOrderItem {
+  color: #00cccc;
+  list-style-type: none;
+}
+.ordersTotal {
+  margin-bottom: 60px;
+}

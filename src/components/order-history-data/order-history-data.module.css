@@ -1,0 +1,25 @@
+.scrollBox {
+  max-height: calc(100vh - 384px);
+  /* min-height: 464px; */
+  /* max-height: 756px; */
+  overflow-y: auto;
+  /* max-height: 756px; */
+  /* overflow-y: scroll; */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.scrollBox::-webkit-scrollbar {
+  max-width: 8px;
+}
+
+.scrollBox::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.scrollBox::-webkit-scrollbar-track {
+  background-color: #2f2f37;
+  margin: 0 0 52px;
+}

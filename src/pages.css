@@ -1,0 +1,13 @@
+form > div {
+  width: 100%;
+}
+
+.input_wrapper {
+  width: 100%;
+}
+.input_wrapper > div {
+  width: 100%;
+}
+.input_wrapper > div > div {
+  width: 100%;
+}

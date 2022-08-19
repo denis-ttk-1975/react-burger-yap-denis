@@ -39,11 +39,8 @@ export function getIngredients() {
       dispatch(setStartForIngredientRequest());
 
       const res = await fetch(fetchUrlForIngredients);
-      // if (!res.ok) {
-      //   throw new Error('Сервер не дал ответа');
-      // }
-      checkResponse(res);
-      const fullResponse = await res.json();
+     
+      const fullResponse = await  checkResponse(res);
 
       dispatch(setSuccessForIngredientRequest([...fullResponse.data]));
     } catch (error) {

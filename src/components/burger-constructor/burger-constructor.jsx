@@ -32,16 +32,14 @@ function BurgerConstructor(props) {
 
       if (itemData) {
         if (itemData.type === 'bun') {
-          const newBun = { ...removeKey(itemData), uuid: nanoid() };
+          const newBun = { ...itemData, uuid: nanoid() };
           dispatch(setBunIntoOrder(newBun));
         }
         if (itemData.type === 'main' || itemData.type === 'sauce') {
-          const newItem = { ...removeKey(itemData), uuid: nanoid() };
+          const newItem = { ...itemData, uuid: nanoid() };
           const newStuffing = [...stuffing, newItem];
           dispatch(setStuffingIntoOrder(newStuffing));
         }
-
-        //   ? stuffing.map((item, index, arr) => {
       }
     },
   });
@@ -51,27 +49,25 @@ function BurgerConstructor(props) {
       alert('Вы выбрали больше чем одну булку, выберите один вид булки');
     }
 
-    return [...arrayIngredients.filter((elem) => elem.type === 'bun' && elem.__v > 0)][0];
+    return [...arrayIngredients.filter((elem) => elem.type === 'bun')][0];
   };
 
   const bunElement = amountBunCheck(orderIngredients);
 
-  const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun' && elem.__v > 0)];
+  const ingredientsArray = [...orderIngredients.filter((elem) => elem.type !== 'bun')];
 
   useEffect(() => {
-    const removeKey = ({ __v, ...rest }) => rest;
     if (bunElement) {
-      const bun = { ...removeKey(bunElement), uuid: nanoid() };
+      const bun = { ...bunElement, uuid: nanoid() };
 
       dispatch(setBunIntoOrder(bun));
     }
     if (ingredientsArray) {
       let stuffingAcc = [];
       ingredientsArray.forEach((elem) => {
-        const newElem = { ...removeKey(elem), uuid: nanoid() };
-        for (let j = 0; j < elem.__v; j++) {
-          stuffingAcc.push(newElem);
-        }
+        const newElem = { ...elem, uuid: nanoid() };
+
+        stuffingAcc.push(newElem);
       });
       dispatch(setStuffingIntoOrder(stuffingAcc));
     }
