@@ -12,6 +12,7 @@ import { updateTokenReducer } from './update-token';
 import { userLogoutReducer } from './logout';
 import { userUpdateInfoReducer } from './patch-user-info';
 import { getUserInfoReducer } from './get-user-info';
+import { feedReducer } from './feed-page-socket';
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -26,6 +27,7 @@ export const rootReducer = combineReducers({
   userLogout: userLogoutReducer,
   userUpdateInfo: userUpdateInfoReducer,
   getUserInfo: getUserInfoReducer,
+  feed: feedReducer,
 });
 
 // export const rootReducer = (state, action) => {
