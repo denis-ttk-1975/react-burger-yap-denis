@@ -29,7 +29,7 @@ function Register() {
         onSubmit={(e) => {
           e.preventDefault();
 
-          if (values?.name || values?.email || values?.password) {
+          if (!values?.name || !values?.email || !values?.password) {
             alert(
               `введены не все значения \n Отсутствуют значения: \n${!values?.name ? '  Имени \n' : ''}${!values?.email ? '  Электронной почты \n' : ''}${
                 !values?.password ? '  Пароля' : ''
