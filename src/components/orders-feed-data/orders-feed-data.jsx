@@ -15,12 +15,19 @@ function OrdersFeedData({ orders }) {
       <div className={styles.scrollBox}>
         {orders.map((elem) => {
           if (!!elem._id) {
+            const orderDate = new Date(Date.parse(elem.createdAt));
+
+            const currentDate = new Date();
+
+            const date = orderDate.getDate() === currentDate.getDate() ? `Сегодня, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3` : 2;
+
             return (
               <OrdersFeedCard
-                number='#000538'
-                date='Сегодня, 16:20 i-GMT+3'
-                title='Death Star Starship Main бургер'
-                status='Выполнен'
+                key={elem._id}
+                number={`#${elem.number}`}
+                date={date}
+                title={elem.name}
+                status={elem.status}
                 data={[
                   { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
                   { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
