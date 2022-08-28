@@ -35,6 +35,7 @@ export const feedPageSocketMiddleware = (wsActions) => {
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
+          console.log('parsedData.success -', parsedData?.success, 'parsedData.message -', parsedData?.message, 'parsedData.orders -', parsedData?.orders);
           dispatch(onMessage(parsedData));
         };
 

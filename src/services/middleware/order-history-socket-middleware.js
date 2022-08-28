@@ -6,16 +6,17 @@ export const orderHistorySocketMiddleware = (wsActions) => {
     let isConnected = false;
     let reconnectTimer = 0;
     let url = '';
-    let accessToken = getCookie('accessToken');
+    // let accessToken = getCookie('accessToken');
 
     return (next) => (action) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
       const { wsOrderHistoryConnect, wsOrderHistoryDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
       // console.log('я в ордер хистори вебсокет мидлваре');
-      console.log('payloadOH -', payload, 'accessToken -', accessToken);
+      // console.log('payloadOH -', payload, 'accessToken -', accessToken);
       if (type === wsOrderHistoryConnect) {
         console.log('connect');
+        let accessToken = getCookie('accessToken');
         url = `${payload}?token=${accessToken}`;
         socket = new WebSocket(url);
         isConnected = true;
@@ -38,6 +39,8 @@ export const orderHistorySocketMiddleware = (wsActions) => {
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
+          console.log('parsedData.success -', parsedData?.success, 'parsedData.message -', parsedData?.message, 'parsedData.orders -', parsedData?.orders);
+
           dispatch(onMessage(parsedData));
         };
 
