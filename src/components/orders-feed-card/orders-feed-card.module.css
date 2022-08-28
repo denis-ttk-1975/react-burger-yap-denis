@@ -5,6 +5,7 @@
   padding: 24px;
   background-color: #1c1c21;
   border-radius: 40px;
+  cursor: pointer;
 }
 .ordersFeedCard_header {
   display: flex;
