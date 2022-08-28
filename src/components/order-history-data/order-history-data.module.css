@@ -1,5 +1,5 @@
 .scrollBox {
-  max-height: calc(100vh - 384px);
+  max-height: calc(100vh - 96px);
   /* min-height: 464px; */
   /* max-height: 756px; */
   overflow-y: auto;

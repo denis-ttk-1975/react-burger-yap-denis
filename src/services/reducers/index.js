@@ -13,6 +13,7 @@ import { userLogoutReducer } from './logout';
 import { userUpdateInfoReducer } from './patch-user-info';
 import { getUserInfoReducer } from './get-user-info';
 import { feedReducer } from './feed-page-socket';
+import { orderHistoryReducer } from './order-history-socket';
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -28,6 +29,7 @@ export const rootReducer = combineReducers({
   userUpdateInfo: userUpdateInfoReducer,
   getUserInfo: getUserInfoReducer,
   feed: feedReducer,
+  orderHistory: orderHistoryReducer,
 });
 
 // export const rootReducer = (state, action) => {

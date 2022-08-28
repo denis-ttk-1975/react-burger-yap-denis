@@ -1,19 +1,22 @@
-export const feedPageSocketMiddleware = (wsActions) => {
+import { getCookie } from './../../utils/getCookie';
+
+export const orderHistorySocketMiddleware = (wsActions) => {
   return (store) => {
     let socket = null;
     let isConnected = false;
     let reconnectTimer = 0;
     let url = '';
+    let accessToken = getCookie('accessToken');
 
     return (next) => (action) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
-      const { wsFeedConnect, wsFeedDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
-      // console.log('я в фиид пейдж вебсокет мидлваре');
-      console.log('payloadFD -', payload);
-      if (type === wsFeedConnect) {
+      const { wsOrderHistoryConnect, wsOrderHistoryDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
+      // console.log('я в ордер хистори вебсокет мидлваре');
+      console.log('payloadOH -', payload, 'accessToken -', accessToken);
+      if (type === wsOrderHistoryConnect) {
         console.log('connect');
-        url = payload;
+        url = `${payload}?token=${accessToken}`;
         socket = new WebSocket(url);
         isConnected = true;
         console.log('isConnected: ', isConnected);
@@ -66,7 +69,7 @@ export const feedPageSocketMiddleware = (wsActions) => {
         //   socket.send(JSON.stringify(action.payload));
         // }
 
-        if (type === wsFeedDisconnect) {
+        if (type === wsOrderHistoryDisconnect) {
           console.log('disconnect');
           clearTimeout(reconnectTimer);
           isConnected = false;

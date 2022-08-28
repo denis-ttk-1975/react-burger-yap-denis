@@ -1,4 +1,5 @@
-import React from 'react'; // импорт библиотеки
+import React, { useEffect } from 'react'; // импорт библиотеки
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -6,8 +7,22 @@ import styles from './order-history-data.module.css';
 
 import OrderCard from './../order-card/order-card';
 
+import { wsOrderHistoryConnect, wsOrderHistoryDisconnect } from './../../services/actions/order-history-socket';
+import { wsUserOrdersInfo } from './../../utils/url';
+
 // whole component
 function OrderHistoryData(props) {
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.orderHistory);
+  console.log('data: ', data);
+
+  useEffect(() => {
+    dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
+    return () => {
+      dispatch(wsOrderHistoryDisconnect());
+    };
+  }, [dispatch]);
+
   return (
     <div className={styles.scrollBox}>
       <OrderCard
