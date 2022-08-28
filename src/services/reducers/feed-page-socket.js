@@ -2,7 +2,7 @@ import { FEED_WS_OPEN, FEED_WS_CLOSE, FEED_WS_ERROR, FEED_WS_MESSAGE } from './.
 
 const initialState = {
   connectionError: '',
-  table: null,
+  data: null,
 };
 
 export const feedReducer = (state = initialState, action) => {
@@ -16,7 +16,8 @@ export const feedReducer = (state = initialState, action) => {
     }
     case FEED_WS_CLOSE: {
       return {
-        ...state,
+        connectionError: '',
+        data: null,
       };
     }
     case FEED_WS_ERROR: {
@@ -28,7 +29,7 @@ export const feedReducer = (state = initialState, action) => {
     case FEED_WS_MESSAGE: {
       return {
         ...state,
-        table: action.payload,
+        data: action.payload,
       };
     }
     default: {

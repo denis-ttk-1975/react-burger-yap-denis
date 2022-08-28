@@ -100,7 +100,9 @@ function BurgerConstructor(props) {
       </div>
       <div className={'constructor__stuffing'}>
         {stuffing.length === 0 ? (
-          <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
+          <div className={styles.innerList}>
+            <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' />
+          </div>
         ) : (
           <div className={styles.innerList}>
             {stuffing.map((elem, index) => {

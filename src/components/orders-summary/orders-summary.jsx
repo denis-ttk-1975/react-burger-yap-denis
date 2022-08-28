@@ -30,11 +30,11 @@ function OrdersSummary(props) {
       </div>
       <div className={`${styles.ordersTotal} text `}>
         <h1 className={`${styles.ordersTotalTitle} text text_type_main-medium`}>Выполнено за все время:</h1>
-        <p className={`${styles.ordersTotalText} text text_type_digits-large`}>28 752</p>
+        <p className={`${styles.ordersTotalText} text text_type_digits-large`}>{props.total}</p>
       </div>
       <div className={`${styles.ordersToday} text `}>
         <h1 className={`${styles.ordersTodayTitle} text text_type_main-medium`}>Выполнено сегодня:</h1>
-        <p className={`${styles.ordersTodayText} text text_type_digits-large`}>138</p>
+        <p className={`${styles.ordersTodayText} text text_type_digits-large`}>{props.totalToday}</p>
       </div>
     </div>
   );

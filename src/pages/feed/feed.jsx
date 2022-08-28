@@ -13,6 +13,9 @@ import styles from './feed.module.css';
 
 function Feed() {
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.feed);
+
+  console.log(data?.total, data?.totalToday, data?.orders);
 
   useEffect(() => {
     dispatch(wsFeedConnect(wsAllOrdersInfo));
@@ -22,10 +25,14 @@ function Feed() {
   }, [dispatch]);
 
   return (
-    <div className={`${styles.feedBox}`}>
-      <OrdersFeedData />
-      <OrdersSummary />
-    </div>
+    <>
+      {!!data?.total && !!data?.totalToday && !!data?.orders && (
+        <div className={`${styles.feedBox}`}>
+          <OrdersFeedData orders={data.orders} />
+          <OrdersSummary total={data.total} totalToday={data.totalToday} />
+        </div>
+      )}
+    </>
   );
 }
 
