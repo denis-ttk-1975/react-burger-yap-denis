@@ -14,6 +14,7 @@ import { wsUserOrdersInfo } from './../../utils/url';
 function OrderHistoryData(props) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.orderHistory);
+  const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
   console.log('data: ', data);
 
   useEffect(() => {
@@ -24,194 +25,40 @@ function OrderHistoryData(props) {
   }, [dispatch]);
 
   return (
-    <div className={styles.scrollBox}>
-      <OrderCard
-        number='#000538'
-        date='Сегодня, 16:20 i-GMT+3'
-        title='Death Star Starship Main бургер'
-        status='Выполнен'
-        data={[
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-        ]}
-        onClick={() => alert('You clicked on order card')}
-        price='480'
-      />
-      <OrderCard
-        number='#000538'
-        date='Сегодня, 16:20 i-GMT+3'
-        title='Death Star Starship Main бургер'
-        status='Выполнен'
-        data={[
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-        ]}
-        onClick={() => alert('You clicked on order card')}
-        price='480'
-      />
-      <OrderCard
-        number='#000538'
-        date='Сегодня, 16:20 i-GMT+3'
-        title='Death Star Starship Main бургер'
-        status='Выполнен'
-        data={[
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-        ]}
-        onClick={() => alert('You clicked on order card')}
-        price='480'
-      />
-      <OrderCard
-        number='#000538'
-        date='Сегодня, 16:20 i-GMT+3'
-        title='Death Star Starship Main бургер'
-        status='Выполнен'
-        data={[
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-        ]}
-        onClick={() => alert('You clicked on order card')}
-        price='480'
-      />
-      <OrderCard
-        number='#000538'
-        date='Сегодня, 16:20 i-GMT+3'
-        title='Death Star Starship Main бургер'
-        status='Выполнен'
-        data={[
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-          { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-        ]}
-        onClick={() => alert('You clicked on order card')}
-        price='480'
-      />
-    </div>
+    <>
+      {!!data?.orders && (
+        <div className={styles.scrollBox}>
+          {data.orders.map((order) => {
+            if (!!order._id) {
+              const orderDate = new Date(Date.parse(order.createdAt));
+              const currentDate = new Date();
+              const date =
+                orderDate.getDate() === currentDate.getDate()
+                  ? `Сегодня, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`
+                  : `Вчера, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`;
+              const itemList = order.ingredients.map((item) => {
+                return ingredientList.find((elem) => elem._id === item.toString());
+              });
+
+              const price = itemList.reduce((acc, item) => acc + Number(item.price), 0);
+
+              return (
+                <OrderCard
+                  key={order._id}
+                  number={`#${order.number}`}
+                  date={date}
+                  title={order.name}
+                  status={order.status}
+                  data={itemList}
+                  onClick={() => alert('You clicked on order card')}
+                  price={price}
+                />
+              );
+            }
+          })}
+        </div>
+      )}
+    </>
   );
 }
 
