@@ -18,13 +18,17 @@ export const orderHistorySocketMiddleware = (wsActions) => {
       const { type, payload } = action;
       const { wsOrderHistoryConnect, wsOrderHistoryDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
       console.log('я в ордер хистори вебсокет мидлваре');
+      url = payload;
 
       if (type === wsOrderHistoryConnect) {
         console.log('connect');
         let accessToken = getCookie('accessToken');
         console.log('payloadOH -', payload, 'accessToken -', accessToken);
-        url = `${payload}?token=${accessToken}`;
-        socket = new WebSocket(url);
+        // url = `${payload}?token=${accessToken}`;
+
+        console.log('payload-start: ', payload);
+
+        socket = new WebSocket(`${url}?token=${accessToken}`);
         isConnected = true;
         console.log('isConnected: ', isConnected);
       }
@@ -58,40 +62,42 @@ export const orderHistorySocketMiddleware = (wsActions) => {
             dispatch(onError(`Закрытие с ошибкой - код ${event.code.toString()}`));
             // if (data?.message === 'Invalid or missing token') {
 
-            if (true) {
-              (async () => {
-                console.log('обновляю токен');
-                try {
-                  const res = await fetch(postUrlUserTokenUpdate, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                      token: `${getCookie('refreshToken')}`,
-                    }),
-                  });
+            (async () => {
+              console.log('обновляю токен');
+              try {
+                const res = await fetch(postUrlUserTokenUpdate, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    token: `${getCookie('refreshToken')}`,
+                  }),
+                });
 
-                  const fullResponse = await checkResponse(res);
-                  // console.log('обновляю токен');
-                  setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
-                  setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
-                } catch (error) {
-                  Promise.reject(error.message);
-                }
-              })();
-              reconnectTimer = window.setTimeout(() => {
-                let accessToken = getCookie('accessToken');
-                url = `${payload}?token=${accessToken}`;
-                console.log('payloadOH -', payload, 'accessToken -', accessToken);
+                const fullResponse = await checkResponse(res);
+                // console.log('обновляю токен');
+                setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
+                setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
+              } catch (error) {
+                Promise.reject(error.message);
+              }
+            })();
+            reconnectTimer = window.setTimeout(() => {
+              let accessToken = getCookie('accessToken');
+              console.log('payload: ', payload);
+              url = payload;
+              // url = `${payload}?token=${accessToken}`;
+              console.log('url: ', url);
 
-                dispatch(onConnect(url));
-                console.log('Reconnection...');
-              }, 3000);
-            }
-            console.log('close');
-            dispatch(onClose());
+              console.log('payloadOH -', payload, 'accessToken -', accessToken);
+
+              dispatch(onConnect(url));
+              console.log('Reconnection...');
+            }, 3000);
           }
+          console.log('close');
+          dispatch(onClose());
         };
 
         // if (type === wsSendMessage) {

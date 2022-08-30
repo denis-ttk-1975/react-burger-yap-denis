@@ -5,7 +5,7 @@ import { Box, Typography, CurrencyIcon } from '@ya.praktikum/react-developer-bur
 
 import styles from './order-card.module.css';
 
-const statusMapping = { done: 'Готов', preparing: 'В работе', created: 'Создан' };
+const statusMapping = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
 
 const OrderCard = ({ number, date, title, status, data, price, onClick }) => {
   const statusFieldStyle = status !== 'done' ? `text text_type_main-default ${styles.orderCard_status}` : `text text_type_main-default ${styles.orderCard_status} ${styles.orderCard_status_done}`;
