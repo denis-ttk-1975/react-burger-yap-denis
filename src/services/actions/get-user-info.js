@@ -3,7 +3,6 @@ import { checkResponse } from './../../utils/checkResponse';
 import { fetchWithCheckJwt } from './../../utils/fetchWithCheckJwt';
 
 import { setUserData } from './../../utils/setUserData';
-import { setCookie } from './../../utils/setCookie';
 import { getCookie } from './../../utils/getCookie';
 
 export const SEND_USER_INFO_REQUEST = 'SEND_USER_INFO_REQUEST';

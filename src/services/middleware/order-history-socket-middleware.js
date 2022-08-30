@@ -1,7 +1,12 @@
 import { getCookie } from './../../utils/getCookie';
+import { setCookie } from './../../utils/setCookie';
+import { checkResponse } from './../../utils/checkResponse';
+import { useSelector } from 'react-redux';
+import { postUrlUserTokenUpdate } from './../../utils/url';
 
 export const orderHistorySocketMiddleware = (wsActions) => {
   return (store) => {
+    // const { data } = useSelector((state) => state.orderHistory);
     let socket = null;
     let isConnected = false;
     let reconnectTimer = 0;
@@ -50,21 +55,40 @@ export const orderHistorySocketMiddleware = (wsActions) => {
             console.log('error', event);
             console.log('isConnected: ', isConnected);
             dispatch(onError(`Закрытие с ошибкой - код ${event.code.toString()}`));
-            reconnectTimer = window.setTimeout(() => {
-              dispatch(onConnect(url));
-              console.log('Reconnection...');
-            }, 3000);
+            // if (data?.message === 'Invalid or missing token') {
+
+            if (true) {
+              (async () => {
+                console.log('обновляю токен');
+                try {
+                  const res = await fetch(postUrlUserTokenUpdate, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                      token: `${getCookie('refreshToken')}`,
+                    }),
+                  });
+
+                  const fullResponse = await checkResponse(res);
+                  // console.log('обновляю токен');
+                  setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
+                  setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
+                } catch (error) {
+                  Promise.reject(error.message);
+                }
+              })();
+              reconnectTimer = window.setTimeout(() => {
+                let accessToken = getCookie('accessToken');
+                url = `${payload}?token=${accessToken}`;
+                dispatch(onConnect(url));
+                console.log('Reconnection...');
+              }, 3000);
+            }
+            console.log('close');
+            dispatch(onClose());
           }
-          console.log('close');
-          dispatch(onClose());
-
-          // if (isConnected) {
-          //   console.log('isConnected: ', isConnected);
-
-          //   reconnectTimer = window.setTimeout(() => {
-          //     dispatch(onConnect(url));
-          //   }, 3000);
-          // }
         };
 
         // if (type === wsSendMessage) {

@@ -16,8 +16,9 @@ export const orderHistoryReducer = (state = initialState, action) => {
     }
     case ORDER_HISTORY_WS_CLOSE: {
       return {
+        ...state,
+
         connectionError: '',
-        data: null,
       };
     }
     case ORDER_HISTORY_WS_ERROR: {

@@ -3,7 +3,6 @@ import { checkResponse } from './../../utils/checkResponse';
 import { fetchWithCheckJwt } from './../../utils/fetchWithCheckJwt';
 
 import { setUserData } from './../../utils/setUserData';
-import { setCookie } from './../../utils/setCookie';
 import { getCookie } from './../../utils/getCookie';
 
 import { updateTokenRequest } from './update-token';

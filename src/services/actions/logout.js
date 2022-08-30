@@ -42,9 +42,11 @@ export function logoutUser(refreshToken) {
       clearUserData();
       setCookie('accessToken', '', {
         'max-age': -1,
+        path: '/',
       });
       setCookie('refreshToken', '', {
         'max-age': -1,
+        path: '/',
       });
     } catch (error) {
       dispatch(setFailedForLogoutRequest(error.message));

@@ -43,8 +43,8 @@ export function loginUser(email, password) {
       console.log('после ЧекРеспонс', fullResponse);
       await dispatch(setSuccessForLoginRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
       setUserData(fullResponse.user.name, fullResponse.user.email);
-      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
-      setCookie('refreshToken', fullResponse.refreshToken);
+      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
+      setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
     } catch (error) {
       const alarm = error.message;
       console.log('я в кетч');
