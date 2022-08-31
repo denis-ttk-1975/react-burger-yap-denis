@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation, useParams, Redirect } from 'react-router-dom';
 
 import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from './../../services/actions/ingredient-details';
 import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
@@ -14,13 +14,13 @@ import BurgerConstructor from './../burger-constructor/burger-constructor';
 import Modal from './../modal/modal';
 import IngredientDetails from './../ingredient-details/ingredient-details';
 import OrderDetails from './../order-details/order-details';
+import OrderIngredients from './../order-ingredients/order-ingredients';
 
 import Login from './../../pages/login/login';
 import Register from './../../pages/register/register';
 import ForgotPassword from './../../pages/forgot-password/forgot-password';
 import ResetPassword from './../../pages/reset-password/reset-password';
 import Profile from './../../pages/profile/profile';
-import OrderHistory from './../../pages/order-history/order-history';
 import Feed from './../../pages/feed/feed';
 import { ProtectedRoute } from './../protected-route/protected-route';
 
@@ -37,10 +37,15 @@ function App() {
   const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails, isOrderModalOpen } = useSelector((state) => state.orderDetails);
   const { ingredientData: ingredientInModal, isIngredientModalOpen } = useSelector((state) => state.ingredientForModal);
   const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
+  const { data: ordersData } = useSelector((state) => state.feed);
 
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  console.log('location: ', location);
+  const param = useParams();
+
+  console.log('param: ', param.id);
 
   const background = location?.state?.background;
 
@@ -124,21 +129,28 @@ function App() {
               <Feed />
             </Route>
             <Route path='/ingredients/:id' exact={true}>
-              {!!menuIngredients.length && <IngredientDetails />}
+              {!!menuIngredients.length && <IngredientDetails center />}
             </Route>
           </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
-            <Modal title='' closeAllModals={closeAllModals}>
+            <Modal closeAllModals={closeAllModals}>
               <OrderDetails dataModal={orderNumber} />
             </Modal>
           )}
           {background && !!menuIngredients.length && (
             <Route path='/ingredients/:id' exact={true}>
-              <Modal title='Детали ингредиента' closeAllModals={() => history.goBack()}>
+              <Modal closeAllModals={() => history.goBack()}>
                 <IngredientDetails />
               </Modal>
             </Route>
           )}
+          {/* {background && !!ordersData?.orders.length && ( */}
+          <Route path='/feed/:id' exact={true}>
+            <Modal closeAllModals={() => history.goBack()}>
+              <OrderIngredients />
+            </Modal>
+          </Route>
+          {/* )} */}
         </main>
       )}
     </>

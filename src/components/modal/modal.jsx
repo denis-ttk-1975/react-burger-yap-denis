@@ -10,7 +10,7 @@ import styles from './modal.module.css';
 // Находим DOM-элемент для отрисовки в нем модальных окон
 const modalsContainer = document.querySelector('#modals');
 
-const Modal = ({ title, closeAllModals, children }) => {
+const Modal = ({ closeAllModals, children }) => {
   // handling for Esc pressing
 
   const handleEscKeydown = (e) => {
@@ -28,12 +28,9 @@ const Modal = ({ title, closeAllModals, children }) => {
   return ReactDOM.createPortal(
     <div className={styles.wrapModal}>
       <div className={styles.modal}>
-        <div className={styles.modalHeader}>
-          <h3 className='text text_type_main-large'>{title}</h3>
-          <button className={styles.closeModalButton} onClick={closeAllModals}>
-            <CloseIcon type='primary' />
-          </button>
-        </div>
+        <button className={styles.closeModalButton} onClick={closeAllModals}>
+          <CloseIcon type='primary' />
+        </button>
         {children}
       </div>
       <ModalOverlay onClick={closeAllModals} />
