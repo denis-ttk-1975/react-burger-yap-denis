@@ -12,6 +12,12 @@
 .ordersListTitle {
   margin-bottom: 24px;
 }
+.OrderItemWrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 241px;
+}
 .preparingOrderItem {
   list-style-type: none;
   width: 136px;
