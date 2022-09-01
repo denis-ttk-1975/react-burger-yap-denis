@@ -1,0 +1,62 @@
+.mainModal {
+  display: flex;
+  flex-direction: column;
+}
+.orderNumber {
+  width: 640px;
+  padding: 60px 40px 40px;
+}
+.center {
+  text-align: center;
+  margin-top: 62px;
+}
+.orderName {
+  padding: 0 40px 12px;
+}
+.orderCard_status {
+  padding: 0 40px 60px;
+}
+.orderCard_status_done {
+  color: #00cccc;
+}
+
+.ingredientsHeader {
+  padding: 0 40px 24px;
+}
+.footer {
+  padding: 0 40px 60px;
+  display: flex;
+  justify-content: space-between;
+}
+.ordersDate {
+}
+.orderCard_price {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.scrollBox {
+  max-height: 312px;
+  /* min-height: 464px; */
+  /* max-height: 756px; */
+  overflow-y: auto;
+  /* max-height: 756px; */
+  /* overflow-y: scroll; */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.scrollBox::-webkit-scrollbar {
+  max-width: 8px;
+}
+
+.scrollBox::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.scrollBox::-webkit-scrollbar-track {
+  background-color: #2f2f37;
+  margin: 0 0 60px;
+}

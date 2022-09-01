@@ -28,7 +28,7 @@ const OrdersFeedCard = ({ number, date, title, status, data, price, onClick }) =
           })}
         </div>
         <div className={`${styles.ordersFeedCard_price}`}>
-          <p className='text text_type_digits-medium'>{price}</p>
+          <p className='text text_type_digits-default'>{price}</p>
 
           <CurrencyIcon type='primary' />
         </div>
