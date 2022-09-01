@@ -35,9 +35,12 @@
   align-items: center;
   gap: 9px;
 }
-
+.scrollBoxWrap {
+  padding: 0 40px 40px 40px;
+}
 .scrollBox {
   max-height: 312px;
+  width: 640px;
   /* min-height: 464px; */
   /* max-height: 756px; */
   overflow-y: auto;
@@ -45,7 +48,7 @@
   /* overflow-y: scroll; */
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 16px;
 }
 
 .scrollBox::-webkit-scrollbar {
@@ -58,5 +61,45 @@
 
 .scrollBox::-webkit-scrollbar-track {
   background-color: #2f2f37;
-  margin: 0 0 60px;
+  margin: 0 0 0px;
+}
+
+.ingredientBox {
+  display: flex;
+  align-items: center;
+  width: 608px;
+  justify-content: space-between;
+}
+
+.spaceAround {
+  display: flex;
+  align-items: center;
+}
+
+.ingredientImageWrap {
+  height: 64px;
+  width: 64px;
+  background: linear-gradient(to right, #801ab2, #4c4cff);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.ingredientImage {
+  height: 56px;
+  width: 56px;
+  background-color: #1c1c21;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.ingredientsName {
+  padding: 0 0 0 16px;
+  max-width: 320px;
+}
+.ingredientsAmountPrice {
+  padding: 0 8px 0 110px;
 }
