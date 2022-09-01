@@ -117,13 +117,13 @@ function OrderIngredients(props) {
               <div className={styles.ingredientBox}>
                 <div className={styles.spaceAround}>
                   <div className={`${styles.ingredientImageWrap}`}>
-                    <img src={data[0].image_mobile} alt={data[0].name} className={`${styles.ingredientImage}`} />
+                    <img src={elem.image_mobile} alt={elem.name} className={`${styles.ingredientImage}`} />
                   </div>
-                  <p className={`${styles.ingredientsName} text text_type_main-default`}>{data[0].name}</p>
+                  <p className={`${styles.ingredientsName} text text_type_main-default`}>{elem.name}</p>
                 </div>
                 <div className={styles.spaceAround}>
                   <p className={`${styles.ingredientsAmountPrice} text text_type_digits-default`}>
-                    {data[0].amount} x {data[0].price}
+                    {elem.amount} x {elem.price}
                   </p>
                   <CurrencyIcon type='primary' />
                 </div>
