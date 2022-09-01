@@ -8,6 +8,7 @@
 }
 .ordersListArea {
   width: 272px;
+  overflow: hidden;
 }
 .ordersListTitle {
   margin-bottom: 24px;

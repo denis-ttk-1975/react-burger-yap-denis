@@ -27,6 +27,21 @@ function OrdersSummary(props) {
             <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034610</li>
             <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034599</li>
             <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034584</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034567</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034612</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034610</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034599</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034584</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034567</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034612</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034610</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034599</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034584</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034567</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034612</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034610</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034599</li>
+            <li className={`${styles.readyOrderItem} text text_type_digits-default `}>034584</li>
           </ul>
         </div>
         <div className={`${styles.ordersListArea} text text_type_main-large`}>
