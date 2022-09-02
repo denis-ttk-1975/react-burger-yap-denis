@@ -27,7 +27,9 @@ function OrdersFeedData({ orders }) {
               return ingredientList.find((elem) => elem._id === item.toString());
             });
 
-            const price = itemList.reduce((acc, item) => acc + Number(item.price), 0);
+            const price = itemList.reduce((acc, item) => {
+              return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
+            }, 0);
 
             return (
               <OrdersFeedCard
