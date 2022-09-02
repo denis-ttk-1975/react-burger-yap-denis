@@ -29,7 +29,7 @@ function Feed() {
       {!!data?.total && !!data?.totalToday && !!data?.orders && (
         <div className={`${styles.feedBox}`}>
           <OrdersFeedData orders={data.orders} />
-          <OrdersSummary total={data.total} totalToday={data.totalToday} />
+          <OrdersSummary orders={data.orders} total={data.total} totalToday={data.totalToday} />
         </div>
       )}
     </>
