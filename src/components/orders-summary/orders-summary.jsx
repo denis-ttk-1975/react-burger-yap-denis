@@ -14,8 +14,12 @@ function OrdersSummary(props) {
           <ul className={`${styles.OrderItemWrap} `}>
             {props.orders
               .filter((elem) => elem.status === 'done')
-              .map((elem) => {
-                return <li className={`${styles.readyOrderItem} text text_type_digits-default `}>{elem.number}</li>;
+              .map((elem, index) => {
+                return (
+                  <li className={`${styles.readyOrderItem} text text_type_digits-default `} key={index}>
+                    {elem.number}
+                  </li>
+                );
               })}
           </ul>
         </div>
@@ -24,8 +28,12 @@ function OrdersSummary(props) {
           <ul className={`${styles.OrderItemWrap} `}>
             {props.orders
               .filter((elem) => elem.status === 'preparing')
-              .map((elem) => {
-                return <li className={`${styles.preparingOrderItem} text text_type_digits-default `}>{elem.number}</li>;
+              .map((elem, index) => {
+                return (
+                  <li className={`${styles.preparingOrderItem} text text_type_digits-default `} key={index}>
+                    {elem.number}
+                  </li>
+                );
               })}
           </ul>
         </div>

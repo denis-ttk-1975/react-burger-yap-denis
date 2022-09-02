@@ -146,8 +146,8 @@ function OrderIngredients(props) {
   );
 }
 
-OrderIngredients.propTypes = {
-  dataModal: PropTypes.string.isRequired,
-};
+// OrderIngredients.propTypes = {
+//   dataModal: PropTypes.string.isRequired,
+// };
 
 export default OrderIngredients;

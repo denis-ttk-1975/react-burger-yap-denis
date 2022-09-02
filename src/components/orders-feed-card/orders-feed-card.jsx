@@ -6,6 +6,15 @@ import { Box, Typography, CurrencyIcon } from '@ya.praktikum/react-developer-bur
 import styles from './orders-feed-card.module.css';
 
 const OrdersFeedCard = ({ number, date, title, status, data, price, onClick }) => {
+  const billetArray =
+    data.length > 6
+      ? data
+          .map((elem, index) => {
+            return index !== 5 ? { ...elem } : { ...elem, restAmount: data.length - 6 };
+          })
+          .slice(0, 6)
+      : [...data];
+  console.log('order number ', number, ' - ', billetArray);
   return (
     <div className={`${styles.ordersFeedCard}`} onClick={onClick}>
       <div className={`${styles.ordersFeedCard_header}`}>
@@ -16,13 +25,14 @@ const OrdersFeedCard = ({ number, date, title, status, data, price, onClick }) =
       {/* <div className={`${styles.ordersFeedCard_status} text text_type_main-default`}>{status}</div> */}
       <div className={`${styles.ordersFeedCard_footer}`}>
         <div className={`${styles.ordersFeedCard_ingredients}`}>
-          {data.map((elem, index, arr) => {
+          {billetArray.reverse().map((elem, index, arr) => {
             const shiftValue = {
-              transform: `translateX(${24 * (index - arr.length + 1)}px)`,
+              transform: `translateX(${16 * (index - arr.length + 1)}px)`,
             };
             return (
               <div style={shiftValue} className={`${styles.ordersFeedCard_ingredientImageWrap}`} key={nanoid()}>
                 <img src={elem.image_mobile} alt='round' className={`${styles.ordersFeedCard_ingredientImage}`} />
+                {elem?.restAmount && <p className={`${styles.ordersFeedCard_restIngredients} text text_type_digits-default`}>+{elem.restAmount}</p>}
               </div>
             );
           })}
