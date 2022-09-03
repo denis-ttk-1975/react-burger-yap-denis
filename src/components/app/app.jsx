@@ -140,7 +140,7 @@ function App() {
               {!!menuIngredients.length && <IngredientDetails center />}
             </Route>
             <Route path='/feed/:id' exact={true}>
-              {!!ordersData?.orders && <OrderIngredients />}
+              {!!ordersData?.orders && <OrderIngredients center />}
             </Route>
           </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (

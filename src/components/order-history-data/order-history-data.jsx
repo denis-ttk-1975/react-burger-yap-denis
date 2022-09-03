@@ -27,7 +27,7 @@ function OrderHistoryData(props) {
     <>
       {!!data?.orders && (
         <div className={styles.scrollBox}>
-          {data.orders.map((order) => {
+          {data.orders.reverse().map((order) => {
             if (!!order._id) {
               const orderDate = new Date(Date.parse(order.createdAt));
               const currentDate = new Date();

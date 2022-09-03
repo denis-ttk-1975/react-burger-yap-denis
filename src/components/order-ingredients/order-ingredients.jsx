@@ -19,99 +19,7 @@ function OrderIngredients(props) {
 
   const statusMapping = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
 
-  const data = [
-    {
-      _id: '60d3b41abdacab0026a733c6',
-      name: 'Краторная булка N-200i',
-      type: 'bun',
-      image: 'https://code.s3.yandex.net/react/code/bun-02.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
-      amount: 2,
-      price: 988,
-    },
-
-    {
-      _id: '60d3b41abdacab0026a733c8',
-      name: 'Филе Люминесцентного тетраодонтимформа',
-      type: 'main',
-      image: 'https://code.s3.yandex.net/react/code/meat-03.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/meat-03-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/meat-03-large.png',
-      amount: 1,
-      price: 1988,
-    },
-    {
-      _id: '60d3b41abdacab0026a733c9',
-      name: 'Мясо бессмертных моллюсков Protostomia',
-      type: 'main',
-      image: 'https://code.s3.yandex.net/react/code/meat-02.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/meat-02-large.png',
-      amount: 1,
-      price: 288,
-    },
-    {
-      _id: '60d3b41abdacab0026a733ca',
-      name: 'Говяжий метеорит (отбивная)',
-      type: 'main',
-      image: 'https://code.s3.yandex.net/react/code/meat-04.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/meat-04-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/meat-04-large.png',
-      amount: 1,
-      price: 388,
-    },
-    {
-      _id: '60d3b41abdacab0026a733cb',
-      name: 'Биокотлета из марсианской Магнолии',
-      type: 'main',
-      image: 'https://code.s3.yandex.net/react/code/meat-01.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/meat-01-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/meat-01-large.png',
-      amount: 3,
-      price: 588,
-    },
-    {
-      _id: '60d3b41abdacab0026a733cc',
-      name: 'Соус Spicy-X',
-      type: 'sauce',
-      image: 'https://code.s3.yandex.net/react/code/sauce-02.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/sauce-02-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/sauce-02-large.png',
-      amount: 2,
-      price: 688,
-    },
-    {
-      _id: '60d3b41abdacab0026a733cd',
-      name: 'Соус фирменный Space Sauce',
-      type: 'sauce',
-      image: 'https://code.s3.yandex.net/react/code/sauce-04.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/sauce-04-large.png',
-      amount: 1,
-      price: 788,
-    },
-    {
-      _id: '60d3b41abdacab0026a733ce',
-      name: 'Соус традиционный галактический',
-      type: 'sauce',
-      image: 'https://code.s3.yandex.net/react/code/sauce-03.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/sauce-03-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/sauce-03-large.png',
-      amount: 1,
-      price: 985,
-    },
-    {
-      _id: '60d3b41abdacab0026a733cf',
-      name: 'Соус с шипами Антарианского плоскоходца',
-      type: 'sauce',
-      image: 'https://code.s3.yandex.net/react/code/sauce-01.png',
-      image_mobile: 'https://code.s3.yandex.net/react/code/sauce-01-mobile.png',
-      image_large: 'https://code.s3.yandex.net/react/code/sauce-01-large.png',
-      amount: 1,
-      price: 981,
-    },
-  ];
+  const styleHeader = props.center ? `${styles.orderNumber} text text_type_digits-default ${styles.center}` : `${styles.orderNumber} text text_type_digits-default`;
 
   const orderDate = new Date(Date.parse(billetData.createdAt));
   const currentDate = new Date();
@@ -130,7 +38,7 @@ function OrderIngredients(props) {
 
   return (
     <div className={styles.mainModal}>
-      <p className={`${styles.orderNumber} text text_type_digits-default`}>#{billetData.number}</p>
+      <p className={`${styleHeader} `}>#{billetData.number}</p>
       <p className={`${styles.orderName} text text_type_main-medium`}>{billetData.name}</p>
       <p className={statusFieldStyle}>{statusMapping[billetData.status]}</p>
       <p className={`${styles.ingredientsHeader} text text_type_main-medium`}>Состав:</p>

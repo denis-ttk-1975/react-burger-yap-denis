@@ -1,6 +1,8 @@
 .mainModal {
   display: flex;
   flex-direction: column;
+
+  width: 640px;
 }
 .orderNumber {
   width: 640px;
@@ -15,6 +17,7 @@
 }
 .orderCard_status {
   padding: 0 40px 60px;
+  width: 640px;
 }
 .orderCard_status_done {
   color: #00cccc;
@@ -22,11 +25,13 @@
 
 .ingredientsHeader {
   padding: 0 40px 24px;
+  width: 640px;
 }
 .footer {
   padding: 0 40px 60px;
   display: flex;
   justify-content: space-between;
+  width: 640px;
 }
 .ordersDate {
 }
