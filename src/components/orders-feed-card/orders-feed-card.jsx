@@ -17,7 +17,7 @@ const OrdersFeedCard = ({ number, date, title, status, data, price, onClick, id 
           })
           .slice(0, 6)
       : [...data];
-  console.log('order number ', number, ' - ', billetArray);
+
   return (
     <Link className={`${styles.ordersFeedCardLink}`} to={{ pathname: `/feed/${id}`, state: { background: location } }}>
       <div className={`${styles.ordersFeedCard}`} onClick={onClick}>

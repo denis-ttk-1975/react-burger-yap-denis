@@ -10,11 +10,9 @@ import styles from './ingredient-details.module.css';
 
 function IngredientDetails(props) {
   const params = useParams();
-  console.log('params: ', params);
   const { menuIngredients } = useSelector((state) => state.burgerIngredients);
 
   const dataModal = menuIngredients.find((item) => item._id === params.id);
-  console.log('dataModal: ', dataModal);
 
   const styleHeader = props.center ? `${styles.modalHeader} text text_type_main-large ${styles.center}` : `${styles.modalHeader} text text_type_main-large`;
 

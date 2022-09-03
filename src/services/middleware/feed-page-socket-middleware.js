@@ -9,14 +9,11 @@ export const feedPageSocketMiddleware = (wsActions) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
       const { wsFeedConnect, wsFeedDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
-      // console.log('я в фиид пейдж вебсокет мидлваре');
-      // console.log('payloadFD -', payload);
+
       if (type === wsFeedConnect) {
-        // console.log('connect');
         url = payload;
         socket = new WebSocket(url);
         isConnected = true;
-        // console.log('isConnected: ', isConnected);
       }
 
       if (socket) {
@@ -35,31 +32,18 @@ export const feedPageSocketMiddleware = (wsActions) => {
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          console.log('parsedData.success -', parsedData?.success, 'parsedData.message -', parsedData?.message, 'parsedData.orders -', parsedData?.orders);
           dispatch(onMessage(parsedData));
         };
 
         socket.onclose = (event) => {
-          // console.log('соединение закрылось!!!!!!');
           if (event.code !== 1000 && isConnected) {
             console.log('error', event);
-            // console.log('isConnected: ', isConnected);
             dispatch(onError(`Закрытие с ошибкой - код ${event.code.toString()}`));
             reconnectTimer = window.setTimeout(() => {
               dispatch(onConnect(url));
-              // console.log('Reconnection...');
             }, 3000);
           }
-          // console.log('close');
           dispatch(onClose());
-
-          // if (isConnected) {
-          //   console.log('isConnected: ', isConnected);
-
-          //   reconnectTimer = window.setTimeout(() => {
-          //     dispatch(onConnect(url));
-          //   }, 3000);
-          // }
         };
 
         // if (type === wsSendMessage) {
@@ -68,7 +52,6 @@ export const feedPageSocketMiddleware = (wsActions) => {
         // }
 
         if (type === wsFeedDisconnect) {
-          // console.log('disconnect');
           clearTimeout(reconnectTimer);
           isConnected = false;
           reconnectTimer = 0;

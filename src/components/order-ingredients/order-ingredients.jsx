@@ -1,4 +1,7 @@
 import React from 'react'; // импорт библиотеки
+import { useSelector, useDispatch } from 'react-redux';
+
+import { BrowserRouter as Router, Link, Route, Switch, useHistory, useRouteMatch, useParams, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
@@ -7,6 +10,15 @@ import { Typography, CurrencyIcon } from '@ya.praktikum/react-developer-burger-u
 import styles from './order-ingredients.module.css';
 
 function OrderIngredients(props) {
+  const params = useParams();
+  const { data: ordersData } = useSelector((state) => state.feed);
+  const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
+
+  const billetData = ordersData.orders.find((item) => item._id === params.id);
+  console.log('billetData: ', billetData);
+
+  const statusMapping = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
+
   const data = [
     {
       _id: '60d3b41abdacab0026a733c6',
@@ -101,29 +113,43 @@ function OrderIngredients(props) {
     },
   ];
 
+  const orderDate = new Date(Date.parse(billetData.createdAt));
+  const currentDate = new Date();
+  const date =
+    orderDate.getDate() === currentDate.getDate() ? `Сегодня, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3` : `Вчера, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`;
+  const itemList = billetData.ingredients.map((item) => {
+    return ingredientList.find((elem) => elem._id === item.toString());
+  });
+
+  const price = itemList.reduce((acc, item) => {
+    return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
+  }, 0);
+
   const statusFieldStyle =
-    props.status !== 'done' ? `text text_type_main-default ${styles.orderCard_status}` : `text text_type_main-default ${styles.orderCard_status} ${styles.orderCard_status_done}`;
+    billetData.status !== 'done' ? `text text_type_main-default ${styles.orderCard_status}` : `text text_type_main-default ${styles.orderCard_status} ${styles.orderCard_status_done}`;
 
   return (
     <div className={styles.mainModal}>
-      <p className={`${styles.orderNumber} text text_type_digits-default`}>#999999</p>
-      <p className={`${styles.orderName} text text_type_main-medium`}>Death Star Starship Main бургер</p>
-      <p className={statusFieldStyle}>Выполнен</p>
+      <p className={`${styles.orderNumber} text text_type_digits-default`}>#{billetData.number}</p>
+      <p className={`${styles.orderName} text text_type_main-medium`}>{billetData.name}</p>
+      <p className={statusFieldStyle}>{statusMapping[billetData.status]}</p>
       <p className={`${styles.ingredientsHeader} text text_type_main-medium`}>Состав:</p>
       <div className={styles.scrollBoxWrap}>
         <div className={styles.scrollBox}>
-          {data.map((elem) => {
+          {billetData.ingredients.map((elem) => {
+            const ingredientInfo = ingredientList.find((item) => item._id === elem);
+            const amount = ingredientInfo.type === 'bun' ? 2 : 1;
             return (
-              <div className={styles.ingredientBox} key={elem._id}>
+              <div className={styles.ingredientBox} key={ingredientInfo._id}>
                 <div className={styles.spaceAround}>
                   <div className={`${styles.ingredientImageWrap}`}>
-                    <img src={elem.image_mobile} alt={elem.name} className={`${styles.ingredientImage}`} />
+                    <img src={ingredientInfo.image_mobile} alt={ingredientInfo.name} className={`${styles.ingredientImage}`} />
                   </div>
-                  <p className={`${styles.ingredientsName} text text_type_main-default`}>{elem.name}</p>
+                  <p className={`${styles.ingredientsName} text text_type_main-default`}>{ingredientInfo.name}</p>
                 </div>
                 <div className={styles.spaceAround}>
                   <p className={`${styles.ingredientsAmountPrice} text text_type_digits-default`}>
-                    {elem.amount} x {elem.price}
+                    {amount} x {ingredientInfo.price}
                   </p>
                   <CurrencyIcon type='primary' />
                 </div>
@@ -134,10 +160,10 @@ function OrderIngredients(props) {
       </div>
 
       <div className={`${styles.footer} text text_type_main-medium`}>
-        <p className={`${styles.ordersDate} text text_type_main-default text_color_inactive`}>Вчера, 13:50 i-GMT+3</p>
+        <p className={`${styles.ordersDate} text text_type_main-default text_color_inactive`}>{date}</p>
 
         <div className={`${styles.orderCard_price}`}>
-          <p className='text text_type_digits-default'>480</p>
+          <p className='text text_type_digits-default'>{price}</p>
 
           <CurrencyIcon type='primary' />
         </div>

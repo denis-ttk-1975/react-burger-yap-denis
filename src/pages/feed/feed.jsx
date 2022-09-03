@@ -20,10 +20,6 @@ function Feed() {
   const location = useLocation();
   const background = location?.state?.background;
 
-  // const { data: ordersData } = useSelector((state) => state.feed);
-
-  console.log(data?.total, data?.totalToday, data?.orders);
-
   // useEffect(() => {
   //   dispatch(wsFeedConnect(wsAllOrdersInfo));
   //   return () => {

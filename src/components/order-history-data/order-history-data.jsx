@@ -15,7 +15,6 @@ function OrderHistoryData(props) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.orderHistory);
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
-  console.log('data: ', data);
 
   useEffect(() => {
     dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));

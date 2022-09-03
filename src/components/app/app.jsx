@@ -45,10 +45,7 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  console.log('location: ', location);
   const param = useParams();
-
-  console.log('param: ', param.id);
 
   const background = location?.state?.background;
 
