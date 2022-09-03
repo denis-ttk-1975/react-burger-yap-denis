@@ -1,4 +1,4 @@
-import React from 'react'; // импорт библиотеки
+import React, { useEffect } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
 import { BrowserRouter as Router, Link, Route, Switch, useHistory, useRouteMatch, useParams, useLocation } from 'react-router-dom';
@@ -9,13 +9,28 @@ import { Typography, CurrencyIcon } from '@ya.praktikum/react-developer-burger-u
 
 import styles from './order-ingredients.module.css';
 
+import { wsOrderHistoryConnect, wsOrderHistoryDisconnect } from './../../services/actions/order-history-socket';
+import { wsUserOrdersInfo } from './../../utils/url';
+
 function OrderIngredients(props) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
+    return () => {
+      dispatch(wsOrderHistoryDisconnect());
+    };
+  }, [dispatch]);
+
   const params = useParams();
   const { data: ordersData } = useSelector((state) => state.feed);
+  const { data: userOrderHistory } = useSelector((state) => state.orderHistory);
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
-  const billetData = ordersData.orders.find((item) => item._id === params.id);
+  const billetData = props.owner === 'user' ? userOrderHistory?.orders.find((item) => item._id === params.id) : ordersData?.orders.find((item) => item._id === params.id);
   console.log('billetData: ', billetData);
+
+  if (!billetData) return null;
 
   const statusMapping = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
 

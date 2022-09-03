@@ -51,6 +51,7 @@ function OrderHistoryData(props) {
                   data={itemList}
                   onClick={() => alert('You clicked on order card')}
                   price={price}
+                  id={order._id}
                 />
               );
             }

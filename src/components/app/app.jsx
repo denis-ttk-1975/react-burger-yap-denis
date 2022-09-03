@@ -41,6 +41,7 @@ function App() {
   const { ingredientData: ingredientInModal, isIngredientModalOpen } = useSelector((state) => state.ingredientForModal);
   const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
   const { data: ordersData } = useSelector((state) => state.feed);
+  const { data: userOrderHistory } = useSelector((state) => state.orderHistory);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -142,6 +143,9 @@ function App() {
             <Route path='/feed/:id' exact={true}>
               {!!ordersData?.orders && <OrderIngredients center />}
             </Route>
+            <ProtectedRoute path={'/profile/orders/:id'} exact={true} condition={getCookie('refreshToken')} redirection={'/login'}>
+              <OrderIngredients owner={'common'} center />
+            </ProtectedRoute>
           </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
             <Modal closeAllModals={closeAllModals}>
@@ -159,6 +163,13 @@ function App() {
             <Route path='/feed/:id' exact={true}>
               <Modal closeAllModals={() => history.goBack()}>
                 <OrderIngredients />
+              </Modal>
+            </Route>
+          )}
+          {background && !!userOrderHistory?.orders.length && (
+            <Route path='/profile/orders/:id' exact={true}>
+              <Modal closeAllModals={() => history.goBack()}>
+                <OrderIngredients owner={'user'} />
               </Modal>
             </Route>
           )}

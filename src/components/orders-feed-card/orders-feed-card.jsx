@@ -7,7 +7,7 @@ import { Box, Typography, CurrencyIcon } from '@ya.praktikum/react-developer-bur
 
 import styles from './orders-feed-card.module.css';
 
-const OrdersFeedCard = ({ number, date, title, status, data, price, onClick, id }) => {
+const OrdersFeedCard = ({ number, date, title, status, data, price, id }) => {
   const location = useLocation();
   const billetArray =
     data.length > 6
@@ -20,7 +20,7 @@ const OrdersFeedCard = ({ number, date, title, status, data, price, onClick, id 
 
   return (
     <Link className={`${styles.ordersFeedCardLink}`} to={{ pathname: `/feed/${id}`, state: { background: location } }}>
-      <div className={`${styles.ordersFeedCard}`} onClick={onClick}>
+      <div className={`${styles.ordersFeedCard}`}>
         <div className={`${styles.ordersFeedCard_header}`}>
           <p className={`${styles.ordersFeedCard_number} text text_type_digits-default`}>{number}</p>
           <p className={`${styles.ordersFeedCard_date} text text_type_main-default text_color_inactive`}>{date}</p>
