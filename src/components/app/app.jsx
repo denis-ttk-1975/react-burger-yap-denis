@@ -32,6 +32,9 @@ import { setBurgerIngredients } from './../../services/actions/burger-constructo
 import { getIngredients } from './../../services/actions/burger-ingredients';
 import { getOrderDetails } from './../../services/actions/order-details';
 
+import { wsFeedConnect, wsFeedDisconnect } from './../../services/actions/feed-page-socket';
+import { wsAllOrdersInfo } from './../../utils/url';
+
 function App() {
   const { menuIngredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
   const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails, isOrderModalOpen } = useSelector((state) => state.orderDetails);
@@ -58,6 +61,15 @@ function App() {
   // load data for order-ingredients
   useEffect(() => {
     dispatch(setBurgerIngredients([]));
+  }, [dispatch]);
+
+  // load data for feed-page
+
+  useEffect(() => {
+    dispatch(wsFeedConnect(wsAllOrdersInfo));
+    return () => {
+      dispatch(wsFeedDisconnect());
+    };
   }, [dispatch]);
 
   // handling for Make-Order-Button
@@ -104,7 +116,6 @@ function App() {
             <Route path='/' exact={true}>
               <DndProvider backend={HTML5Backend}>
                 <BurgerIngredients onClickIngredientsItem={clickIngredientItemHandler} />
-
                 <BurgerConstructor onClickMakeOrder={() => clickOrderDetailsHandler(bun, stuffing)} />
               </DndProvider>
             </Route>
@@ -131,6 +142,9 @@ function App() {
             <Route path='/ingredients/:id' exact={true}>
               {!!menuIngredients.length && <IngredientDetails center />}
             </Route>
+            <Route path='/feed/:id' exact={true}>
+              {!!ordersData?.orders && <OrderIngredients />}
+            </Route>
           </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
             <Modal closeAllModals={closeAllModals}>
@@ -144,13 +158,13 @@ function App() {
               </Modal>
             </Route>
           )}
-          {/* {background && !!ordersData?.orders.length && ( */}
-          <Route path='/feed/:id' exact={true}>
-            <Modal closeAllModals={() => history.goBack()}>
-              <OrderIngredients />
-            </Modal>
-          </Route>
-          {/* )} */}
+          {background && !!ordersData?.orders.length && (
+            <Route path='/feed/:id' exact={true}>
+              <Modal closeAllModals={() => history.goBack()}>
+                <OrderIngredients />
+              </Modal>
+            </Route>
+          )}
         </main>
       )}
     </>

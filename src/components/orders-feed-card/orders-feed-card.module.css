@@ -14,17 +14,21 @@
 }
 .ordersFeedCard_number {
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_title {
   margin-bottom: 8px;
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_status {
   margin-bottom: 24px;
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_status_done {
   color: #00cccc;
+  text-decoration: none;
 }
 .ordersFeedCard_footer {
   display: flex;
@@ -35,6 +39,7 @@
   align-items: center;
   gap: 9px;
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_ingredients {
   /* max-width: calc(100%-116px); */
@@ -70,4 +75,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.ordersFeedCardLink {
+  text-decoration: none;
 }

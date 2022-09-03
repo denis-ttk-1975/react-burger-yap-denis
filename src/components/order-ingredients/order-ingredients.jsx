@@ -114,7 +114,7 @@ function OrderIngredients(props) {
         <div className={styles.scrollBox}>
           {data.map((elem) => {
             return (
-              <div className={styles.ingredientBox}>
+              <div className={styles.ingredientBox} key={elem._id}>
                 <div className={styles.spaceAround}>
                   <div className={`${styles.ingredientImageWrap}`}>
                     <img src={elem.image_mobile} alt={elem.name} className={`${styles.ingredientImage}`} />

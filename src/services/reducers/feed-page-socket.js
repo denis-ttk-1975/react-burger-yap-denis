@@ -16,8 +16,7 @@ export const feedReducer = (state = initialState, action) => {
     }
     case FEED_WS_CLOSE: {
       return {
-        connectionError: '',
-        data: null,
+        ...state,
       };
     }
     case FEED_WS_ERROR: {

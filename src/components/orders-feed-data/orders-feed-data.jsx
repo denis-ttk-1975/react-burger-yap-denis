@@ -41,6 +41,7 @@ function OrdersFeedData({ orders }) {
                 data={itemList}
                 onClick={() => alert('You clicked on order card')}
                 price={price}
+                id={order._id}
               />
             );
           }
