@@ -138,7 +138,7 @@ function App() {
               <Feed />
             </Route>
             <Route path='/ingredients/:id' exact={true}>
-              {!!menuIngredients.length && <IngredientDetails center />}
+              {!!menuIngredients && <IngredientDetails center />}
             </Route>
             <Route path='/feed/:id' exact={true}>
               {!!ordersData?.orders && <OrderIngredients center />}
@@ -152,21 +152,21 @@ function App() {
               <OrderDetails dataModal={orderNumber} />
             </Modal>
           )}
-          {background && !!menuIngredients.length && (
+          {background && !!menuIngredients && (
             <Route path='/ingredients/:id' exact={true}>
               <Modal closeAllModals={() => history.goBack()}>
                 <IngredientDetails />
               </Modal>
             </Route>
           )}
-          {background && !!ordersData?.orders.length && (
+          {background && !!ordersData?.orders && (
             <Route path='/feed/:id' exact={true}>
               <Modal closeAllModals={() => history.goBack()}>
                 <OrderIngredients />
               </Modal>
             </Route>
           )}
-          {background && !!userOrderHistory?.orders.length && (
+          {background && !!userOrderHistory?.orders && (
             <Route path='/profile/orders/:id' exact={true}>
               <Modal closeAllModals={() => history.goBack()}>
                 <OrderIngredients owner={'user'} />
