@@ -16,6 +16,20 @@ function OrderHistoryData(props) {
   const { data } = useSelector((state) => state.orderHistory);
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
+  const billetArray = !!data?.orders
+    ? [
+        ...data?.orders.sort((a, b) => {
+          if (a.number < b.number) {
+            return 1;
+          }
+
+          return -1;
+        }),
+      ]
+    : [];
+
+  console.log('billetArray: ', billetArray);
+
   useEffect(() => {
     dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
     return () => {
@@ -25,9 +39,10 @@ function OrderHistoryData(props) {
 
   return (
     <>
-      {!!data?.orders && (
+      {!!billetArray && (
         <div className={styles.scrollBox}>
-          {data.orders.reverse().map((order) => {
+          {/* {data.orders.reverse().map((order) => { */}
+          {billetArray.map((order) => {
             if (!!order._id) {
               const orderDate = new Date(Date.parse(order.createdAt));
               const currentDate = new Date();

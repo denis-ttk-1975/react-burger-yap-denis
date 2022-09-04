@@ -11,11 +11,23 @@ import OrdersFeedCard from './../orders-feed-card/orders-feed-card';
 function OrdersFeedData({ orders }) {
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
+  const billetArray = !!orders
+    ? [
+        ...orders.sort((a, b) => {
+          if (a.number < b.number) {
+            return 1;
+          }
+
+          return -1;
+        }),
+      ]
+    : [];
+
   return (
     <div className={`${styles.ordersFeed}`}>
       <h1 className={`${styles.ordersFeedTitle} text text_type_main-large`}>Лента заказов</h1>
       <div className={styles.scrollBox}>
-        {orders.map((order) => {
+        {billetArray.map((order) => {
           if (!!order._id) {
             const orderDate = new Date(Date.parse(order.createdAt));
             const currentDate = new Date();
