@@ -44,9 +44,38 @@ function OrderIngredients(props) {
     return ingredientList.find((elem) => elem._id === item.toString());
   });
 
-  const price = itemList.reduce((acc, item) => {
-    return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
+  const prepareIngredientDataArray = (array, ingredientsData) => {
+    const uniqElemArray = Array.from(new Set(array));
+    let result = uniqElemArray.map((item) => {
+      return ingredientsData.find((elem) => elem._id === item.toString());
+    });
+    result = result.map((item) => {
+      const amountIngredient = array.filter((elem) => elem.toString() === item._id.toString()).length;
+      console.log('amountIngredient: ', amountIngredient);
+      return { ...item, amount: amountIngredient };
+    });
+    result = result.map((item) => {
+      if (item.type === 'bun') {
+        return { ...item, amount: 2 };
+      } else {
+        return { ...item };
+      }
+    });
+
+    return result;
+  };
+
+  const ingredientDataArray = prepareIngredientDataArray(billetData.ingredients, ingredientList);
+
+  console.log('ingredientDataArray: ', ingredientDataArray);
+
+  const price = ingredientDataArray.reduce((acc, item) => {
+    return acc + Number(item.price) * Number(item.amount);
   }, 0);
+
+  // const price = itemList.reduce((acc, item) => {
+  //   return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
+  // }, 0);
 
   const statusFieldStyle =
     billetData.status !== 'done' ? `text text_type_main-default ${styles.orderCard_status}` : `text text_type_main-default ${styles.orderCard_status} ${styles.orderCard_status_done}`;
@@ -59,20 +88,20 @@ function OrderIngredients(props) {
       <p className={`${styles.ingredientsHeader} text text_type_main-medium`}>Состав:</p>
       <div className={styles.scrollBoxWrap}>
         <div className={styles.scrollBox}>
-          {billetData.ingredients.map((elem) => {
-            const ingredientInfo = ingredientList.find((item) => item._id === elem);
-            const amount = ingredientInfo.type === 'bun' ? 2 : 1;
+          {ingredientDataArray.map((elem) => {
+            // const ingredientInfo = ingredientList.find((item) => item._id === elem);
+            // const amount = ingredientInfo.type === 'bun' ? 2 : 1;
             return (
-              <div className={styles.ingredientBox} key={ingredientInfo._id}>
+              <div className={styles.ingredientBox} key={elem._id}>
                 <div className={styles.spaceAround}>
                   <div className={`${styles.ingredientImageWrap}`}>
-                    <img src={ingredientInfo.image_mobile} alt={ingredientInfo.name} className={`${styles.ingredientImage}`} />
+                    <img src={elem.image_mobile} alt={elem.name} className={`${styles.ingredientImage}`} />
                   </div>
-                  <p className={`${styles.ingredientsName} text text_type_main-default`}>{ingredientInfo.name}</p>
+                  <p className={`${styles.ingredientsName} text text_type_main-default`}>{elem.name}</p>
                 </div>
                 <div className={styles.spaceAround}>
                   <p className={`${styles.ingredientsAmountPrice} text text_type_digits-default`}>
-                    {amount} x {ingredientInfo.price}
+                    {elem.amount} x {elem.price}
                   </p>
                   <CurrencyIcon type='primary' />
                 </div>
