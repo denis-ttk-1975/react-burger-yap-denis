@@ -5,6 +5,8 @@ import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.pr
 
 import styles from './app-header.module.css';
 
+import { checkFunk } from './../../utils/getNewTokens';
+
 function AppHeader() {
   const location = useLocation();
   const typePrimary = 'primary';
@@ -26,7 +28,7 @@ function AppHeader() {
             <p className={location.pathname === '/feed' ? classNameActive : classNameInactive}>Лента заказов</p>
           </Link>
         </div>
-        <div className={styles.headerLogo}>
+        <div className={styles.headerLogo} onClick={checkFunk}>
           <Link to={{ pathname: `/` }}>
             <Logo />
           </Link>

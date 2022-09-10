@@ -6,7 +6,6 @@ import { postUrlUserTokenUpdate } from './../../utils/url';
 
 export const orderHistorySocketMiddleware = (wsActions) => {
   return (store) => {
-    // const { data } = useSelector((state) => state.orderHistory);
     let socket = null;
     let isConnected = false;
     let reconnectTimer = 0;
