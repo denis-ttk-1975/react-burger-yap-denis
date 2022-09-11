@@ -1,5 +1,4 @@
 import { getCookie } from './../../utils/getCookie';
-import { setCookie } from './../../utils/setCookie';
 import { checkResponse } from './../../utils/checkResponse';
 import { getNewTokens } from './../../utils/getNewTokens';
 import { postUrlUserTokenUpdate } from '../../utils/url';
@@ -14,7 +13,6 @@ export const websocketMiddleware = (wsActions) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
       const { wsConnect, wsDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
-      console.log('я в вебсокетмидлваре');
 
       if (type === wsConnect) {
         const { wsUrl, token } = payload;
@@ -52,7 +50,6 @@ export const websocketMiddleware = (wsActions) => {
         socket.onmessage = (event) => {
           const { data } = event;
           const parsedData = JSON.parse(data);
-          console.log('parsedData.success -', parsedData?.success, 'parsedData.message -', parsedData?.message, 'parsedData.orders -', parsedData?.orders);
           dispatch(onMessage(parsedData));
           if (parsedData?.message === 'Invalid or missing token') {
             getNewTokens(postUrlUserTokenUpdate, getCookie('refreshToken'), checkResponse);

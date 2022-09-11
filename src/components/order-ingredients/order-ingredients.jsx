@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
-import { BrowserRouter as Router, Link, Route, Switch, useHistory, useRouteMatch, useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 
@@ -15,10 +15,8 @@ import { getCookie } from './../../utils/getCookie';
 
 function OrderIngredients(props) {
   const dispatch = useDispatch();
-  console.log('запуск ордерИнгредиент');
 
   useEffect(() => {
-    console.log('запуск юсЭффект222');
     const wsConnectLink = props.owner === 'user' ? { wsUrl: wsUserOrdersInfo, token: getCookie('accessToken') } : { wsUrl: wsAllOrdersInfo, token: null };
     dispatch(wsConnect(wsConnectLink.wsUrl, wsConnectLink.token));
     return () => {
@@ -32,11 +30,7 @@ function OrderIngredients(props) {
 
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
-  console.log('orderTable: ', orderTable);
-
   const billetData = props.owner === 'user' ? orderTable?.orders.find((item) => item._id === params.id) : orderTable?.orders.find((item) => item._id === params.id);
-
-  console.log('billetData: ', billetData);
 
   if (!billetData) return null;
 
@@ -59,7 +53,6 @@ function OrderIngredients(props) {
     });
     result = result.map((item) => {
       const amountIngredient = array.filter((elem) => elem.toString() === item._id.toString()).length;
-      console.log('amountIngredient: ', amountIngredient);
       return { ...item, amount: amountIngredient };
     });
     result = result.map((item) => {
@@ -74,8 +67,6 @@ function OrderIngredients(props) {
   };
 
   const ingredientDataArray = prepareIngredientDataArray(billetData.ingredients, ingredientList);
-
-  console.log('ingredientDataArray: ', ingredientDataArray);
 
   const price = ingredientDataArray.reduce((acc, item) => {
     return acc + Number(item.price) * Number(item.amount);

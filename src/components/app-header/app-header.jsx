@@ -1,11 +1,9 @@
 import React from 'react'; // импорт библиотеки
-import { useHistory, useLocation, Link } from 'react-router-dom'; // импорт библиотеки
+import { useLocation, Link } from 'react-router-dom'; // импорт библиотеки
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './app-header.module.css';
-
-import { checkFunk } from './../../utils/getNewTokens';
 
 function AppHeader() {
   const location = useLocation();
@@ -28,7 +26,7 @@ function AppHeader() {
             <p className={location.pathname === '/feed' ? classNameActive : classNameInactive}>Лента заказов</p>
           </Link>
         </div>
-        <div className={styles.headerLogo} onClick={checkFunk}>
+        <div className={styles.headerLogo}>
           <Link to={{ pathname: `/` }}>
             <Logo />
           </Link>

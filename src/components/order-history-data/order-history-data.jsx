@@ -30,8 +30,6 @@ function OrderHistoryData(props) {
       ]
     : [];
 
-  console.log('billetArray: ', billetArray);
-
   useEffect(() => {
     dispatch(wsConnect(wsUserOrdersInfo, getCookie('accessToken')));
     return () => {
@@ -54,7 +52,6 @@ function OrderHistoryData(props) {
               const itemList = order.ingredients.map((item) => {
                 return ingredientList.find((elem) => elem._id === item.toString());
               });
-              console.log('itemList: ', itemList);
               const price = itemList.reduce((acc, item) => acc + Number(item.price), 0);
 
               return (

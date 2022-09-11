@@ -1,8 +1,8 @@
 import React from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useForm } from './../../hooks/useForm';
 
@@ -11,8 +11,6 @@ import styles from './forgot-password.module.css';
 import { sendForgotPasswordRequest } from './../../services/actions/forgot-password';
 
 function ForgotPassword() {
-  // const [valueEmail, setValueEmail] = React.useState('');
-
   const { values, setValues, handleChange } = useForm({ email: '' });
 
   const dispatch = useDispatch();
@@ -38,15 +36,7 @@ function ForgotPassword() {
         <div className={'input_wrapper'}>
           <EmailInput onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
         </div>
-        <Button
-          type='primary'
-          size='medium'
-          // onClick={(e) => {
-          //   e.preventDefault();
-          //   history.push(location);
-          //   dispatch(sendForgotPasswordRequest(valueEmail));
-          // }}
-        >
+        <Button type='primary' size='medium'>
           Восстановить
         </Button>
       </form>

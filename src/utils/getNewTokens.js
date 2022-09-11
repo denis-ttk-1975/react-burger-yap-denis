@@ -15,21 +15,11 @@ export async function getNewTokens(url, refreshToken, checkResponsePromise) {
     });
 
     const fullResponse = await checkResponsePromise(res);
-    console.log('fullResponse: ', fullResponse);
 
     setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
-    console.log('fullResponse.accessToken:', fullResponse.accessToken.split('Bearer ')[1]);
 
     setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
-    console.log('fullResponse.refreshToken: ', fullResponse.refreshToken);
   } catch (error) {
     throw new Error('Ошибка обновления токена');
-  }
-}
-
-export function checkFunk() {
-  if (!!getCookie('refreshToken')) {
-    console.log('проверка функуии');
-    getNewTokens('https://norma.nomoreparties.space/api/auth/token', getCookie('refreshToken'), checkResponse);
   }
 }

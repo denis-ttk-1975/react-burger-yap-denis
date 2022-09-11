@@ -1,6 +1,6 @@
 import React from 'react'; // react-lib import
-import { BrowserRouter as Router, Link, Route, Switch, useHistory, useRouteMatch, useParams, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types'; //prop-types-lib import
 

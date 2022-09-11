@@ -1,6 +1,6 @@
 import React from 'react'; // импорт библиотеки
 import { useDrag } from 'react-dnd';
-import { BrowserRouter as Router, Link, Route, Switch, useHistory, useRouteMatch, useParams, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 

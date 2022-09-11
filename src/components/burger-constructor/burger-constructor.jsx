@@ -18,8 +18,6 @@ import ElemList from './../elem-list/elem-list';
 import defaultBunGrey from './../../images/default-bun-grey.png';
 import defaultIngredientGrey from './../../images/default-ingredient-grey.png';
 
-import { NewLineKind } from 'typescript';
-
 function BurgerConstructor(props) {
   const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
 

@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 

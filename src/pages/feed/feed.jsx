@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
-import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation, useParams, Redirect } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, PasswordInput, EditIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import OrdersFeedData from '../../components/orders-feed-data/orders-feed-data';
 import OrdersSummary from '../../components/orders-summary/orders-summary';
@@ -17,8 +16,6 @@ import styles from './feed.module.css';
 function Feed() {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.orderTable);
-  const location = useLocation();
-  const background = location?.state?.background;
 
   useEffect(() => {
     dispatch(wsConnect(wsAllOrdersInfo, null));

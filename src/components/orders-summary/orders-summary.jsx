@@ -16,7 +16,7 @@ function OrdersSummary(props) {
               .filter((elem) => elem.status === 'done')
               .map((elem, index) => {
                 return (
-                  <li className={`${styles.readyOrderItem} text text_type_digits-default `} key={index}>
+                  <li className={`${styles.readyOrderItem} text text_type_digits-default `} key={elem._id}>
                     {elem.number}
                   </li>
                 );

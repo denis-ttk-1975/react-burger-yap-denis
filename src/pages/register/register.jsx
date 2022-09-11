@@ -1,8 +1,8 @@
 import React from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useForm } from './../../hooks/useForm';
 
@@ -11,15 +11,10 @@ import styles from './register.module.css';
 import { registerNewUser } from './../../services/actions/register';
 
 function Register() {
-  // const [valueName, setValueName] = React.useState('');
-  // const [valueEmail, setValueEmail] = React.useState('');
-  // const [valuePassword, setValuePassword] = React.useState('');
-
   const { values, setValues, handleChange } = useForm({ name: '', email: '', password: '' });
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const { userInfo } = useSelector((state) => state.userRegistration);
 
   return (
     <div className={`${styles.registerBox}`}>
