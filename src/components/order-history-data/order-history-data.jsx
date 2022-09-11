@@ -7,7 +7,6 @@ import styles from './order-history-data.module.css';
 
 import OrderCard from './../order-card/order-card';
 
-import { wsOrderHistoryConnect, wsOrderHistoryDisconnect } from './../../services/actions/order-history-socket';
 import { wsConnect, wsDisconnect } from './../../services/actions/websocket';
 
 import { wsUserOrdersInfo } from './../../utils/url';
@@ -16,7 +15,6 @@ import { getCookie } from './../../utils/getCookie';
 // whole component
 function OrderHistoryData(props) {
   const dispatch = useDispatch();
-  // const { data } = useSelector((state) => state.orderHistory);
   const { data } = useSelector((state) => state.orderTable);
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
@@ -34,13 +32,6 @@ function OrderHistoryData(props) {
 
   console.log('billetArray: ', billetArray);
 
-  // useEffect(() => {
-  //   dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
-  //   return () => {
-  //     dispatch(wsOrderHistoryDisconnect());
-  //   };
-  // }, []);
-
   useEffect(() => {
     dispatch(wsConnect(wsUserOrdersInfo, getCookie('accessToken')));
     return () => {
@@ -52,7 +43,6 @@ function OrderHistoryData(props) {
     <>
       {!!billetArray && (
         <div className={styles.scrollBox}>
-          {/* {data.orders.reverse().map((order) => { */}
           {billetArray.map((order) => {
             if (!!order._id) {
               const orderDate = new Date(Date.parse(order.createdAt));

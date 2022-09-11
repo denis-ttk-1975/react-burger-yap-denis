@@ -9,29 +9,13 @@ import { Typography, CurrencyIcon } from '@ya.praktikum/react-developer-burger-u
 
 import styles from './order-ingredients.module.css';
 
-import { wsOrderHistoryConnect, wsOrderHistoryDisconnect } from './../../services/actions/order-history-socket';
 import { wsUserOrdersInfo, wsAllOrdersInfo } from './../../utils/url';
-import { wsFeedConnect, wsFeedDisconnect } from './../../services/actions/feed-page-socket';
 import { wsConnect, wsDisconnect } from './../../services/actions/websocket';
 import { getCookie } from './../../utils/getCookie';
 
 function OrderIngredients(props) {
   const dispatch = useDispatch();
   console.log('запуск ордерИнгредиент');
-  // useEffect(() => {
-  //   console.log('запуск юсЭффект');
-  //   if (props.owner === 'user') {
-  //     dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
-  //     return () => {
-  //       dispatch(wsOrderHistoryDisconnect());
-  //     };
-  //   } else {
-  //     dispatch(wsFeedConnect(wsAllOrdersInfo));
-  //     return () => {
-  //       dispatch(wsFeedDisconnect());
-  //     };
-  //   }
-  // }, []);
 
   useEffect(() => {
     console.log('запуск юсЭффект222');
@@ -43,15 +27,13 @@ function OrderIngredients(props) {
   }, []);
 
   const params = useParams();
-  const { data: ordersData } = useSelector((state) => state.feed);
-  const { data: userOrderHistory } = useSelector((state) => state.orderHistory);
+
   const { data: orderTable } = useSelector((state) => state.orderTable);
 
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
   console.log('orderTable: ', orderTable);
 
-  // const billetData = props.owner === 'user' ? userOrderHistory?.orders.find((item) => item._id === params.id) : ordersData?.orders.find((item) => item._id === params.id);
   const billetData = props.owner === 'user' ? orderTable?.orders.find((item) => item._id === params.id) : orderTable?.orders.find((item) => item._id === params.id);
 
   console.log('billetData: ', billetData);
@@ -99,10 +81,6 @@ function OrderIngredients(props) {
     return acc + Number(item.price) * Number(item.amount);
   }, 0);
 
-  // const price = itemList.reduce((acc, item) => {
-  //   return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
-  // }, 0);
-
   const statusFieldStyle =
     billetData.status !== 'done' ? `text text_type_main-default ${styles.orderCard_status}` : `text text_type_main-default ${styles.orderCard_status} ${styles.orderCard_status_done}`;
 
@@ -115,8 +93,6 @@ function OrderIngredients(props) {
       <div className={styles.scrollBoxWrap}>
         <div className={styles.scrollBox}>
           {ingredientDataArray.map((elem) => {
-            // const ingredientInfo = ingredientList.find((item) => item._id === elem);
-            // const amount = ingredientInfo.type === 'bun' ? 2 : 1;
             return (
               <div className={styles.ingredientBox} key={elem._id}>
                 <div className={styles.spaceAround}>

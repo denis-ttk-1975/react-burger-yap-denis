@@ -32,16 +32,16 @@ import { setBurgerIngredients } from './../../services/actions/burger-constructo
 import { getIngredients } from './../../services/actions/burger-ingredients';
 import { getOrderDetails } from './../../services/actions/order-details';
 
-import { wsFeedConnect, wsFeedDisconnect } from './../../services/actions/feed-page-socket';
-import { wsAllOrdersInfo } from './../../utils/url';
+// import { wsFeedConnect, wsFeedDisconnect } from './../../services/actions/feed-page-socket';
+// import { wsAllOrdersInfo } from './../../utils/url';
 
 function App() {
   const { menuIngredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
   const { orderNumber, isLoading: isLoadingOrderDetails, errorMessage: errorMessageOrderDetails, isOrderModalOpen } = useSelector((state) => state.orderDetails);
   const { ingredientData: ingredientInModal, isIngredientModalOpen } = useSelector((state) => state.ingredientForModal);
   const { orderIngredients, bun, stuffing } = useSelector((state) => state.burgerConstructor);
-  const { data: ordersData } = useSelector((state) => state.feed);
-  const { data: userOrderHistory } = useSelector((state) => state.orderHistory);
+  // const { data: ordersData } = useSelector((state) => state.feed);
+  // const { data: userOrderHistory } = useSelector((state) => state.orderHistory);
 
   const dispatch = useDispatch();
   const history = useHistory();

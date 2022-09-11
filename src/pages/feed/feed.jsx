@@ -7,9 +7,7 @@ import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, Passwo
 
 import OrdersFeedData from '../../components/orders-feed-data/orders-feed-data';
 import OrdersSummary from '../../components/orders-summary/orders-summary';
-import OrderIngredients from './../../components/order-ingredients/order-ingredients';
 
-import { wsFeedConnect, wsFeedDisconnect } from './../../services/actions/feed-page-socket';
 import { wsConnect, wsDisconnect } from './../../services/actions/websocket';
 
 import { wsAllOrdersInfo } from './../../utils/url';
@@ -18,17 +16,9 @@ import styles from './feed.module.css';
 
 function Feed() {
   const dispatch = useDispatch();
-  // const { data } = useSelector((state) => state.feed);
   const { data } = useSelector((state) => state.orderTable);
   const location = useLocation();
   const background = location?.state?.background;
-
-  // useEffect(() => {
-  //   dispatch(wsFeedConnect(wsAllOrdersInfo));
-  //   return () => {
-  //     dispatch(wsFeedDisconnect());
-  //   };
-  // }, []);
 
   useEffect(() => {
     dispatch(wsConnect(wsAllOrdersInfo, null));
