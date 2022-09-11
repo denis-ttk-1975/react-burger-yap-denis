@@ -152,14 +152,15 @@ function App() {
               </Modal>
             </Route>
           )}
-          {background && !!ordersData?.orders && (
+
+          {background && (
             <Route path='/feed/:id' exact={true}>
               <Modal closeAllModals={() => history.goBack()}>
                 <OrderIngredients owner={'common'} />
               </Modal>
             </Route>
           )}
-          {background && !!userOrderHistory?.orders && (
+          {background && (
             <Route path='/profile/orders/:id' exact={true}>
               <Modal closeAllModals={() => history.goBack()}>
                 <OrderIngredients owner={'user'} />

@@ -8,12 +8,16 @@ import styles from './order-history-data.module.css';
 import OrderCard from './../order-card/order-card';
 
 import { wsOrderHistoryConnect, wsOrderHistoryDisconnect } from './../../services/actions/order-history-socket';
+import { wsConnect, wsDisconnect } from './../../services/actions/websocket';
+
 import { wsUserOrdersInfo } from './../../utils/url';
+import { getCookie } from './../../utils/getCookie';
 
 // whole component
 function OrderHistoryData(props) {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.orderHistory);
+  // const { data } = useSelector((state) => state.orderHistory);
+  const { data } = useSelector((state) => state.orderTable);
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
   const billetArray = !!data?.orders
@@ -30,10 +34,17 @@ function OrderHistoryData(props) {
 
   console.log('billetArray: ', billetArray);
 
+  // useEffect(() => {
+  //   dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
+  //   return () => {
+  //     dispatch(wsOrderHistoryDisconnect());
+  //   };
+  // }, []);
+
   useEffect(() => {
-    dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
+    dispatch(wsConnect(wsUserOrdersInfo, getCookie('accessToken')));
     return () => {
-      dispatch(wsOrderHistoryDisconnect());
+      dispatch(wsDisconnect());
     };
   }, []);
 
