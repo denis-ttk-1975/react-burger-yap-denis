@@ -30,7 +30,7 @@ function OrdersSummary(props) {
               .filter((elem) => elem.status === 'preparing')
               .map((elem, index) => {
                 return (
-                  <li className={`${styles.preparingOrderItem} text text_type_digits-default `} key={index}>
+                  <li className={`${styles.preparingOrderItem} text text_type_digits-default `} key={elem._id}>
                     {elem.number}
                   </li>
                 );
