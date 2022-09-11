@@ -14,6 +14,7 @@ import { userUpdateInfoReducer } from './patch-user-info';
 import { getUserInfoReducer } from './get-user-info';
 import { feedReducer } from './feed-page-socket';
 import { orderHistoryReducer } from './order-history-socket';
+import { wsReducer } from './websocket';
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -30,6 +31,7 @@ export const rootReducer = combineReducers({
   getUserInfo: getUserInfoReducer,
   feed: feedReducer,
   orderHistory: orderHistoryReducer,
+  orderTable: wsReducer,
 });
 
 // export const rootReducer = (state, action) => {

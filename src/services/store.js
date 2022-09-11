@@ -6,6 +6,7 @@ import { rootReducer } from './reducers/index';
 
 import { feedPageSocketMiddleware } from './middleware/feed-page-socket-middleware';
 import { orderHistorySocketMiddleware } from './middleware/order-history-socket-middleware';
+import { websocketMiddleware } from './middleware/websocket-middleware';
 
 import { FEED_CONNECT, FEED_DISCONNECT, wsFeedConnect, wsFeedClose, wsFeedError, wsFeedMessage, wsFeedOpen } from './actions/feed-page-socket';
 import {
@@ -17,6 +18,7 @@ import {
   wsOrderHistoryMessage,
   wsOrderHistoryOpen,
 } from './actions/order-history-socket';
+import { CONNECT, DISCONNECT, wsConnect, wsClose, wsError, wsMessage, wsOpen } from './actions/websocket';
 
 const wsFeedActions = {
   wsFeedConnect: FEED_CONNECT,
@@ -40,8 +42,19 @@ const wsOrderHistoryActions = {
   onMessage: wsOrderHistoryMessage,
 };
 
+const wsActions = {
+  wsConnect: CONNECT,
+  wsDisconnect: DISCONNECT,
+
+  onConnect: wsConnect,
+  onOpen: wsOpen,
+  onClose: wsClose,
+  onError: wsError,
+  onMessage: wsMessage,
+};
+
 const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
-const enhancer = composeEnhancers(applyMiddleware(thunk, feedPageSocketMiddleware(wsFeedActions), orderHistorySocketMiddleware(wsOrderHistoryActions)));
+const enhancer = composeEnhancers(applyMiddleware(thunk, feedPageSocketMiddleware(wsFeedActions), orderHistorySocketMiddleware(wsOrderHistoryActions), websocketMiddleware(wsActions)));
 
 export const store = createStore(rootReducer, enhancer);

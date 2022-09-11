@@ -12,31 +12,48 @@ import styles from './order-ingredients.module.css';
 import { wsOrderHistoryConnect, wsOrderHistoryDisconnect } from './../../services/actions/order-history-socket';
 import { wsUserOrdersInfo, wsAllOrdersInfo } from './../../utils/url';
 import { wsFeedConnect, wsFeedDisconnect } from './../../services/actions/feed-page-socket';
+import { wsConnect, wsDisconnect } from './../../services/actions/websocket';
+import { getCookie } from './../../utils/getCookie';
 
 function OrderIngredients(props) {
   const dispatch = useDispatch();
   console.log('запуск ордерИнгредиент');
+  // useEffect(() => {
+  //   console.log('запуск юсЭффект');
+  //   if (props.owner === 'user') {
+  //     dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
+  //     return () => {
+  //       dispatch(wsOrderHistoryDisconnect());
+  //     };
+  //   } else {
+  //     dispatch(wsFeedConnect(wsAllOrdersInfo));
+  //     return () => {
+  //       dispatch(wsFeedDisconnect());
+  //     };
+  //   }
+  // }, []);
+
   useEffect(() => {
-    console.log('запуск юсЭффект');
-    if (props.owner === 'user') {
-      dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
-      return () => {
-        dispatch(wsOrderHistoryDisconnect());
-      };
-    } else {
-      dispatch(wsFeedConnect(wsAllOrdersInfo));
-      return () => {
-        dispatch(wsFeedDisconnect());
-      };
-    }
+    console.log('запуск юсЭффект222');
+    const wsConnectLink = props.owner === 'user' ? { wsUrl: wsUserOrdersInfo, token: getCookie('accessToken') } : { wsUrl: wsAllOrdersInfo, token: null };
+    dispatch(wsConnect(wsConnectLink.wsUrl, wsConnectLink.token));
+    return () => {
+      dispatch(wsDisconnect());
+    };
   }, []);
 
   const params = useParams();
   const { data: ordersData } = useSelector((state) => state.feed);
   const { data: userOrderHistory } = useSelector((state) => state.orderHistory);
+  const { data: orderTable } = useSelector((state) => state.orderTable);
+
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
-  const billetData = props.owner === 'user' ? userOrderHistory?.orders.find((item) => item._id === params.id) : ordersData?.orders.find((item) => item._id === params.id);
+  console.log('orderTable: ', orderTable);
+
+  // const billetData = props.owner === 'user' ? userOrderHistory?.orders.find((item) => item._id === params.id) : ordersData?.orders.find((item) => item._id === params.id);
+  const billetData = props.owner === 'user' ? orderTable?.orders.find((item) => item._id === params.id) : orderTable?.orders.find((item) => item._id === params.id);
+
   console.log('billetData: ', billetData);
 
   if (!billetData) return null;

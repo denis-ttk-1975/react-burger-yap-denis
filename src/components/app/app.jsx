@@ -60,15 +60,6 @@ function App() {
     dispatch(setBurgerIngredients([]));
   }, [dispatch]);
 
-  // load data for feed-page
-
-  // useEffect(() => {
-  //   dispatch(wsFeedConnect(wsAllOrdersInfo));
-  //   return () => {
-  //     dispatch(wsFeedDisconnect());
-  //   };
-  // }, [dispatch]);
-
   // handling for Make-Order-Button
 
   const clickOrderDetailsHandler = (bunElement, stuffingArray) => {
