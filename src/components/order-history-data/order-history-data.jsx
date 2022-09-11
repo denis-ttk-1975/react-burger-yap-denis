@@ -35,7 +35,7 @@ function OrderHistoryData(props) {
     return () => {
       dispatch(wsOrderHistoryDisconnect());
     };
-  }, [dispatch]);
+  }, []);
 
   return (
     <>

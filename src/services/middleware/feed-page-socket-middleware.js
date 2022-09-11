@@ -14,6 +14,7 @@ export const feedPageSocketMiddleware = (wsActions) => {
         url = payload;
         socket = new WebSocket(url);
         isConnected = true;
+        console.log('socket.url', socket.url);
       }
 
       if (socket) {

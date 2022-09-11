@@ -1,25 +1,24 @@
-import { getCookie } from './../../utils/getCookie';
-import { setCookie } from './../../utils/setCookie';
-import { checkResponse } from './../../utils/checkResponse';
+import { getCookie } from '../../utils/getCookie';
+import { setCookie } from '../../utils/setCookie';
+import { checkResponse } from '../../utils/checkResponse';
 import { useSelector } from 'react-redux';
-import { postUrlUserTokenUpdate } from './../../utils/url';
+import { postUrlUserTokenUpdate } from '../../utils/url';
 
-export const orderHistorySocketMiddleware = (wsActions) => {
+export const websocketMiddleware = (wsActions) => {
   return (store) => {
     let socket = null;
     let isConnected = false;
     let reconnectTimer = 0;
     let url = '';
-    // let accessToken = getCookie('accessToken');
 
     return (next) => (action) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
-      const { wsOrderHistoryConnect, wsOrderHistoryDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
-      console.log('я в ордер хистори вебсокет мидлваре');
+      const { wsConnect, wsDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
+      console.log('я в вебсокетмидлваре');
       url = payload;
 
-      if (type === wsOrderHistoryConnect) {
+      if (type === wsConnect) {
         console.log('connect');
         let accessToken = getCookie('accessToken');
         console.log('payloadOH -', payload, 'accessToken -', accessToken);
@@ -29,7 +28,6 @@ export const orderHistorySocketMiddleware = (wsActions) => {
 
         socket = new WebSocket(`${url}?token=${accessToken}`);
         isConnected = true;
-        console.log('socket.url', socket.url);
         console.log('isConnected: ', isConnected);
       }
       // if (type === wsSendMessage) {
@@ -37,7 +35,7 @@ export const orderHistorySocketMiddleware = (wsActions) => {
       //   socket.send(JSON.stringify(action.payload));
       // }
 
-      if (type === wsOrderHistoryDisconnect) {
+      if (type === wsDisconnect) {
         console.log('disconnect');
         clearTimeout(reconnectTimer);
         isConnected = false;

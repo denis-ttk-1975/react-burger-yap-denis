@@ -20,12 +20,12 @@ function Feed() {
   const location = useLocation();
   const background = location?.state?.background;
 
-  // useEffect(() => {
-  //   dispatch(wsFeedConnect(wsAllOrdersInfo));
-  //   return () => {
-  //     dispatch(wsFeedDisconnect());
-  //   };
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(wsFeedConnect(wsAllOrdersInfo));
+    return () => {
+      dispatch(wsFeedDisconnect());
+    };
+  }, []);
 
   return (
     <>

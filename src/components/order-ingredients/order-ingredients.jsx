@@ -10,17 +10,26 @@ import { Typography, CurrencyIcon } from '@ya.praktikum/react-developer-burger-u
 import styles from './order-ingredients.module.css';
 
 import { wsOrderHistoryConnect, wsOrderHistoryDisconnect } from './../../services/actions/order-history-socket';
-import { wsUserOrdersInfo } from './../../utils/url';
+import { wsUserOrdersInfo, wsAllOrdersInfo } from './../../utils/url';
+import { wsFeedConnect, wsFeedDisconnect } from './../../services/actions/feed-page-socket';
 
 function OrderIngredients(props) {
   const dispatch = useDispatch();
-
+  console.log('запуск ордерИнгредиент');
   useEffect(() => {
-    dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
-    return () => {
-      dispatch(wsOrderHistoryDisconnect());
-    };
-  }, [dispatch]);
+    console.log('запуск юсЭффект');
+    if (props.owner === 'user') {
+      dispatch(wsOrderHistoryConnect(wsUserOrdersInfo));
+      return () => {
+        dispatch(wsOrderHistoryDisconnect());
+      };
+    } else {
+      dispatch(wsFeedConnect(wsAllOrdersInfo));
+      return () => {
+        dispatch(wsFeedDisconnect());
+      };
+    }
+  }, []);
 
   const params = useParams();
   const { data: ordersData } = useSelector((state) => state.feed);

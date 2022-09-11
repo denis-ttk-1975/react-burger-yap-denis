@@ -62,12 +62,12 @@ function App() {
 
   // load data for feed-page
 
-  useEffect(() => {
-    dispatch(wsFeedConnect(wsAllOrdersInfo));
-    return () => {
-      dispatch(wsFeedDisconnect());
-    };
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(wsFeedConnect(wsAllOrdersInfo));
+  //   return () => {
+  //     dispatch(wsFeedDisconnect());
+  //   };
+  // }, [dispatch]);
 
   // handling for Make-Order-Button
 
@@ -140,10 +140,13 @@ function App() {
               {!!menuIngredients && <IngredientDetails center />}
             </Route>
             <Route path='/feed/:id' exact={true}>
-              {!!ordersData?.orders && <OrderIngredients center />}
+              <>
+                {/* <p>просто проверка</p> {!!ordersData?.orders && <OrderIngredients center />} */}
+                <OrderIngredients owner={'common'} center />
+              </>
             </Route>
             <ProtectedRoute path={'/profile/orders/:id'} exact={true} condition={getCookie('refreshToken')} redirection={'/login'}>
-              <OrderIngredients owner={'common'} center />
+              <OrderIngredients owner={'user'} center />
             </ProtectedRoute>
           </Switch>
           {isOrderModalOpen && !isLoadingOrderDetails && !errorMessageOrderDetails && (
@@ -161,7 +164,7 @@ function App() {
           {background && !!ordersData?.orders && (
             <Route path='/feed/:id' exact={true}>
               <Modal closeAllModals={() => history.goBack()}>
-                <OrderIngredients />
+                <OrderIngredients owner={'common'} />
               </Modal>
             </Route>
           )}
