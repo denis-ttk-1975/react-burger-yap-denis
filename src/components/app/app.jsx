@@ -126,7 +126,6 @@ function App() {
             </Route>
             <Route path='/feed/:id' exact={true}>
               <>
-                {/* <p>просто проверка</p> {!!ordersData?.orders && <OrderIngredients center />} */}
                 <OrderIngredients owner={'common'} center />
               </>
             </Route>

@@ -14,6 +14,8 @@ function IngredientDetails(props) {
 
   const dataModal = menuIngredients.find((item) => item._id === params.id);
 
+  if (!dataModal) return null;
+
   const styleHeader = props.center ? `${styles.modalHeader} text text_type_main-large ${styles.center}` : `${styles.modalHeader} text text_type_main-large`;
 
   return (
