@@ -24,7 +24,7 @@ export const websocketMiddleware = (wsActions) => {
         console.log('isConnected: ', isConnected);
       }
 
-      if (type === wsDisconnect) {
+      if (type === wsDisconnect && socket) {
         console.log('disconnect');
         clearTimeout(reconnectTimer);
         isConnected = false;
