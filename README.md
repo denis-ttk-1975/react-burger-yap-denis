@@ -10,6 +10,8 @@
 
 ### also WebSocket protocol and redux-middlelware to handle WebSocket added
 
+### for month 10 - typescript refactoring done
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 This project's made within learning in YandexPraktikum courses web-developer-plus. This is my first project made on ReactJS.
