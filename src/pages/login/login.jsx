@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useHistory, Link, useLocation } from 'react-router-dom';
 
-import { Typography, Logo, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Typography, Button, PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useForm } from './../../hooks/useForm';
 

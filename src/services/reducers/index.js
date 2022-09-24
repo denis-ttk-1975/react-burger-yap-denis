@@ -8,10 +8,13 @@ import { userRegistrationReducer } from './register';
 import { forgotPasswordReducer } from './forgot-password';
 import { resetPasswordReducer } from './reset-password';
 import { userLoginReducer } from './login';
-import { updateTokenReducer } from './update-token';
+// import { updateTokenReducer } from './update-token';
 import { userLogoutReducer } from './logout';
 import { userUpdateInfoReducer } from './patch-user-info';
 import { getUserInfoReducer } from './get-user-info';
+// import { feedReducer } from './feed-page-socket';
+// import { orderHistoryReducer } from './order-history-socket';
+import { wsReducer } from './websocket';
 
 export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
@@ -22,10 +25,13 @@ export const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   userLogin: userLoginReducer,
-  updateToken: updateTokenReducer,
+  // updateToken: updateTokenReducer,
   userLogout: userLogoutReducer,
   userUpdateInfo: userUpdateInfoReducer,
   getUserInfo: getUserInfoReducer,
+  // feed: feedReducer,
+  // orderHistory: orderHistoryReducer,
+  orderTable: wsReducer,
 });
 
 // export const rootReducer = (state, action) => {

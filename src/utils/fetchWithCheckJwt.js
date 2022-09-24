@@ -3,6 +3,8 @@ import { getCookie } from './getCookie';
 
 import { postUrlUserTokenUpdate } from './url';
 
+import { getNewTokens } from './getNewTokens';
+
 export const fetchWithCheckJwt = async (url, options, checkResponsePromise, refreshToken) => {
   try {
     const res = await fetch(url, options);
@@ -10,25 +12,8 @@ export const fetchWithCheckJwt = async (url, options, checkResponsePromise, refr
 
     return result;
   } catch (err) {
-    if (err.message === 'jwt expired') {
-      try {
-        const res = await fetch(postUrlUserTokenUpdate, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            token: `${refreshToken}`,
-          }),
-        });
-
-        const fullResponse = await checkResponsePromise(res);
-
-        setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
-        setCookie('refreshToken', fullResponse.refreshToken);
-      } catch (error) {
-        Promise.reject(error.message);
-      }
+    if (err.message === 'jwt expired' || err.message === 'invalid token' || err.message === 'jwt malformed' || err.message === 'Token is invalid') {
+      await getNewTokens(postUrlUserTokenUpdate, refreshToken, checkResponsePromise);
 
       const res = await fetch(url, {
         ...options,

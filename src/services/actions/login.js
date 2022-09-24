@@ -1,5 +1,4 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, useHistory, useRouteMatch, useLocation, Redirect } from 'react-router-dom';
 
 import { postUrlUserLogin } from '../../utils/url';
 import { checkResponse } from '../../utils/checkResponse';
@@ -40,17 +39,14 @@ export function loginUser(email, password) {
       });
 
       const fullResponse = await checkResponse(res);
-      console.log('после ЧекРеспонс', fullResponse);
       await dispatch(setSuccessForLoginRequest(fullResponse.user, fullResponse.accessToken, fullResponse.refreshToken));
       setUserData(fullResponse.user.name, fullResponse.user.email);
-      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
-      setCookie('refreshToken', fullResponse.refreshToken);
+      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
+      setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
     } catch (error) {
       const alarm = error.message;
-      console.log('я в кетч');
       dispatch(setFailedForLoginRequest(alarm));
       alert(alarm);
-      // document.history.back();
     }
   };
 }

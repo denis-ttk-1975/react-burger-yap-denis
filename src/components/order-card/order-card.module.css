@@ -65,3 +65,7 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+.ordersCardLink {
+  text-decoration: none;
+}

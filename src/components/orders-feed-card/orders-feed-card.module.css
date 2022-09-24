@@ -1,10 +1,11 @@
 .ordersFeedCard {
   display: flex;
   flex-direction: column;
-  width: 584px;
+  width: 536px;
   padding: 24px;
   background-color: #1c1c21;
   border-radius: 40px;
+  cursor: pointer;
 }
 .ordersFeedCard_header {
   display: flex;
@@ -13,17 +14,21 @@
 }
 .ordersFeedCard_number {
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_title {
   margin-bottom: 8px;
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_status {
   margin-bottom: 24px;
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_status_done {
   color: #00cccc;
+  text-decoration: none;
 }
 .ordersFeedCard_footer {
   display: flex;
@@ -34,6 +39,7 @@
   align-items: center;
   gap: 9px;
   color: #f2f2f3;
+  text-decoration: none;
 }
 .ordersFeedCard_ingredients {
   /* max-width: calc(100%-116px); */
@@ -52,6 +58,7 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  position: relative;
 }
 
 .ordersFeedCard_ingredientImage {
@@ -61,4 +68,14 @@
   border: 2px solid transparent;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.ordersFeedCard_restIngredients {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.ordersFeedCardLink {
+  text-decoration: none;
 }

@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import { useHistory, useLocation, Link } from 'react-router-dom'; // импорт библиотеки
+import { useLocation, Link } from 'react-router-dom'; // импорт библиотеки
 
 import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 

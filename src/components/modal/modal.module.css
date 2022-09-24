@@ -16,15 +16,8 @@
   z-index: 5;
   color: #fff;
   border-radius: 40px;
-}
-
-.modalHeader {
-  width: 640px;
-  height: 64px;
-  padding: 40px 40px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
+  width: 720px;
 }
 
 .closeModalButton {
@@ -36,4 +29,7 @@
   align-items: center;
   cursor: pointer;
   border: none;
+  position: absolute;
+  top: 60px;
+  right: 40px;
 }

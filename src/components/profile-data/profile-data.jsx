@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateUserInfo } from './../../services/actions/patch-user-info';
 import { requestForUserInfo } from './../../services/actions/get-user-info';
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo, Input, EmailInput, PasswordInput, EditIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Box, Typography, Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useForm } from './../../hooks/useForm';
 
@@ -15,10 +15,6 @@ function ProfileData() {
   useEffect(() => {
     dispatch(requestForUserInfo());
   }, [dispatch]);
-
-  // const [valueName, setValueName] = React.useState(localStorage.getItem('user_name'));
-  // const [valueEmail, setValueEmail] = React.useState(localStorage.getItem('user_email'));
-  // const [valuePassword, setValuePassword] = React.useState('');
 
   const { values, setValues, handleChange } = useForm({ name: localStorage.getItem('user_name'), email: localStorage.getItem('user_email'), password: '' });
 

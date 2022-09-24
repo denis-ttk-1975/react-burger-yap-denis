@@ -1,4 +1,5 @@
 import React from 'react'; // импорт библиотеки
+import { useSelector } from 'react-redux';
 
 import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
@@ -7,24 +8,57 @@ import styles from './orders-feed-data.module.css';
 import OrdersFeedCard from './../orders-feed-card/orders-feed-card';
 
 // whole component
-function OrdersFeedData(props) {
+function OrdersFeedData({ orders }) {
+  const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
+
+  const billetArray = !!orders
+    ? [
+        ...orders.sort((a, b) => {
+          if (a.number < b.number) {
+            return 1;
+          }
+
+          return -1;
+        }),
+      ]
+    : [];
+
   return (
-    <div>
+    <div className={`${styles.ordersFeed}`}>
       <h1 className={`${styles.ordersFeedTitle} text text_type_main-large`}>Лента заказов</h1>
       <div className={styles.scrollBox}>
-        <OrdersFeedCard
-          number='#000538'
-          date='Сегодня, 16:20 i-GMT+3'
-          title='Death Star Starship Main бургер'
-          status='Выполнен'
-          data={[
-            { image_mobile: 'https://code.s3.yandex.net/react/code/meat-02-mobile.png' },
-            { image_mobile: 'https://code.s3.yandex.net/react/code/core-mobile.png' },
-            { image_mobile: 'https://code.s3.yandex.net/react/code/sauce-04-mobile.png' },
-          ]}
-          onClick={() => alert('You clicked on order card')}
-          price='480'
-        />
+        {billetArray.map((order) => {
+          if (!!order._id) {
+            const orderDate = new Date(Date.parse(order.createdAt));
+            const currentDate = new Date();
+            const date =
+              orderDate.getDate() === currentDate.getDate()
+                ? `Сегодня, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`
+                : `Вчера, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`;
+            const itemList = order.ingredients.map((item) => {
+              return ingredientList.find((elem) => elem._id === item.toString());
+            });
+
+            const price = itemList.reduce((acc, item) => {
+              return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
+            }, 0);
+
+            return (
+              <OrdersFeedCard
+                key={order._id}
+                number={`#${order.number}`}
+                date={date}
+                title={order.name}
+                status={order.status}
+                data={itemList}
+                // onClick={() => alert('You clicked on order card')}
+                price={price}
+                id={order._id}
+              />
+            );
+          }
+          return null;
+        })}
       </div>
     </div>
   );

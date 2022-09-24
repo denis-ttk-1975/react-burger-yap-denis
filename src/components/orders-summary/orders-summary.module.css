@@ -6,18 +6,27 @@
   gap: 36px;
   margin-bottom: 60px;
 }
-.ordersList {
+.ordersListArea {
   width: 272px;
+  overflow: hidden;
 }
 .ordersListTitle {
   margin-bottom: 24px;
 }
+.OrderItemWrap {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 241px;
+}
 .preparingOrderItem {
   list-style-type: none;
+  width: 136px;
 }
 .readyOrderItem {
   color: #00cccc;
   list-style-type: none;
+  width: 136px;
 }
 .ordersTotal {
   margin-bottom: 60px;

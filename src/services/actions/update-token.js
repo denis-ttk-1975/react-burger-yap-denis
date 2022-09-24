@@ -37,8 +37,8 @@ export function updateTokenRequest(refreshToken) {
       const fullResponse = await checkResponse(res);
 
       await dispatch(setSuccessForUpdateTokenRequest(fullResponse.accessToken, fullResponse.refreshToken));
-      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1]);
-      setCookie('refreshToken', fullResponse.refreshToken);
+      setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
+      setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
     } catch (error) {
       dispatch(setFailedForUpdateTokenRequest(error.message));
       Promise.reject(error.message);

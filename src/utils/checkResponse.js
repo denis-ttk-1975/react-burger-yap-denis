@@ -1,6 +1,5 @@
 export async function checkResponse(res) {
   const serverResponseBody = await res.json();
-  console.log('я в чек респонс - serverResponseBody: ', serverResponseBody);
   if (res.status !== 200) {
     if (serverResponseBody.message.length) {
       console.log(`${serverResponseBody.message}`);

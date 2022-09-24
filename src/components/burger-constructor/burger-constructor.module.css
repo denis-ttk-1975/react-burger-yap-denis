@@ -33,7 +33,7 @@
   max-height: calc(100vh - 536px);
   /* min-height: 464px; */
   /* max-height: 756px; */
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .innerList::-webkit-scrollbar {
