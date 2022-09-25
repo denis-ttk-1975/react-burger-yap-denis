@@ -16,7 +16,7 @@ import ElemList from '../elem-list/elem-list';
 import defaultBunGrey from './../../images/default-bun-grey.png';
 import defaultIngredientGrey from './../../images/default-ingredient-grey.png';
 
-type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string };
+type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
 
 const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = ({ onClickMakeOrder }) => {
   const { orderIngredients, bun, stuffing } = useSelector(

@@ -1,19 +1,28 @@
-import React from 'react'; // импорт библиотеки
+import React, { FunctionComponent, ReactNode } from 'react'; // импорт библиотеки
 import { useSelector } from 'react-redux';
-
-import PropTypes from 'prop-types';
-
-import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './ingredient-area.module.css';
 import IngredientsItem from '../ingredient-item/ingredient-item';
 
+interface Props {
+  children?: ReactNode;
+  group: string;
+  type: string;
+  data: {}[];
+  onClickIngredientsItem: () => void;
+}
+export type Ref = ReactNode;
+
+type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
+
 // area for group of ingredients - bun, sauce, main
-const IngredientsArea = React.forwardRef((props, ref) => {
-  const { bun, stuffing } = useSelector((state) => state.burgerConstructor);
+const IngredientsArea = React.forwardRef<Props, Ref>((props, ref) => {
+  const { bun, stuffing } = useSelector((state: { burgerConstructor: { bun: TIngredientElement; stuffing: TIngredientElement[] } }) => state.burgerConstructor);
 
   function countIngredients() {
-    const acc = {};
+    const acc: {
+      [name: string]: number;
+    } = {};
     if (bun) acc[bun._id] = 1;
     if (stuffing) {
       stuffing.forEach((elem) => {
@@ -32,7 +41,7 @@ const IngredientsArea = React.forwardRef((props, ref) => {
         {props.group}
       </h3>
       <div className={styles.ingredientsGrid}>
-        {props.data.map((elem) => {
+        {props.data.map((elem: TIngredientElement) => {
           if (elem.type === props.type) {
             return <IngredientsItem amount={ingredientsAmountData[elem._id]} data={elem} key={elem._id} onClickIngredientsItem={props.onClickIngredientsItem} />;
           }
@@ -42,11 +51,5 @@ const IngredientsArea = React.forwardRef((props, ref) => {
     </div>
   );
 });
-
-IngredientsArea.propTypes = {
-  data: PropTypes.array.isRequired,
-  group: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-};
 
 export default IngredientsArea;
