@@ -1,19 +1,23 @@
-import React, { useEffect } from 'react'; // импорт библиотеки
+import React, { useEffect, ReactNode } from 'react'; // импорт библиотеки
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
-import ModalOverlay from './../modal-overlay/modal-overlay';
+import ModalOverlay from '../modal-overlay/modal-overlay';
 
-import { Box, CloseIcon, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './modal.module.css';
 
-// Находим DOM-элемент для отрисовки в нем модальных окон
-const modalsContainer = document.querySelector('#modals');
+type TModalProps = {
+  children: ReactNode;
+  closeAllModals: () => void;
+};
 
-const Modal = ({ closeAllModals, children }) => {
+// Находим DOM-элемент для отрисовки в нем модальных окон
+const modalsContainer = document.querySelector('#modals') as HTMLElement;
+
+const Modal = ({ closeAllModals, children }: TModalProps) => {
   // handling for Esc pressing
 
-  const handleEscKeydown = (e) => {
+  const handleEscKeydown = (e: KeyboardEvent) => {
     e.key === 'Escape' && closeAllModals();
   };
 
@@ -37,10 +41,6 @@ const Modal = ({ closeAllModals, children }) => {
     </div>,
     modalsContainer
   );
-};
-
-Modal.propTypes = {
-  closeAllModals: PropTypes.func.isRequired,
 };
 
 export default Modal;

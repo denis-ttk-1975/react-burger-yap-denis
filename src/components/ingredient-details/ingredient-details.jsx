@@ -2,10 +2,6 @@ import React from 'react'; // react-lib import
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import PropTypes from 'prop-types'; //prop-types-lib import
-
-import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import styles from './ingredient-details.module.css';
 
 function IngredientDetails(props) {
