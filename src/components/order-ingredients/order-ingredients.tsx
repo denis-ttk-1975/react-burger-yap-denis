@@ -3,17 +3,36 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { useParams } from 'react-router-dom';
 
-import PropTypes from 'prop-types';
-
-import { Typography, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './order-ingredients.module.css';
 
-import { wsUserOrdersInfo, wsAllOrdersInfo } from './../../utils/url';
-import { wsConnect, wsDisconnect } from './../../services/actions/websocket';
-import { getCookie } from './../../utils/getCookie';
+import { TIngredientElement } from './../../services/types/types';
 
-function OrderIngredients(props) {
+import { wsUserOrdersInfo, wsAllOrdersInfo } from '../../utils/url';
+import { wsConnect, wsDisconnect } from '../../services/actions/websocket';
+import { getCookie } from '../../utils/getCookie';
+
+type TOrderIngredientsProps = { center?: boolean; owner: 'user' | 'common' };
+
+type TIngredientDataArray = {
+  carbohydrates: number;
+  fat: number;
+  proteins: number;
+  calories: number;
+  image_large: string;
+  image_mobile: string;
+  type: string;
+  __v: number;
+  uuid: string;
+  price: number;
+  name: string;
+  image: string;
+  _id: string;
+  amount: number;
+};
+
+function OrderIngredients(props: TOrderIngredientsProps) {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,17 +43,19 @@ function OrderIngredients(props) {
     };
   }, []);
 
-  const params = useParams();
+  const params = useParams() as { id: string };
 
-  const { data: orderTable } = useSelector((state) => state.orderTable);
+  const { data: orderTable } = useSelector(
+    (state: { orderTable: { data: { orders: { status: string; number: number; name: string; _id: string; createdAt: string; ingredients: string[] }[] } } }) => state.orderTable
+  );
 
-  const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
+  const { menuIngredients: ingredientList } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
 
   const billetData = props.owner === 'user' ? orderTable?.orders.find((item) => item._id === params.id) : orderTable?.orders.find((item) => item._id === params.id);
 
   if (!billetData) return null;
 
-  const statusMapping = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
+  const statusMapping: { done: string; preparing: string; created: string; deleted: string } = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
 
   const styleHeader = props.center ? `${styles.orderNumber} text text_type_digits-default ${styles.center}` : `${styles.orderNumber} text text_type_digits-default`;
 
@@ -46,11 +67,11 @@ function OrderIngredients(props) {
     return ingredientList.find((elem) => elem._id === item.toString());
   });
 
-  const prepareIngredientDataArray = (array, ingredientsData) => {
+  const prepareIngredientDataArray = (array: string[], ingredientsData: TIngredientElement[]) => {
     const uniqElemArray = Array.from(new Set(array));
     let result = uniqElemArray.map((item) => {
       return ingredientsData.find((elem) => elem._id === item.toString());
-    });
+    }) as TIngredientDataArray[];
     result = result.map((item) => {
       const amountIngredient = array.filter((elem) => elem.toString() === item._id.toString()).length;
       return { ...item, amount: amountIngredient };
@@ -116,9 +137,5 @@ function OrderIngredients(props) {
     </div>
   );
 }
-
-// OrderIngredients.propTypes = {
-//   dataModal: PropTypes.string.isRequired,
-// };
 
 export default OrderIngredients;

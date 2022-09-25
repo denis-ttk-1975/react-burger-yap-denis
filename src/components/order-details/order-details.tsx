@@ -1,13 +1,9 @@
 import React from 'react'; // импорт библиотеки
 
-import PropTypes from 'prop-types';
-
-import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import styles from './order-details.module.css';
 import orderAcceptedIcon from './../../images/order-accepted-icon.png';
 
-function OrderDetails(props) {
+function OrderDetails(props: { dataModal: string }) {
   return (
     <div className={styles.mainModal}>
       <p className={`text text_type_digits-large ${styles.idOrderNumber}`}>{props.dataModal}</p>
@@ -20,9 +16,5 @@ function OrderDetails(props) {
     </div>
   );
 }
-
-OrderDetails.propTypes = {
-  dataModal: PropTypes.string.isRequired,
-};
 
 export default OrderDetails;

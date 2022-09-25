@@ -7,6 +7,9 @@ import { setStuffingIntoOrder } from '../../services/actions/burger-constructor'
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './elem-list.module.css';
+
+import { TIngredientElement } from './../../services/types/types';
+
 type TElementListProps = {
   index: number;
   uuid: string;
@@ -14,8 +17,6 @@ type TElementListProps = {
   price: number;
   image: string;
 };
-
-type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
 
 function ElemList({ index, uuid, name, price, image }: TElementListProps) {
   const dispatch = useDispatch();

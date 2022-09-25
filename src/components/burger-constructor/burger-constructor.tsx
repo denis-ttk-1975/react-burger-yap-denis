@@ -16,7 +16,7 @@ import ElemList from '../elem-list/elem-list';
 import defaultBunGrey from './../../images/default-bun-grey.png';
 import defaultIngredientGrey from './../../images/default-ingredient-grey.png';
 
-type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
+import { TIngredientElement } from './../../services/types/types';
 
 const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = ({ onClickMakeOrder }) => {
   const { orderIngredients, bun, stuffing } = useSelector(
@@ -106,7 +106,7 @@ const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = (
         {stuffing.length === 0 ? (
           <div className={styles.innerList}>
             {/* <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' /> */}
-            <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} index={0} />
+            <ElemList uuid={'0'} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} index={0} />
           </div>
         ) : (
           <div className={styles.innerList}>

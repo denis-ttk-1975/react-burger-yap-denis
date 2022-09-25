@@ -6,7 +6,7 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 
 import styles from './ingredient-item.module.css';
 
-type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
+import { TIngredientElement } from './../../services/types/types';
 
 type TIngredientItemProps = {
   amount: number;

@@ -8,9 +8,11 @@ import styles from './burger-ingredients.module.css';
 import IngredientsArea from '../ingredient-area/ingredient-area';
 import NavIngredient from '../nav-ingredient/nav-ingredient';
 
+import { TIngredientElement } from './../../services/types/types';
+
 // whole component
 function BurgerIngredients({ onClickIngredientsItem }: { onClickIngredientsItem: () => void }) {
-  const { menuIngredients } = useSelector((state: { burgerIngredients: { menuIngredients: {} } }) => state.burgerIngredients);
+  const { menuIngredients } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
 
   const dispatch = useDispatch();
   const scrollBoxRef = useRef<HTMLDivElement>(null);

@@ -4,9 +4,13 @@ import { useSelector } from 'react-redux';
 
 import styles from './ingredient-details.module.css';
 
-function IngredientDetails(props) {
-  const params = useParams();
-  const { menuIngredients } = useSelector((state) => state.burgerIngredients);
+import { TIngredientElement } from './../../services/types/types';
+
+type TIngredientDetailsProps = { center?: boolean };
+
+function IngredientDetails(props: TIngredientDetailsProps) {
+  const params = useParams() as { id: string };
+  const { menuIngredients } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
 
   const dataModal = menuIngredients.find((item) => item._id === params.id);
 
