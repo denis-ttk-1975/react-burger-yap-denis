@@ -1,17 +1,17 @@
 import React, { FC } from 'react'; // импорт библиотеки
 import { useLocation, Link } from 'react-router-dom'; // импорт библиотеки
 
-import { Box, Typography, BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
+import { BurgerIcon, ListIcon, ProfileIcon, Logo } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './app-header.module.css';
 
 function AppHeader() {
-  const location = useLocation();
-  const typePrimary = 'primary';
-  const typeSecondary = 'secondary';
+  const location: { pathname: string } = useLocation();
+  const typePrimary: 'secondary' | 'primary' | 'error' | 'success' = 'primary';
+  const typeSecondary: 'secondary' | 'primary' | 'error' | 'success' = 'secondary';
 
-  const classNameActive = 'ml-2 text text_type_main-default ';
-  const classNameInactive = 'ml-2 text text_type_main-default text_color_inactive';
+  const classNameActive: string = 'ml-2 text text_type_main-default ';
+  const classNameInactive: string = 'ml-2 text text_type_main-default text_color_inactive';
   return (
     <header className={`${styles.header}`}>
       <div className={`${styles.headerBox}`}>
