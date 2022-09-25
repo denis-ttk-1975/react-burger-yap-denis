@@ -1,26 +1,37 @@
-import React, { useRef } from 'react'; // импорт библиотеки
+import React, { useRef, ReactNode } from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 import { useDrag, useDrop } from 'react-dnd';
 
-import { setStuffingIntoOrder } from './../../services/actions/burger-constructor';
-
-import PropTypes from 'prop-types';
+import { setStuffingIntoOrder } from '../../services/actions/burger-constructor';
 
 import { DragIcon, ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './elem-list.module.css';
+type TElementListProps = {
+  index: number;
+  uuid: string;
+  name: string;
+  price: number;
+  image: string;
+};
 
-import { IngredientType } from '../../utils/prop-types';
+type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
 
-function ElemList({ index, uuid, name, price, image }) {
+function ElemList({ index, uuid, name, price, image }: TElementListProps) {
   const dispatch = useDispatch();
-  const { stuffing } = useSelector((state) => state.burgerConstructor);
+  const { stuffing } = useSelector(
+    (state: {
+      burgerConstructor: {
+        stuffing: TIngredientElement[];
+      };
+    }) => state.burgerConstructor
+  );
 
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [, drop] = useDrop({
     accept: 'sorting',
 
-    hover(item, monitor) {
+    hover(item: typeof ElemList, monitor) {
       if (!ref.current) {
         return;
       }
@@ -82,13 +93,11 @@ function ElemList({ index, uuid, name, price, image }) {
         price={price}
         thumbnail={image}
         handleClose={() => {
-          dispatch(setStuffingIntoOrder(stuffing.filter((elem) => elem.uuid !== uuid)));
+          dispatch(setStuffingIntoOrder(stuffing.filter((elem: TIngredientElement) => elem.uuid !== uuid)));
         }}
       />
     </div>
   );
 }
-
-ElemList.propTypes = IngredientType;
 
 export default ElemList;

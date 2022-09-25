@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styles from './ingredient-area.module.css';
 import IngredientsItem from '../ingredient-item/ingredient-item';
 
-type Props = {
+type TIngredientAreaProps = {
   children?: HTMLDivElement;
   group: string;
   type: string;
@@ -16,7 +16,7 @@ type Ref = HTMLDivElement;
 type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
 
 // area for group of ingredients - bun, sauce, main
-const IngredientsArea = React.forwardRef<Props, Ref>((props, ref) => {
+const IngredientsArea = React.forwardRef<TIngredientAreaProps, Ref>((props, ref) => {
   const { bun, stuffing } = useSelector((state: { burgerConstructor: { bun: TIngredientElement; stuffing: TIngredientElement[] } }) => state.burgerConstructor);
 
   function countIngredients() {

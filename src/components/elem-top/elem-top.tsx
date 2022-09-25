@@ -8,7 +8,13 @@ import styles from './elem-top.module.css';
 
 import { IngredientType } from '../../utils/prop-types';
 
-function ElemTop(props) {
+type TElementTopBottomProps = {
+  name: string;
+  price: number;
+  image: string;
+};
+
+function ElemTop(props: TElementTopBottomProps) {
   return (
     <div className={styles.elemTop}>
       <ConstructorElement type='top' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />

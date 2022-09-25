@@ -8,14 +8,14 @@ import styles from './ingredient-item.module.css';
 
 type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
 
-type Props = {
+type TIngredientItemProps = {
   amount: number;
   data: TIngredientElement;
   onClickIngredientsItem: (arg: TIngredientElement) => void;
 };
 
 // card for ingredient item
-function IngredientsItem(props: Props) {
+function IngredientsItem(props: TIngredientItemProps) {
   const [, dragRef] = useDrag(() => ({
     type: props.data.type,
     item: props.data,

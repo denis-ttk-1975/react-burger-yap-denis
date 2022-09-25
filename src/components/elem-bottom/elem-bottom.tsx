@@ -5,10 +5,15 @@ import PropTypes from 'prop-types';
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './elem-bottom.module.css';
-
 import { IngredientType } from '../../utils/prop-types';
 
-function ElemBottom(props) {
+type TElementTopBottomProps = {
+  name: string;
+  price: number;
+  image: string;
+};
+
+function ElemBottom(props: TElementTopBottomProps) {
   return (
     <div className={styles.elemBottom}>
       <ConstructorElement type='bottom' isLocked={true} text={props.name} price={props.price} thumbnail={props.image} />
