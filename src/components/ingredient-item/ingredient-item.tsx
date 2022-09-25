@@ -2,14 +2,20 @@ import React from 'react'; // импорт библиотеки
 import { useDrag } from 'react-dnd';
 import { Link, useLocation } from 'react-router-dom';
 
-import PropTypes from 'prop-types';
-
-import { Box, CurrencyIcon, Typography, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './ingredient-item.module.css';
 
+type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
+
+type Props = {
+  amount: number;
+  data: TIngredientElement;
+  onClickIngredientsItem: (arg: TIngredientElement) => void;
+};
+
 // card for ingredient item
-function IngredientsItem(props) {
+function IngredientsItem(props: Props) {
   const [, dragRef] = useDrag(() => ({
     type: props.data.type,
     item: props.data,
@@ -30,9 +36,5 @@ function IngredientsItem(props) {
     </Link>
   );
 }
-
-IngredientsItem.propTypes = {
-  data: PropTypes.object.isRequired,
-};
 
 export default IngredientsItem;

@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import styles from './ingredient-area.module.css';
 import IngredientsItem from '../ingredient-item/ingredient-item';
 
-interface Props {
-  children?: ReactNode;
+type Props = {
+  children?: HTMLDivElement;
   group: string;
   type: string;
-  data: {}[];
+  data: TIngredientElement[];
   onClickIngredientsItem: () => void;
-}
-export type Ref = ReactNode;
+};
+type Ref = HTMLDivElement;
 
 type TIngredientElement = { image_mobile: string; type: string; __v: number; uuid: string; price: number; name: string; image: string; _id: string };
 
