@@ -1,11 +1,15 @@
 import React from 'react'; // импорт библиотеки
 
-import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import styles from './orders-summary.module.css';
 
+type TOrderSummaryProps = {
+  orders: { status: string; _id: string; number: string | number }[];
+  total: number;
+  totalToday: number;
+};
+
 // whole component
-function OrdersSummary(props) {
+function OrdersSummary(props: TOrderSummaryProps) {
   return (
     <div className={`${styles.ordersSummary}`}>
       <div className={`${styles.ordersSummaryLists} text `}>
