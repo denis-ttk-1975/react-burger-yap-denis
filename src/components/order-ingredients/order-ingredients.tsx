@@ -55,7 +55,7 @@ function OrderIngredients(props: TOrderIngredientsProps) {
 
   if (!billetData) return null;
 
-  const statusMapping: { done: string; preparing: string; created: string; deleted: string } = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
+  const statusMapping: { [key: string]: string } = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
 
   const styleHeader = props.center ? `${styles.orderNumber} text text_type_digits-default ${styles.center}` : `${styles.orderNumber} text text_type_digits-default`;
 

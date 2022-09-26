@@ -46,10 +46,14 @@ function ElemList({ index, uuid, name, price, image }: TElementListProps) {
       }
       // Determine rectangle on screen
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      // conditional term for TypeScript
+      if (!hoverBoundingRect) return;
       // Get vertical middle
       const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
+      // conditional term for TypeScript
+      if (!clientOffset) return;
       // Get pixels to the top
       const hoverClientY = clientOffset.y - hoverBoundingRect.top;
       // Only perform the move when the mouse has crossed half of the items height

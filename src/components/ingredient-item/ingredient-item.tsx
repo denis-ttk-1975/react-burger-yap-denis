@@ -25,7 +25,11 @@ function IngredientsItem(props: TIngredientItemProps) {
   return (
     <Link to={{ pathname: `/ingredients/${id}`, state: { background: location } }}>
       <div className={styles.ingredientsCard} onClick={() => props.onClickIngredientsItem(props.data)} ref={dragRef}>
-        {props.amount ? <Counter count={props.amount} size='default' className={styles.counter} /> : null}
+        {props.amount ? (
+          <div className={styles.counter}>
+            <Counter count={props.amount} size='default' />
+          </div>
+        ) : null}
         <img src={props.data.image} alt={props.data.name} className='mb-2' />
         <div className={`mb-2 ${styles.priceLabel}`}>
           <p className='text text_type_digits-default'>{props.data.price}</p>
