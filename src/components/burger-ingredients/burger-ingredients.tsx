@@ -21,14 +21,16 @@ function BurgerIngredients({ onClickIngredientsItem }: { onClickIngredientsItem:
   const mainRef = useRef<HTMLDivElement>(null);
 
   const scrollHandler: React.UIEventHandler<HTMLDivElement> = (e) => {
-    if (scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop) {
-      dispatch(setBunActiveForMenu());
-    }
-    if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop && scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop + sauceRef.current.offsetTop) {
-      dispatch(setSauceActiveForMenu());
-    }
-    if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop + sauceRef.current.offsetTop) {
-      dispatch(setMainActiveForMenu());
+    if (scrollBoxRef.current && bunRef.current && sauceRef.current) {
+      if (scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop) {
+        dispatch(setBunActiveForMenu());
+      }
+      if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop && scrollBoxRef.current.scrollTop <= bunRef.current.offsetTop + sauceRef.current.offsetTop) {
+        dispatch(setSauceActiveForMenu());
+      }
+      if (scrollBoxRef.current.scrollTop > bunRef.current.offsetTop + sauceRef.current.offsetTop) {
+        dispatch(setMainActiveForMenu());
+      }
     }
   };
 

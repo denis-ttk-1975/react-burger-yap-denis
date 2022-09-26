@@ -16,7 +16,7 @@ type TIngredientAreaProps = {
 type Ref = HTMLDivElement;
 
 // area for group of ingredients - bun, sauce, main
-const IngredientsArea = React.forwardRef<TIngredientAreaProps, Ref>((props, ref) => {
+const IngredientsArea = React.forwardRef<Ref, TIngredientAreaProps>((props, ref) => {
   const { bun, stuffing } = useSelector((state: { burgerConstructor: { bun: TIngredientElement; stuffing: TIngredientElement[] } }) => state.burgerConstructor);
 
   function countIngredients() {

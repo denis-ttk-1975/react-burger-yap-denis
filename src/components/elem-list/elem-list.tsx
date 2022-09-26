@@ -32,7 +32,7 @@ function ElemList({ index, uuid, name, price, image }: TElementListProps) {
   const [, drop] = useDrop({
     accept: 'sorting',
 
-    hover(item: typeof ElemList, monitor) {
+    hover(item: TElementListProps, monitor) {
       if (!ref.current) {
         return;
       }
