@@ -2,20 +2,18 @@ import React, { useEffect } from 'react'; // импорт библиотеки
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import OrdersFeedData from '../../components/orders-feed-data/orders-feed-data';
 import OrdersSummary from '../../components/orders-summary/orders-summary';
 
-import { wsConnect, wsDisconnect } from './../../services/actions/websocket';
+import { wsConnect, wsDisconnect } from '../../services/actions/websocket';
 
-import { wsAllOrdersInfo } from './../../utils/url';
+import { wsAllOrdersInfo } from '../../utils/url';
 
 import styles from './feed.module.css';
 
 function Feed() {
   const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.orderTable);
+  const { data } = useSelector((state: {orderTable: {data: {orders: []; total: number; totalToday: number}}}) => state.orderTable);
 
   useEffect(() => {
     dispatch(wsConnect(wsAllOrdersInfo, null));
