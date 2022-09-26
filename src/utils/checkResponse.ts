@@ -1,4 +1,4 @@
-export async function checkResponse(res) {
+export async function checkResponse(res: any) {
   const serverResponseBody = await res.json();
   if (res.status !== 200) {
     if (serverResponseBody.message.length) {
