@@ -4,7 +4,7 @@ import { useHistory, Link, useLocation } from 'react-router-dom';
 
 import { Typography, Button, PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useForm } from './../../hooks/useForm';
+import { useForm } from '../../hooks/useForm';
 
 import styles from './login.module.css';
 
