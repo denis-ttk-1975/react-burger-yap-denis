@@ -1,15 +1,17 @@
 import React from 'react'; // импорт библиотеки
 import { useSelector } from 'react-redux';
 
-import { Box, Typography } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import styles from './orders-feed-data.module.css';
 
-import OrdersFeedCard from './../orders-feed-card/orders-feed-card';
+import OrdersFeedCard from '../orders-feed-card/orders-feed-card';
+
+import { TIngredientElement } from './../../services/types/types';
+
+type TOrdersFeedDataProps = { name: string; status: string; price: number; number: number; _id: string; ingredients: string[]; createdAt: string }[];
 
 // whole component
-function OrdersFeedData({ orders }) {
-  const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
+function OrdersFeedData({ orders }: { orders: TOrdersFeedDataProps }) {
+  const { menuIngredients: ingredientList } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
 
   const billetArray = !!orders
     ? [
@@ -35,9 +37,13 @@ function OrdersFeedData({ orders }) {
               orderDate.getDate() === currentDate.getDate()
                 ? `Сегодня, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`
                 : `Вчера, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`;
-            const itemList = order.ingredients.map((item) => {
-              return ingredientList.find((elem) => elem._id === item.toString());
-            });
+            const itemList = order.ingredients
+              .map((item) => {
+                return ingredientList.find((elem) => elem._id === item.toString());
+              })
+              .filter((el) => {
+                return el !== undefined;
+              }) as TIngredientElement[];
 
             const price = itemList.reduce((acc, item) => {
               return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);

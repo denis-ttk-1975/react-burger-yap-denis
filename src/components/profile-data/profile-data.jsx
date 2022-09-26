@@ -1,13 +1,19 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
 import { useDispatch } from 'react-redux';
-import { updateUserInfo } from './../../services/actions/patch-user-info';
-import { requestForUserInfo } from './../../services/actions/get-user-info';
+import { updateUserInfo } from '../../services/actions/patch-user-info';
+import { requestForUserInfo } from '../../services/actions/get-user-info';
 
-import { Box, Typography, Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Input, EmailInput, PasswordInput, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useForm } from './../../hooks/useForm';
+import { useForm } from '../../hooks/useForm';
 
 import styles from './profile-data.module.css';
+
+// type TValues = {
+//   name: string;
+//   email: string;
+//   password: string;
+// };
 
 function ProfileData() {
   const dispatch = useDispatch();

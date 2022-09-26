@@ -2,12 +2,10 @@ import React from 'react'; // импорт библиотеки
 import { useDispatch } from 'react-redux';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 
-import { Typography } from '@ya.praktikum/react-developer-burger-ui-components';
-
 import styles from './profile-nav.module.css';
 
-import { logoutUser } from './../../services/actions/logout';
-import { getCookie } from './../../utils/getCookie';
+import { logoutUser } from '../../services/actions/logout';
+import { getCookie } from '../../utils/getCookie';
 
 function ProfileNav() {
   const dispatch = useDispatch();

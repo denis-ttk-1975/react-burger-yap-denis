@@ -3,11 +3,27 @@ import { Link, useLocation } from 'react-router-dom';
 
 import { nanoid } from 'nanoid';
 
-import { Box, Typography, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './orders-feed-card.module.css';
 
-const OrdersFeedCard = ({ number, date, title, status, data, price, id }) => {
+const OrdersFeedCard = ({
+  number,
+  date,
+  title,
+  status,
+  data,
+  price,
+  id,
+}: {
+  number: string;
+  status: string;
+  date: string;
+  title: string;
+  data: { image_mobile: string }[];
+  price: number;
+  id: string;
+}) => {
   const location = useLocation();
   const billetArray =
     data.length > 6
@@ -26,7 +42,6 @@ const OrdersFeedCard = ({ number, date, title, status, data, price, id }) => {
           <p className={`${styles.ordersFeedCard_date} text text_type_main-default text_color_inactive`}>{date}</p>
         </div>
         <div className={`${styles.ordersFeedCard_title} text text_type_main-medium`}>{title}</div>
-        {/* <div className={`${styles.ordersFeedCard_status} text text_type_main-default`}>{status}</div> */}
         <div className={`${styles.ordersFeedCard_footer}`}>
           <div className={`${styles.ordersFeedCard_ingredients}`}>
             {billetArray.reverse().map((elem, index, arr) => {
