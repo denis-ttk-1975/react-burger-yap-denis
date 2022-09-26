@@ -1,9 +1,9 @@
 import React from 'react'; // импорт библиотеки
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setBunActiveForMenu, setSauceActiveForMenu, setMainActiveForMenu } from './../../services/actions/burger-ingredients';
+import { setBunActiveForMenu, setSauceActiveForMenu, setMainActiveForMenu } from '../../services/actions/burger-ingredients';
 
-import { Box, Typography, Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './nav-ingredient.module.css';
 
@@ -12,9 +12,9 @@ import styles from './nav-ingredient.module.css';
 function NavIngredient() {
   const dispatch = useDispatch();
 
-  const { activeNavElement } = useSelector((state) => state.burgerIngredients);
+  const { activeNavElement } = useSelector((state: { burgerIngredients: { activeNavElement: string } }) => state.burgerIngredients);
 
-  const onTabClick = (par) => {
+  const onTabClick = (par: string) => {
     switch (par) {
       case 'bun': {
         dispatch(setBunActiveForMenu());
