@@ -3,9 +3,9 @@ import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER } f
 import { TIngredientElement } from './../../services/types/types';
 import { TBurgerConstructorActions } from './../../services/actions/burger-constructor';
 
-type TBurgerIngredientsState = { orderIngredients: TIngredientElement[]; bun: TIngredientElement; stuffing: TIngredientElement[] };
+type TBurgerConstructorState = { orderIngredients: TIngredientElement[]; bun: TIngredientElement; stuffing: TIngredientElement[] };
 
-const initialState: TBurgerIngredientsState = {
+const initialState: TBurgerConstructorState = {
   orderIngredients: [],
   bun: {},
   stuffing: [],
