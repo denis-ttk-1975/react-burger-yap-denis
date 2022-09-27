@@ -2,7 +2,7 @@ import { setCookie } from './setCookie';
 import { getCookie } from './getCookie';
 import { checkResponse } from './checkResponse';
 
-export async function getNewTokens(url, refreshToken, checkResponsePromise) {
+export async function getNewTokens(url: string, refreshToken: string, checkResponsePromise: any) {
   try {
     const res = await fetch(url, {
       method: 'POST',
