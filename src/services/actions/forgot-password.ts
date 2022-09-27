@@ -1,6 +1,7 @@
 import { postUrlForgotPassword } from '../../utils/url';
 import { checkResponse } from '../../utils/checkResponse';
-import { TIngredientElement, AppDispatch } from './../../services/types/types';
+
+import { AppDispatch } from './../../services/types/types';
 
 export const SEND_FORGOT_PASSWORD: 'SEND_REGISTRATION' = 'SEND_REGISTRATION';
 export const GET_FORGOT_PASSWORD_FAILED: 'GET_REGISTRATION_FAILED' = 'GET_REGISTRATION_FAILED';

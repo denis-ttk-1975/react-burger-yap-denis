@@ -23,7 +23,7 @@ export function setBurgerIngredients(ingredients: TIngredientElement[]) {
   return { type: SET_BURGER_INGREDIENTS, ingredients };
 }
 
-export function setBunIntoOrder(bun: TIngredientElement) {
+export function setBunIntoOrder(bun: TIngredientElement | {}) {
   return { type: SET_BUN_INTO_ORDER, bun };
 }
 

@@ -1,5 +1,6 @@
 import { fetchUrlForIngredients } from '../../utils/url';
 import { checkResponse } from '../../utils/checkResponse';
+
 import { TIngredientElement, AppDispatch } from './../../services/types/types';
 
 export const GET_INGREDIENTS: 'GET_INGREDIENTS' = 'GET_INGREDIENTS';
