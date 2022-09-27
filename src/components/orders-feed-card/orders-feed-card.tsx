@@ -6,26 +6,13 @@ import { nanoid } from 'nanoid';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './orders-feed-card.module.css';
+import { TIngredientElement } from './../../services/types/types';
 
-const OrdersFeedCard = ({
-  number,
-  date,
-  title,
-  status,
-  data,
-  price,
-  id,
-}: {
-  number: string;
-  status: string;
-  date: string;
-  title: string;
-  data: { image_mobile: string }[];
-  price: number;
-  id: string;
-}) => {
+type TBilletArrayElement = TIngredientElement & { restAmount?: number };
+
+const OrdersFeedCard = ({ number, date, title, status, data, price, id }: { number: string; status: string; date: string; title: string; data: TIngredientElement[]; price: number; id: string }) => {
   const location = useLocation();
-  const billetArray =
+  const billetArray: TBilletArrayElement[] =
     data.length > 6
       ? data
           .map((elem, index) => {
