@@ -15,7 +15,7 @@ export function setFailedForUpdateTokenRequest(errorMessage) {
   return { type: GET_UPDATE_TOKEN_FAILED, errorMessage };
 }
 
-export function setSuccessForUpdateTokenRequest(userData, accessToken, refreshToken) {
+export function setSuccessForUpdateTokenRequest(accessToken, refreshToken) {
   return { type: GET_UPDATE_TOKEN_SUCCESS, payload: { accessToken: accessToken, refreshToken: refreshToken } };
 }
 
