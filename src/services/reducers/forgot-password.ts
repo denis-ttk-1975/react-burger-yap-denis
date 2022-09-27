@@ -1,12 +1,17 @@
-import { SEND_FORGOT_PASSWORD, GET_FORGOT_PASSWORD_FAILED, GET_FORGOT_PASSWORD_SUCCESS } from './../actions/forgot-password';
+import { SEND_FORGOT_PASSWORD, GET_FORGOT_PASSWORD_FAILED, GET_FORGOT_PASSWORD_SUCCESS } from '../actions/forgot-password';
 
-const initialState = {
+import { TIngredientElement } from '../types/types';
+import { TForgotPasswordActions } from '../actions/forgot-password';
+
+type TBurgerIngredientsState = { isLoading: boolean; errorMessage: string; message: string };
+
+const initialState: TBurgerIngredientsState = {
   isLoading: false,
   errorMessage: '',
-  message: {},
+  message: '',
 };
 
-export const forgotPasswordReducer = (state = initialState, action) => {
+export const forgotPasswordReducer = (state = initialState, action: TForgotPasswordActions) => {
   switch (action.type) {
     case SEND_FORGOT_PASSWORD: {
       return {
