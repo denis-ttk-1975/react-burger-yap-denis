@@ -43,25 +43,17 @@ function OrdersFeedData({ orders }: { orders: TOrdersFeedDataProps }) {
               })
               .filter((el) => {
                 return el !== undefined;
-              }) as TIngredientElement[];
+              });
+
+            if (!itemList.length) {
+              return null;
+            }
 
             const price = itemList.reduce((acc, item) => {
               return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
             }, 0);
 
-            return (
-              <OrdersFeedCard
-                key={order._id}
-                number={`#${order.number}`}
-                date={date}
-                title={order.name}
-                status={order.status}
-                data={itemList}
-                // onClick={() => alert('You clicked on order card')}
-                price={price}
-                id={order._id}
-              />
-            );
+            return <OrdersFeedCard key={order._id} number={`#${order.number}`} date={date} title={order.name} status={order.status} data={itemList} price={price} id={order._id} />;
           }
           return null;
         })}

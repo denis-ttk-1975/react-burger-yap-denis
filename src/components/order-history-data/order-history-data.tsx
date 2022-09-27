@@ -57,16 +57,14 @@ function OrderHistoryData() {
                 })
                 .filter((el) => {
                   return el !== undefined;
-                }) as TIngredientElement[];
+                });
 
-              // if (!itemList.length || !!itemList) {
-              //   return null;
-              // }
+              if (!itemList.length) {
+                return null;
+              }
               const price = !!itemList ? itemList.reduce((acc, item) => acc + Number(item.price), 0) : 0;
 
-              return (
-                <OrderCard key={order._id} number={`#${order.number}`} date={date} title={order.name} status={order.status} data={itemList as TIngredientElement[]} price={price} id={order._id} />
-              );
+              return <OrderCard key={order._id} number={`#${order.number}`} date={date} title={order.name} status={order.status} data={itemList} price={price} id={order._id} />;
             }
           })}
         </div>
