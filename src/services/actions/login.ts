@@ -4,24 +4,40 @@ import { checkResponse } from '../../utils/checkResponse';
 import { setUserData } from '../../utils/setUserData';
 import { setCookie } from '../../utils/setCookie';
 
-export const SEND_LOGIN = 'SEND_LOGIN';
-export const GET_LOGIN_FAILED = 'GET_LOGIN_FAILED';
-export const GET_LOGIN_SUCCESS = 'GET_LOGIN_SUCCESS';
+import { AppDispatch } from './../../services/types/types';
+
+export const SEND_LOGIN: 'SEND_LOGIN' = 'SEND_LOGIN';
+export const GET_LOGIN_FAILED: 'GET_LOGIN_FAILED' = 'GET_LOGIN_FAILED';
+export const GET_LOGIN_SUCCESS: 'GET_LOGIN_SUCCESS' = 'GET_LOGIN_SUCCESS';
+
+export type TSendLogin = {
+  readonly type: typeof SEND_LOGIN;
+};
+
+export type TGetLoginFailed = {
+  readonly type: typeof GET_LOGIN_FAILED;
+  readonly errorMessage: string;
+};
+
+export type TGetLoginSuccess = {
+  readonly type: typeof GET_LOGIN_SUCCESS;
+  readonly payload: { message: string };
+};
 
 export function setStartForLoginRequest() {
   return { type: SEND_LOGIN };
 }
 
-export function setFailedForLoginRequest(errorMessage) {
+export function setFailedForLoginRequest(errorMessage: string) {
   return { type: GET_LOGIN_FAILED, errorMessage };
 }
 
-export function setSuccessForLoginRequest(userData, accessToken, refreshToken) {
+export function setSuccessForLoginRequest(userData: { name: string; email: string }, accessToken: string, refreshToken: string) {
   return { type: GET_LOGIN_SUCCESS, payload: { user: userData, accessToken: accessToken, refreshToken: refreshToken } };
 }
 
-export function loginUser(email, password) {
-  return async function (dispatch) {
+export function loginUser(email: string, password: string) {
+  return async function (dispatch: AppDispatch) {
     try {
       dispatch(setStartForLoginRequest());
 
@@ -41,7 +57,7 @@ export function loginUser(email, password) {
       setUserData(fullResponse.user.name, fullResponse.user.email);
       setCookie('accessToken', fullResponse.accessToken.split('Bearer ')[1], { path: '/' });
       setCookie('refreshToken', fullResponse.refreshToken, { path: '/' });
-    } catch (error) {
+    } catch (error: any) {
       const alarm = error.message;
       dispatch(setFailedForLoginRequest(alarm));
       alert(alarm);
