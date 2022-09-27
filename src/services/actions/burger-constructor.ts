@@ -4,7 +4,7 @@ export const SET_BURGER_INGREDIENTS: 'SET_BURGER_INGREDIENTS' = 'SET_BURGER_INGR
 export const SET_BUN_INTO_ORDER: 'SET_BUN_INTO_ORDER' = 'SET_BUN_INTO_ORDER';
 export const SET_STUFFING_INTO_ORDER: 'SET_STUFFING_INTO_ORDER' = 'SET_STUFFING_INTO_ORDER';
 
-export type TSetBurgerIngredient = {
+export type TSetBurgerIngredients = {
   readonly type: typeof SET_BURGER_INGREDIENTS;
   readonly ingredients: TIngredientElement[];
 };
