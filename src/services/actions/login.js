@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { postUrlUserLogin } from '../../utils/url';
 import { checkResponse } from '../../utils/checkResponse';
 
