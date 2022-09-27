@@ -30,7 +30,7 @@ export type TwsMessage = {
 
 export type TwsError = {
   readonly type: typeof WS_ERROR;
-  readonly payload: { error: any };
+  readonly payload: { error: string };
 };
 
 export const wsConnect = (wsUrl: string, token: string) => ({ type: CONNECT, payload: { wsUrl: wsUrl, token: token } });
