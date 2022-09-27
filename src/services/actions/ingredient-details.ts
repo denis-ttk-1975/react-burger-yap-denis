@@ -19,6 +19,8 @@ export type TCloseIngredientModal = {
   readonly type: typeof CLOSE_INGREDIENT_MODAL;
 };
 
+export type TIngredientDetailsActions = TSetIngredient | TResetIngredient | TOpenIngredientModal;
+
 export function setIngredientItemForModal(ingredientData: TIngredientElement) {
   return { type: SET_INGREDIENT, ingredientData };
 }

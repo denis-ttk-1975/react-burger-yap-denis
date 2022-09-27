@@ -23,6 +23,8 @@ export type TGetUpdateTokenSuccess = {
   readonly payload: { message: string };
 };
 
+export type TUpdateTokenActions = TSendUpdateToken | TGetUpdateTokenFailed | TGetUpdateTokenSuccess;
+
 export function setStartForUpdateTokenRequest() {
   return { type: SEND_UPDATE_TOKEN };
 }

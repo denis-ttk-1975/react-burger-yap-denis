@@ -41,6 +41,8 @@ export type TCloseOrderModal = {
   readonly type: typeof CLOSE_ORDER_MODAL;
 };
 
+export type TOrderDetailsActions = TGetOrder | TGetOrderFailed | TGetOrderSuccess | TResetOrderNumber | TOpenOrderModal | TCloseOrderModal;
+
 export function setStartForOrderRequest() {
   return { type: GET_ORDER };
 }

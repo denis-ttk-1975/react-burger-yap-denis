@@ -21,6 +21,8 @@ export type TGetResetPasswordSuccess = {
   readonly payload: { message: string };
 };
 
+export type TResetPasswordActions = TSendResetPassword | TGetResetPasswordFailed | TGetResetPasswordSuccess;
+
 export function setStartForResetPasswordRequest() {
   return { type: SEND_RESET_PASSWORD };
 }

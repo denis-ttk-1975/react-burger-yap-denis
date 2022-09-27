@@ -27,6 +27,8 @@ export type TGetUpdateUserInfoSuccess = {
   readonly payload: { user: { name: string; email: string } };
 };
 
+export type TPatchUserInfoActions = TSendUpdateUserInfo | TGetUpdateUserInfoFailed | TGetUpdateUserInfoSuccess;
+
 export function setStartForUpdateUserInfoRequest() {
   return { type: SEND_UPDATE_USER_INFO };
 }

@@ -19,6 +19,8 @@ export type TSetStuffingIntoOrder = {
   readonly stuffing: TIngredientElement[];
 };
 
+export type TBurgerConstructorActions = TSetBurgerIngredients | TSetBunIntoOrder | TSetStuffingIntoOrder;
+
 export function setBurgerIngredients(ingredients: TIngredientElement[]) {
   return { type: SET_BURGER_INGREDIENTS, ingredients };
 }

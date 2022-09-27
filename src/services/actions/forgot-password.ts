@@ -21,6 +21,8 @@ export type TGetForgotPasswordSuccess = {
   readonly payload: { message: string };
 };
 
+export type TForgotPasswordActions = TSendForgotPassword | TGetForgotPasswordFailed | TGetForgotPasswordSuccess;
+
 export function setStartForForgotPasswordRequest() {
   return { type: SEND_FORGOT_PASSWORD };
 }

@@ -24,6 +24,8 @@ export type TGetLoginSuccess = {
   readonly payload: { message: string };
 };
 
+export type TLoginActions = TSendLogin | TGetLoginFailed | TGetLoginSuccess;
+
 export function setStartForLoginRequest() {
   return { type: SEND_LOGIN };
 }

@@ -24,6 +24,9 @@ export type TGetRegistrationSuccess = {
   readonly payload: { message: string };
 };
 
+export type TRegisterActions = TSendRegistration | TGetRegistrationFailed | TGetRegistrationSuccess;
+
+
 export function setStartForRegistrationRequest() {
   return { type: SEND_REGISTRATION };
 }

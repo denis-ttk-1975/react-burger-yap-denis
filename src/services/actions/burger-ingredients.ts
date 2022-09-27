@@ -37,6 +37,8 @@ export type TNavActiveMain = {
   readonly type: typeof NAV_ACTIVE_MAIN;
 };
 
+export type TBurgerIngredientsActions = TGetIngredients | TGetIngredientsFailed | TGetIngredientsSuccess | TNavActiveBun | TNavActiveSauce | TNavActiveMain;
+
 export function setStartForIngredientRequest() {
   return { type: GET_INGREDIENTS };
 }

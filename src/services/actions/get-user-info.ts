@@ -25,6 +25,8 @@ export type TGetUserInfoRequestSuccess = {
   readonly payload: { user: { name: string; email: string } };
 };
 
+export type TGetUserInfoActions = TSendUserInfoRequest | TGetUserInfoRequestFailed | TGetUserInfoRequestSuccess;
+
 export function setStartForUserInfoRequest() {
   return { type: SEND_USER_INFO_REQUEST };
 }

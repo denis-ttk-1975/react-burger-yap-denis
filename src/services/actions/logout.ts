@@ -24,6 +24,8 @@ export type TGetLogoutSuccess = {
   readonly payload: { message: string };
 };
 
+export type TLogoutActions = TSendLogout | TGetLogoutFailed | TGetLogoutSuccess;
+
 export function setStartForLogoutRequest() {
   return { type: SEND_LOGOUT };
 }

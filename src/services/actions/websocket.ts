@@ -33,6 +33,8 @@ export type TwsError = {
   readonly payload: { error: string };
 };
 
+export type TWebsocketActions = TwsConnect | TwsDisconnect | TwsOpen | TwsClose | TwsMessage | TwsError;
+
 export const wsConnect = (wsUrl: string, token: string | null | undefined) => ({ type: CONNECT, payload: { wsUrl: wsUrl, token: token } });
 export const wsDisconnect = () => ({ type: DISCONNECT });
 
