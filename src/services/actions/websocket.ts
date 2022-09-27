@@ -8,7 +8,7 @@ export const WS_ERROR: 'WS_ERROR' = 'WS_ERROR';
 
 export type TwsConnect = {
   readonly type: typeof CONNECT;
-  readonly payload: { wsUrl: string; token: string };
+  readonly payload: { wsUrl: string; token: string | undefined | null };
 };
 
 export type TwsDisconnect = {
@@ -33,7 +33,7 @@ export type TwsError = {
   readonly payload: { error: string };
 };
 
-export const wsConnect = (wsUrl: string, token: string) => ({ type: CONNECT, payload: { wsUrl: wsUrl, token: token } });
+export const wsConnect = (wsUrl: string, token: string | null | undefined) => ({ type: CONNECT, payload: { wsUrl: wsUrl, token: token } });
 export const wsDisconnect = () => ({ type: DISCONNECT });
 
 export const wsOpen = () => ({ type: WS_OPEN });

@@ -10,9 +10,25 @@ import { TIngredientElement } from './../../services/types/types';
 
 type TBilletArrayElement = TIngredientElement & { restAmount?: number };
 
-const OrdersFeedCard = ({ number, date, title, status, data, price, id }: { number: string; status: string; date: string; title: string; data: TIngredientElement[]; price: number; id: string }) => {
+const OrdersFeedCard = ({
+  number,
+  date,
+  title,
+  status,
+  data,
+  price,
+  id,
+}: {
+  number: string;
+  status: string;
+  date: string;
+  title: string;
+  data: (TIngredientElement | undefined)[];
+  price: number;
+  id: string;
+}) => {
   const location = useLocation();
-  const billetArray: TBilletArrayElement[] =
+  const billetArray =
     data.length > 6
       ? data
           .map((elem, index) => {
@@ -37,8 +53,8 @@ const OrdersFeedCard = ({ number, date, title, status, data, price, id }: { numb
               };
               return (
                 <div style={shiftValue} className={`${styles.ordersFeedCard_ingredientImageWrap}`} key={nanoid()}>
-                  <img src={elem.image_mobile} alt='round' className={`${styles.ordersFeedCard_ingredientImage}`} />
-                  {elem?.restAmount && <p className={`${styles.ordersFeedCard_restIngredients} text text_type_digits-default`}>+{elem.restAmount}</p>}
+                  <img src={elem?.image_mobile} alt='round' className={`${styles.ordersFeedCard_ingredientImage}`} />
+                  {elem?.restAmount && <p className={`${styles.ordersFeedCard_restIngredients} text text_type_digits-default`}>+{elem?.restAmount}</p>}
                 </div>
               );
             })}

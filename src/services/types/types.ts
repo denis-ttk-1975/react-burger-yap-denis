@@ -19,4 +19,5 @@ export type TIngredientElement = {
   name: string;
   image: string;
   _id: string;
+  restAmount?: number;
 };

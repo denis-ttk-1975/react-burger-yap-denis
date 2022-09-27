@@ -50,7 +50,7 @@ function OrdersFeedData({ orders }: { orders: TOrdersFeedDataProps }) {
             }
 
             const price = itemList.reduce((acc, item) => {
-              return item.type === 'bun' ? acc + 2 * Number(item.price) : acc + Number(item.price);
+              return item?.type === 'bun' ? acc + 2 * Number(item?.price) : acc + Number(item?.price);
             }, 0);
 
             return <OrdersFeedCard key={order._id} number={`#${order.number}`} date={date} title={order.name} status={order.status} data={itemList} price={price} id={order._id} />;

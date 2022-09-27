@@ -62,7 +62,7 @@ function OrderHistoryData() {
               if (!itemList.length) {
                 return null;
               }
-              const price = !!itemList ? itemList.reduce((acc, item) => acc + Number(item.price), 0) : 0;
+              const price = !!itemList ? itemList.reduce((acc, item) => acc + Number(item?.price), 0) : 0;
 
               return <OrderCard key={order._id} number={`#${order.number}`} date={date} title={order.name} status={order.status} data={itemList} price={price} id={order._id} />;
             }
