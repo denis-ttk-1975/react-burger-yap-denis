@@ -14,12 +14,12 @@ export type TGetIngredients = {
   readonly type: typeof GET_INGREDIENTS;
 };
 
-export type TIngredientsFailed = {
+export type TGetIngredientsFailed = {
   readonly type: typeof GET_INGREDIENTS_FAILED;
   readonly errorMessage: string;
 };
 
-export type TIngredientsSuccess = {
+export type TGetIngredientsSuccess = {
   readonly type: typeof GET_INGREDIENTS_SUCCESS;
   readonly ingredients: TIngredientElement[];
 };
