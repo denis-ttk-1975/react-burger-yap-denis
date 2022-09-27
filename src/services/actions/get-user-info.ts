@@ -11,6 +11,20 @@ export const SEND_USER_INFO_REQUEST = 'SEND_USER_INFO_REQUEST';
 export const GET_USER_INFO_REQUEST_FAILED = 'GET_USER_INFO_REQUEST_FAILED';
 export const GET_USER_INFO_REQUEST_SUCCESS = 'GET_USER_INFO_REQUEST_SUCCESS';
 
+export type TSendUserInfoRequest = {
+  readonly type: typeof SEND_USER_INFO_REQUEST;
+};
+
+export type TGetUserInfoRequestFailed = {
+  readonly type: typeof GET_USER_INFO_REQUEST_FAILED;
+  readonly errorMessage: string;
+};
+
+export type TGetUserInfoRequestSuccess = {
+  readonly type: typeof GET_USER_INFO_REQUEST_SUCCESS;
+  readonly payload: { user: { name: string; email: string } };
+};
+
 export function setStartForUserInfoRequest() {
   return { type: SEND_USER_INFO_REQUEST };
 }
