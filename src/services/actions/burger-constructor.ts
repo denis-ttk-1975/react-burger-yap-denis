@@ -10,12 +10,12 @@ export type TSetBurgerIngredients = {
 };
 
 export type TSetBunIntoOrder = {
-  readonly type: typeof SET_BURGER_INGREDIENTS;
+  readonly type: typeof SET_BUN_INTO_ORDER;
   readonly bun: TIngredientElement;
 };
 
 export type TSetStuffingIntoOrder = {
-  readonly type: typeof SET_BURGER_INGREDIENTS;
+  readonly type: typeof SET_STUFFING_INTO_ORDER;
   readonly stuffing: TIngredientElement[];
 };
 
