@@ -37,8 +37,12 @@ function ProfileNav() {
         <NavLink
           onClick={(e) => {
             e.preventDefault();
-
-            dispatch(logoutUser(getCookie('refreshToken')));
+            const refreshToken = getCookie('refreshToken');
+            if (refreshToken) {
+              dispatch(logoutUser(refreshToken));
+            } else {
+              console.log('Refresh Token absent. You will be redirected to root page');
+            }
 
             history.push({ pathname: '/' });
           }}
