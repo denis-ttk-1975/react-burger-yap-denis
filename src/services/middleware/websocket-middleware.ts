@@ -1,11 +1,15 @@
-import { getCookie } from './../../utils/getCookie';
-import { checkResponse } from './../../utils/checkResponse';
-import { getNewTokens } from './../../utils/getNewTokens';
+import { Middleware } from 'redux';
+
+import { getCookie } from '../../utils/getCookie';
+import { checkResponse } from '../../utils/checkResponse';
+import { getNewTokens } from '../../utils/getNewTokens';
 import { postUrlUserTokenUpdate } from '../../utils/url';
 
-export const websocketMiddleware = (wsActions) => {
+import { RootState, TwsActions } from './../types/types';
+
+export const websocketMiddleware = (wsActions: TwsActions): Middleware<{}, RootState> => {
   return (store) => {
-    let socket = null;
+    let socket: WebSocket | null = null;
     let isConnected = false;
     let reconnectTimer = 0;
 
@@ -39,29 +43,13 @@ export const websocketMiddleware = (wsActions) => {
           dispatch(onOpen());
         };
 
-        socket.onerror = (event) => {
+        socket.onerror = (event: { message: string; code: number | string }) => {
           console.log(event);
           console.log(`Ошибка ${event.message}`);
           console.log(`Код ошибки ${event.code}`);
           dispatch(onError('Произошла ошибка. Соединение будет закрыто и снова открыто.'));
-          socket.close(4000);
-        };
-
-        socket.onmessage = (event) => {
-          const { data } = event;
-          const parsedData = JSON.parse(data);
-          dispatch(onMessage(parsedData));
-          if (parsedData?.message === 'Invalid or missing token') {
-            getNewTokens(postUrlUserTokenUpdate, getCookie('refreshToken'), checkResponse);
-            // reconnectTimer = window.setTimeout(() => {
-            //   let accessToken = getCookie('accessToken');
-            //   let url = !!token ? `${wsUrl}?token=${accessToken}` : `${wsUrl}`;
-            //   console.log('url: ', url);
-            //   dispatch(onClose());
-
-            //   dispatch(onConnect(url));
-            //   console.log('Reconnection...');
-            // }, 3000);
+          if (socket) {
+            socket.close(4000);
           }
         };
 
@@ -83,9 +71,30 @@ export const websocketMiddleware = (wsActions) => {
           console.log('close');
           dispatch(onClose());
         };
-      }
 
-      next(action);
+        socket.onmessage = (event) => {
+          const { data } = event;
+          const parsedData = JSON.parse(data);
+          dispatch(onMessage(parsedData));
+          if (parsedData?.message === 'Invalid or missing token') {
+            const refreshToken = getCookie('refreshToken');
+            if (refreshToken) {
+              getNewTokens(postUrlUserTokenUpdate, refreshToken, checkResponse);
+              // reconnectTimer = window.setTimeout(() => {
+              //   let accessToken = getCookie('accessToken');
+              //   let url = !!token ? `${wsUrl}?token=${accessToken}` : `${wsUrl}`;
+              //   console.log('url: ', url);
+              //   dispatch(onClose());
+
+              //   dispatch(onConnect(url));
+              //   console.log('Reconnection...');
+              // }, 3000);};
+            }
+          }
+        };
+
+        next(action);
+      }
     };
   };
 };

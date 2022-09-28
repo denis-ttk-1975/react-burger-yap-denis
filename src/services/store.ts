@@ -8,6 +8,8 @@ import { websocketMiddleware } from './middleware/websocket-middleware';
 
 import { CONNECT, DISCONNECT, wsConnect, wsClose, wsError, wsMessage, wsOpen } from './actions/websocket';
 
+import { TApplicationActions } from './../services/types/types';
+
 const wsActions = {
   wsConnect: CONNECT,
   wsDisconnect: DISCONNECT,
@@ -22,5 +24,7 @@ const wsActions = {
 const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
 
 const enhancer = composeEnhancers(applyMiddleware(thunk, websocketMiddleware(wsActions)));
+
+export type RootState = ReturnType<typeof rootReducer>;
 
 export const store = createStore(rootReducer, enhancer);
