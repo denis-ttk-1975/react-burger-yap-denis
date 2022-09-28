@@ -1,6 +1,10 @@
-import { SEND_REGISTRATION, GET_REGISTRATION_FAILED, GET_REGISTRATION_SUCCESS } from './../actions/register';
+import { SEND_REGISTRATION, GET_REGISTRATION_FAILED, GET_REGISTRATION_SUCCESS } from '../actions/register';
 
-const initialState = {
+import { TRegisterActions } from './../../services/actions/register';
+
+type TRegisterState = { isLoading: boolean; errorMessage: string; userInfo: { [key: string]: string }; accessToken: string | null; refreshToken: string | null };
+
+const initialState: TRegisterState = {
   isLoading: false,
   errorMessage: '',
   userInfo: {},
@@ -8,7 +12,7 @@ const initialState = {
   refreshToken: null,
 };
 
-export const userRegistrationReducer = (state = initialState, action) => {
+export const userRegistrationReducer = (state = initialState, action: TRegisterActions) => {
   switch (action.type) {
     case SEND_REGISTRATION: {
       return {

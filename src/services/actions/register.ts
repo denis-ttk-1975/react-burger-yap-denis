@@ -21,7 +21,7 @@ export type TGetRegistrationFailed = {
 
 export type TGetRegistrationSuccess = {
   readonly type: typeof GET_REGISTRATION_SUCCESS;
-  readonly payload: { message: string };
+  readonly payload: { user: { userData: { name: string; email: string } }; accessToken: string; refreshToken: string };
 };
 
 export type TRegisterActions = TSendRegistration | TGetRegistrationFailed | TGetRegistrationSuccess;
