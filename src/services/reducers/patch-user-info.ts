@@ -1,12 +1,16 @@
-import { SEND_UPDATE_USER_INFO, GET_UPDATE_USER_INFO_FAILED, GET_UPDATE_USER_INFO_SUCCESS } from './../actions/patch-user-info';
+import { SEND_UPDATE_USER_INFO, GET_UPDATE_USER_INFO_FAILED, GET_UPDATE_USER_INFO_SUCCESS } from '../actions/patch-user-info';
 
-const initialState = {
+import { TPatchUserInfoActions } from './../../services/actions/patch-user-info';
+
+type TPatchUserInfoState = { isLoading: boolean; errorMessage: string; userInfo: { [key: string]: string } };
+
+const initialState: TPatchUserInfoState = {
   isLoading: false,
   errorMessage: '',
   userInfo: {},
 };
 
-export const userUpdateInfoReducer = (state = initialState, action) => {
+export const userUpdateInfoReducer = (state = initialState, action: TPatchUserInfoActions) => {
   switch (action.type) {
     case SEND_UPDATE_USER_INFO: {
       return {
