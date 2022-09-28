@@ -1,11 +1,16 @@
-import { SET_INGREDIENT, RESET_INGREDIENT, OPEN_INGREDIENT_MODAL, CLOSE_INGREDIENT_MODAL } from './../actions/ingredient-details';
+import { SET_INGREDIENT, RESET_INGREDIENT, OPEN_INGREDIENT_MODAL, CLOSE_INGREDIENT_MODAL } from '../actions/ingredient-details';
 
-const initialState = {
+import { TIngredientElement } from './../../services/types/types';
+import { TIngredientDetailsActions } from './../../services/actions/ingredient-details';
+
+type TIngredientDetailsState = { isIngredientModalOpen: boolean; ingredientData: TIngredientElement | {} };
+
+const initialState: TIngredientDetailsState = {
   ingredientData: {},
   isIngredientModalOpen: false,
 };
 
-export const ingredientForModalReducer = (state = initialState, action) => {
+export const ingredientForModalReducer = (state = initialState, action: TIngredientDetailsActions) => {
   switch (action.type) {
     case SET_INGREDIENT: {
       return {

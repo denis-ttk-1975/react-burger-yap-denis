@@ -9,6 +9,7 @@ export type TSetIngredient = {
   readonly type: typeof SET_INGREDIENT;
   readonly ingredientData: TIngredientElement;
 };
+
 export type TResetIngredient = { readonly type: typeof RESET_INGREDIENT };
 
 export type TOpenIngredientModal = {
@@ -19,7 +20,7 @@ export type TCloseIngredientModal = {
   readonly type: typeof CLOSE_INGREDIENT_MODAL;
 };
 
-export type TIngredientDetailsActions = TSetIngredient | TResetIngredient | TOpenIngredientModal;
+export type TIngredientDetailsActions = TSetIngredient | TResetIngredient | TOpenIngredientModal | TCloseIngredientModal;
 
 export function setIngredientItemForModal(ingredientData: TIngredientElement) {
   return { type: SET_INGREDIENT, ingredientData };

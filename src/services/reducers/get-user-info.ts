@@ -1,6 +1,5 @@
 import { SEND_USER_INFO_REQUEST, GET_USER_INFO_REQUEST_FAILED, GET_USER_INFO_REQUEST_SUCCESS } from '../actions/get-user-info';
 
-import { TIngredientElement } from './../../services/types/types';
 import { TGetUserInfoActions } from './../../services/actions/get-user-info';
 
 type TGetUserInfoState = { isLoading: boolean; errorMessage: string; userInfo: { [key: string]: string } };
