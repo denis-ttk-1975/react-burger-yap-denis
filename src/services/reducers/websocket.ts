@@ -1,11 +1,15 @@
-import { WS_OPEN, WS_CLOSE, WS_ERROR, WS_MESSAGE } from './../actions/websocket';
+import { WS_OPEN, WS_CLOSE, WS_ERROR, WS_MESSAGE } from '../actions/websocket';
 
-const initialState = {
+import { TWebsocketActions } from './../../services/actions/websocket';
+
+type TWebsocketState = { connectionError: string; data: any };
+
+const initialState: TWebsocketState = {
   connectionError: '',
   data: null,
 };
 
-export const wsReducer = (state = initialState, action) => {
+export const wsReducer = (state = initialState, action: TWebsocketActions) => {
   switch (action.type) {
     case WS_OPEN: {
       return {
