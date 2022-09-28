@@ -21,7 +21,7 @@ export type TGetLoginFailed = {
 
 export type TGetLoginSuccess = {
   readonly type: typeof GET_LOGIN_SUCCESS;
-  readonly payload: { message: string };
+  readonly payload: { user: { userData: { name: string; email: string } }; accessToken: string; refreshToken: string };
 };
 
 export type TLoginActions = TSendLogin | TGetLoginFailed | TGetLoginSuccess;

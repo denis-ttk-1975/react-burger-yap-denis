@@ -1,6 +1,10 @@
 import { SEND_LOGIN, GET_LOGIN_FAILED, GET_LOGIN_SUCCESS } from '../actions/login';
 
-const initialState = {
+import { TLoginActions } from './../../services/actions/login';
+
+type TLoginState = { isLoading: boolean; errorMessage: string; userInfo: { [key: string]: string }; accessToken: string | null; refreshToken: string | null };
+
+const initialState: TLoginState = {
   isLoading: false,
   errorMessage: '',
   userInfo: {},
@@ -8,7 +12,7 @@ const initialState = {
   refreshToken: null,
 };
 
-export const userLoginReducer = (state = initialState, action) => {
+export const userLoginReducer = (state = initialState, action: TLoginActions) => {
   switch (action.type) {
     case SEND_LOGIN: {
       return {
