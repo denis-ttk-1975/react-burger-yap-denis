@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import { useDispatch } from 'react-redux';
+import { useDispatch } from './../../services/store';
 import { NavLink, useHistory, useRouteMatch } from 'react-router-dom';
 
 import styles from './profile-nav.module.css';
