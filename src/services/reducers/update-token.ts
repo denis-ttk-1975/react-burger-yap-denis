@@ -1,6 +1,10 @@
 import { SEND_UPDATE_TOKEN, GET_UPDATE_TOKEN_FAILED, GET_UPDATE_TOKEN_SUCCESS } from '../actions/update-token';
 
-const initialState = {
+import { TUpdateTokenActions } from './../../services/actions/update-token';
+
+type TUpdateTokenState = { isLoading: boolean; errorMessage: string; accessToken: string | null; refreshToken: string | null };
+
+const initialState: TUpdateTokenState = {
   isLoading: false,
   errorMessage: '',
 
@@ -8,7 +12,7 @@ const initialState = {
   refreshToken: null,
 };
 
-export const updateTokenReducer = (state = initialState, action) => {
+export const updateTokenReducer = (state = initialState, action: TUpdateTokenActions) => {
   switch (action.type) {
     case SEND_UPDATE_TOKEN: {
       return {

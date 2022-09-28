@@ -20,7 +20,7 @@ export type TGetUpdateTokenFailed = {
 
 export type TGetUpdateTokenSuccess = {
   readonly type: typeof GET_UPDATE_TOKEN_SUCCESS;
-  readonly payload: { message: string };
+  readonly payload: { accessToken: string; refreshToken: string };
 };
 
 export type TUpdateTokenActions = TSendUpdateToken | TGetUpdateTokenFailed | TGetUpdateTokenSuccess;
