@@ -1,14 +1,14 @@
 import React from 'react'; // импорт библиотеки
-import { useDispatch } from 'react-redux';
+import { useDispatch } from './../../services/store';
 import { useHistory, Link } from 'react-router-dom';
 
-import { Box, Typography, Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, PasswordInput, Input, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useForm } from './../../hooks/useForm';
+import { useForm } from '../../hooks/useForm';
 
 import styles from './register.module.css';
 
-import { registerNewUser } from './../../services/actions/register';
+import { registerNewUser } from '../../services/actions/register';
 
 function Register() {
   const { values, setValues, handleChange } = useForm({ name: '', email: '', password: '' });
@@ -41,7 +41,7 @@ function Register() {
       >
         <div className={'input_wrapper'}>
           <Input
-            className={`${styles.register_input}`}
+            // className={`${styles.register_input}`}
             type={'text'}
             placeholder={'Имя'}
             onChange={(e) => handleChange(e)}
@@ -52,10 +52,10 @@ function Register() {
           />
         </div>
         <div className={'input_wrapper'}>
-          <EmailInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
+          <EmailInput onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput className={`${styles.register_input}`} onChange={(e) => handleChange(e)} value={values?.password || ''} name={'password'} />
+          <PasswordInput onChange={(e) => handleChange(e)} value={values?.password || ''} name={'password'} />
         </div>
         <Button type='primary' size='medium'>
           Зарегистрироваться
