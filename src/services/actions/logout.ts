@@ -21,20 +21,19 @@ export type TGetLogoutFailed = {
 
 export type TGetLogoutSuccess = {
   readonly type: typeof GET_LOGOUT_SUCCESS;
-  readonly payload: { message: string };
 };
 
 export type TLogoutActions = TSendLogout | TGetLogoutFailed | TGetLogoutSuccess;
 
-export function setStartForLogoutRequest() {
+export function setStartForLogoutRequest(): TSendLogout {
   return { type: SEND_LOGOUT };
 }
 
-export function setFailedForLogoutRequest(errorMessage: string) {
+export function setFailedForLogoutRequest(errorMessage: string): TGetLogoutFailed {
   return { type: GET_LOGOUT_FAILED, errorMessage };
 }
 
-export function setSuccessForLogoutRequest() {
+export function setSuccessForLogoutRequest(): TGetLogoutSuccess {
   return { type: GET_LOGOUT_SUCCESS };
 }
 

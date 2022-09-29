@@ -43,10 +43,10 @@ export const websocketMiddleware = (wsActions: TwsActions): Middleware<{}, RootS
           dispatch(onOpen());
         };
 
-        socket.onerror = (event: { message: string; code: number | string }) => {
+        socket.onerror = (event) => {
           console.log(event);
-          console.log(`Ошибка ${event.message}`);
-          console.log(`Код ошибки ${event.code}`);
+          // console.log(`Ошибка ${event.message}`);
+          // console.log(`Код ошибки ${event.code}`);
           dispatch(onError('Произошла ошибка. Соединение будет закрыто и снова открыто.'));
           if (socket) {
             socket.close(4000);

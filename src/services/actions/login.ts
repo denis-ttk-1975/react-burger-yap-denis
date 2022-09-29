@@ -21,20 +21,20 @@ export type TGetLoginFailed = {
 
 export type TGetLoginSuccess = {
   readonly type: typeof GET_LOGIN_SUCCESS;
-  readonly payload: { user: { userData: { name: string; email: string } }; accessToken: string; refreshToken: string };
+  readonly payload: { user: { name: string; email: string }; accessToken: string; refreshToken: string };
 };
 
 export type TLoginActions = TSendLogin | TGetLoginFailed | TGetLoginSuccess;
 
-export function setStartForLoginRequest() {
+export function setStartForLoginRequest(): TSendLogin {
   return { type: SEND_LOGIN };
 }
 
-export function setFailedForLoginRequest(errorMessage: string) {
+export function setFailedForLoginRequest(errorMessage: string): TGetLoginFailed {
   return { type: GET_LOGIN_FAILED, errorMessage };
 }
 
-export function setSuccessForLoginRequest(userData: { name: string; email: string }, accessToken: string, refreshToken: string) {
+export function setSuccessForLoginRequest(userData: { name: string; email: string }, accessToken: string, refreshToken: string): TGetLoginSuccess {
   return { type: GET_LOGIN_SUCCESS, payload: { user: userData, accessToken: accessToken, refreshToken: refreshToken } };
 }
 

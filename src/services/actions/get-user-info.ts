@@ -27,15 +27,15 @@ export type TGetUserInfoRequestSuccess = {
 
 export type TGetUserInfoActions = TSendUserInfoRequest | TGetUserInfoRequestFailed | TGetUserInfoRequestSuccess;
 
-export function setStartForUserInfoRequest() {
+export function setStartForUserInfoRequest(): TSendUserInfoRequest {
   return { type: SEND_USER_INFO_REQUEST };
 }
 
-export function setFailedForUserInfoRequest(errorMessage: string) {
+export function setFailedForUserInfoRequest(errorMessage: string): TGetUserInfoRequestFailed {
   return { type: GET_USER_INFO_REQUEST_FAILED, errorMessage };
 }
 
-export function setSuccessForUserInfoRequest(userData: { name: string; email: string }) {
+export function setSuccessForUserInfoRequest(userData: { name: string; email: string }): TGetUserInfoRequestSuccess {
   return { type: GET_USER_INFO_REQUEST_SUCCESS, payload: { user: userData } };
 }
 

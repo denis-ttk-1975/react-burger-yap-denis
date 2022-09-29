@@ -21,21 +21,20 @@ export type TGetRegistrationFailed = {
 
 export type TGetRegistrationSuccess = {
   readonly type: typeof GET_REGISTRATION_SUCCESS;
-  readonly payload: { user: { userData: { name: string; email: string } }; accessToken: string; refreshToken: string };
+  readonly payload: { user: { name: string; email: string }; accessToken: string; refreshToken: string };
 };
 
 export type TRegisterActions = TSendRegistration | TGetRegistrationFailed | TGetRegistrationSuccess;
 
-
-export function setStartForRegistrationRequest() {
+export function setStartForRegistrationRequest(): TSendRegistration {
   return { type: SEND_REGISTRATION };
 }
 
-export function setFailedForRegistrationRequest(errorMessage: string) {
+export function setFailedForRegistrationRequest(errorMessage: string): TGetRegistrationFailed {
   return { type: GET_REGISTRATION_FAILED, errorMessage };
 }
 
-export function setSuccessForRegistrationRequest(userData: { name: string; email: string }, accessToken: string, refreshToken: string) {
+export function setSuccessForRegistrationRequest(userData: { name: string; email: string }, accessToken: string, refreshToken: string): TGetRegistrationSuccess {
   return { type: GET_REGISTRATION_SUCCESS, payload: { user: userData, accessToken: accessToken, refreshToken: refreshToken } };
 }
 
