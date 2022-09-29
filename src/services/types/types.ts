@@ -59,15 +59,15 @@ export type TLocationState = {
   };
 };
 
-export type HistoryState = { location: { pathname: string; state: { fromForgotPassword: boolean } } };
-
-export type THistory<T extends object = {}> = {
-  hash: string;
-  key: string;
-  pathname: string;
-  search: string;
-  state?: { fromForgotPassword: boolean };
-};
+export type THistory =
+  | {
+      hash?: string;
+      key?: string;
+      pathname: string;
+      search?: string;
+      state?: { fromForgotPassword: boolean };
+    }
+  | {};
 
 export type TIngredientElement = {
   carbohydrates: number;

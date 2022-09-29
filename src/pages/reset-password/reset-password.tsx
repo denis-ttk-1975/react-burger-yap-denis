@@ -5,6 +5,7 @@ import { useHistory, Link, Redirect } from 'react-router-dom'; // импорт �
 import { Button, PasswordInput, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useForm } from '../../hooks/useForm';
+import { THistory } from '../../services/types/types';
 
 import styles from './reset-password.module.css';
 
@@ -15,6 +16,7 @@ function ResetPassword() {
 
   const dispatch = useDispatch();
 
+  // const history = useHistory<THistory>();
   const history = useHistory<any>();
 
   console.log(history);
