@@ -1,5 +1,7 @@
 import React, { useRef, ReactNode } from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from './../../services/store';
+
 import { useDrag, useDrop } from 'react-dnd';
 
 import { setStuffingIntoOrder } from '../../services/actions/burger-constructor';

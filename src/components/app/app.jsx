@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from './../../services/store';
+
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
@@ -46,11 +48,13 @@ function App() {
   // getting data about ingredients from server
 
   useEffect(() => {
+    console.log('11');
     dispatch(getIngredients());
   }, [dispatch]);
 
   // load data for order-ingredients
   useEffect(() => {
+    console.log('22');
     dispatch(setBurgerIngredients([]));
   }, [dispatch]);
 

@@ -1,5 +1,7 @@
 import React, { useEffect, FunctionComponent } from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from './../../services/store';
+
 import { useDrop } from 'react-dnd';
 
 import { setBunIntoOrder, setStuffingIntoOrder } from '../../services/actions/burger-constructor';

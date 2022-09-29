@@ -39,38 +39,42 @@ export type TNavActiveMain = {
 
 export type TBurgerIngredientsActions = TGetIngredients | TGetIngredientsFailed | TGetIngredientsSuccess | TNavActiveBun | TNavActiveSauce | TNavActiveMain;
 
-export function setStartForIngredientRequest() {
+export function setStartForIngredientRequest(): TGetIngredients {
   return { type: GET_INGREDIENTS };
 }
 
-export function setFailedForIngredientRequest(errorMessage: string) {
+export function setFailedForIngredientRequest(errorMessage: string): TGetIngredientsFailed {
   return { type: GET_INGREDIENTS_FAILED, errorMessage };
 }
 
-export function setSuccessForIngredientRequest(ingredients: TIngredientElement[]) {
+export function setSuccessForIngredientRequest(ingredients: TIngredientElement[]): TGetIngredientsSuccess {
+  console.log('55');
+  console.log(ingredients);
   return { type: GET_INGREDIENTS_SUCCESS, ingredients };
 }
 
-export function setBunActiveForMenu() {
+export function setBunActiveForMenu(): TNavActiveBun {
   return { type: NAV_ACTIVE_BUN };
 }
 
-export function setSauceActiveForMenu() {
+export function setSauceActiveForMenu(): TNavActiveSauce {
   return { type: NAV_ACTIVE_SAUCE };
 }
 
-export function setMainActiveForMenu() {
+export function setMainActiveForMenu(): TNavActiveMain {
   return { type: NAV_ACTIVE_MAIN };
 }
 
 export function getIngredients() {
   return async function (dispatch: AppDispatch) {
     try {
+      console.log('33');
       dispatch(setStartForIngredientRequest());
 
       const res = await fetch(fetchUrlForIngredients);
 
       const fullResponse = await checkResponse(res);
+      console.log('fullResponse: ', fullResponse);
 
       dispatch(setSuccessForIngredientRequest([...fullResponse.data]));
     } catch (error: any) {

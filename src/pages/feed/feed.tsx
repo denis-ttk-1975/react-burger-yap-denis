@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
+import { useDispatch } from './../../services/store';
+
 
 import OrdersFeedData from '../../components/orders-feed-data/orders-feed-data';
 import OrdersSummary from '../../components/orders-summary/orders-summary';

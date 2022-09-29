@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useDispatch } from './../../services/store';
+
 
 import { useParams } from 'react-router-dom';
 
