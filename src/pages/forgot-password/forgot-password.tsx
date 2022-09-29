@@ -1,14 +1,14 @@
 import React from 'react'; // импорт библиотеки
-import { useDispatch } from 'react-redux';
+import { useDispatch } from './../../services/store';
 import { useHistory, Link } from 'react-router-dom';
 
-import { Box, Typography, Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
-import { useForm } from './../../hooks/useForm';
+import { useForm } from '../../hooks/useForm';
 
 import styles from './forgot-password.module.css';
 
-import { sendForgotPasswordRequest } from './../../services/actions/forgot-password';
+import { sendForgotPasswordRequest } from '../../services/actions/forgot-password';
 
 function ForgotPassword() {
   const { values, setValues, handleChange } = useForm({ email: '' });
@@ -30,7 +30,10 @@ function ForgotPassword() {
         onSubmit={(e) => {
           e.preventDefault();
           history.push(location);
-          dispatch(sendForgotPasswordRequest(values?.email));
+          const email = values?.email;
+          if (!!email) {
+            dispatch(sendForgotPasswordRequest(email));
+          }
         }}
       >
         <div className={'input_wrapper'}>
