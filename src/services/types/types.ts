@@ -53,10 +53,20 @@ export type TApplicationActions =
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 
-export type LocationState = {
+export type TLocationState = {
   from: {
     pathname: string;
   };
+};
+
+export type HistoryState = { location: { pathname: string; state: { fromForgotPassword: boolean } } };
+
+export type THistory<T extends object = {}> = {
+  hash: string;
+  key: string;
+  pathname: string;
+  search: string;
+  state?: { fromForgotPassword: boolean };
 };
 
 export type TIngredientElement = {

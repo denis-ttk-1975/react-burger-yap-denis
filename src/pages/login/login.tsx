@@ -7,7 +7,7 @@ import { Button, PasswordInput, EmailInput } from '@ya.praktikum/react-developer
 import { useForm } from '../../hooks/useForm';
 
 import styles from './login.module.css';
-import { LocationState } from './../../services/types/types';
+import { TLocationState } from './../../services/types/types';
 
 import { loginUser } from '../../services/actions/login';
 
@@ -19,7 +19,7 @@ function Login() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation<LocationState>();
+  const location = useLocation<TLocationState>();
 
   const login = useCallback(() => {
     history.replace({ pathname: '/login' });
@@ -37,7 +37,6 @@ function Login() {
           if (!!email && !!password) {
             dispatch(loginUser(email, password));
           }
-          const userPath = location?.state?.from?.pathname;
           history.push({ pathname: location?.state?.from?.pathname || '/' });
         }}
       >
