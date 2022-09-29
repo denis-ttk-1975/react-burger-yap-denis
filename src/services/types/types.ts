@@ -53,6 +53,12 @@ export type TApplicationActions =
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 
+export type LocationState = {
+  from: {
+    pathname: string;
+  };
+};
+
 export type TIngredientElement = {
   carbohydrates: number;
   fat: number;

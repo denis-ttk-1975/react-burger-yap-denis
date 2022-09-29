@@ -1,12 +1,13 @@
 import React, { useCallback } from 'react'; // импорт библиотеки
-import { useDispatch } from 'react-redux';
+import { useDispatch } from './../../services/store';
 import { useHistory, Link, useLocation } from 'react-router-dom';
 
-import { Typography, Button, PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Button, PasswordInput, EmailInput } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import { useForm } from '../../hooks/useForm';
 
 import styles from './login.module.css';
+import { LocationState } from './../../services/types/types';
 
 import { loginUser } from '../../services/actions/login';
 
@@ -18,7 +19,7 @@ function Login() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<LocationState>();
 
   const login = useCallback(() => {
     history.replace({ pathname: '/login' });
@@ -31,17 +32,20 @@ function Login() {
         className={`${styles.login_form}`}
         onSubmit={(e) => {
           e.preventDefault();
-
-          dispatch(loginUser(values?.email, values?.password));
-
+          const email = values?.email;
+          const password = values?.password;
+          if (!!email && !!password) {
+            dispatch(loginUser(email, password));
+          }
+          const userPath = location?.state?.from?.pathname;
           history.push({ pathname: location?.state?.from?.pathname || '/' });
         }}
       >
         <div className={'input_wrapper'}>
-          <EmailInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
+          <EmailInput onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />
         </div>
         <div className={'input_wrapper'}>
-          <PasswordInput className={`${styles.login_input}`} onChange={(e) => handleChange(e)} value={values?.password || ''} name={'password'} />
+          <PasswordInput onChange={(e) => handleChange(e)} value={values?.password || ''} name={'password'} />
         </div>
 
         <Button type='primary' size='medium'>
