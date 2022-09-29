@@ -11,7 +11,7 @@ export type TSetBurgerIngredients = {
 
 export type TSetBunIntoOrder = {
   readonly type: typeof SET_BUN_INTO_ORDER;
-  readonly bun: TIngredientElement;
+  readonly bun: TIngredientElement | {};
 };
 
 export type TSetStuffingIntoOrder = {
@@ -21,14 +21,14 @@ export type TSetStuffingIntoOrder = {
 
 export type TBurgerConstructorActions = TSetBurgerIngredients | TSetBunIntoOrder | TSetStuffingIntoOrder;
 
-export function setBurgerIngredients(ingredients: TIngredientElement[]) {
+export function setBurgerIngredients(ingredients: TIngredientElement[]): TSetBurgerIngredients {
   return { type: SET_BURGER_INGREDIENTS, ingredients };
 }
 
-export function setBunIntoOrder(bun: TIngredientElement | {}) {
+export function setBunIntoOrder(bun: TIngredientElement | {}): TSetBunIntoOrder {
   return { type: SET_BUN_INTO_ORDER, bun };
 }
 
-export function setStuffingIntoOrder(stuffing: TIngredientElement[]) {
+export function setStuffingIntoOrder(stuffing: TIngredientElement[]): TSetStuffingIntoOrder {
   return { type: SET_STUFFING_INTO_ORDER, stuffing };
 }

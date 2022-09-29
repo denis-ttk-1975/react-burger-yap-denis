@@ -43,27 +43,27 @@ export type TCloseOrderModal = {
 
 export type TOrderDetailsActions = TGetOrder | TGetOrderFailed | TGetOrderSuccess | TResetOrderNumber | TOpenOrderModal | TCloseOrderModal;
 
-export function setStartForOrderRequest() {
+export function setStartForOrderRequest(): TGetOrder {
   return { type: GET_ORDER };
 }
 
-export function setFailedForOrderRequest(errorMessage: string) {
+export function setFailedForOrderRequest(errorMessage: string): TGetOrderFailed {
   return { type: GET_ORDER_FAILED, errorMessage };
 }
 
-export function setSuccessForOrderRequest(orderNumber: string) {
+export function setSuccessForOrderRequest(orderNumber: string): TGetOrderSuccess {
   return { type: GET_ORDER_SUCCESS, orderNumber };
 }
 
-export function resetOrderNumberForModal() {
+export function resetOrderNumberForModal(): TResetOrderNumber {
   return { type: RESET_ORDER_NUMBER };
 }
 
-export function setOpenForOrderModal() {
+export function setOpenForOrderModal(): TOpenOrderModal {
   return { type: OPEN_ORDER_MODAL };
 }
 
-export function setCloseForOrderModal() {
+export function setCloseForOrderModal(): TCloseOrderModal {
   return { type: CLOSE_ORDER_MODAL };
 }
 

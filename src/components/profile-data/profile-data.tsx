@@ -46,7 +46,7 @@ function ProfileData() {
     >
       <div className={'input_wrapper'}>
         <Input
-          className={`${styles.profile_data_input}`}
+          // className={`${styles.profile_data_input}`}
           type={'text'}
           placeholder={'Имя'}
           onChange={(e) => {
@@ -63,7 +63,7 @@ function ProfileData() {
       </div>
       <div className={'input_wrapper'}>
         <EmailInput
-          className={`${styles.profile_data_input}`}
+          // className={`${styles.profile_data_input}`}
           onChange={(e) => {
             handleChange(e);
             setActivateButtons(true);
@@ -74,7 +74,7 @@ function ProfileData() {
       </div>
       <div className={'input_wrapper'}>
         <PasswordInput
-          className={`${styles.profile_data_input}`}
+          // className={`${styles.profile_data_input}`}
           onChange={(e) => {
             handleChange(e);
             setActivateButtons(true);
