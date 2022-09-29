@@ -11,7 +11,7 @@ type TIngredientAreaProps = {
   group: string;
   type: string;
   data: TIngredientElement[];
-  onClickIngredientsItem: () => void;
+  onClickIngredientsItem: (data: TIngredientElement) => void;
 };
 type Ref = HTMLDivElement;
 

@@ -1,38 +1,41 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from './../../services/store';
+// import { useSelector } from 'react-redux';
+import { useSelector } from './../../services/store';
+
+import { useDispatch } from '../../services/store';
 
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
 
-import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from './../../services/actions/ingredient-details';
-import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from './../../services/actions/order-details';
+import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from '../../services/actions/ingredient-details';
+import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from '../../services/actions/order-details';
 
-import Preloader from './../preloader/preloader';
-import AppHeader from './../app-header/app-header';
-import BurgerIngredients from './../burger-ingredients/burger-ingredients';
-import BurgerConstructor from './../burger-constructor/burger-constructor';
-import Modal from './../modal/modal';
-import IngredientDetails from './../ingredient-details/ingredient-details';
-import OrderDetails from './../order-details/order-details';
-import OrderIngredients from './../order-ingredients/order-ingredients';
+import Preloader from '../preloader/preloader';
+import AppHeader from '../app-header/app-header';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import Modal from '../modal/modal';
+import IngredientDetails from '../ingredient-details/ingredient-details';
+import OrderDetails from '../order-details/order-details';
+import OrderIngredients from '../order-ingredients/order-ingredients';
 
-import Login from './../../pages/login/login';
-import Register from './../../pages/register/register';
-import ForgotPassword from './../../pages/forgot-password/forgot-password';
-import ResetPassword from './../../pages/reset-password/reset-password';
-import Profile from './../../pages/profile/profile';
-import Feed from './../../pages/feed/feed';
-import { ProtectedRoute } from './../protected-route/protected-route';
+import Login from '../../pages/login/login';
+import Register from '../../pages/register/register';
+import ForgotPassword from '../../pages/forgot-password/forgot-password';
+import ResetPassword from '../../pages/reset-password/reset-password';
+import Profile from '../../pages/profile/profile';
+import Feed from '../../pages/feed/feed';
+import { ProtectedRoute } from '../protected-route/protected-route';
 
-import { getCookie } from './../../utils/getCookie';
+import { getCookie } from '../../utils/getCookie';
 
 import styles from './app.module.css';
+import { TLocationState, TIngredientElement } from './../../services/types/types';
 
-import { setBurgerIngredients } from './../../services/actions/burger-constructor';
-import { getIngredients } from './../../services/actions/burger-ingredients';
-import { getOrderDetails } from './../../services/actions/order-details';
+import { setBurgerIngredients} from '../../services/actions/burger-constructor';
+import { getIngredients } from '../../services/actions/burger-ingredients';
+import { getOrderDetails } from '../../services/actions/order-details';
 
 function App() {
   const { menuIngredients, isLoading: isLoadingIngredients, errorMessage: errorMessageIngredients } = useSelector((state) => state.burgerIngredients);
@@ -41,7 +44,7 @@ function App() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
+  const location = useLocation<TLocationState>();
 
   const background = location?.state?.background;
 
@@ -60,17 +63,17 @@ function App() {
 
   // handling for Make-Order-Button
 
-  const clickOrderDetailsHandler = (bunElement, stuffingArray) => {
+  const clickOrderDetailsHandler = (bunElement: TIngredientElement | {}, stuffingArray: TIngredientElement[]) => {
     if (Object.keys(bunElement).length === 0) {
       alert('Добавьте булку');
     } else if (!stuffingArray.length) {
       alert('Добавьте хотя бы один ингредиент');
     } else if (!getCookie('refreshToken')) {
-      dispatch(setBurgerIngredients([bunElement, ...stuffingArray]));
+      dispatch(setBurgerIngredients([bunElement as TIngredientElement, ...stuffingArray]));
       // <Redirect to={{ pathname: '/login', state: { from: location } }} />;
       history.push({ pathname: '/login', state: { from: location } });
     } else {
-      dispatch(getOrderDetails([bunElement, ...stuffingArray]));
+      dispatch(getOrderDetails([bunElement as TIngredientElement, ...stuffingArray]));
       dispatch(setOpenForOrderModal());
       dispatch(setBurgerIngredients([]));
     }
@@ -78,7 +81,7 @@ function App() {
 
   // handling for click on tab with ingredient
 
-  const clickIngredientItemHandler = (data) => {
+  const clickIngredientItemHandler = (data: TIngredientElement) => {
     dispatch(setIngredientItemForModal(data));
     dispatch(setOpenForIngredientModal());
   };
@@ -119,7 +122,7 @@ function App() {
               <ResetPassword />
             </ProtectedRoute>
 
-            <ProtectedRoute path={['/profile', '/profile/orders']} exact={true} condition={getCookie('refreshToken')} redirection={'/login'}>
+            <ProtectedRoute path={['/profile', '/profile/orders']} exact={true} condition={!!getCookie('refreshToken')} redirection={'/login'}>
               <Profile />
             </ProtectedRoute>
             <Route path='/feed' exact={true}>
@@ -133,7 +136,7 @@ function App() {
                 <OrderIngredients owner={'common'} center />
               </>
             </Route>
-            <ProtectedRoute path={'/profile/orders/:id'} exact={true} condition={getCookie('refreshToken')} redirection={'/login'}>
+            <ProtectedRoute path={'/profile/orders/:id'} exact={true} condition={!!getCookie('refreshToken')} redirection={'/login'}>
               <OrderIngredients owner={'user'} center />
             </ProtectedRoute>
           </Switch>

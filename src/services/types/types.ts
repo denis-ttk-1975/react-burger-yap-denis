@@ -54,10 +54,19 @@ export type TApplicationActions =
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 
 export type TLocationState = {
-  from: {
+  background?: string;
+  from?: {
     pathname: string;
   };
 };
+
+// export type TLocation<T extends object = {}> = {
+//   pathname: string;
+//   state: object & T;
+//   search: string;
+//   hash: string;
+//   key?: string | undefined;
+// };
 
 export type THistory =
   | {

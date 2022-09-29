@@ -12,7 +12,7 @@ import NavIngredient from '../nav-ingredient/nav-ingredient';
 import { TIngredientElement } from './../../services/types/types';
 
 // whole component
-function BurgerIngredients({ onClickIngredientsItem }: { onClickIngredientsItem: () => void }) {
+function BurgerIngredients({ onClickIngredientsItem }: { onClickIngredientsItem: (data: TIngredientElement) => void }) {
   const { menuIngredients } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
 
   const dispatch = useDispatch();
