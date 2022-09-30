@@ -7,6 +7,7 @@ import { useDispatch } from '../../services/store';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
+import { Location } from 'history';
 
 import { setIngredientItemForModal, resetIngredientItemForModal, setOpenForIngredientModal, setCloseForIngredientModal } from '../../services/actions/ingredient-details';
 import { resetOrderNumberForModal, setOpenForOrderModal, setCloseForOrderModal } from '../../services/actions/order-details';
@@ -33,7 +34,7 @@ import { getCookie } from '../../utils/getCookie';
 import styles from './app.module.css';
 import { TLocationState, TIngredientElement } from './../../services/types/types';
 
-import { setBurgerIngredients} from '../../services/actions/burger-constructor';
+import { setBurgerIngredients } from '../../services/actions/burger-constructor';
 import { getIngredients } from '../../services/actions/burger-ingredients';
 import { getOrderDetails } from '../../services/actions/order-details';
 
@@ -44,7 +45,7 @@ function App() {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation<TLocationState>();
+  const location = useLocation<{ background: Location }>();
 
   const background = location?.state?.background;
 
