@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'; // импорт библиотеки
-import { useSelector } from 'react-redux';
+import { useSelector } from './../../services/store';
 import { useDispatch } from './../../services/store';
 
 import { setBunActiveForMenu, setSauceActiveForMenu, setMainActiveForMenu } from '../../services/actions/burger-ingredients';
@@ -13,7 +13,8 @@ import { TIngredientElement } from './../../services/types/types';
 
 // whole component
 function BurgerIngredients({ onClickIngredientsItem }: { onClickIngredientsItem: (data: TIngredientElement) => void }) {
-  const { menuIngredients } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
+  const { menuIngredients } = useSelector((state) => state.burgerIngredients);
+  console.log('menuIngredients: ', menuIngredients);
 
   const dispatch = useDispatch();
   const scrollBoxRef = useRef<HTMLDivElement>(null);

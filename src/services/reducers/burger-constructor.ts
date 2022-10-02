@@ -3,12 +3,12 @@ import { SET_BURGER_INGREDIENTS, SET_BUN_INTO_ORDER, SET_STUFFING_INTO_ORDER } f
 import { TIngredientElement } from './../../services/types/types';
 import { TBurgerConstructorActions } from './../../services/actions/burger-constructor';
 
-type TBurgerConstructorState = { orderIngredients: TIngredientElement[]; bun: TIngredientElement | {}; stuffing: TIngredientElement[] };
+type TBurgerConstructorState = { orderIngredients: Array<TIngredientElement> | undefined; bun: TIngredientElement | undefined; stuffing: Array<TIngredientElement> | undefined };
 
 const initialState: TBurgerConstructorState = {
-  orderIngredients: [],
-  bun: {},
-  stuffing: [],
+  orderIngredients: undefined,
+  bun: undefined,
+  stuffing: undefined,
 };
 
 export const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions) => {

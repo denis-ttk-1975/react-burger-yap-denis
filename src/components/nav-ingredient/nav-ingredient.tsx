@@ -1,5 +1,5 @@
 import React from 'react'; // импорт библиотеки
-import { useSelector } from 'react-redux';
+import { useSelector } from './../../services/store';
 import { useDispatch } from './../../services/store';
 
 import { setBunActiveForMenu, setSauceActiveForMenu, setMainActiveForMenu } from '../../services/actions/burger-ingredients';
@@ -13,7 +13,7 @@ import styles from './nav-ingredient.module.css';
 function NavIngredient() {
   const dispatch = useDispatch();
 
-  const { activeNavElement } = useSelector((state: { burgerIngredients: { activeNavElement: string } }) => state.burgerIngredients);
+  const { activeNavElement } = useSelector((state) => state.burgerIngredients);
 
   const onTabClick = (par: string) => {
     switch (par) {

@@ -1,5 +1,5 @@
 import React, { useEffect, FunctionComponent } from 'react'; // импорт библиотеки
-import { useSelector } from 'react-redux';
+import { useSelector } from './../../services/store';
 import { useDispatch } from './../../services/store';
 
 import { useDrop } from 'react-dnd';
@@ -20,7 +20,7 @@ import defaultIngredientGrey from './../../images/default-ingredient-grey.png';
 
 import { TIngredientElement } from './../../services/types/types';
 
-const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = ({ onClickMakeOrder }) => {
+const BurgerConstructor = ({ onClickMakeOrder }: { onClickMakeOrder: () => void }) => {
   const { orderIngredients, bun, stuffing } = useSelector(
     (state: {
       burgerConstructor: {
@@ -51,16 +51,16 @@ const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = (
   });
 
   const amountBunCheck = (arrayIngredients: TIngredientElement[]) => {
-    if (arrayIngredients.filter((elem: TIngredientElement) => elem.type === 'bun' && elem.__v > 0).length > 1) {
-      alert('Вы выбрали больше чем одну булку, выберите один вид булки');
-    }
+    // if (arrayIngredients.filter((elem: TIngredientElement) => elem.type === 'bun' && elem.__v > 0).length > 1) {
+    //   alert('Вы выбрали больше чем одну булку, выберите один вид булки');
+    // }
 
     return [...arrayIngredients.filter((elem: TIngredientElement) => elem.type === 'bun')][0];
   };
 
-  const bunElement = amountBunCheck(orderIngredients);
+  const bunElement = !orderIngredients ? undefined : amountBunCheck(orderIngredients);
 
-  const ingredientsArray = [...orderIngredients.filter((elem: TIngredientElement) => elem.type !== 'bun')];
+  const ingredientsArray = !orderIngredients ? undefined : [...orderIngredients.filter((elem: TIngredientElement) => elem.type !== 'bun')];
 
   useEffect(() => {
     if (bunElement) {
@@ -81,13 +81,15 @@ const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = (
 
   function sumTotalBill() {
     let result = 0;
-    if (stuffing.length) {
+    if (stuffing) {
       stuffing.forEach((item: TIngredientElement) => {
-        result = result + item.price;
+        if (item.price) {
+          result = result + item.price;
+        }
       });
     }
-    if (Object.keys(bun).length) {
-      result = result + bun.price * 2;
+    if (!!bun) {
+      result = result + bun['price'] * 2;
     }
 
     return result;
@@ -97,15 +99,9 @@ const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = (
 
   return (
     <div className={`mt-25 ${styles.constructorArea}`} ref={dropIngredientTarget}>
-      <div>
-        {Object.keys(bun).length === 0 ? (
-          <ElemTop name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
-        ) : (
-          <ElemTop name={`${bun['name']} (верх)`} price={bun['price']} image={bun['image_mobile']} />
-        )}
-      </div>
+      <div>{!bun ? <ElemTop name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} /> : <ElemTop name={`${bun['name']} (верх)`} price={bun['price']} image={bun['image_mobile']} />}</div>
       <div className={'constructor__stuffing'}>
-        {stuffing.length === 0 ? (
+        {!stuffing ? (
           <div className={styles.innerList}>
             {/* <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' /> */}
             <ElemList uuid={'0'} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} index={0} />
@@ -122,11 +118,7 @@ const BurgerConstructor: FunctionComponent<{ onClickMakeOrder: () => void }> = (
         )}
       </div>
       <div>
-        {Object.keys(bun).length === 0 ? (
-          <ElemBottom name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} />
-        ) : (
-          <ElemBottom name={`${bun['name']} (низ)`} price={bun['price']} image={bun['image_mobile']} />
-        )}
+        {!bun ? <ElemBottom name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} /> : <ElemBottom name={`${bun['name']} (низ)`} price={bun['price']} image={bun['image_mobile']} />}
       </div>
 
       <div className={`${styles.orderArea} mt-10 pr-4`}>

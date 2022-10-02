@@ -1,6 +1,6 @@
 import React from 'react'; // react-lib import
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector } from './../../services/store';
 
 import styles from './ingredient-details.module.css';
 
@@ -10,7 +10,7 @@ type TIngredientDetailsProps = { center?: boolean };
 
 function IngredientDetails(props: TIngredientDetailsProps) {
   const params = useParams() as { id: string };
-  const { menuIngredients } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
+  const { menuIngredients } = useSelector((state) => state.burgerIngredients);
 
   const dataModal = menuIngredients.find((item) => item._id === params.id);
 

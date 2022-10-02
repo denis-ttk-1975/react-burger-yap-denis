@@ -49,7 +49,8 @@ export function setFailedForIngredientRequest(errorMessage: string): TGetIngredi
 
 export function setSuccessForIngredientRequest(ingredients: TIngredientElement[]): TGetIngredientsSuccess {
   console.log('55');
-  console.log(ingredients);
+  console.log('мы внутри setSuccessForIngredientRequest акшн криэйтора', ingredients);
+  console.log('{ type: GET_INGREDIENTS_SUCCESS, ingredients } - ', { type: GET_INGREDIENTS_SUCCESS, ingredients });
   return { type: GET_INGREDIENTS_SUCCESS, ingredients };
 }
 
@@ -76,7 +77,10 @@ export function getIngredients() {
       const fullResponse = await checkResponse(res);
       console.log('fullResponse: ', fullResponse);
 
+      console.log('[...fullResponse.data]: ', [...fullResponse.data]);
+
       dispatch(setSuccessForIngredientRequest([...fullResponse.data]));
+      console.log('вот здесь ингредиенты должны быть уже');
     } catch (error: any) {
       dispatch(setFailedForIngredientRequest(error.message));
     }

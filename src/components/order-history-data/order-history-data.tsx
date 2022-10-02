@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'; // импорт библиотеки
-import { useSelector } from 'react-redux';
+import { useSelector } from './../../services/store';
 import { useDispatch } from './../../services/store';
 
 import styles from './order-history-data.module.css';
@@ -19,7 +19,7 @@ function OrderHistoryData() {
   const { data } = useSelector(
     (state: { orderTable: { data: { orders: { name: string; status: string; price: number; number: number; _id: string; ingredients: string[]; createdAt: string }[] } } }) => state.orderTable
   );
-  const { menuIngredients: ingredientList } = useSelector((state: { burgerIngredients: { menuIngredients: TIngredientElement[] } }) => state.burgerIngredients);
+  const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
 
   const billetArray = !!data?.orders
     ? [

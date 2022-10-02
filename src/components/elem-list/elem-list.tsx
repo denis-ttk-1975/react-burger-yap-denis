@@ -1,5 +1,5 @@
 import React, { useRef, ReactNode } from 'react'; // импорт библиотеки
-import { useSelector } from 'react-redux';
+import { useSelector } from './../../services/store';
 import { useDispatch } from './../../services/store';
 
 import { useDrag, useDrop } from 'react-dnd';

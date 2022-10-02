@@ -1,8 +1,8 @@
 import { ReactNode } from 'react'; // импорт библиотеки
 
-import { Route, Redirect, useLocation } from 'react-router-dom';
+import { Route, Redirect, useLocation, RouteProps } from 'react-router-dom';
 
-export function ProtectedRoute({ children, condition, redirection, exact, ...path }: { children: ReactNode; condition: boolean; redirection: string; path: any; exact: boolean }) {
+export function ProtectedRoute({ children, condition, redirection, ...rest }: { children: ReactNode; condition: boolean; redirection: string } & RouteProps) {
   const location = useLocation();
-  return <Route {...path} render={() => (condition ? children : <Redirect to={{ pathname: redirection, state: { from: location } }} />)} />;
+  return <Route {...rest} render={() => (condition ? children : <Redirect to={{ pathname: redirection, state: { from: location } }} />)} />;
 }

@@ -13,8 +13,11 @@ const initialState: TBurgerIngredientsState = {
 };
 
 export const burgerIngredientsReducer = (state = initialState, action: TBurgerIngredientsActions) => {
+  console.log('burgerIngredientsReducer');
+  console.log(action.type);
   switch (action.type) {
     case GET_INGREDIENTS: {
+      console.log('GET_INGREDIENTS: ');
       return {
         ...state,
         isLoading: true,
@@ -22,6 +25,7 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
       };
     }
     case GET_INGREDIENTS_SUCCESS: {
+      console.log('GET_INGREDIENTS_SUCCESS: ');
       return {
         ...state,
         menuIngredients: action.ingredients,
@@ -36,25 +40,30 @@ export const burgerIngredientsReducer = (state = initialState, action: TBurgerIn
       };
     }
     case NAV_ACTIVE_BUN: {
+      console.log('bun');
       return {
         ...state,
         activeNavElement: 'bun',
       };
     }
     case NAV_ACTIVE_SAUCE: {
+      console.log('sauce');
+
       return {
         ...state,
         activeNavElement: 'sauce',
       };
     }
     case NAV_ACTIVE_MAIN: {
+      console.log('main');
+
       return {
         ...state,
         activeNavElement: 'main',
       };
     }
-
     default: {
+      console.log('я проскочил весь редьюсер');
       return state;
     }
   }

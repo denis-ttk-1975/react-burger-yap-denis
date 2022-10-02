@@ -21,7 +21,7 @@ import { store } from './services/store';
 // const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 // export const store = createStore(rootReducer, enhancer);
-
+console.log(77);
 ReactDOM.render(
   <Provider store={store}>
     <Router>
