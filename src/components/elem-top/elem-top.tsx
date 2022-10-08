@@ -1,12 +1,8 @@
 import React from 'react'; // импорт библиотеки
 
-import PropTypes from 'prop-types';
-
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import styles from './elem-top.module.css';
-
-import { IngredientType } from '../../utils/prop-types';
 
 type TElementTopBottomProps = {
   name: string;
@@ -21,7 +17,5 @@ function ElemTop(props: TElementTopBottomProps) {
     </div>
   );
 }
-
-ElemTop.propTypes = IngredientType;
 
 export default ElemTop;
