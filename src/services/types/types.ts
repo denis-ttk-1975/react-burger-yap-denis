@@ -79,3 +79,13 @@ export type TIngredientElement = {
   _id: string;
   restAmount?: number;
 };
+
+export type TOrderCardProps = {
+  number: string;
+  date: string;
+  title: string;
+  status: string;
+  data: (TIngredientElement | undefined)[];
+  price: number;
+  id: string;
+};

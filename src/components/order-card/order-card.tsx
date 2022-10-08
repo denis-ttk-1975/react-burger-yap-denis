@@ -7,27 +7,21 @@ import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components
 
 import styles from './order-card.module.css';
 
-import { TIngredientElement } from './../../services/types/types';
+import { TIngredientElement, TOrderCardProps } from './../../services/types/types';
 
 const statusMapping: { [key: string]: string } = { done: 'Выполнен', preparing: 'Готовится', created: 'Создан', deleted: 'Отменен' };
 
-const OrderCard = ({
-  number,
-  date,
-  title,
-  status,
-  data,
-  price,
-  id,
-}: {
-  number: string;
-  date: string;
-  title: string;
-  status: string;
-  data: (TIngredientElement | undefined)[];
-  price: number;
-  id: string;
-}) => {
+// type TOrderCardProps = {
+//   number: string;
+//   date: string;
+//   title: string;
+//   status: string;
+//   data: (TIngredientElement | undefined)[];
+//   price: number;
+//   id: string;
+// };
+
+const OrderCard = ({ number, date, title, status, data, price, id }: TOrderCardProps) => {
   const location = useLocation();
   const statusFieldStyle = status !== 'done' ? `text text_type_main-default ${styles.orderCard_status}` : `text text_type_main-default ${styles.orderCard_status} ${styles.orderCard_status_done}`;
 
