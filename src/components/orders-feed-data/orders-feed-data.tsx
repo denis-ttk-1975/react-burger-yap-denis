@@ -12,7 +12,6 @@ type TOrdersFeedDataProps = { name: string; status: string; price: number; numbe
 // whole component
 function OrdersFeedData({ orders }: { orders: TOrdersFeedDataProps }) {
   const { menuIngredients: ingredientList } = useSelector((state) => state.burgerIngredients);
-  console.log('OrdersFeedData - orders');
   const billetArray = !!orders
     ? [
         ...orders.sort((a, b) => {
@@ -24,7 +23,6 @@ function OrdersFeedData({ orders }: { orders: TOrdersFeedDataProps }) {
         }),
       ]
     : [];
-  console.log('billetArray: ', billetArray);
 
   return (
     <div className={`${styles.ordersFeed}`}>
@@ -38,20 +36,15 @@ function OrdersFeedData({ orders }: { orders: TOrdersFeedDataProps }) {
               orderDate.getDate() === currentDate.getDate()
                 ? `Сегодня, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`
                 : `Вчера, ${orderDate.getHours()}:${orderDate.getMinutes()}  i-GMT+3`;
-            console.log('order.ingredients: ', order.ingredients);
             const itemList = order.ingredients
               .map((item) => {
-                console.log('item -', item);
-                console.log('ingredientList -', ingredientList);
-
                 return ingredientList.find((elem) => elem._id === item.toString());
               })
               .filter((el) => {
                 return el !== undefined;
               });
-            // console.log('itemList: ', itemList);
+
             if (!itemList.length) {
-              console.log('нулевая длина заказа');
               return null;
             }
 

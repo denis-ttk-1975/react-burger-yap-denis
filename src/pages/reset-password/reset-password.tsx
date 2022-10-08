@@ -19,8 +19,6 @@ function ResetPassword() {
   // const history = useHistory<THistory>();
   const history = useHistory<any>();
 
-  console.log(history);
-
   if (!history.location?.state?.fromForgotPassword) {
     return <Redirect to={'/forgot-password'} />;
   }

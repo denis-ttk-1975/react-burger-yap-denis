@@ -1,7 +1,7 @@
 import { postUrlResetPassword } from '../../utils/url';
 import { checkResponse } from '../../utils/checkResponse';
 
-import { AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
 
 export const SEND_RESET_PASSWORD: 'SEND_RESET_PASSWORD' = 'SEND_RESET_PASSWORD';
 export const GET_RESET_PASSWORD_FAILED: 'GET_RESET_PASSWORD_FAILED' = 'GET_RESET_PASSWORD_FAILED';

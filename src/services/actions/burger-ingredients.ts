@@ -1,7 +1,9 @@
 import { fetchUrlForIngredients } from '../../utils/url';
 import { checkResponse } from '../../utils/checkResponse';
 
-import { TIngredientElement, AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
+
+import { TIngredientElement } from './../../services/types/types';
 
 export const GET_INGREDIENTS: 'GET_INGREDIENTS' = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_FAILED: 'GET_INGREDIENTS_FAILED' = 'GET_INGREDIENTS_FAILED';
@@ -48,9 +50,6 @@ export function setFailedForIngredientRequest(errorMessage: string): TGetIngredi
 }
 
 export function setSuccessForIngredientRequest(ingredients: TIngredientElement[]): TGetIngredientsSuccess {
-  console.log('55');
-  console.log('мы внутри setSuccessForIngredientRequest акшн криэйтора', ingredients);
-  console.log('{ type: GET_INGREDIENTS_SUCCESS, ingredients } - ', { type: GET_INGREDIENTS_SUCCESS, ingredients });
   return { type: GET_INGREDIENTS_SUCCESS, ingredients };
 }
 
@@ -69,18 +68,13 @@ export function setMainActiveForMenu(): TNavActiveMain {
 export function getIngredients() {
   return async function (dispatch: AppDispatch) {
     try {
-      console.log('33');
       dispatch(setStartForIngredientRequest());
 
       const res = await fetch(fetchUrlForIngredients);
 
       const fullResponse = await checkResponse(res);
-      console.log('fullResponse: ', fullResponse);
-
-      console.log('[...fullResponse.data]: ', [...fullResponse.data]);
 
       dispatch(setSuccessForIngredientRequest([...fullResponse.data]));
-      console.log('вот здесь ингредиенты должны быть уже');
     } catch (error: any) {
       dispatch(setFailedForIngredientRequest(error.message));
     }

@@ -14,7 +14,6 @@ import { TIngredientElement } from './../../services/types/types';
 // whole component
 function BurgerIngredients({ onClickIngredientsItem }: { onClickIngredientsItem: (data: TIngredientElement) => void }) {
   const { menuIngredients } = useSelector((state) => state.burgerIngredients);
-  console.log('menuIngredients: ', menuIngredients);
 
   const dispatch = useDispatch();
   const scrollBoxRef = useRef<HTMLDivElement>(null);

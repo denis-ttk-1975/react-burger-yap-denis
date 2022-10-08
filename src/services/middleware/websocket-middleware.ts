@@ -1,11 +1,20 @@
 import { Middleware } from 'redux';
-
 import { getCookie } from '../../utils/getCookie';
 import { checkResponse } from '../../utils/checkResponse';
 import { getNewTokens } from '../../utils/getNewTokens';
 import { postUrlUserTokenUpdate } from '../../utils/url';
+import { TwsClose, TwsError, TwsMessage, TwsOpen } from '../actions/websocket';
+import { RootState } from '../store';
 
-import { RootState, TwsActions } from './../types/types';
+export type TwsActions = {
+  wsConnect: string;
+  wsDisconnect: string;
+
+  onOpen: () => TwsOpen;
+  onClose: () => TwsClose;
+  onError: (error: string) => TwsError;
+  onMessage: (data: unknown) => TwsMessage;
+};
 
 export const websocketMiddleware = (wsActions: TwsActions): Middleware<{}, RootState> => {
   return (store) => {
@@ -16,7 +25,7 @@ export const websocketMiddleware = (wsActions: TwsActions): Middleware<{}, RootS
     return (next) => (action) => {
       const { dispatch, getState } = store;
       const { type, payload } = action;
-      const { wsConnect, wsDisconnect, onConnect, onOpen, onClose, onError, onMessage } = wsActions;
+      const { wsConnect, wsDisconnect, onOpen, onClose, onError, onMessage } = wsActions;
 
       if (type === wsConnect) {
         const { wsUrl, token } = payload;
@@ -43,13 +52,32 @@ export const websocketMiddleware = (wsActions: TwsActions): Middleware<{}, RootS
           dispatch(onOpen());
         };
 
-        socket.onerror = (event) => {
-          console.log(event);
-          // console.log(`Ошибка ${event.message}`);
-          // console.log(`Код ошибки ${event.code}`);
+        socket.onerror = (event: Event) => {
+          if (event instanceof ErrorEvent) {
+            console.log(`Ошибка ${event.message}`);
+          }
           dispatch(onError('Произошла ошибка. Соединение будет закрыто и снова открыто.'));
-          if (socket) {
-            socket.close(4000);
+          // socket.close(4000);
+        };
+
+        socket.onmessage = (event) => {
+          const { data } = event;
+          const parsedData = JSON.parse(data);
+          dispatch(onMessage(parsedData));
+          if (parsedData?.message === 'Invalid or missing token') {
+            const refreshToken = getCookie('refreshToken');
+            if (refreshToken) {
+              getNewTokens(postUrlUserTokenUpdate, refreshToken, checkResponse);
+            }
+            // reconnectTimer = window.setTimeout(() => {
+            //   let accessToken = getCookie('accessToken');
+            //   let url = !!token ? `${wsUrl}?token=${accessToken}` : `${wsUrl}`;
+            //   console.log('url: ', url);
+            //   dispatch(onClose());
+
+            //   dispatch(onConnect(url));
+            //   console.log('Reconnection...');
+            // }, 3000);
           }
         };
 
@@ -71,30 +99,9 @@ export const websocketMiddleware = (wsActions: TwsActions): Middleware<{}, RootS
           console.log('close');
           dispatch(onClose());
         };
-
-        socket.onmessage = (event) => {
-          const { data } = event;
-          const parsedData = JSON.parse(data);
-          dispatch(onMessage(parsedData));
-          if (parsedData?.message === 'Invalid or missing token') {
-            const refreshToken = getCookie('refreshToken');
-            if (refreshToken) {
-              getNewTokens(postUrlUserTokenUpdate, refreshToken, checkResponse);
-              // reconnectTimer = window.setTimeout(() => {
-              //   let accessToken = getCookie('accessToken');
-              //   let url = !!token ? `${wsUrl}?token=${accessToken}` : `${wsUrl}`;
-              //   console.log('url: ', url);
-              //   dispatch(onClose());
-
-              //   dispatch(onConnect(url));
-              //   console.log('Reconnection...');
-              // }, 3000);};
-            }
-          }
-        };
-
-        next(action);
       }
+
+      next(action);
     };
   };
 };

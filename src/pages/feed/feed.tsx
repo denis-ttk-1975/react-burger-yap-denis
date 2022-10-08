@@ -22,7 +22,6 @@ function Feed() {
       dispatch(wsDisconnect());
     };
   }, []);
-  console.log('Orders:', data?.orders);
   return (
     <>
       {!!data?.total && !!data?.totalToday && !!data?.orders && (

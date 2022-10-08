@@ -5,7 +5,7 @@ import { fetchWithCheckJwt } from '../../utils/fetchWithCheckJwt';
 import { setUserData } from '../../utils/setUserData';
 import { getCookie } from '../../utils/getCookie';
 
-import { AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
 
 export const SEND_USER_INFO_REQUEST = 'SEND_USER_INFO_REQUEST';
 export const GET_USER_INFO_REQUEST_FAILED = 'GET_USER_INFO_REQUEST_FAILED';

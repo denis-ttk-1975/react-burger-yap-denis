@@ -4,7 +4,7 @@ import { checkResponse } from '../../utils/checkResponse';
 import { setUserData } from '../../utils/setUserData';
 import { setCookie } from '../../utils/setCookie';
 
-import { AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
 
 export const SEND_LOGIN: 'SEND_LOGIN' = 'SEND_LOGIN';
 export const GET_LOGIN_FAILED: 'GET_LOGIN_FAILED' = 'GET_LOGIN_FAILED';

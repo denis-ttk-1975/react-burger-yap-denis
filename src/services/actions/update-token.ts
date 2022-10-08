@@ -3,7 +3,7 @@ import { checkResponse } from '../../utils/checkResponse';
 
 import { setCookie } from '../../utils/setCookie';
 
-import { AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
 
 export const SEND_UPDATE_TOKEN: 'SEND_UPDATE_TOKEN' = 'SEND_UPDATE_TOKEN';
 export const GET_UPDATE_TOKEN_FAILED: 'GET_UPDATE_TOKEN_FAILED' = 'GET_UPDATE_TOKEN_FAILED';

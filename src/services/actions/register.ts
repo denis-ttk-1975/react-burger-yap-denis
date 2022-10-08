@@ -4,7 +4,7 @@ import { checkResponse } from '../../utils/checkResponse';
 import { setUserData } from '../../utils/setUserData';
 import { setCookie } from '../../utils/setCookie';
 
-import { AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
 
 export const SEND_REGISTRATION: 'SEND_REGISTRATION' = 'SEND_REGISTRATION';
 export const GET_REGISTRATION_FAILED: 'GET_REGISTRATION_FAILED' = 'GET_REGISTRATION_FAILED';

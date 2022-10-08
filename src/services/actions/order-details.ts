@@ -6,7 +6,9 @@ import { getCookie } from '../../utils/getCookie';
 
 import { setBunIntoOrder, setStuffingIntoOrder } from './burger-constructor';
 
-import { TIngredientElement, AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
+
+import { TIngredientElement } from './../../services/types/types';
 
 export const GET_ORDER: 'GET_ORDER' = 'GET_ORDER';
 export const GET_ORDER_FAILED: 'GET_ORDER_FAILED' = 'GET_ORDER_FAILED';

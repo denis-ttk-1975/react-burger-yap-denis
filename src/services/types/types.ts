@@ -31,10 +31,10 @@ export type TwsActions = {
   onMessage: (data: any) => { type: 'WS_MESSAGE'; payload: any };
 };
 
-export type RootState = ReturnType<typeof rootReducer>;
+// export type RootState = ReturnType<typeof rootReducer>;
 
 // export type AppDispatch = typeof store.dispatch;
-export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>;
+// export type AppDispatch = ThunkDispatch<RootState, never, TApplicationActions>;
 
 export type TApplicationActions =
   | TBurgerConstructorActions
@@ -51,7 +51,7 @@ export type TApplicationActions =
   | TUpdateTokenActions
   | TWebsocketActions;
 
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
+// export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, TApplicationActions>;
 
 export type TLocationState = {
   background?: string;

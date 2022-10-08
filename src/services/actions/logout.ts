@@ -4,7 +4,7 @@ import { checkResponse } from '../../utils/checkResponse';
 import { clearUserData } from '../../utils/clearUserData';
 import { setCookie } from '../../utils/setCookie';
 
-import { AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
 
 export const SEND_LOGOUT: 'SEND_LOGOUT' = 'SEND_LOGOUT';
 export const GET_LOGOUT_FAILED: 'GET_LOGOUT_FAILED' = 'GET_LOGOUT_FAILED';

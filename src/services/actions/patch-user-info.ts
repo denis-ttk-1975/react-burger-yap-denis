@@ -7,7 +7,7 @@ import { getCookie } from '../../utils/getCookie';
 
 import { updateTokenRequest } from './update-token';
 
-import { AppDispatch } from './../../services/types/types';
+import { AppDispatch } from './../../services/store';
 
 export const SEND_UPDATE_USER_INFO: 'SEND_UPDATE_USER_INFO' = 'SEND_UPDATE_USER_INFO';
 export const GET_UPDATE_USER_INFO_FAILED: 'GET_UPDATE_USER_INFO_FAILED' = 'GET_UPDATE_USER_INFO_FAILED';

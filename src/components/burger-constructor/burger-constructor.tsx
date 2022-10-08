@@ -96,12 +96,11 @@ const BurgerConstructor = ({ onClickMakeOrder }: { onClickMakeOrder: () => void 
   }
 
   const amountTotalBill = sumTotalBill() || 0;
-
   return (
     <div className={`mt-25 ${styles.constructorArea}`} ref={dropIngredientTarget}>
       <div>{!bun ? <ElemTop name={'Перенесите вашу булку сюда'} price={0} image={defaultBunGrey} /> : <ElemTop name={`${bun['name']} (верх)`} price={bun['price']} image={bun['image_mobile']} />}</div>
       <div className={'constructor__stuffing'}>
-        {!stuffing ? (
+        {!stuffing || !stuffing.length ? (
           <div className={styles.innerList}>
             {/* <ElemList uuid={0} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} className='pr-4' /> */}
             <ElemList uuid={'0'} name={'Перенесите ваш ингредиент сюда'} price={0} image={defaultIngredientGrey} index={0} />

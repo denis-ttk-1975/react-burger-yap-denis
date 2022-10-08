@@ -52,13 +52,11 @@ function App() {
   // getting data about ingredients from server
 
   useEffect(() => {
-    console.log('11');
     dispatch(getIngredients());
   }, [dispatch]);
 
   // load data for order-ingredients
   useEffect(() => {
-    console.log('22');
     dispatch(setBurgerIngredients([]));
   }, [dispatch]);
 
@@ -173,11 +171,5 @@ function App() {
     </>
   );
 }
-
-// declare module 'react' {
-//   interface FunctionComponent<P = {}> {
-//     (props: PropsWithChildren<P>, context?: any): ReactElement<any, any> | null;
-//   }
-// };
 
 export default App;
