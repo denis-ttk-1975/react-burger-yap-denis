@@ -51,10 +51,6 @@ const BurgerConstructor = ({ onClickMakeOrder }: { onClickMakeOrder: () => void 
   });
 
   const amountBunCheck = (arrayIngredients: TIngredientElement[]) => {
-    // if (arrayIngredients.filter((elem: TIngredientElement) => elem.type === 'bun' && elem.__v > 0).length > 1) {
-    //   alert('Вы выбрали больше чем одну булку, выберите один вид булки');
-    // }
-
     return [...arrayIngredients.filter((elem: TIngredientElement) => elem.type === 'bun')][0];
   };
 
@@ -109,7 +105,6 @@ const BurgerConstructor = ({ onClickMakeOrder }: { onClickMakeOrder: () => void 
           <div className={styles.innerList}>
             {stuffing.map((elem: TIngredientElement, index: number) => {
               if (elem.type !== 'bun') {
-                // return <ElemList index={index} uuid={elem.uuid} name={elem.name} price={elem.price} image={elem.image} key={elem.uuid} className='pr-4' />;
                 return <ElemList index={index} uuid={elem.uuid} name={elem.name} price={elem.price} image={elem.image} key={elem.uuid} />;
               }
             })}

@@ -16,7 +16,6 @@ function ResetPassword() {
 
   const dispatch = useDispatch();
 
-  // const history = useHistory<THistory>();
   const history = useHistory<any>();
 
   if (!history.location?.state?.fromForgotPassword) {

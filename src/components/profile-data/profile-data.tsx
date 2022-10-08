@@ -9,12 +9,6 @@ import { useForm } from './../../hooks/useForm';
 
 import styles from './profile-data.module.css';
 
-// type TValues = {
-//   name: string;
-//   email: string;
-//   password: string;
-// };
-
 function ProfileData() {
   const dispatch = useDispatch();
 
@@ -46,7 +40,6 @@ function ProfileData() {
     >
       <div className={'input_wrapper'}>
         <Input
-          // className={`${styles.profile_data_input}`}
           type={'text'}
           placeholder={'Имя'}
           onChange={(e) => {
@@ -63,7 +56,6 @@ function ProfileData() {
       </div>
       <div className={'input_wrapper'}>
         <EmailInput
-          // className={`${styles.profile_data_input}`}
           onChange={(e) => {
             handleChange(e);
             setActivateButtons(true);
@@ -74,7 +66,6 @@ function ProfileData() {
       </div>
       <div className={'input_wrapper'}>
         <PasswordInput
-          // className={`${styles.profile_data_input}`}
           onChange={(e) => {
             handleChange(e);
             setActivateButtons(true);
@@ -91,9 +82,6 @@ function ProfileData() {
             onClick={(e) => {
               e.preventDefault();
               setValues({ name: localStorage.getItem('user_name'), email: localStorage.getItem('user_email'), password: '' });
-              // setValueName(localStorage.getItem('user_name'));
-              // setValueEmail(localStorage.getItem('user_email'));
-              // setValuePassword('');
             }}
           >
             Отмена

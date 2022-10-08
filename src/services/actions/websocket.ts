@@ -41,6 +41,5 @@ export const wsDisconnect = () => ({ type: DISCONNECT });
 export const wsOpen = () => ({ type: WS_OPEN });
 export const wsClose = () => ({ type: WS_CLOSE });
 export const wsMessage = (data: any) => ({ type: WS_MESSAGE, payload: data });
-// export const wsError = (error: string) => ({ type: WS_ERROR, payload: error });
 
 export const wsError = (error: any) => ({ type: WS_ERROR, payload: error });

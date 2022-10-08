@@ -40,16 +40,7 @@ function Register() {
         }}
       >
         <div className={'input_wrapper'}>
-          <Input
-            // className={`${styles.register_input}`}
-            type={'text'}
-            placeholder={'Имя'}
-            onChange={(e) => handleChange(e)}
-            value={values?.name || ''}
-            name={'name'}
-            error={false}
-            errorText={'Ошибка'}
-          />
+          <Input type={'text'} placeholder={'Имя'} onChange={(e) => handleChange(e)} value={values?.name || ''} name={'name'} error={false} errorText={'Ошибка'} />
         </div>
         <div className={'input_wrapper'}>
           <EmailInput onChange={(e) => handleChange(e)} value={values?.email || ''} name={'email'} />

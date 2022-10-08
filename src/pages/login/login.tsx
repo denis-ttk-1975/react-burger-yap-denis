@@ -12,9 +12,6 @@ import { TLocationState } from './../../services/types/types';
 import { loginUser } from '../../services/actions/login';
 
 function Login() {
-  // const [valueEmail, setValueEmail] = React.useState('');
-  // const [valuePassword, setValuePassword] = React.useState('');
-
   const { values, setValues, handleChange } = useForm({ email: '', password: '' });
 
   const dispatch = useDispatch();

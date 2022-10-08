@@ -14,12 +14,6 @@ import { CONNECT, DISCONNECT, wsConnect, wsClose, wsError, wsMessage, wsOpen } f
 
 import { TApplicationActions } from './../services/types/types';
 
-// declare global {
-//   interface Window {
-//     __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-//   }
-// }
-
 const wsActions = {
   wsConnect: CONNECT,
   wsDisconnect: DISCONNECT,
@@ -30,10 +24,6 @@ const wsActions = {
   onError: wsError,
   onMessage: wsMessage,
 };
-
-// const composeEnhancers = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({}) : compose;
-// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-// const enhancer = composeEnhancers(applyMiddleware(thunk, websocketMiddleware(wsActions)));
 
 const enhancer = composeWithDevTools(applyMiddleware(thunk, websocketMiddleware(wsActions)));
 

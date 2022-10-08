@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-// import { useSelector } from 'react-redux';
 import { useSelector } from './../../services/store';
 
 import { useDispatch } from '../../services/store';
@@ -69,7 +68,6 @@ function App() {
       alert('Добавьте хотя бы один ингредиент');
     } else if (!getCookie('refreshToken')) {
       dispatch(setBurgerIngredients([bunElement as TIngredientElement, ...stuffingArray]));
-      // <Redirect to={{ pathname: '/login', state: { from: location } }} />;
       history.push({ pathname: '/login', state: { from: location } });
     } else {
       dispatch(getOrderDetails([bunElement as TIngredientElement, ...stuffingArray]));
