@@ -5,7 +5,7 @@ import { postUrlUserTokenUpdate } from './url';
 
 import { getNewTokens } from './getNewTokens';
 
-export const fetchWithCheckJwt = async (url: string, options: { method: string; headers: {}; body?: string }, checkResponsePromise: (res: any) => void, refreshToken: string): Promise<any> => {
+export const fetchWithCheckJwt = async (url: string, options: { method: string; headers: {}; body?: string }, checkResponsePromise: (res: Response) => void, refreshToken: string): Promise<any> => {
   try {
     const res = await fetch(url, options);
     const result = await checkResponsePromise(res);
