@@ -1,0 +1,72 @@
+import { postUrlUserLogout } from '../../utils/url';
+import { checkResponse } from '../../utils/checkResponse';
+
+import { clearUserData } from '../../utils/clearUserData';
+import { setCookie } from '../../utils/setCookie';
+
+import { AppDispatch } from './../../services/store';
+
+export const SEND_LOGOUT: 'SEND_LOGOUT' = 'SEND_LOGOUT';
+export const GET_LOGOUT_FAILED: 'GET_LOGOUT_FAILED' = 'GET_LOGOUT_FAILED';
+export const GET_LOGOUT_SUCCESS: 'GET_LOGOUT_SUCCESS' = 'GET_LOGOUT_SUCCESS';
+
+export type TSendLogout = {
+  readonly type: typeof SEND_LOGOUT;
+};
+
+export type TGetLogoutFailed = {
+  readonly type: typeof GET_LOGOUT_FAILED;
+  readonly errorMessage: string;
+};
+
+export type TGetLogoutSuccess = {
+  readonly type: typeof GET_LOGOUT_SUCCESS;
+};
+
+export type TLogoutActions = TSendLogout | TGetLogoutFailed | TGetLogoutSuccess;
+
+export function setStartForLogoutRequest(): TSendLogout {
+  return { type: SEND_LOGOUT };
+}
+
+export function setFailedForLogoutRequest(errorMessage: string): TGetLogoutFailed {
+  return { type: GET_LOGOUT_FAILED, errorMessage };
+}
+
+export function setSuccessForLogoutRequest(): TGetLogoutSuccess {
+  return { type: GET_LOGOUT_SUCCESS };
+}
+
+export function logoutUser(refreshToken: string) {
+  return async function (dispatch: AppDispatch) {
+    try {
+      dispatch(setStartForLogoutRequest());
+
+      const res = await fetch(postUrlUserLogout, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          token: `${refreshToken}`,
+        }),
+      });
+
+      const fullResponse = await checkResponse(res);
+      await dispatch(setSuccessForLogoutRequest());
+      alert(fullResponse.message);
+
+      clearUserData();
+      setCookie('accessToken', '', {
+        'max-age': -1,
+        path: '/',
+      });
+      setCookie('refreshToken', '', {
+        'max-age': -1,
+        path: '/',
+      });
+    } catch (error: any) {
+      dispatch(setFailedForLogoutRequest(error.message));
+    }
+  };
+}

@@ -16,6 +16,10 @@
   gap: 24px;
 }
 
+.input_wrapper {
+  width: 480px;
+}
+
 .login_footer {
   margin-bottom: 16px;
 }
