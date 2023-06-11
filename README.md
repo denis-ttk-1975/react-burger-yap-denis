@@ -1,8 +1,8 @@
 # SPA for online Burger-Shop
 # SPA приложение для он-лайн ресторана бургеров
 
-Exanmple internet-Page available at https://denis-ttk-1975.github.io/react-burger-yap-denis/
-Работающий сайт размещен на https://denis-ttk-1975.github.io/react-burger-yap-denis/
+#### Example internet-Page available at https://denis-ttk-1975.github.io/react-burger-yap-denis/
+#### Работающий сайт размещен на https://denis-ttk-1975.github.io/react-burger-yap-denis/
 
 ## Author - Denis Ulesov
 ## Автор - Денис Улесов
